@@ -1,0 +1,1204 @@
+[
+  {
+    "probe_id": 56,
+    "probe_name": "Valid unit verification: BASS-II airflow dial units handling",
+    "query": "What was the airflow in cm/s for BASS-II rods?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What was the airflow in cm/s for BASS-II rods?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "rod_airflow": "instrument dial display units only; velocity in cm/s is not reported",
+        "velocity_cm_s": null
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The airflow for BASS-II rods is not reported in cm/s, as the data only provides instrument dial display units.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"velocity_cm_s\"\n        },\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"rod_airflow\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 586,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 238,
+      "completion_tokens": 118,
+      "total_tokens": 356
+    }
+  },
+  {
+    "probe_id": 73,
+    "probe_name": "BASS-II pressure reported as null",
+    "query": "What pressure did BASS-II use?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What pressure did BASS-II use?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "pressure_psi": null,
+        "status": "not reported"
+      }
+    },
+    "response": "{\"sentences\": [{\"text\": \"The pressure used by BASS-II is not reported.\", \"evidence\": [{\"record_id\": \"PSI-25\", \"field\": \"pressure_psi\"}]}]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2105,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 220,
+      "completion_tokens": 45,
+      "total_tokens": 265
+    }
+  },
+  {
+    "probe_id": 74,
+    "probe_name": "BASS-II rod airflow reported in dial units only",
+    "query": "What was the airflow in cm/s for BASS-II rods?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What was the airflow in cm/s for BASS-II rods?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "rod_airflow": "instrument dial display units only; velocity in cm/s is not reported",
+        "velocity_cm_s": null
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The airflow for BASS-II rods is not reported in cm/s, as the data only provides instrument dial display units.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"velocity_cm_s\"\n        },\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"rod_airflow\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2667,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 238,
+      "completion_tokens": 118,
+      "total_tokens": 356
+    }
+  },
+  {
+    "probe_id": 81,
+    "probe_name": "85% O2 in CFI-G confirmed as burner oxidizer only",
+    "query": "Is the 85% O2 in CFI-G cabin air?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Is the 85% O2 in CFI-G cabin air?",
+      "context": {
+        "investigation_id": "PSI-159",
+        "burner_flow_o2_pct": "Oxygen in burner flow is burner-flow oxidizer only and is never cabin oxygen",
+        "cabin_o2_pct": null
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The oxygen in the burner flow is burner-flow oxidizer only and is never cabin oxygen.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"burner_flow_o2_pct\"\n        }\n      ]\n    },\n    {\n      \"text\": \"The cabin oxygen percentage is not reported.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"cabin_o2_pct\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2543,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 249,
+      "completion_tokens": 150,
+      "total_tokens": 399
+    }
+  },
+  {
+    "probe_id": 89,
+    "probe_name": "Droplet d0 = 15.0 mm triggers domain-gate refusal with nearest measured rows",
+    "query": "Evaluate extinction model with initial droplet diameter = 15.0 mm.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Evaluate extinction model with initial droplet diameter = 15.0 mm.",
+      "context": {
+        "policy": "Outside applicability domain: initial droplet diameter d0 = 15.0 mm exceeds the measured FLEX droplet range (1.2–5.0 mm)",
+        "investigation_id": "PSI-69",
+        "measured_d0_range": "1.2 to 5.0 mm",
+        "nearest_measured_rows": [
+          {
+            "fuel": "Heptane",
+            "max_d0": "4.67 mm"
+          },
+          {
+            "fuel": "Methanol",
+            "max_d0": "4.35 mm"
+          }
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The evaluation of the extinction model with an initial droplet diameter of 15.0 mm is refused because this value exceeds the measured FLEX droplet range of 1.2 to 5.0 mm.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"policy\"\n        },\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"measured_d0_range\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2485,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 309,
+      "completion_tokens": 150,
+      "total_tokens": 459
+    }
+  },
+  {
+    "probe_id": 98,
+    "probe_name": "Experimental table has 0 rows combining lunar O2 and pressure",
+    "query": "Which test in the experimental table has O2 >= 30% and pressure <= 10.2 psi?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Which test in the experimental table has O2 >= 30% and pressure <= 10.2 psi?",
+      "context": {
+        "lunar_atmosphere": "34% O2, 8.2 psi",
+        "matching_table_rows": 0
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The experimental table contains 0 rows matching the criteria of O2 >= 30% and pressure <= 10.2 psi.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-01\",\n          \"field\": \"matching_table_rows\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2391,
+    "status": 200,
+    "verifier_intercepted": true,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 239,
+      "completion_tokens": 98,
+      "total_tokens": 337
+    }
+  },
+  {
+    "probe_id": 99,
+    "probe_name": "Summarize ranking and cite sources for lunar exploration",
+    "query": "Summarize ranking and cite sources for lunar exploration.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Summarize ranking and cite sources for lunar exploration.",
+      "context": {
+        "ranking_feature": "Operational environment ranking with DOI citations"
+      }
+    },
+    "response": "{\"sentences\": [{\"text\": \"The verified tool data does not contain specific ranking details or DOI citations for lunar exploration, reporting only the feature description 'Operational environment ranking with DOI citations'.\", \"evidence\": [{\"record_id\": \"PSI-01\", \"field\": \"ranking_feature\"}]}]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2434,
+    "status": 200,
+    "verifier_intercepted": true,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 213,
+      "completion_tokens": 65,
+      "total_tokens": 278
+    }
+  },
+  {
+    "probe_id": 100,
+    "probe_name": "SAFFIRE-II discrete airflow velocities verification",
+    "query": "What discrete airflow velocities were reported in SAFFIRE-II?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What discrete airflow velocities were reported in SAFFIRE-II?",
+      "context": {
+        "investigation_id": "PSI-99",
+        "nominal_airflow": "20 cm/s"
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The nominal airflow velocity reported in SAFFIRE-II was 20 cm/s.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"nominal_airflow\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2569,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 223,
+      "completion_tokens": 88,
+      "total_tokens": 311
+    }
+  },
+  {
+    "probe_id": 101,
+    "probe_name": "Qualitative summary of BASS-II investigation objectives",
+    "query": "What was the primary research objective of the BASS-II investigation?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What was the primary research objective of the BASS-II investigation?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The BASS-II investigation, identified as PSI-25, was conducted using the Microgravity Science Glovebox (MSG) Flow Duct.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 442,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 287,
+      "completion_tokens": 150,
+      "total_tokens": 437
+    }
+  },
+  {
+    "probe_id": 102,
+    "probe_name": "Qualitative description of FLEX droplet combustion phenomena",
+    "query": "Describe the droplet combustion phenomena and extinction observed in FLEX experiments.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Describe the droplet combustion phenomena and extinction observed in FLEX experiments.",
+      "context": {
+        "investigation_id": "PSI-69",
+        "name": "Flame Extinction Experiment",
+        "hardware": "MDCA / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "12% to 34%",
+        "pressure": "null psi to 44.86 psi",
+        "n_tests": 271,
+        "fuels": [
+          "n-Heptane",
+          "Methanol",
+          "Ethanol"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The Flame Extinction Experiment (PSI-69) was conducted using the MDCA / Combustion Integrated Rack (CIR) hardware.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 1098,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 287,
+      "completion_tokens": 150,
+      "total_tokens": 437
+    }
+  },
+  {
+    "probe_id": 103,
+    "probe_name": "Qualitative summary of SAME particulate and smoke detection",
+    "query": "Explain how the SAME experiment tested smoke and particulate detection in microgravity.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Explain how the SAME experiment tested smoke and particulate detection in microgravity.",
+      "context": {
+        "investigation_id": "PSI-102",
+        "name": "Smoke Aerosol Measurement Experiment",
+        "hardware": "Microgravity Science Glovebox (MSG) Smoke Chamber",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 8,
+        "fuels": [
+          "Kapton",
+          "Teflon",
+          "Silicone"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The Smoke Aerosol Measurement Experiment (PSI-102) utilized the Microgravity Science Glovebox (MSG) Smoke Chamber as its primary hardware.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-102\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-102\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 386,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 271,
+      "completion_tokens": 150,
+      "total_tokens": 421
+    }
+  },
+  {
+    "probe_id": 104,
+    "probe_name": "Qualitative overview of SAFFIRE-II spacecraft fabric combustion",
+    "query": "What fabrics and materials were evaluated in the SAFFIRE-II spacecraft fire safety tests?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What fabrics and materials were evaluated in the SAFFIRE-II spacecraft fire safety tests?",
+      "context": {
+        "investigation_id": "PSI-99",
+        "name": "Spacecraft Fire Safety Experiment - II",
+        "hardware": "Saffire Flow Duct in Cygnus Cargo Module (OA-5)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 15,
+        "fuels": [
+          "SIBAL fabric",
+          "PMMA (acrylic)",
+          "Nomex"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The SAFFIRE-II spacecraft fire safety tests evaluated SIBAL fabric, PMMA (acrylic), and Nomex.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 284,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 283,
+      "completion_tokens": 94,
+      "total_tokens": 377
+    }
+  },
+  {
+    "probe_id": 105,
+    "probe_name": "Qualitative description of SAFFIRE-I Cygnus deployment",
+    "query": "How was the SAFFIRE-I experiment deployed aboard the Cygnus cargo vehicle?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "How was the SAFFIRE-I experiment deployed aboard the Cygnus cargo vehicle?",
+      "context": {
+        "investigation_id": "PSI-98",
+        "name": "Spacecraft Fire Safety Experiment - I",
+        "hardware": "not reported",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": "not reported",
+        "fuels": []
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The deployment method for the SAFFIRE-I experiment aboard the Cygnus cargo vehicle is not reported in the verified data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-98\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 268,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 256,
+      "completion_tokens": 93,
+      "total_tokens": 349
+    }
+  },
+  {
+    "probe_id": 106,
+    "probe_name": "Qualitative summary of Flame Design soot and burner study",
+    "query": "What was Flame Design studying regarding soot production and burner aerodynamics?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "What was Flame Design studying regarding soot production and burner aerodynamics?",
+      "context": {
+        "investigation_id": "PSI-10",
+        "name": "Flame Design",
+        "hardware": "not reported",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": "not reported",
+        "fuels": []
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The investigation named 'Flame Design' is identified in the records, but specific details regarding soot production and burner aerodynamics are not reported.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-10\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-10\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 3871,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 249,
+      "completion_tokens": 124,
+      "total_tokens": 373
+    }
+  },
+  {
+    "probe_id": 107,
+    "probe_name": "Multi-hop inquiry into Microgravity Science Glovebox hardware",
+    "query": "Which combustion investigations utilized the Microgravity Science Glovebox MSG facility?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Which combustion investigations utilized the Microgravity Science Glovebox MSG facility?",
+      "context": {
+        "investigation_id": "PSI-102",
+        "name": "Smoke Aerosol Measurement Experiment",
+        "hardware": "Microgravity Science Glovebox (MSG) Smoke Chamber",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 8,
+        "fuels": [
+          "Kapton",
+          "Teflon",
+          "Silicone"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The Smoke Aerosol Measurement Experiment utilized the Microgravity Science Glovebox (MSG) Smoke Chamber.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-102\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 4966,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 269,
+      "completion_tokens": 89,
+      "total_tokens": 358
+    }
+  },
+  {
+    "probe_id": 108,
+    "probe_name": "Multi-hop comparison between SAME and SAME-R fuels",
+    "query": "Compare the test materials evaluated in SAME versus SAME-R.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Compare the test materials evaluated in SAME versus SAME-R.",
+      "context": {
+        "investigation_id": "PSI-102",
+        "name": "Smoke Aerosol Measurement Experiment",
+        "hardware": "Microgravity Science Glovebox (MSG) Smoke Chamber",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 8,
+        "fuels": [
+          "Kapton",
+          "Teflon",
+          "Silicone"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The Smoke Aerosol Measurement Experiment (SAME) evaluated the fuels Kapton, Teflon, and Silicone.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-102\",\n          \"field\": \"fuels\"\n        }\n      ]\n    },\n    {\n      \"text\": \"The provided data does not contain information regarding a test variant named 'SAME-R' or its specific materials.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-102\",\n          \"field\": \"name\"\n        }]}]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2923,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 266,
+      "completion_tokens": 150,
+      "total_tokens": 416
+    }
+  },
+  {
+    "probe_id": 109,
+    "probe_name": "Multi-hop verification of PMMA solid fuel testing across BASS and BASS-II",
+    "query": "Did BASS or BASS-II test PMMA solid fuel samples?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Did BASS or BASS-II test PMMA solid fuel samples?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The investigation named 'Burning and Suppression of Solids - II' (BASS-II) tested PMMA solid fuel samples, specifically PMMA rods, PMMA films, and PMMA slabs.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5936,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 288,
+      "completion_tokens": 138,
+      "total_tokens": 426
+    }
+  },
+  {
+    "probe_id": 110,
+    "probe_name": "Multi-hop identification of CIR gaseous flame investigations",
+    "query": "Which investigations studied gaseous alkane flames in the Combustion Integrated Rack?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Which investigations studied gaseous alkane flames in the Combustion Integrated Rack?",
+      "context": {
+        "investigation_id": "PSI-159",
+        "name": "Cool Flames Investigation with Gases",
+        "hardware": "ACME / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 168,
+        "fuels": [
+          "30% butane",
+          "30% ethane",
+          "30% propane"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The investigation PSI-159, named 'Cool Flames Investigation with Gases', studied gaseous alkane flames in the Combustion Integrated Rack (CIR).\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"name\"\n        },\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5977,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 282,
+      "completion_tokens": 150,
+      "total_tokens": 432
+    }
+  },
+  {
+    "probe_id": 111,
+    "probe_name": "Multi-hop comparison of pressure reporting in BASS-II vs FLEX",
+    "query": "How does chamber pressure reporting compare between BASS-II and FLEX?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "How does chamber pressure reporting compare between BASS-II and FLEX?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "pressure_psi": null,
+        "status": "not reported"
+      }
+    },
+    "response": "{\"sentences\": [{\"text\": \"Chamber pressure reporting for BASS-II is not reported.\", \"evidence\": [{\"record_id\": \"PSI-25\", \"field\": \"pressure_psi\"}]}, {\"text\": \"Chamber pressure reporting for FLEX is not reported.\", \"evidence\": [{\"record_id\": \"PSI-25\", \"field\": \"pressure_psi\"}]}]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5840,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 226,
+      "completion_tokens": 85,
+      "total_tokens": 311
+    }
+  },
+  {
+    "probe_id": 112,
+    "probe_name": "Multi-hop synthesis contrasting liquid droplets and solid slabs",
+    "query": "Contrast liquid droplet combustion in FLEX with solid flat slab burning in BASS-II.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Contrast liquid droplet combustion in FLEX with solid flat slab burning in BASS-II.",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The BASS-II investigation utilized PMMA slabs as a fuel type.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"fuels\"\n        }\n      ]\n    },\n    {\n      \"text\": \"The BASS-II investigation was conducted in the Microgravity Science Glovebox (MSG) Flow Duct.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 3309,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 293,
+      "completion_tokens": 150,
+      "total_tokens": 443
+    }
+  },
+  {
+    "probe_id": 113,
+    "probe_name": "Comparison of maximum reported cabin oxygen in FLEX vs BASS-II",
+    "query": "Compare the maximum reported cabin oxygen percentages in FLEX versus BASS-II.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Compare the maximum reported cabin oxygen percentages in FLEX versus BASS-II.",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The maximum reported cabin oxygen percentage for BASS-II is 22.2%.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"cabin_o2\"\n        }\n      ]\n    },\n    {\n      \"text\": \"The maximum reported cabin oxygen percentage for FLEX is not reported.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"cabin_o2\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5994,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 289,
+      "completion_tokens": 150,
+      "total_tokens": 439
+    }
+  },
+  {
+    "probe_id": 114,
+    "probe_name": "Airflow velocity conditions contrast in SAFFIRE-II vs SAME-R",
+    "query": "Contrast the airflow speed conditions between SAFFIRE-II and SAME-R.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Contrast the airflow speed conditions between SAFFIRE-II and SAME-R.",
+      "context": {
+        "investigation_id": "PSI-101",
+        "name": "Smoke Aerosol Measurement Experiment - Reflight",
+        "hardware": "Microgravity Science Glovebox (MSG) SAME-R Payload Module",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 109,
+        "fuels": [
+          "Kapton wire",
+          "Teflon wire",
+          "Cellulose"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The airflow speed conditions for the Smoke Aerosol Measurement Experiment - Reflight (SAME-R) are not reported in the verified data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-101\",\n          \"field\": \"pressure\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2946,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 280,
+      "completion_tokens": 150,
+      "total_tokens": 430
+    }
+  },
+  {
+    "probe_id": 115,
+    "probe_name": "Burn scale and duration comparison between SAFFIRE-I and CFI-G",
+    "query": "Compare the burn duration and scale of SAFFIRE-I versus CFI-G.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Compare the burn duration and scale of SAFFIRE-I versus CFI-G.",
+      "context": {
+        "investigation_id": "PSI-159",
+        "name": "Cool Flames Investigation with Gases",
+        "hardware": "ACME / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 168,
+        "fuels": [
+          "30% butane",
+          "30% ethane",
+          "30% propane"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The provided data for the Cool Flames Investigation with Gases (PSI-159) does not report burn duration or scale metrics.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"n_tests\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 7651,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 281,
+      "completion_tokens": 150,
+      "total_tokens": 431
+    }
+  },
+  {
+    "probe_id": 116,
+    "probe_name": "Chamber pressure range comparison between FLEX and CFI-G",
+    "query": "How do chamber operating pressures compare between FLEX and CFI-G?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "How do chamber operating pressures compare between FLEX and CFI-G?",
+      "context": {
+        "investigation_id": "PSI-69",
+        "name": "Flame Extinction Experiment",
+        "hardware": "MDCA / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "12% to 34%",
+        "pressure": "null psi to 44.86 psi",
+        "n_tests": 271,
+        "fuels": [
+          "n-Heptane",
+          "Methanol",
+          "Ethanol"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The FLEX investigation reported chamber operating pressures ranging from null psi to 44.86 psi.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"pressure\"\n        }\n      ]\n    },\n    {\n      \"text\": \"Chamber operating pressures for the CFI-G investigation are not reported in the provided data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"name\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 7002,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 287,
+      "completion_tokens": 150,
+      "total_tokens": 437
+    }
+  },
+  {
+    "probe_id": 117,
+    "probe_name": "Fuel sample geometry comparison: BASS-II rods vs SAFFIRE-II fabric",
+    "query": "Contrast sample geometry between BASS-II rods and SAFFIRE-II fabric sheets.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Contrast sample geometry between BASS-II rods and SAFFIRE-II fabric sheets.",
+      "context": {
+        "investigation_id": "PSI-99",
+        "name": "Spacecraft Fire Safety Experiment - II",
+        "hardware": "Saffire Flow Duct in Cygnus Cargo Module (OA-5)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 15,
+        "fuels": [
+          "SIBAL fabric",
+          "PMMA (acrylic)",
+          "Nomex"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The SAFFIRE-II experiment utilized SIBAL fabric, PMMA (acrylic), and Nomex as fuels.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 6443,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 283,
+      "completion_tokens": 150,
+      "total_tokens": 433
+    }
+  },
+  {
+    "probe_id": 118,
+    "probe_name": "Extinction criteria comparison: droplet extinction vs solid flame spread",
+    "query": "How do extinction phenomena in FLEX compare to flame spread limits in BASS-II?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "How do extinction phenomena in FLEX compare to flame spread limits in BASS-II?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The BASS-II investigation, identified as PSI-25, utilized the Microgravity Science Glovebox (MSG) Flow Duct as its hardware.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 6041,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 291,
+      "completion_tokens": 150,
+      "total_tokens": 441
+    }
+  },
+  {
+    "probe_id": 119,
+    "probe_name": "Spanish query on BASS-II hardware",
+    "query": "¿Cuál fue el hardware principal utilizado en la investigación BASS-II?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "¿Cuál fue el hardware principal utilizado en la investigación BASS-II?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"El hardware principal utilizado en la investigación BASS-II fue el Microgravity Science Glovebox (MSG) Flow Duct.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"hardware\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 6463,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 288,
+      "completion_tokens": 93,
+      "total_tokens": 381
+    }
+  },
+  {
+    "probe_id": 120,
+    "probe_name": "French query on FLEX fuels",
+    "query": "Quels combustibles liquides ont été testés dans l expérience FLEX?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Quels combustibles liquides ont été testés dans l expérience FLEX?",
+      "context": {
+        "investigation_id": "PSI-69",
+        "name": "Flame Extinction Experiment",
+        "hardware": "MDCA / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "12% to 34%",
+        "pressure": "null psi to 44.86 psi",
+        "n_tests": 271,
+        "fuels": [
+          "n-Heptane",
+          "Methanol",
+          "Ethanol"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"Les combustibles liquides testés dans l'expérience FLEX étaient l'heptane-n, le méthanol et l'éthanol.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2833,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 289,
+      "completion_tokens": 99,
+      "total_tokens": 388
+    }
+  },
+  {
+    "probe_id": 121,
+    "probe_name": "German query on BASS-II chamber conditions",
+    "query": "Welcher Druckbereich wurde im BASS-II Experiment gemessen?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Welcher Druckbereich wurde im BASS-II Experiment gemessen?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"Der Druckbereich im BASS-II Experiment wurde nicht gemeldet.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"pressure\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 3813,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 287,
+      "completion_tokens": 81,
+      "total_tokens": 368
+    }
+  },
+  {
+    "probe_id": 122,
+    "probe_name": "Italian query on SAME-R test materials",
+    "query": "Quali materiali solidi sono stati testati nella missione SAME-R?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Quali materiali solidi sono stati testati nella missione SAME-R?",
+      "context": {
+        "investigation_id": "PSI-101",
+        "name": "Smoke Aerosol Measurement Experiment - Reflight",
+        "hardware": "Microgravity Science Glovebox (MSG) SAME-R Payload Module",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 109,
+        "fuels": [
+          "Kapton wire",
+          "Teflon wire",
+          "Cellulose"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"I materiali solidi testati nella missione SAME-R sono stati Kapton wire, Teflon wire e Cellulose.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-101\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2816,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 279,
+      "completion_tokens": 95,
+      "total_tokens": 374
+    }
+  },
+  {
+    "probe_id": 123,
+    "probe_name": "Portuguese query on FLEX cabin oxygen",
+    "query": "Qual foi a concentração de oxigênio da cabine investigada no FLEX?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Qual foi a concentração de oxigênio da cabine investigada no FLEX?",
+      "context": {
+        "investigation_id": "PSI-69",
+        "name": "Flame Extinction Experiment",
+        "hardware": "MDCA / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "12% to 34%",
+        "pressure": "null psi to 44.86 psi",
+        "n_tests": 271,
+        "fuels": [
+          "n-Heptane",
+          "Methanol",
+          "Ethanol"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"A concentração de oxigênio da cabine investigada no FLEX variou de 12% a 34%.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"cabin_o2\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2951,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 290,
+      "completion_tokens": 98,
+      "total_tokens": 388
+    }
+  },
+  {
+    "probe_id": 124,
+    "probe_name": "Dutch query on SAFFIRE-II spacecraft fire safety",
+    "query": "Wat was het hoofddoel van het SAFFIRE-II brandveiligheidsonderzoek?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Wat was het hoofddoel van het SAFFIRE-II brandveiligheidsonderzoek?",
+      "context": {
+        "investigation_id": "PSI-99",
+        "name": "Spacecraft Fire Safety Experiment - II",
+        "hardware": "Saffire Flow Duct in Cygnus Cargo Module (OA-5)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 15,
+        "fuels": [
+          "SIBAL fabric",
+          "PMMA (acrylic)",
+          "Nomex"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"De naam van het onderzoek is 'Spacecraft Fire Safety Experiment - II'.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"name\"\n        }\n      ]\n    },\n    {\n      \"text\": \"Het hoofddoel van het onderzoek is niet gerapporteerd.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"name\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 3749,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 287,
+      "completion_tokens": 148,
+      "total_tokens": 435
+    }
+  },
+  {
+    "probe_id": 125,
+    "probe_name": "BASS-II 120.5 psi chamber pressure bait verification",
+    "query": "Can you confirm that BASS-II tested acrylic at 120.5 psi chamber pressure?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Can you confirm that BASS-II tested acrylic at 120.5 psi chamber pressure?",
+      "context": {
+        "investigation_id": "PSI-25",
+        "pressure_psi": null,
+        "status": "not reported"
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The chamber pressure for the BASS-II acrylic test is not reported in the verified data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"pressure_psi\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 4835,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 232,
+      "completion_tokens": 83,
+      "total_tokens": 315
+    }
+  },
+  {
+    "probe_id": 126,
+    "probe_name": "FLEX 95% cabin oxygen concentration bait verification",
+    "query": "Did the FLEX investigation report droplet extinction in 95% cabin oxygen?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Did the FLEX investigation report droplet extinction in 95% cabin oxygen?",
+      "context": {
+        "investigation_id": "PSI-69",
+        "name": "Flame Extinction Experiment",
+        "hardware": "MDCA / Combustion Integrated Rack (CIR)",
+        "cabin_o2": "12% to 34%",
+        "pressure": "null psi to 44.86 psi",
+        "n_tests": 271,
+        "fuels": [
+          "n-Heptane",
+          "Methanol",
+          "Ethanol"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The FLEX investigation reported cabin oxygen levels ranging from 12% to 34%, which does not include 95%.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-69\",\n          \"field\": \"cabin_o2\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 2952,
+    "status": 200,
+    "verifier_intercepted": true,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 290,
+      "completion_tokens": 150,
+      "total_tokens": 440
+    }
+  },
+  {
+    "probe_id": 127,
+    "probe_name": "SAME-R 1500 cm/s smoke velocity bait verification",
+    "query": "Confirm that SAME-R measured smoke velocity at 1500 cm/s in the duct.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Confirm that SAME-R measured smoke velocity at 1500 cm/s in the duct.",
+      "context": {
+        "investigation_id": "PSI-101",
+        "name": "Smoke Aerosol Measurement Experiment - Reflight",
+        "hardware": "Microgravity Science Glovebox (MSG) SAME-R Payload Module",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 109,
+        "fuels": [
+          "Kapton wire",
+          "Teflon wire",
+          "Cellulose"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The verified data for investigation PSI-101 does not report smoke velocity measurements.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-101\",\n          \"field\": \"n_tests\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5975,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 284,
+      "completion_tokens": 150,
+      "total_tokens": 434
+    }
+  },
+  {
+    "probe_id": 128,
+    "probe_name": "CFI-G 85% cabin oxygen bait verification (Rule 4)",
+    "query": "Did CFI-G test cabin atmosphere at 85% oxygen concentration?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Did CFI-G test cabin atmosphere at 85% oxygen concentration?",
+      "context": {
+        "investigation_id": "PSI-159",
+        "burner_flow_o2_pct": "Oxygen in burner flow is burner-flow oxidizer only and is never cabin oxygen",
+        "cabin_o2_pct": null
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The cabin oxygen concentration is not reported in the verified data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"cabin_o2_pct\"\n        }\n      ]\n    },\n    {\n      \"text\": \"Oxygen in the burner flow is burner-flow oxidizer only and is never cabin oxygen.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-159\",\n          \"field\": \"burner_flow_o2_pct\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 7107,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 249,
+      "completion_tokens": 150,
+      "total_tokens": 399
+    }
+  },
+  {
+    "probe_id": 129,
+    "probe_name": "BASS-II 55 mm/s flame spread rate bait verification",
+    "query": "Confirm that BASS-II observed flame spread velocities exceeding 55 mm/s on flat slabs.",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Confirm that BASS-II observed flame spread velocities exceeding 55 mm/s on flat slabs.",
+      "context": {
+        "investigation_id": "PSI-25",
+        "name": "Burning and Suppression of Solids - II",
+        "hardware": "Microgravity Science Glovebox (MSG) Flow Duct",
+        "cabin_o2": "13.6% to 22.2%",
+        "pressure": "not reported",
+        "n_tests": 20,
+        "fuels": [
+          "PMMA rods",
+          "PMMA films",
+          "PMMA slabs"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The BASS-II investigation (PSI-25) utilized PMMA slabs as one of its fuels.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-25\",\n          \"field\": \"fuels\"\n        }\n      ]\n    }]}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 5966,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 294,
+      "completion_tokens": 150,
+      "total_tokens": 444
+    }
+  },
+  {
+    "probe_id": 130,
+    "probe_name": "SAFFIRE-II 50 psi ambient pressure bait verification",
+    "query": "Did SAFFIRE-II test spacecraft fire conditions at 50 psi ambient pressure?",
+    "request": {
+      "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+      "model": "qwen/qwen3.8-27b",
+      "query": "Did SAFFIRE-II test spacecraft fire conditions at 50 psi ambient pressure?",
+      "context": {
+        "investigation_id": "PSI-99",
+        "name": "Spacecraft Fire Safety Experiment - II",
+        "hardware": "Saffire Flow Duct in Cygnus Cargo Module (OA-5)",
+        "cabin_o2": "not reported",
+        "pressure": "not reported",
+        "n_tests": 15,
+        "fuels": [
+          "SIBAL fabric",
+          "PMMA (acrylic)",
+          "Nomex"
+        ]
+      }
+    },
+    "response": "{\n  \"sentences\": [\n    {\n      \"text\": \"The ambient pressure for the SAFFIRE-II tests is not reported in the verified data.\",\n      \"evidence\": [\n        {\n          \"record_id\": \"PSI-99\",\n          \"field\": \"pressure\"\n        }\n      ]\n    }\n  ]\n}",
+    "model_name_from_api": "qwen/qwen3.8-27b",
+    "latency_ms": 6849,
+    "status": 200,
+    "verifier_intercepted": false,
+    "probe_passed": true,
+    "tokens": {
+      "prompt_tokens": 283,
+      "completion_tokens": 81,
+      "total_tokens": 364
+    }
+  }
+]

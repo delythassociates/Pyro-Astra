@@ -1,0 +1,136 @@
+{
+  "psi_id": "PSI-99",
+  "investigation_title": "SAFFIRE-II",
+  "source_file": "raw_real/PSI-99/experimental_table/PSI-99_Experimental table_SAFFIRE-2.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Sample Number": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Sample / run identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies test sample number (e.g. '2-1', '2-2')"
+    },
+    "Material": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel material identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel sample material"
+    },
+    "Samle Thickness ": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sample thickness",
+      "unit": null,
+      "reason": "Header lacks unit specification ('Samle Thickness ' contains no unit; cells mix 'mm' and 'cm')"
+    },
+    "Sample Length ": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sample length",
+      "unit": null,
+      "reason": "Header lacks unit specification ('Sample Length ' contains no unit)"
+    },
+    "Sample Width (cm)": {
+      "mapped": true,
+      "canonical_field": "sample_width_cm",
+      "quantity": "Sample width",
+      "unit": "cm",
+      "reason": "Unambiguously names sample width and centimeter unit"
+    },
+    "Air Flow (cm/s)": {
+      "mapped": true,
+      "canonical_field": "airflow_speed_cm_s",
+      "quantity": "Air flow velocity",
+      "unit": "cm/s",
+      "reason": "Unambiguously names airflow velocity and cm/s unit"
+    },
+    "Percent O2 (Note 1)": {
+      "mapped": true,
+      "canonical_field": "o2_initial_pct",
+      "quantity": "Initial oxygen concentration",
+      "unit": "Percent",
+      "reason": "Unambiguously names oxygen quantity and percent unit (vol% from ISS cabin context)"
+    },
+    "Ignition Power (W)": {
+      "mapped": true,
+      "canonical_field": "ignition_power_w",
+      "quantity": "Ignition power",
+      "unit": "W",
+      "reason": "Unambiguously names ignition electrical power and Watt unit"
+    },
+    "Ignition Time (s)": {
+      "mapped": true,
+      "canonical_field": "ignition_time_s",
+      "quantity": "Ignition duration",
+      "unit": "s",
+      "reason": "Unambiguously names ignition duration and second unit"
+    },
+    "Burn Time (s)": {
+      "mapped": true,
+      "canonical_field": "burn_time_s",
+      "quantity": "Burn duration",
+      "unit": "s",
+      "reason": "Unambiguously names burn duration and second unit"
+    },
+    "Flow Direction": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Flow orientation",
+      "unit": null,
+      "reason": "Qualitative orientation descriptor ('Concurrent', 'Opposed'); no measurement unit"
+    },
+    "?-g Burn Length": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Microgravity burn length",
+      "unit": null,
+      "reason": "Header lacks unit specification and contains character encoding anomaly ('?-g')"
+    },
+    "?-g Spread Length": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Microgravity spread rate/length",
+      "unit": null,
+      "reason": "Header lacks unit specification and cells contain spread rates ('2.1 mm/s') rather than lengths"
+    },
+    "1-g Burn Length": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "1-g burn length",
+      "unit": null,
+      "reason": "Header lacks unit specification; cells mix text ('Complete') and measurements"
+    },
+    "1-g Spread Rate": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "1-g spread rate",
+      "unit": null,
+      "reason": "Header lacks unit specification; cells mix qualitative text ('Acceleratory') and measurements"
+    },
+    "Camera 1": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Camera 1 identifier",
+      "unit": null,
+      "reason": "Instrument camera identifier without physical measurement unit"
+    },
+    "Camera 2": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Camera 2 identifier",
+      "unit": null,
+      "reason": "Instrument camera identifier without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "Silicone": "Silicone",
+    "Cotton-Fiberglass (SIBAL)": "SIBAL",
+    "PMMA & Nomex": "PMMA / Nomex composite",
+    "PMMA": "PMMA",
+    "": "unmapped",
+    "Pre-test flow visulation data for sample 2-1": "unmapped",
+    "Pre-test flow visulation data for sample 2-2": "unmapped"
+  }
+}

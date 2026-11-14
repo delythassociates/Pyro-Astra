@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "psi_id": "PSI-47",
+    "source_file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+    "encoding": "utf-8",
+    "total_rows": 2,
+    "columns_normalized": [
+      "Session Name",
+      "Actual Day",
+      "Hardware Description",
+      "Sample Material",
+      "Sampled Location"
+    ],
+    "suspect_rows": [],
+    "gravity_regime": "microgravity",
+    "note": "Ingested directly from authentic NASA PSI PSI-47 experimental table."
+  },
+  "runs": [
+    {
+      "row_index": 1,
+      "test_id": "D1",
+      "fuel_raw": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes.",
+      "material_class": "Arizona Road Dust",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "D1",
+        "fuel": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes."
+      },
+      "raw": {
+        "Session Name": "D1",
+        "Actual Day": "GMT 54 (2005)",
+        "Hardware Description": "Contained the modified P-Trak with Alcohol Wick and batteries",
+        "Sample Material": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes.",
+        "Sampled Location": "Sampled air near Express rack 4"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+          "test_id": "D1",
+          "column": "Session Name"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+          "test_id": "D1",
+          "column": "Sample Material"
+        }
+      }
+    },
+    {
+      "row_index": 2,
+      "test_id": "D2",
+      "fuel_raw": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes.",
+      "material_class": "Arizona Road Dust",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "D2",
+        "fuel": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes."
+      },
+      "raw": {
+        "Session Name": "D2",
+        "Actual Day": "GMT 63 (2005)",
+        "Hardware Description": "Contained DustTrak and batteries",
+        "Sample Material": "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes.",
+        "Sampled Location": "Sampled separated Velcro and the air near Port rack 6 and in Node 1"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+          "test_id": "D2",
+          "column": "Session Name"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+          "test_id": "D2",
+          "column": "Sample Material"
+        }
+      }
+    }
+  ]
+}

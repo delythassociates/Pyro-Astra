@@ -1,0 +1,46 @@
+{
+  "psi_id": "PSI-47",
+  "investigation_title": "DAFT",
+  "source_file": "raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Session Name": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Session identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies DAFT test session"
+    },
+    "Actual Day": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Execution day",
+      "unit": null,
+      "reason": "Day timestamp without physical measurement unit"
+    },
+    "Hardware Description": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Hardware description",
+      "unit": null,
+      "reason": "Qualitative equipment description without physical measurement unit"
+    },
+    "Sample Material": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Aerosol particulate material",
+      "unit": null,
+      "reason": "Unambiguously names aerosol sample particulate material"
+    },
+    "Sampled Location": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "ISS sampling location",
+      "unit": null,
+      "reason": "Qualitative ISS module location without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "Arizona Road Dust (ARD Fine) in combination with ISS GN2 to create an aerosol for measurement purposes.": "Arizona Road Dust"
+  }
+}

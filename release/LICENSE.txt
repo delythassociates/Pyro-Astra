@@ -1,0 +1,56 @@
+# PYRO-ASTRA Data & Code License
+
+===============================================================================
+1. NASA PHYSICAL SCIENCES INFORMATICS (PSI) DATA LICENSE
+===============================================================================
+Data Source: NASA Physical Sciences Informatics (PSI) System
+Registry of Open Data on AWS: https://registry.opendata.aws/nasa-psi/
+
+LICENSE STATEMENT:
+"There are no restrictions on the use of this data."
+(Source: Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)
+
+NASA Open Data Policy:
+Data produced by NASA is dedicated to the public domain under Creative Commons
+Zero v1.0 Universal (CC0-1.0) and US Government Works public domain provisions.
+There are no copyright restrictions on the underlying physical measurements,
+experiment matrices, or metadata downloaded from NASA PSI or NASA NTRS.
+
+Scientific Attribution:
+When utilizing this data in research or publications, credit NASA Physical
+Sciences Informatics (PSI) and the respective Principal Investigators using
+the permanent DOIs provided in `availability.json` and `docs/DATACARD.md`.
+
+===============================================================================
+2. PYRO-ASTRA SOFTWARE & PACKAGING LICENSE (MIT)
+===============================================================================
+Copyright (c) 2026 PYRO-ASTRA Team · NASA Space Apps Challenge 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+3. SCIENTIFIC INTEGRITY & GROUNDING NOTICE
+===============================================================================
+In accordance with the PYRO-ASTRA Non-Negotiable Physical Rules:
+1. No ungrounded, interpolated, or fabricated numbers are present in this release.
+2. Every number carries traceable provenance to an authentic NASA PSI record or
+   official NASA Technical Memorandum.
+3. Partial-gravity data is NOT present in NASA PSI combustion records. Any attempt
+   to extrapolate these microgravity bounds to lunar (0.16g) or Martian (0.38g)
+   environments without empirical validation violates physical grounding rules.

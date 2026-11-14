@@ -1,0 +1,23 @@
+# PSI-25 BASS-II Experimental Table Ingestion Manifest
+# SHA-256 Checksum, Row Count, and Column List
+db4f5fcc2416fd2150e58c2d73d761090106271a640ecd189297eb7c3cf2951f  PSI-25_Experimental_table_BASS-II.csv
+row_count: 129
+columns:
+  - PI
+  - Test #
+  - Date
+  - GMT
+  - Sample #
+  - Fuel Sample Material
+  - Flow restrictor
+  - Fan display
+  - Air display
+  - Radiometer gain   (1000   250   50   10)
+  - Total Frames Shot
+  - Calibrated  initial O2 % by vol 
+  - Calibrated final O2 % by vol
+  - Initial CO2 % by vol
+  - Final CO2 % by vol
+  - Initial CO (ppm)
+  - Final CO (ppm)
+

@@ -1,0 +1,118 @@
+{
+  "psi_id": "PSI-69",
+  "investigation_title": "FLEX",
+  "source_file": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv",
+  "encoding": "cp1252",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "FLEX Test #": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies individual test run"
+    },
+    "FLEX Identifier": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Run identifier code",
+      "unit": null,
+      "reason": "Secondary run identifier without physical measurement unit; run indexed by FLEX Test #"
+    },
+    "Test Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar date",
+      "unit": null,
+      "reason": "Calendar date string without physical measurement unit"
+    },
+    "Test GMT": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test time",
+      "unit": null,
+      "reason": "Time string (GMT) without physical measurement unit"
+    },
+    "Fuel": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel substance"
+    },
+    "Ambient pressure; mmHg": {
+      "mapped": true,
+      "canonical_field": "pressure_mmhg",
+      "quantity": "Ambient pressure",
+      "unit": "mmHg",
+      "reason": "Unambiguously names pressure and mmHg unit (convertible to psi via 1 mmHg = 0.01933678 psi)"
+    },
+    "O initial ambient composition; mole fraction": {
+      "mapped": true,
+      "canonical_field": "o2_initial_mole_fraction",
+      "quantity": "Initial oxygen composition",
+      "unit": "mole fraction",
+      "reason": "Unambiguously names initial oxygen composition and mole fraction unit"
+    },
+    "N initial ambient composition; mole fraction": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Initial nitrogen composition",
+      "unit": "mole fraction",
+      "reason": "Secondary ambient inert gas (nitrogen) component; canonical atmospheric focus is O2"
+    },
+    "CO initial ambient composition; mole fraction": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Initial CO/CO2 composition",
+      "unit": "mole fraction",
+      "reason": "Secondary ambient gas component, header typo ('CO' vs 'CO2' ambiguous without metadata check)"
+    },
+    "He initial ambient composition; mole fraction": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Initial helium composition",
+      "unit": "mole fraction",
+      "reason": "Secondary ambient inert gas (helium) component; canonical atmospheric focus is O2"
+    },
+    "Droplet initial diameter; mm": {
+      "mapped": true,
+      "canonical_field": "droplet_diameter_initial_mm",
+      "quantity": "Initial droplet diameter",
+      "unit": "mm",
+      "reason": "Unambiguously names initial droplet diameter and millimeter unit"
+    },
+    "Visible flame extinction diameter; mm": {
+      "mapped": true,
+      "canonical_field": "extinction_diameter_mm",
+      "quantity": "Extinction diameter",
+      "unit": "mm",
+      "reason": "Unambiguously names visible flame extinction diameter and millimeter unit"
+    },
+    "Burning rate; mm": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Burning rate",
+      "unit": "mm",
+      "reason": "Ambiguous unit dimension: header specifies 'mm' for a rate (expected mm/s or mm^2/s); excluded per strict unit naming rule"
+    },
+    "Burn time; s": {
+      "mapped": true,
+      "canonical_field": "burn_time_s",
+      "quantity": "Burn duration",
+      "unit": "s",
+      "reason": "Unambiguously names burn duration and second unit"
+    },
+    "Test end": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test termination mode",
+      "unit": null,
+      "reason": "Qualitative termination observation ('Disruption', 'Extinction', 'Completion'); no physical measurement unit"
+    }
+  },
+  "material_map": {
+    "Methanol": "Methanol",
+    "Heptane": "Heptane"
+  }
+}

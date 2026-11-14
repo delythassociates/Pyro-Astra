@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "psi_id": "PSI-100",
+    "source_file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+    "encoding": "utf-8",
+    "total_rows": 2,
+    "columns_normalized": [
+      "Sample Number",
+      "Material",
+      "Sample Thickness",
+      "Sample Length",
+      "Sample Width",
+      "Air Flow",
+      "Direction",
+      "Camera 1",
+      "Camera 2"
+    ],
+    "suspect_rows": [],
+    "gravity_regime": "microgravity",
+    "note": "Ingested directly from authentic NASA PSI PSI-100 experimental table."
+  },
+  "runs": [
+    {
+      "row_index": 1,
+      "test_id": "S1",
+      "fuel_raw": "SIBAL Fabric",
+      "material_class": "SIBAL",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "S1",
+        "fuel": "SIBAL Fabric"
+      },
+      "raw": {
+        "Sample Number": "S1",
+        "Material": "SIBAL Fabric",
+        "Sample Thickness": ".33 cm",
+        "Sample Length": "94 cm",
+        "Sample Width": "40.6 cm",
+        "Air Flow": "30 cm/s",
+        "Direction": "Concurrent ",
+        "Camera 1": "S1C1",
+        "Camera 2": "S1C2"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+          "test_id": "S1",
+          "column": "Sample Number"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+          "test_id": "S1",
+          "column": "Material"
+        }
+      }
+    },
+    {
+      "row_index": 2,
+      "test_id": "S2",
+      "fuel_raw": "SIBAL Fabric",
+      "material_class": "SIBAL",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "S2",
+        "fuel": "SIBAL Fabric"
+      },
+      "raw": {
+        "Sample Number": "S2",
+        "Material": "SIBAL Fabric",
+        "Sample Thickness": ".33 cm",
+        "Sample Length": "94 cm",
+        "Sample Width": "40.6 cm",
+        "Air Flow": "30 cm/s",
+        "Direction": "Opposed",
+        "Camera 1": "S2C1",
+        "Camera 2": "S2C2"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+          "test_id": "S2",
+          "column": "Sample Number"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+          "test_id": "S2",
+          "column": "Material"
+        }
+      }
+    }
+  ]
+}

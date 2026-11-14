@@ -1,0 +1,37 @@
+{
+  "psi_id": "PSI-142",
+  "investigation_title": "CFE Data Summary",
+  "source_file": "raw_real/PSI-142/experimental_table/PSI-142_Experimental table_Data Summary Table.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Data ID": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Dataset identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies published dataset item"
+    },
+    "Data Description": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Dataset description",
+      "unit": null,
+      "reason": "Qualitative publication dataset description without physical measurement unit"
+    },
+    "Reference Publication Link": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "DOI URL",
+      "unit": null,
+      "reason": "Literature DOI hyperlink without physical measurement unit"
+    },
+    "Figure ID in Reference": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Figure index",
+      "unit": null,
+      "reason": "Publication figure reference without physical measurement unit"
+    }
+  },
+  "material_map": {}
+}

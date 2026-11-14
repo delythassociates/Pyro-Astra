@@ -1,0 +1,10 @@
+# Vercel Ignore File for PYRO-ASTRA
+raw_real/
+*.zip
+*.tar.gz
+*.pdf
+.git
+.gemini
+tests/
+analysis/
+

@@ -1,0 +1,74 @@
+{
+  "psi_id": "PSI-100",
+  "investigation_title": "SAFFIRE-III",
+  "source_file": "raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Sample Number": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Sample run identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies test sample run"
+    },
+    "Material": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel material identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel sample material"
+    },
+    "Sample Thickness": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sample thickness",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title"
+    },
+    "Sample Length": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sample length",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title"
+    },
+    "Sample Width": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sample width",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title"
+    },
+    "Air Flow": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Air flow velocity",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title ('Air Flow ' contains no unit; cell contains '30 cm/s')"
+    },
+    "Direction": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Flow orientation",
+      "unit": null,
+      "reason": "Qualitative orientation descriptor ('Concurrent ', 'Opposed'); no measurement unit"
+    },
+    "Camera 1": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Camera 1 identifier",
+      "unit": null,
+      "reason": "Instrument camera identifier without physical measurement unit"
+    },
+    "Camera 2": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Camera 2 identifier",
+      "unit": null,
+      "reason": "Instrument camera identifier without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "SIBAL Fabric": "SIBAL"
+  }
+}

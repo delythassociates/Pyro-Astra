@@ -1,0 +1,58 @@
+[
+  {
+    "id": "surprise-1",
+    "title": "Cool Flames and Low-Temperature Combustion in Microgravity Inform Advanced Engine Design",
+    "topic": "Engine Efficiency & Low-Temperature Combustion",
+    "claim_in_our_words": "The study of cool flames and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications.",
+    "verbatim_quote": "Additionally, the study of ''cool flames'' and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications.",
+    "source_file": "raw_real/PSI-69/investigation_metadata.json",
+    "source_name": "NASA PSI FLEX Investigation (PSI-69)",
+    "url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-69",
+    "sha256": "a2d8ec5d0e9ad1060f6ecc7a850598634cc5519c373ae70462bf76c31fc8731c",
+    "date": "2016-07-31",
+    "what_this_does_not_show": "This does not show that cool flames occur in all materials, solid fabrics, or under high convective velocities, nor does it quantify cool flame ignition risks in spacecraft structural plastics.",
+    "implication_as_question": "Could undetected low-temperature chemical oxidation persist in spacecraft ventilation ducts after standard optical fire detectors indicate complete flame extinguishment?"
+  },
+  {
+    "id": "surprise-2",
+    "title": "Absence of Buoyancy Yields Spherical Diffusion Reaction Zones",
+    "topic": "Microgravity Transport Phenomena",
+    "claim_in_our_words": "In microgravity, the absence of natural buoyant convection prevents combustion exhaust from rising, causing flames in quiescent environments to form symmetric, spherical diffusion envelopes.",
+    "verbatim_quote": "in microgravity, the burn rate is a little too slow, and we get that nice, you know, circular flame shape, and it’s very hard for the flame to sustain itself without the flow",
+    "source_file": "raw_real/podcast_386.txt",
+    "source_name": "NASA Johnson Space Center, Houston We Have a Podcast, Ep. 386",
+    "url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/moon-material-flammability/",
+    "sha256": "a447f9571569c5fb1d8776392c681fbecb3cad3d9cd42089665c483e91c75b79",
+    "date": "2025-05-23",
+    "what_this_does_not_show": "This does not show that microgravity flames are inherently benign; while quiescent spherical flames burn slowly in still air, gentle forced ventilation (such as 10-20 cm/s cabin circulation) supplies fresh oxygen and can sustain vigorous flame spread.",
+    "implication_as_question": "How does the transition from buoyant upward plumes to spherical diffusion envelopes impact the spatial sensor placement and extinguishing agent dispersal inside spacecraft cabins?"
+  },
+  {
+    "id": "surprise-3",
+    "title": "Fabric Candidate Extinguishes in 1g but Sustains Burning in Lunar Gravity",
+    "topic": "Partial-Gravity Combustion Behavior",
+    "claim_in_our_words": "In parabolic flight testing of a fabric candidate under identical atmospheric conditions, the material ignited and self-extinguished in 1g, but ignited and sustained burning in lunar gravity.",
+    "verbatim_quote": "And in 1g the flame ignites, but it self extinguishes pretty quickly. But in the lunar g test, it ignites and it keeps burning. And that was, I think, the first time we’ve seen that behavior in this particular material that it that it would extinguish in 1g but it would keep burning in lunar g.",
+    "source_file": "raw_real/podcast_386.txt",
+    "source_name": "NASA Johnson Space Center, Houston We Have a Podcast, Ep. 386",
+    "url": "https://www.nasa.gov/podcasts/houston-we-have-a-podcast/moon-material-flammability/",
+    "sha256": "a447f9571569c5fb1d8776392c681fbecb3cad3d9cd42089665c483e91c75b79",
+    "date": "2025-05-23",
+    "what_this_does_not_show": "This does not prove that all materials burn faster or longer on the Moon, nor does it represent an official NASA design standard. A single parabolic-flight test on one fabric, described in a podcast; not PSI data; not generalizable.",
+    "implication_as_question": "Could standard terrestrial (1g) flammability testing underestimate material fire spread risks inside pressurized lunar surface habitats?"
+  },
+  {
+    "id": "surprise-4",
+    "title": "Cool Diffusion Flames: Transition to Hot Flame and Oscillation in Microgravity",
+    "topic": "Extinction & Transition Dynamics",
+    "claim_in_our_words": "Under microgravity aboard the ISS, gaseous cool diffusion flames exhibit complex extinction and transition kinetics: decreasing reactant flow causes extinction, while increasing flow causes a transition to a hot diffusion flame, with oscillation possible between hot and cool flames.",
+    "verbatim_quote": "Cool diffusion flames for which a decrease in fluent flow rate will cause extinction, whereas an increase will cause a transition to a hot diffusion flame, with oscillation possible between hot and cool flames.",
+    "source_file": "raw_real/PSI-159/investigation_metadata.json",
+    "source_name": "NASA PSI CFI-G Investigation (PSI-159)",
+    "url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-159",
+    "sha256": "e01abe2caa309753a9bee1b0c3c79dec194a2a7300d0d13541e0dcf25e3b0ea5",
+    "date": "2021-08-16",
+    "what_this_does_not_show": "This does not indicate that ambient cabin atmospheres support cool flames; it describes controlled gaseous burner injection kinetics aboard the ISS.",
+    "implication_as_question": "Could fluctuating ventilation velocities inadvertently trigger a transition from low-temperature oxidation into a high-temperature hot flame inside spacecraft hardware?"
+  }
+]

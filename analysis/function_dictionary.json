@@ -1,0 +1,43 @@
+{
+  "label": "defined by the PYRO-ASTRA team",
+  "version": "1.0",
+  "description": "Rule-based keyword dictionary defining the 6 PYRO-ASTRA spacecraft fire safety functional domains.",
+  "functions": [
+    {
+      "id": "detection",
+      "name": "Detection",
+      "description": "Smoke, aerosol, gas, or particulate detection and sensor response under microgravity conditions.",
+      "keywords": ["smoke", "detector", "detection", "aerosol", "particulate", "fire detector", "smoke particulate"]
+    },
+    {
+      "id": "suppression",
+      "name": "Suppression",
+      "description": "Physical and chemical fire extinguishment, gaseous suppressants (CO2, He, N2), water mist, and quenching.",
+      "keywords": ["suppression", "extinguish", "fire extinguishing", "extinguishment", "suppressant", "suppress", "extinguisher"]
+    },
+    {
+      "id": "material_screening",
+      "name": "Material flammability screening",
+      "description": "Solid material flammability screening protocols, bridging normal-gravity standards (NASA-STD-6001 Test 1) to flight environments.",
+      "keywords": ["NASA-STD-6001", "screening", "materials selection", "standard test method", "standard test", "flammability screening"]
+    },
+    {
+      "id": "fire_growth_spread",
+      "name": "Fire growth and spread",
+      "description": "Empirical rates of flame spread, propagation directions (concurrent vs opposed), and large-scale fire growth.",
+      "keywords": ["fire grow", "flame spread", "fire growth", "spread rate", "flame propagation", "growth and spread", "fire grows"]
+    },
+    {
+      "id": "ventilation_airflow",
+      "name": "Ventilation/airflow effects",
+      "description": "Effects of low-velocity convective airflow, forced duct ventilation, and sub-buoyant flow speeds on combustion.",
+      "keywords": ["airflow", "ventilation", "convection", "forced flow", "flow duct", "convective flow", "low-velocity flows", "flow velocity", "forced convective flow"]
+    },
+    {
+      "id": "extinction_limits",
+      "name": "Extinction limits",
+      "description": "Limiting oxygen index (LOI), radiative and diffusive extinction boundaries, and low-speed flame quench limits.",
+      "keywords": ["extinction", "limiting oxygen", "extinction limits", "quench", "flammability boundary", "extinction limit", "extinction mechanisms", "flame extinction"]
+    }
+  ]
+}

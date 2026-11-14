@@ -1,0 +1,75 @@
+{
+  "psi_id": "PSI-107",
+  "investigation_title": "Spice",
+  "source_file": "raw_real/PSI-107/experimental_table/PSI-107_Experimental table_Spice.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "GMT date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "GMT day of year",
+      "unit": null,
+      "reason": "Day of year counter without physical measurement unit"
+    },
+    "GMT ignition": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Ignition timestamp",
+      "unit": null,
+      "reason": "Time string without physical measurement unit"
+    },
+    "GMT Flame Off": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Extinction timestamp",
+      "unit": null,
+      "reason": "Time string without physical measurement unit"
+    },
+    "Fuel": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel substance"
+    },
+    "Nozzle (mm)": {
+      "mapped": true,
+      "canonical_field": "nozzle_diameter_mm",
+      "quantity": "Burner nozzle diameter",
+      "unit": "mm",
+      "reason": "Unambiguously names nozzle diameter and millimeter unit"
+    },
+    "Fuel Rate (sccm)": {
+      "mapped": true,
+      "canonical_field": "fuel_flow_sccm",
+      "quantity": "Fuel volumetric flow rate",
+      "unit": "sccm",
+      "reason": "Unambiguously names fuel flow rate and sccm unit"
+    },
+    "Fuel Rate (mg/s)": {
+      "mapped": true,
+      "canonical_field": "fuel_mass_flow_mg_s",
+      "quantity": "Fuel mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names fuel mass flow rate and mg/s unit"
+    },
+    "HC Fuel Rate (mg/s)": {
+      "mapped": true,
+      "canonical_field": "hydrocarbon_fuel_mass_flow_mg_s",
+      "quantity": "Hydrocarbon fuel mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names hydrocarbon mass flow rate and mg/s unit"
+    },
+    "Air Rate (cm/s)": {
+      "mapped": true,
+      "canonical_field": "airflow_speed_cm_s",
+      "quantity": "Coflow air rate",
+      "unit": "cm/s",
+      "reason": "Unambiguously names coflow air velocity and cm/s unit"
+    }
+  },
+  "material_map": {
+    "Ethylene": "Ethylene",
+    "Methane": "Methane"
+  }
+}

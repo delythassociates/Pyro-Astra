@@ -1,0 +1,11 @@
+# PSI-68 Experimental Table Manifest
+cc57ad1bd9977aa13e7ac6c3aa618303012686e232b36c052c6a9f1a74e5f528  PSI-68_Experimental table_Flex2.csv
+row_count: 8
+columns:
+  - Sample (Fuel Type)
+  - Initial Droplet Diameter (mm)
+  - Ambient Gas Mixture
+  - Oxygen Mole Fraction
+  - Ambient Pressure (atm)
+  - Ambient Temperature (C)
+  - Flow Velocity (cm/s)

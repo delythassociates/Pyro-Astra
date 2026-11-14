@@ -1,0 +1,34 @@
+{
+  "metadata_zips": [
+    {
+      "psi_id": "PSI-60",
+      "zip_path": "raw_real/PSI-60/PSI-60_metadata_NEWID-5_Computational and Ex.zip",
+      "file_count": 2,
+      "files": [
+        {
+          "filename": "i_Investigation.txt",
+          "bytes": 7451
+        },
+        {
+          "filename": "s_PSI-60.txt",
+          "bytes": 56
+        }
+      ]
+    },
+    {
+      "psi_id": "PSI-106",
+      "zip_path": "raw_real/PSI-106/PSI-106_metadata_PSI-174_SLICE.zip",
+      "file_count": 2,
+      "files": [
+        {
+          "filename": "i_Investigation.txt",
+          "bytes": 8449
+        },
+        {
+          "filename": "s_PSI-106.txt",
+          "bytes": 56
+        }
+      ]
+    }
+  ]
+}

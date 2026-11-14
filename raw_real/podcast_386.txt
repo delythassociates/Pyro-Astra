@@ -1,0 +1,1875 @@
+ 
+ 
+ 
+	 
+ 
+var gform;gform||(document.addEventListener("gform_main_scripts_loaded",function(){gform.scriptsLoaded=!0}),document.addEventListener("gform/theme/scripts_loaded",function(){gform.themeScriptsLoaded=!0}),window.addEventListener("DOMContentLoaded",function(){gform.domLoaded=!0}),gform={domLoaded:!1,scriptsLoaded:!1,themeScriptsLoaded:!1,isFormEditor:()=>"function"==typeof InitializeEditor,callIfLoaded:function(o){return!(!gform.domLoaded||!gform.scriptsLoaded||!gform.themeScriptsLoaded&&!gform.isFormEditor()||(gform.isFormEditor()&&console.warn("The use of gform.initializeOnLoaded() is deprecated in the form editor context and will be removed in Gravity Forms 3.1."),o(),0))},initializeOnLoaded:function(o){gform.callIfLoaded(o)||(document.addEventListener("gform_main_scripts_loaded",()=>{gform.scriptsLoaded=!0,gform.callIfLoaded(o)}),document.addEventListener("gform/theme/scripts_loaded",()=>{gform.themeScriptsLoaded=!0,gform.callIfLoaded(o)}),window.addEventListener("DOMContentLoaded",()=>{gform.domLoaded=!0,gform.callIfLoaded(o)}))},hooks:{action:{},filter:{}},addAction:function(o,r,e,t){gform.addHook("action",o,r,e,t)},addFilter:function(o,r,e,t){gform.addHook("filter",o,r,e,t)},doAction:function(o){gform.doHook("action",o,arguments)},applyFilters:function(o){return gform.doHook("filter",o,arguments)},removeAction:function(o,r){gform.removeHook("action",o,r)},removeFilter:function(o,r,e){gform.removeHook("filter",o,r,e)},addHook:function(o,r,e,t,n){null==gform.hooks[o][r]&&(gform.hooks[o][r]=[]);var d=gform.hooks[o][r];null==n&&(n=r+"_"+d.length),gform.hooks[o][r].push({tag:n,callable:e,priority:t=null==t?10:t})},doHook:function(r,o,e){var t;if(e=Array.prototype.slice.call(e,1),null!=gform.hooks[r][o]&&((o=gform.hooks[r][o]).sort(function(o,r){return o.priority-r.priority}),o.forEach(function(o){"function"!=typeof(t=o.callable)&&(t=window[t]),"action"==r?t.apply(null,e):e[0]=t.apply(null,e)})),"filter"==r)return e[0]},removeHook:function(o,r,t,n){var e;null!=gform.hooks[o][r]&&(e=(e=gform.hooks[o][r]).filter(function(o,r,e){return!!(null!=n&&n!=o.tag||null!=t&&t!=o.priority)}),gform.hooks[o][r]=e)}});
+ 
+
+	 
+	 
+
+	
+ 
+ Moon Material Flammability - NASA 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+ 
+ 
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-color]){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+ 
+
+ 
+ 
+.gform_fields{-moz-column-gap:10px;column-gap:10px;display:grid;grid-template-columns:repeat(12,1fr);row-gap:16px}.gform-page-footer,.gform_footer{margin-top:36px}@media only screen and (min-width:800px){.gform_fields{row-gap:36px}}.gform_fields>*{grid-column:span 12}.gform_fields .gfield .ginput_container .large,.gform_fields .gfield .ginput_container>*{width:100%}.gform_fields .ginput_container .gfield_select,.gform_fields .ginput_container input:not([type=checkbox]):not([type=radio]),.gform_fields .ginput_container select{height:48px}.gform_fields .ginput_container textarea{height:148px}.gfield_label.gform-field-label,.gform_fields .gfield_description,.gform_fields .gsection_description{display:block;grid-column:span 12}.gform_fields .gfield{grid-column:span 12}@media only screen and (min-width:800px){.gfield.gfield--width-full:not(.gfield--type-section):not(.gfield--type-html):not(.gfield--type-choice):not(.gfield--type-fileupload){display:grid;grid-template-columns:repeat(12,1fr)}.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-3 .ginput_container,.gform_fields .gfield-hds-inline-field-cols-3{grid-column:span 3}.gform_fields .gfield--width-full.gfield--type-date .ginput_container.ginput_container_date,.gform_fields .gfield-hds-inline-field-cols-4{grid-column:span 4}.gform_fields .gfield-hds-inline-field-cols-5,.gform_fields .gfield.gfield--type-time .ginput_container{grid-column:span 5}.gform_fields .gfield--width-full.gfield--type-date .ginput_container,.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-6 .ginput_container,.gform_fields .gfield-hds-inline-field-cols-6{grid-column:span 6}.gform_fields .gfield-hds-inline-field-cols-7{grid-column:span 7}.gform_fields .gfield-hds-inline-field-cols-8{grid-column:span 8}.gform_fields .gfield-hds-inline-field-cols-9{grid-column:span 9}.gform_fields .gfield-hds-inline-field-cols-10{grid-column:span 10}.gform_fields .gfield-hds-inline-field-cols-11{grid-column:span 11}.gform_fields .gfield--width-full,.gform_fields .gfield--width-full .ginput_container{grid-column:span 12}.gform_fields .gfield .ginput_container .small{width:33%}.gform_fields .gfield .ginput_container .medium{width:50%}.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-3 .ginput_container .medium,.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-3 .ginput_container .small,.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-6 .ginput_container .medium,.gform_fields .gfield--width-full.gfield-hds-inline-field-cols-6 .ginput_container .small{width:100%}}.gfield--type-phone .ginput_container.ginput_container_phone{grid-column:span 4}.gfield--input-type-time .ginput_container,.gfield--type-time .ginput_container{-moz-column-gap:5px;column-gap:5px;display:flex;flex-wrap:nowrap}.gfield--input-type-time .hour_minute_colon,.gfield--type-time .ginput_container .hour_minute_colon{display:none}.gfield--input-type-address .ginput_container span,.gform-grid-col{display:grid}.gfield--input-type-address .ginput_container span.ginput_left,.gfield--input-type-address .ginput_container span.ginput_right{flex:0 0 calc(50% - 5px)}.gform_fields .gfield--input-type-hidden{position:absolute}.gform_fields .gfield .ginput_container_consent input{width:auto}.ui-datepicker .ui-datepicker-header{display:grid;grid-template-columns:15% 70% 15%;grid-template-rows:auto}.ui-datepicker .ui-datepicker-header .ui-datepicker-next,.ui-datepicker .ui-datepicker-header .ui-datepicker-prev,.ui-datepicker .ui-datepicker-header .ui-datepicker-title{grid-row:1}.ui-datepicker .ui-datepicker-header .ui-datepicker-title{grid-column:2}.ui-datepicker .ui-datepicker-header .ui-datepicker-next{display:grid;justify-content:end}.gform_fields .gfield.gfield--input-type-datedropdown .ginput_container{-moz-column-gap:5px;column-gap:5px;display:flex;flex-wrap:nowrap}@media only screen and (min-width:800px){.gfield--type-address .ginput_container,.gfield--type-name .ginput_container{display:flex}.gfield--type-name .ginput_container,.gform_fields .gfield.gfield--input-type-datedropdown .ginput_container{-moz-column-gap:10px;column-gap:10px;flex-wrap:nowrap}.gfield--type-address .ginput_container{-moz-column-gap:10px;column-gap:10px;flex-wrap:wrap;row-gap:5px}.gfield--type-address .ginput_container .ginput_left,.gfield--type-address .ginput_container .ginput_right{width:calc(50% - 5px)}}.gform_wrapper .gform_validation_container{display:none!important}.hds-single-form-embed .form-entry-content{width:100%}fieldset.gfield{border:none;padding:0}.gform_fields select{-moz-appearance:none;-webkit-appearance:none;appearance:none;background:#fff;padding:0 12px}.gform_fields .ginput_container input,.gform_fields .ginput_container select,.gform_fields .ginput_container textarea{border:1px solid #d1d1d1;border-radius:2px}.gform_fields .ginput_container input:focus,.gform_fields .ginput_container select:focus,.gform_fields .ginput_container textarea:focus{border-color:#288bff;outline:2px solid #288bff}.gform_fields .ginput_container input:not([type=checkbox]):not([type=radio]){padding:0 16px}.gform_fields .gfield .ginput_container textarea{padding:16px}.gform_fields .ginput_container input[type=checkbox],.gform_fields .ginput_container input[type=radio]{margin-right:4px}.gform_fields .ginput_container .gchoice{margin-bottom:8px}.gform_fields .ginput_container input[type=radio]{border-radius:100%}.gform_fields .gfield--type-fileupload .ginput_container input[type=file]{padding-top:8px}.gform_fields .gfield-hds-multifile-uploads .ginput_container_fileupload{border:1px solid #d1d1d1;border-radius:2px;padding:12px 24px}.bg-carbon-90 .gsection_title{color:#d1d1d1}.gform_fields .gfield--type-section .gsection_title{border-bottom:1px solid #000;padding-bottom:4px}.gform_fields .gfield_description,.gform_fields .gsection_description{color:#58585b;font-size:12px;margin-top:5px}.gform_fields .gfield--type-section .gsection_description{font-size:1rem;line-height:1.65;margin-bottom:0}.gform_fields .ginput_container_select{position:relative}.gfield--input-type-datedropdown .ginput_container_date:after,.gform_fields .gfield-hds-canadian-address-type .address_state:after,.gform_fields .gfield-hds-international-address-type .address_country:after,.gform_fields .gfield-hds-us-address-type .address_state:after,.gform_fields .gfield_time_ampm:after,.gform_fields .ginput_container_select:after{content:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikljb24gLyBBcnJvdyAvIENoZXZyb24tRG93biI+CjxwYXRoIGlkPSJWZWN0b3IgMjcgKFN0cm9rZSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNSA2LjMxODg5TDkuMDQxMDUgMi4yNUwxMCAzLjIxNTU1TDUgOC4yNUwtNC4yMjA1N2UtMDggMy4yMTU1NUwwLjk1ODk0OSAyLjI1TDUgNi4zMTg4OVoiIGZpbGw9ImJsYWNrIi8+CjwvZz4KPC9zdmc+Cg==);display:block;pointer-events:none;position:absolute;right:16px;top:16px}.gform_fields input.gform-datepicker{width:100%}.gform_fields .ginput_container_date{position:relative}.gform_fields .gfield--input-type-datepicker .ginput_container_date:after{content:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDBINlYySDE0VjBIMTZWMkgxOVYyMEgxVjJINFYwWk0zIDRIMTdWNkgzVjRaTTMgOFYxOEgxN1Y4SDNaIiBmaWxsPSJibGFjayIvPgo8L3N2Zz4K);display:block;position:absolute;right:16px;top:16px}.ui-datepicker.gform-theme-datepicker{background:#fff;border-radius:2px;box-shadow:0 0 20px rgba(0,0,0,.2);margin-top:5px;padding:10px;width:270px}.ui-datepicker .ui-datepicker-month,.ui-datepicker .ui-datepicker-year{-moz-appearance:none;-webkit-appearance:none;appearance:none;background:#fff;border:none;height:24px}.ui-datepicker .ui-datepicker-month{text-align:center;width:60%}img.ui-datepicker-trigger{display:none}.ui-icon-circle-triangle-e{transform:rotate(180deg)}.ui-datepicker .ui-icon-circle-triangle-e,.ui-datepicker .ui-icon-circle-triangle-w{background-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikljb24gLyBBcnJvdyAvIENpcmNsZS1MZWZ0Ij4KPHBhdGggaWQ9IkVsbGlwc2UgMjQ1IiBkPSJNMTAgMTkuNUM0Ljc1MzMgMTkuNSAwLjUgMTUuMjQ2NyAwLjUgMTBDMC40OTk5OTkgNC43NTMzIDQuNzUzMjkgMC41IDEwIDAuNUMxNS4yNDY3IDAuNDk5OTk5IDE5LjUgNC43NTMyOSAxOS41IDEwQzE5LjUgMTUuMjQ2NyAxNS4yNDY3IDE5LjUgMTAgMTkuNVoiIHN0cm9rZT0iIzE3MTcxQiIvPgo8cGF0aCBpZD0iVmVjdG9yIDI3IChTdHJva2UpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTguOTQ0OTEgMTBMMTIuMiAxMy4yMzI4TDExLjQyNzYgMTRMNy40MDAwMiAxMEwxMS40Mjc2IDZMMTIuMiA2Ljc2NzE2TDguOTQ0OTEgMTBaIiBmaWxsPSIjMTcxNzFCIi8+CjwvZz4KPC9zdmc+Cg==);background-size:100%;display:block;font-size:0;height:24px;width:24px}.ui-datepicker .ui-datepicker-calendar{border-collapse:collapse;margin:10px 0 -10px -5px;width:260px}.ui-datepicker-calendar tbody tr td{border-bottom:10px solid transparent;text-align:center}.ui-datepicker-calendar tbody tr td a{color:#17171b}.ui-datepicker-calendar .ui-datepicker-unselectable{color:#959599}.ui-datepicker-calendar .ui-datepicker-current-day{background:#1c67e3}.ui-datepicker-calendar .ui-datepicker-current-day a{color:#fff}.gfield_label.gform-field-label{color:#2e2e32;font-weight:600;letter-spacing:-.25px;margin-bottom:8px}.gfield_required,.gform_fields .gfield_validation_message{color:#b60109}.gfield_required .gfield_required_text{font-size:90%;font-weight:400;margin-left:6px}.gfield_required .gfield_required_asterisk{margin-left:3px}.gform_fields .gfield_validation_message{align-items:center;display:flex;letter-spacing:.25px}.gform_fields .validation_message--hidden-on-empty{display:none}.gfield_validation_message:before{content:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCAxOUMxNC45NzA2IDE5IDE5IDE0Ljk3MDYgMTkgMTBDMTkgNS4wMjk0NCAxNC45NzA2IDEgMTAgMUM1LjAyOTQ0IDEgMSA1LjAyOTQ0IDEgMTBDMSAxNC45NzA2IDUuMDI5NDQgMTkgMTAgMTlaTTkgMTNWNEgxMVYxM0g5Wk05IDE2VjE0SDExVjE2SDlaIiBmaWxsPSIjRjY0MTM3Ii8+Cjwvc3ZnPgo=);margin-right:6px}.gform_fields .gform-field-label--type-sub{margin-bottom:12px}.gform_fields input+.gform-field-label--type-sub{margin:5px 0 12px}.gform_fields .gfield-hds-multifile-uploads button,.gform_footer .gform_button.button,.gform_page_footer .gform_button.button,.gform_page_footer .gform_next_button.button,.gform_page_footer .gform_previous_button.button{background-color:#f64137;border:none;color:#fff;font-size:16px;font-weight:600;line-height:20px;padding:12px 20px;transition:background-color .2s ease-in-out}.gform_page_footer .gform_previous_button.button{background-color:unset;border:1px solid #1c67e3;color:#000;margin-right:1.5em}.gform_fields .gfield-hds-multifile-uploads button{font-size:12px;padding:6px 10px}.gform_fields .gfield-hds-multifile-uploads button:hover,.gform_footer .gform_button.button:hover,.gform_page_footer .gform_button.button:hover,.gform_page_footer .gform_next_button.button:hover,.gform_page_footer .gform_previous_button.button:hover{background-color:#b60109;cursor:pointer;transition:background-color .2s ease-in-out}.gform_page_footer .gform_previous_button.button:hover{background-color:unset}.gform_fields .gfield-hds-multifile-uploads button:focus .gform_footer .gform_button.button:focus{outline:1px dashed #b9b9bb}.gform_fields .gfield-hds-singlefile-uploads .ginput_container input::file-selector-button{background-color:#f64137;border:none;color:#fff;font-size:12px;font-weight:600;line-height:20px;padding:6px 10px;transition:background-color .2s ease-in-out}.gform_fields .gfield-hds-singlefile-uploads .ginput_container input::file-selector-button:hover{background-color:#b60109;cursor:pointer;transition:background-color .2s ease-in-out}.usa-article-content div.form-entry-content p.form-omb-approval-wrapper{margin:0}div.form-entry-content p.form-omb-approval-wrapper .form-omb-approval-label{font-size:.7rem;font-weight:700;margin-right:5px}div.form-entry-content p.form-omb-approval-wrapper .form-omb-approval-code{font-family:dm-mono,monospace;font-size:.9rem;font-style:normal;font-weight:500;letter-spacing:1px;line-height:1;text-transform:uppercase}.gf_progressbar_wrapper{margin-bottom:16px}.gf_progressbar_title{color:#2e2e32;font-size:14px;font-weight:600;margin-bottom:8px}.gf_progressbar{background-color:#e6e6e6;border-radius:4px;height:20px;overflow:hidden}.gf_progressbar_percentage{background-color:#1c67e3;border-radius:4px;height:100%;text-align:center;transition:width .3s ease}.gf_progressbar_percentage span{color:#fff;display:block;font-size:12px;font-weight:600;line-height:20px}.hds-gf-stepper{margin-bottom:24px}.hds-gf-stepper__list{display:flex;gap:4px;list-style:none;margin:0;padding:0}.hds-gf-stepper__item{display:flex;flex:1 0 0;flex-direction:column;gap:12px;min-width:0}.hds-gf-stepper__bar{background-color:#d1d1d1;display:block;height:6px;width:100%}.bg-carbon-90 .hds-gf-stepper__bar{background-color:#3d3d40}.hds-gf-stepper__item.is-complete .hds-gf-stepper__bar{background-color:#288bff}.hds-gf-stepper__item.is-active .hds-gf-stepper__bar{background-color:#1c67e3}.hds-gf-stepper__content{display:flex;flex-direction:column;gap:4px;min-width:0}.hds-gf-stepper__heading{align-items:center;color:#000;display:flex;font-family:Inter,sans-serif;font-size:16px;font-weight:400;gap:4px;letter-spacing:-.5px;line-height:20px}.bg-carbon-90 .hds-gf-stepper__heading{color:#d1d1d1}.hds-gf-stepper__item.is-active .hds-gf-stepper__heading{font-weight:600}.hds-gf-stepper__sub{color:#58585b;font-size:12px;font-weight:400;letter-spacing:.25px;line-height:16px}.hds-gf-stepper__check{fill:currentcolor;color:#47da84;flex-shrink:0;height:20px;width:20px}.hds-gf-stepper__current-step{color:#58585b;display:none;font-size:12px;font-weight:400;letter-spacing:.25px;line-height:16px;margin-top:4px}.bg-carbon-90 .hds-gf-stepper__current-step{color:#b9b9bb}.hds-single-form-embed.bg-carbon-90 .form-entry-content{margin-bottom:40px;width:100%}.bg-carbon-90 .gform_fields .ginput_container span>*,.bg-carbon-90 .gform_fields .ginput_container>*{background:transparent;color:#d1d1d1}.bg-carbon-90 .gform_fields .ginput_container input::-moz-placeholder{color:#d1d1d1}.bg-carbon-90 .gform_fields .ginput_container input::placeholder{color:#d1d1d1}.bg-carbon-90 .gform_fields .gsection_title{border-bottom:1px solid #fff}.bg-carbon-90 .gform_fields .ginput_container_date:after{content:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikljb24gLyBDYWxlbmRhciI+CjxwYXRoIGlkPSJVbmlvbiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik00IDBINlYySDE0VjBIMTZWMkgxOVYyMEgxVjJINFYwWk0zIDRIMTdWNkgzVjRaTTMgOFYxOEgxN1Y4SDNaIiBmaWxsPSJ3aGl0ZSIvPgo8L2c+Cjwvc3ZnPgo=)}.bg-carbon-90 .gform_fields .ginput_container_select:after{content:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikljb24gLyBBcnJvdyAvIENoZXZyb24tRG93biI+CjxwYXRoIGlkPSJWZWN0b3IgMjcgKFN0cm9rZSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNSA2LjMxODg5TDkuMDQxMDUgMi4yNUwxMCAzLjIxNTU1TDUgOC4yNUwtNC4yMjA1N2UtMDggMy4yMTU1NUwwLjk1ODk0OSAyLjI1TDUgNi4zMTg4OVoiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9zdmc+Cg==)}.bg-carbon-90 .gf_progressbar_title,.bg-carbon-90 .gfield--type-html,.bg-carbon-90 .gfield--type-html a,.bg-carbon-90 .gform-field-label,.bg-carbon-90 .gform_fields .gfield_description,.bg-carbon-90 .gform_fields .gsection_description,.bg-carbon-90 .gform_required_legend,.bg-carbon-90 h2{color:#d1d1d1}.bg-carbon-90 .gf_progressbar{background-color:#3d3d40}.bg-carbon-90 .hds-gf-stepper__sub{color:#b9b9bb}.gform_submission_error{font-size:revert}@media only screen and (min-width:800px){.hds-single-form-embed.bg-carbon-90{padding:2rem}.hds-single-form-embed.bg-carbon-90 .form-entry-content{margin-bottom:0}.gform_fields select{padding:0 16px}}@media only screen and (max-width:799px){.hds-gf-stepper__content{clip:rect(1px,1px,1px,1px);word-wrap:normal;-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}.hds-gf-stepper__current-step{display:block}}
+
+/*# sourceURL=https://www.nasa.gov/wp-content/plugins/nasa-blocks/build/blocks/gravity-form-embed/style-index.css */
+ 
+ 
+ 
+/* Popup Theme 862807: Default Theme */
+.pum-theme-862807, .pum-theme-default-theme { background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-862807 .pum-container, .pum-theme-default-theme .pum-container { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); background-color: rgba( 249, 249, 249, 1.00 ) } 
+.pum-theme-862807 .pum-title, .pum-theme-default-theme .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; font-style: normal; line-height: 36px } 
+.pum-theme-862807 .pum-content, .pum-theme-default-theme .pum-content { color: #8c8c8c; font-family: inherit; font-weight: 400; font-style: inherit } 
+.pum-theme-862807 .pum-content + .pum-close, .pum-theme-default-theme .pum-content + .pum-close { position: absolute; height: auto; width: auto; left: auto; right: 0px; bottom: auto; top: 0px; padding: 8px; color: #ffffff; font-family: inherit; font-weight: 400; font-size: 12px; font-style: inherit; line-height: 36px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 183, 205, 1.00 ) } 
+
+/* Popup Theme 862808: Light Box */
+.pum-theme-862808, .pum-theme-lightbox { background-color: rgba( 0, 0, 0, 0.60 ) } 
+.pum-theme-862808 .pum-container, .pum-theme-lightbox .pum-container { padding: 18px; border-radius: 3px; border: 8px solid #000000; box-shadow: 0px 0px 30px 0px rgba( 2, 2, 2, 1.00 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-862808 .pum-title, .pum-theme-lightbox .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-862808 .pum-content, .pum-theme-lightbox .pum-content { color: #000000; font-family: inherit; font-weight: 100 } 
+.pum-theme-862808 .pum-content + .pum-close, .pum-theme-lightbox .pum-content + .pum-close { position: absolute; height: 26px; width: 26px; left: auto; right: -13px; bottom: auto; top: -13px; padding: 0px; color: #ffffff; font-family: Arial; font-weight: 100; font-size: 24px; line-height: 24px; border: 2px solid #ffffff; border-radius: 26px; box-shadow: 0px 0px 15px 1px rgba( 2, 2, 2, 0.75 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 1.00 ) } 
+
+/* Popup Theme 862809: Enterprise Blue */
+.pum-theme-862809, .pum-theme-enterprise-blue { background-color: rgba( 0, 0, 0, 0.70 ) } 
+.pum-theme-862809 .pum-container, .pum-theme-enterprise-blue .pum-container { padding: 28px; border-radius: 5px; border: 1px none #000000; box-shadow: 0px 10px 25px 4px rgba( 2, 2, 2, 0.50 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-862809 .pum-title, .pum-theme-enterprise-blue .pum-title { color: #315b7c; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 34px; line-height: 36px } 
+.pum-theme-862809 .pum-content, .pum-theme-enterprise-blue .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-862809 .pum-content + .pum-close, .pum-theme-enterprise-blue .pum-content + .pum-close { position: absolute; height: 28px; width: 28px; left: auto; right: 8px; bottom: auto; top: 8px; padding: 4px; color: #ffffff; font-family: Times New Roman; font-weight: 100; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 42px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 49, 91, 124, 1.00 ) } 
+
+/* Popup Theme 862810: Hello Box */
+.pum-theme-862810, .pum-theme-hello-box { background-color: rgba( 0, 0, 0, 0.75 ) } 
+.pum-theme-862810 .pum-container, .pum-theme-hello-box .pum-container { padding: 30px; border-radius: 80px; border: 14px solid #81d742; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+.pum-theme-862810 .pum-title, .pum-theme-hello-box .pum-title { color: #2d2d2d; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Montserrat; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-862810 .pum-content, .pum-theme-hello-box .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-862810 .pum-content + .pum-close, .pum-theme-hello-box .pum-content + .pum-close { position: absolute; height: auto; width: auto; left: auto; right: -30px; bottom: auto; top: -30px; padding: 0px; color: #2d2d2d; font-family: Times New Roman; font-weight: 100; font-size: 32px; line-height: 28px; border: 1px none #ffffff; border-radius: 28px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 255, 255, 255, 1.00 ) } 
+
+/* Popup Theme 862811: Cutting Edge */
+.pum-theme-862811, .pum-theme-cutting-edge { background-color: rgba( 0, 0, 0, 0.50 ) } 
+.pum-theme-862811 .pum-container, .pum-theme-cutting-edge .pum-container { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 0px 10px 25px 0px rgba( 2, 2, 2, 0.50 ); background-color: rgba( 30, 115, 190, 1.00 ) } 
+.pum-theme-862811 .pum-title, .pum-theme-cutting-edge .pum-title { color: #ffffff; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Sans-Serif; font-weight: 100; font-size: 26px; line-height: 28px } 
+.pum-theme-862811 .pum-content, .pum-theme-cutting-edge .pum-content { color: #ffffff; font-family: inherit; font-weight: 100 } 
+.pum-theme-862811 .pum-content + .pum-close, .pum-theme-cutting-edge .pum-content + .pum-close { position: absolute; height: 24px; width: 24px; left: auto; right: 0px; bottom: auto; top: 0px; padding: 0px; color: #1e73be; font-family: Times New Roman; font-weight: 100; font-size: 32px; line-height: 24px; border: 1px none #ffffff; border-radius: 0px; box-shadow: -1px 1px 1px 0px rgba( 2, 2, 2, 0.10 ); text-shadow: -1px 1px 1px rgba( 0, 0, 0, 0.10 ); background-color: rgba( 238, 238, 34, 1.00 ) } 
+
+/* Popup Theme 862812: Framed Border */
+.pum-theme-862812, .pum-theme-framed-border { background-color: rgba( 255, 255, 255, 0.50 ) } 
+.pum-theme-862812 .pum-container, .pum-theme-framed-border .pum-container { padding: 18px; border-radius: 0px; border: 20px outset #dd3333; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.97 ) inset; background-color: rgba( 255, 251, 239, 1.00 ) } 
+.pum-theme-862812 .pum-title, .pum-theme-framed-border .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 100; font-size: 32px; line-height: 36px } 
+.pum-theme-862812 .pum-content, .pum-theme-framed-border .pum-content { color: #2d2d2d; font-family: inherit; font-weight: 100 } 
+.pum-theme-862812 .pum-content + .pum-close, .pum-theme-framed-border .pum-content + .pum-close { position: absolute; height: 20px; width: 20px; left: auto; right: -20px; bottom: auto; top: -20px; padding: 0px; color: #ffffff; font-family: Tahoma; font-weight: 700; font-size: 16px; line-height: 18px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 0.55 ) } 
+
+/* Popup Theme 862813: Floating Bar - Soft Blue */
+.pum-theme-862813, .pum-theme-floating-bar { background-color: rgba( 255, 255, 255, 0.00 ) } 
+.pum-theme-862813 .pum-container, .pum-theme-floating-bar .pum-container { padding: 8px; border-radius: 0px; border: 1px none #000000; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); background-color: rgba( 238, 246, 252, 1.00 ) } 
+.pum-theme-862813 .pum-title, .pum-theme-floating-bar .pum-title { color: #505050; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; line-height: 36px } 
+.pum-theme-862813 .pum-content, .pum-theme-floating-bar .pum-content { color: #505050; font-family: inherit; font-weight: 400 } 
+.pum-theme-862813 .pum-content + .pum-close, .pum-theme-floating-bar .pum-content + .pum-close { position: absolute; height: 18px; width: 18px; left: auto; right: 5px; bottom: auto; top: 50%; padding: 0px; color: #505050; font-family: Sans-Serif; font-weight: 700; font-size: 15px; line-height: 18px; border: 1px solid #505050; border-radius: 15px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.00 ); background-color: rgba( 255, 255, 255, 0.00 ); transform: translate(0, -50%) } 
+
+/* Popup Theme 862814: Content Only - For use with page builders or block editor */
+.pum-theme-862814, .pum-theme-content-only { background-color: rgba( 0, 0, 0, 0.70 ) } 
+.pum-theme-862814 .pum-container, .pum-theme-content-only .pum-container { padding: 0px; border-radius: 0px; border: 1px none #000000; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ) } 
+.pum-theme-862814 .pum-title, .pum-theme-content-only .pum-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: 400; font-size: 32px; line-height: 36px } 
+.pum-theme-862814 .pum-content, .pum-theme-content-only .pum-content { color: #8c8c8c; font-family: inherit; font-weight: 400 } 
+.pum-theme-862814 .pum-content + .pum-close, .pum-theme-content-only .pum-content + .pum-close { position: absolute; height: 18px; width: 18px; left: auto; right: 7px; bottom: auto; top: 7px; padding: 0px; color: #000000; font-family: inherit; font-weight: 700; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 15px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.00 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.00 ); background-color: rgba( 255, 255, 255, 0.00 ) } 
+
+#pum-872473 {z-index: 1999999999}
+
+/*# sourceURL=popup-maker-site-inline-css */
+ 
+ 
+var popupData = {"popupId":"872473","randomChance":"0.1"};
+//# sourceURL=random-popup-display-js-extra
+ 
+ 
+ 
+var gf_global = {"gf_currency_config":{"name":"U.S. Dollar","symbol_left":"$","symbol_right":"","symbol_padding":"","thousand_separator":",","decimal_separator":".","decimals":2,"code":"USD"},"base_url":"https://www.nasa.gov/wp-content/plugins/gravityforms","number_formats":[],"version_hash":"2f9b4ca12179b4ec60d030e7d34f8b18","countries":{"AF":"Afghanistan","AX":"\u00c5land Islands","AL":"Albania","DZ":"Algeria","AS":"American Samoa","AD":"Andorra","AO":"Angola","AI":"Anguilla","AQ":"Antarctica","AG":"Antigua and Barbuda","AR":"Argentina","AM":"Armenia","AW":"Aruba","AU":"Australia","AT":"Austria","AZ":"Azerbaijan","BS":"Bahamas","BH":"Bahrain","BD":"Bangladesh","BB":"Barbados","BY":"Belarus","BE":"Belgium","BZ":"Belize","BJ":"Benin","BM":"Bermuda","BT":"Bhutan","BO":"Bolivia","BQ":"Bonaire, Sint Eustatius and Saba","BA":"Bosnia and Herzegovina","BW":"Botswana","BV":"Bouvet Island","BR":"Brazil","IO":"British Indian Ocean Territory","BN":"Brunei Darussalam","BG":"Bulgaria","BF":"Burkina Faso","BI":"Burundi","CV":"Cabo Verde","KH":"Cambodia","CM":"Cameroon","CA":"Canada","KY":"Cayman Islands","CF":"Central African Republic","TD":"Chad","CL":"Chile","CN":"China","CX":"Christmas Island","CC":"Cocos Islands","CO":"Colombia","KM":"Comoros","CD":"Congo, Democratic Republic of the","CG":"Congo","CK":"Cook Islands","CR":"Costa Rica","CI":"C\u00f4te d'Ivoire","HR":"Croatia","CU":"Cuba","CW":"Cura\u00e7ao","CY":"Cyprus","CZ":"Czechia","DK":"Denmark","DJ":"Djibouti","DM":"Dominica","DO":"Dominican Republic","EC":"Ecuador","EG":"Egypt","SV":"El Salvador","GQ":"Equatorial Guinea","ER":"Eritrea","EE":"Estonia","SZ":"Eswatini","ET":"Ethiopia","FK":"Falkland Islands","FO":"Faroe Islands","FJ":"Fiji","FI":"Finland","FR":"France","GF":"French Guiana","PF":"French Polynesia","TF":"French Southern Territories","GA":"Gabon","GM":"Gambia","GE":"Georgia","DE":"Germany","GH":"Ghana","GI":"Gibraltar","GR":"Greece","GL":"Greenland","GD":"Grenada","GP":"Guadeloupe","GU":"Guam","GT":"Guatemala","GG":"Guernsey","GN":"Guinea","GW":"Guinea-Bissau","GY":"Guyana","HT":"Haiti","HM":"Heard Island and McDonald Islands","VA":"Holy See","HN":"Honduras","HK":"Hong Kong","HU":"Hungary","IS":"Iceland","IN":"India","ID":"Indonesia","IR":"Iran","IQ":"Iraq","IE":"Ireland","IM":"Isle of Man","IL":"Israel","IT":"Italy","JM":"Jamaica","JP":"Japan","JE":"Jersey","JO":"Jordan","KZ":"Kazakhstan","KE":"Kenya","KI":"Kiribati","KP":"Korea, Democratic People's Republic of","KR":"Korea, Republic of","KW":"Kuwait","KG":"Kyrgyzstan","LA":"Lao People's Democratic Republic","LV":"Latvia","LB":"Lebanon","LS":"Lesotho","LR":"Liberia","LY":"Libya","LI":"Liechtenstein","LT":"Lithuania","LU":"Luxembourg","MO":"Macao","MG":"Madagascar","MW":"Malawi","MY":"Malaysia","MV":"Maldives","ML":"Mali","MT":"Malta","MH":"Marshall Islands","MQ":"Martinique","MR":"Mauritania","MU":"Mauritius","YT":"Mayotte","MX":"Mexico","FM":"Micronesia","MD":"Moldova","MC":"Monaco","MN":"Mongolia","ME":"Montenegro","MS":"Montserrat","MA":"Morocco","MZ":"Mozambique","MM":"Myanmar","NA":"Namibia","NR":"Nauru","NP":"Nepal","NL":"Netherlands","NC":"New Caledonia","NZ":"New Zealand","NI":"Nicaragua","NE":"Niger","NG":"Nigeria","NU":"Niue","NF":"Norfolk Island","MK":"North Macedonia","MP":"Northern Mariana Islands","NO":"Norway","OM":"Oman","PK":"Pakistan","PW":"Palau","PS":"Palestine, State of","PA":"Panama","PG":"Papua New Guinea","PY":"Paraguay","PE":"Peru","PH":"Philippines","PN":"Pitcairn","PL":"Poland","PT":"Portugal","PR":"Puerto Rico","QA":"Qatar","RE":"R\u00e9union","RO":"Romania","RU":"Russian Federation","RW":"Rwanda","BL":"Saint Barth\u00e9lemy","SH":"Saint Helena, Ascension and Tristan da Cunha","KN":"Saint Kitts and Nevis","LC":"Saint Lucia","MF":"Saint Martin","PM":"Saint Pierre and Miquelon","VC":"Saint Vincent and the Grenadines","WS":"Samoa","SM":"San Marino","ST":"Sao Tome and Principe","SA":"Saudi Arabia","SN":"Senegal","RS":"Serbia","SC":"Seychelles","SL":"Sierra Leone","SG":"Singapore","SX":"Sint Maarten","SK":"Slovakia","SI":"Slovenia","SB":"Solomon Islands","SO":"Somalia","ZA":"South Africa","GS":"South Georgia and the South Sandwich Islands","SS":"South Sudan","ES":"Spain","LK":"Sri Lanka","SD":"Sudan","SR":"Suriname","SJ":"Svalbard and Jan Mayen","SE":"Sweden","CH":"Switzerland","SY":"Syria Arab Republic","TW":"Taiwan","TJ":"Tajikistan","TZ":"Tanzania, the United Republic of","TH":"Thailand","TL":"Timor-Leste","TG":"Togo","TK":"Tokelau","TO":"Tonga","TT":"Trinidad and Tobago","TN":"Tunisia","TR":"T\u00fcrkiye","TM":"Turkmenistan","TC":"Turks and Caicos Islands","TV":"Tuvalu","UG":"Uganda","UA":"Ukraine","AE":"United Arab Emirates","GB":"United Kingdom","US":"United States","UY":"Uruguay","UM":"US Minor Outlying Islands","UZ":"Uzbekistan","VU":"Vanuatu","VE":"Venezuela","VN":"Viet Nam","VG":"Virgin Islands, British","VI":"Virgin Islands, U.S.","WF":"Wallis and Futuna","EH":"Western Sahara","YE":"Yemen","ZM":"Zambia","ZW":"Zimbabwe"},"strings":{"newRowAdded":"New row added.","rowRemoved":"Row removed","formSaved":"The form has been saved. The content contains the link to return and complete the form."}};
+var gform_i18n = {"datepicker":{"wdOffset":1,"helpTextShort":"Press F1 for help","helpText":"Press the arrow keys to navigate by day, PageUp and PageDown to navigate by month, Alt+PageUp and Alt+PageDown to navigate by year, or Escape to cancel.","openOnFocusHelpText":"Press Down arrow to browse the calendar, or Escape to close.","tooltipTxt":"Press Escape to cancel","disabledTxt":"Disabled","markedTxt":"Selected","prevTxt":"Previous","nextTxt":"Next","monthTxt":"Month","yearTxt":"Year","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"days":[{"s":"S","l":"Sunday"},{"s":"M","l":"Monday"},{"s":"T","l":"Tuesday"},{"s":"W","l":"Wednesday"},{"s":"T","l":"Thursday"},{"s":"F","l":"Friday"},{"s":"S","l":"Saturday"}]}};
+var gf_legacy_multi = {"117":""};
+var gform_gravityforms = {"strings":{"invalid_file_extension":"This type of file is not allowed. Must be one of the following:","file_uploaded":"File uploaded","delete_file":"Delete this file","in_progress":"in progress","file_exceeds_limit":"File exceeds size limit","illegal_extension":"This type of file is not allowed.","max_reached":"Maximum number of files reached","unknown_error":"There was a problem while saving the file on the server","currently_uploading":"Please wait for the uploading to complete","cancel":"Cancel","cancel_upload":"Cancel this upload","cancelled":"Cancelled","error":"Error","message":"Message"},"vars":{"images_url":"https://www.nasa.gov/wp-content/plugins/gravityforms/images"}};
+//# sourceURL=gform_gravityforms-js-extra
+ 
+ 
+ 
+ 
+ 
+	 
+	 
+	 
+	 
+	 
+	 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NLJ258M'); 
+	 
+		 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+	 
+	 
+ 
+ 
+	 
+	 
+	 
+	
+ 
+	 
+		 
+			 
+				 
+					 
+					 
+					 
+				 
+			 
+		 
+		 
+			 
+				 
+			 
+		 
+		 
+			 
+				 
+			 
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 
+				 
+					 
+						 Explore 
+						 
+					 
+				 
+			 
+			 Search 
+		 
+		 
+			 
+				 
+			 
+		 
+		 
+			 
+				 
+					 
+					 
+						 News &amp; Events 
+						 
+					 
+											 
+							 
+								 News &amp; Events 
+								 
+							 
+															 
+									 
+										 News Releases 
+									 
+								 
+															 
+									 
+										 Recently Published 
+									 
+								 
+															 
+									 
+										 Video Series on NASA+ 
+									 
+								 
+															 
+									 
+										 Podcasts &amp; Audio 
+									 
+								 
+															 
+									 
+										 Blogs 
+									 
+								 
+															 
+									 
+										 Newsletters 
+									 
+								 
+															 
+									 
+										 Social Media 
+									 
+								 
+															 
+									 
+										 Media Resources 
+									 
+								 
+															 
+									 
+										 Events 
+									 
+								 
+															 
+									 
+										 Upcoming Launches &amp; Landings 
+									 
+								 
+															 
+									 
+										 Virtual Guest Program 
+									 
+								 
+													 
+										 
+					 
+					 
+						 Multimedia 
+						 
+					 
+											 
+							 
+								 Multimedia 
+								 
+							 
+															 
+									 
+										 NASA+ 
+									 
+								 
+															 
+									 
+										 Images 
+									 
+								 
+															 
+									 
+										 NASA Live 
+									 
+								 
+															 
+									 
+										 NASA Apps 
+									 
+								 
+															 
+									 
+										 Podcasts 
+									 
+								 
+															 
+									 
+										 Image of the Day 
+									 
+								 
+															 
+									 
+										 e-Books 
+									 
+								 
+															 
+									 
+										 3D Resources 
+									 
+								 
+															 
+									 
+										 Interactives 
+									 
+								 
+															 
+									 
+										 STEM Multimedia 
+									 
+								 
+															 
+									 
+										 NASA Brand &amp; Usage Guidelines 
+									 
+								 
+													 
+										 
+					 
+						 
+							 NASA+ 
+						 
+					 
+				 
+			 
+		 
+	 
+ 
+ 
+	 
+		 
+		 Search 		 
+			 
+		 
+	 
+	 
+		 Suggested Searches 
+		 
+							 
+					 
+						 
+						 Artemis 
+						 
+					 
+				 
+								 
+					 
+						 
+						 ISS 
+						 
+					 
+				 
+								 
+					 
+						 
+						 Roman 
+						 
+					 
+				 
+								 
+					 
+						 
+						 Webb 
+						 
+					 
+				 
+								 
+					 
+						 
+						 Quesst 
+						 
+					 
+				 
+								 
+					 
+						 
+						 Moon Base 
+						 
+					 
+				 
+							 
+				 
+					 View All Topics A-Z 
+					 
+				 
+			 
+		 
+	 
+ 
+
+ 
+	 
+		 
+
+			
+ 
+	 
+		 
+		 Home Missions Humans in Space Earth The Solar System The Universe Science Aeronautics Technology Learning Resources About NASA Español 			 
+			 
+				 
+					 News &amp; Events 
+					 
+				 
+			 
+			 
+				 
+					 Multimedia 
+					 
+				 
+			 
+			 
+				 
+					 NASA+ 
+				 
+			 
+		 
+	 
+ 
+ Featured 3 min read NASA Invites Media, Public to Join Voyager 1 One-Light Day Activities article 3 days ago 5 min read NASA’s ESCAPADE Completes Powered Earth Flybys, Now En Route to Mars article 4 days ago 4 min read What’s Up: November 2026 Skywatching Tips from NASA article 2 weeks ago 
+	 
+
+		 
+		 
+			 
+				 
+				 Back 
+			 
+			 
+		 
+
+		 Missions Search All NASA Missions A to Z List of Missions Upcoming Launches and Landings Spaceships and Rockets Communicating with Missions Artemis James Webb Space Telescope Hubble Space Telescope International Space Station OSIRIS-Rex Humans in Space Why Go to Space Astronauts Commercial Space Destinations Spaceships and Rockets Living in Space Earth Explore Earth Science Climate Change Earth, Our Planet Earth Science in Action Earth Multimedia Earth Data Earth Science Researchers The Solar System The Sun Mercury Venus Earth The Moon Mars Jupiter Saturn Uranus Neptune Pluto &amp; Dwarf Planets Asteroids, Comets &amp; Meteors The Kuiper Belt The Oort Cloud Skywatching The Universe Exoplanets The Search for Life in the Universe Stars Galaxies Black Holes The Big Bang Dark Energy Dark Matter Science Earth Science Planetary Science Astrophysics &amp; Space Science The Sun &amp; Heliophysics Biological &amp; Physical Sciences Lunar Science Citizen Science Astromaterials Aeronautics Research Human Space Travel Research Aeronautics Science in the Air NASA Aircraft Flight Research Innovation Supersonic Flight Air Traffic Solutions Green Aviation Tech Drones &amp; You Technology Technology Transfer &amp; Spinoffs Space Travel Living in Space Lunar Surface Technology Manufacturing and Materials Robotics Science Instruments Computing Learning Resources For Students For Educators For Colleges and Universities For Professionals Science for Everyone Requests for Exhibits, Artifacts, Speakers &amp; Flyovers STEM Engagement at NASA About NASA NASA&#039;s Impacts Centers and Facilities Directorates Organizations People of NASA Careers Internships Our History Doing Business with NASA Get Involved Contact NASA en Español Ciencia Aeronáutica Ciencias Terrestres Sistema Solar Universo News &amp; Events News Releases Recently Published Video Series on NASA+ Podcasts &amp; Audio Blogs Newsletters Social Media Media Resources Events Upcoming Launches &amp; Landings Virtual Guest Program Multimedia NASA+ Images NASA Live NASA Apps Podcasts Image of the Day e-Books 3D Resources Interactives STEM Multimedia NASA Brand &amp; Usage Guidelines 	 
+ 
+
+
+
+
+
+
+ 
+	 Featured 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA Invites Media, Public to Join Voyager 1 One-Light Day Activities 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 3 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 6 min read 
+
+		 
+			 NASA’s Chandra Finds Source of Star’s Mysterious Outbursts 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 4 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 NASA’s Hubble Offers Cosmic Sampler of Targets for Roman 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 day ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 2 min read 
+
+		 
+			 NASA Astronauts to Answer Questions from Florida Students 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 2 min read 
+
+		 
+			 NASA Astronaut, STEM Creator Connect with Students for STEM Day 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA&#8217;s ISAM State of Play: The Industry Standard for Space Servicing, Assembly, and Manufacturing 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 weeks ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 A Global Rebound for Mangroves 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 20 hours ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 Scotland’s Flow Country 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 STRIVE 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 days ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 NASA’s ESCAPADE Completes Powered Earth Flybys, Now En Route to Mars 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 4 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 PROMISE 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 6 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 4 min read 
+
+		 
+			 What’s Up: November 2026 Skywatching Tips from NASA 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 weeks ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 NASA’s Hubble Offers Cosmic Sampler of Targets for Roman 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 day ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 NASA Scientists Show How Gravitational Waves Can Reveal New Worlds 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 3 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 6 min read 
+
+		 
+			 NASA’s Chandra Finds Source of Star’s Mysterious Outbursts 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 4 days ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 A Global Rebound for Mangroves 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 20 hours ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 NASA’s Hubble Offers Cosmic Sampler of Targets for Roman 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 day ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 Scotland’s Flow Country 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 days ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 Through NASA’s Lens: Capturing Space Shuttle Endeavour’s Move to LA 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 day ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 4 min read 
+
+		 
+			 MAX POWER: NASA’s Inaugural Aerospace Expo Ignites America’s Future 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 4 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA Navigation Experiment Shows Promise for Planetary Landings 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA Navigation Experiment Shows Promise for Planetary Landings 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 2 min read 
+
+		 
+			 High-speed Intelligent Robust Autonomous Terrain Exploration 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 5 min read 
+
+		 
+			 The Pacific’s Busy Storm Season 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 2 weeks ago 
+
+		 
+	 
+ 
+ Featured 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 2 min read 
+
+		 
+			 NASA Astronauts to Answer Questions from Florida Students 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 4 min read 
+
+		 
+			 NASA Space Grant Students Fuel Agency&#8217;s Inspiration Tour 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 2 min read 
+
+		 
+			 NASA Astronaut, STEM Creator Connect with Students for STEM Day 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 1 week ago 
+
+		 
+	 
+ 
+ Featured 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA Invites Media, Public to Join Voyager 1 One-Light Day Activities 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 3 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 3 min read 
+
+		 
+			 NASA Announces $1 Million to Students for Moon Base Challenge 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 5 days ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 1 min read 
+
+		 
+			 TIME Best Inventions of 2026 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 4 weeks ago 
+
+		 
+	 
+ 
+ Highlights 
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 11 min read 
+
+		 
+			 La NASA anuncia la cobertura de la misión lunar Artemis II 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 8 months ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 15 min read 
+
+		 
+			 Agenda diaria de la misión a la Luna de Artemis II de la NASA 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 8 months ago 
+
+		 
+	 
+ 
+
+ 
+	 
+		 
+			 		 
+	 
+
+	 
+
+		 6 min read 
+
+		 
+			 La NASA refuerza Artemis: añade una misión y perfecciona su arquitectura general 
+		 
+
+		 
+
+			 
+				 
+				 article 
+			 
+
+			 9 months ago 
+
+		 
+	 
+ 
+ 
+ 
+
+		 
+	 
+
+
+ 
+ Moon Material Flammability Houston We Have a Podcast Season 1 Episode 386 May 23, 2025 Two NASA experts discuss an experiment that will further our understanding of flame behavior on the lunar surface to keep astronauts safe. HWHAP 386. Listen to the Podcast Spotify Apple Podcasts SoundCloud RSS Feed Moon Material Flammability Houston We Have a Podcast Season 1 Episode 386 May 23, 2025 &#9658; Listen Now! 
+ From Earth orbit to the Moon and Mars, explore the world of human spaceflight with NASA each week on the official podcast of the Johnson Space Center in Houston, Texas. Listen to in-depth conversations with the astronauts, scientists and engineers who make it possible. 
+ On episode 386, two NASA experts discuss an experiment that will further our understanding of flame behavior on the lunar surface to keep astronauts safe. This episode was recorded May 9 , 2025. 
+ 
+ Transcript 
+ Gary Jordan 
+ Houston, We Have a Podcast. Welcome to the official podcast of the NASA Johnson Space Center, episode 386, Moon Material Flammability. I&#8217;m Gary Jordan, and I&#8217;ll be your host today. On this podcast, we bring in the experts, scientists, engineers and astronauts, all to let you know what&#8217;s going on in the world of human space flight and more. 
+ NASA is paving the path for returning human presence to the moon and eventually to Mars. With that comes the need to understand as much as possible ahead of time on what life will be like and how to stay safe. You have your more apparent challenges to address, like a pressurized suit for working in vacuum, landing on the surface, and finalizing tools, but some of the seemingly smaller details can still present challenges. One of them is understanding flame behavior. Turns out that gravity may have some impact on flame size, intensity, and spread. In particular lunar gravity turns out to be this Goldilocks zone that may prolong how long it may take for a flame to self extinguish. 
+ Well, there just so happens to be an experiment that&#8217;s an interesting blend of science with important knowledge that could translate to how to keep lunar astronauts safer. Joining us to discuss this topic is Emily Johnson, and Dr. Paul Ferkul, project manager and principal investigator, respectively, for the Flammability of Materials on the Moon or FM Squared experiment. 
+ With that, let&#8217;s ignite this conversation. Here we go. 
+ &nbsp; 
+ &lt;Intro Music&gt; 
+ &nbsp; 
+ Gary Jordan 
+ Emily and Paul, thank you so much for coming on Houston We Have a Podcast today. 
+ &nbsp; 
+ Paul Ferkul  
+ Great to be here. 
+ &nbsp; 
+ Emily Johnson 
+ Thank you. Thank you for having us 
+ &nbsp; 
+ Gary Jordan  
+ All right, FM Squared is what we&#8217;re going to be talking about, flames on the Moon, and a lot about fire. This, this conversation is going to be fire. I&#8217;m sorry to kick off like that, but in the intro, I did a pun. I have to start off with a pun. So this is, this is the how we&#8217;re gonna get kicked off. Fires in space. Wonder how you got into the fields that you did. I like to start our conversations with all of our guests by learning a little bit about what got you to where you are. Emily, why don&#8217;t you start a little bit of biography that led you to become the project manager for this experiment? 
+ &nbsp; 
+ Emily Johnson 
+ Sure. Yeah, so you know, NASA was not something that was ever really on my radar growing up, and when I got into college, I was studying molecular and cellular biology, and I still didn&#8217;t really know that NASA did my particular type of science. But actually, it was when Kate Rubins had her first flight to the ISS that I saw Kate Rubins, and she was, you know, my particular type of scientist. And I was like, wow, you know, NASA, NASA wants people like me too. So after that, I applied for a couple of internships, and eventually I got into the space life sciences training program based out of NASA Ames. And man, it just like really changed my life, honestly, like that was where I fell in love with NASA, and it really kicked off my career. We&#8217;ve actually been able to start a similar program at NASA Glenn for physical sciences. It&#8217;s modeled off of that original program from Ames, and it&#8217;s something we&#8217;re super proud of, and the Ames folks are really involved in that too. So that&#8217;s really cool. And after that internship, I came back to to Ohio, and I got a job and as a contractor for NASA Glenn did some some engineering work, and did some ISS operations. And the there was a civil servant program manager at the time who was just a really incredible leader, and she really inspired me to pursue leadership and management. And so that&#8217;s how I got into project management. And now I&#8217;m the project manager for FM Squared, and I get to help brilliant scientists like Paul, you know, get their experiments going. And so yeah, here the rest is kind of history, 
+ &nbsp; 
+ Gary Jordan 
+ Yeah. And here we are talking about this awesome experiment. It&#8217;s great to have you, Emily. All right, Paul, tell us about about how you got to work with fires in space. 
+ &nbsp; 
+ Paul Ferkul 
+ It was somewhat of a different path than Emily, starting from my college career at Case Western Reserve University in Cleveland, my college advisor, my undergraduate advisor, was Professor James T&#8217;ien, and he actually was working with NASA. He was in the program, doing research in combustion. And when it came time for me to graduate and look for a job, I stopped in his office and, you know, basically getting ready to move on and get a job and career. But he said he had some work for me, if I wanted to do graduate studies in the department. He had some work at NASA for me to do. So that&#8217;s how I got my start. And that was, I was very excited, because I certainly liked the space program. Unlike you, you didn&#8217;t have the advantage of remembering the the first man on the moon and stuff, but I, I was actually alive, so I got to see that. So it struck a core that NASA was still a very, very, a big, big deal for me at that time. So I was fortunate to get in the program. I immediately, actually, this is actually this is actually in 1985 so It&#8217;s been 40 years that I&#8217;ve been at NASA, and this might be today, could be the first day I actually started 40 years ago. I don&#8217;t know the exact calendar, but it was right about the summer time I was, I was a summer student at this time, you know, just after graduating undergrad. So it was right about the same time, but I started doing drop tower tests at NASA Glenn Research Center and combustion. So from the very beginning, I was doing combustion tests at the drop tower, and then it morphed. And of course, I furthered my career. I got my master&#8217;s degree, then I ended up the same deal. I was ready to move on. And he said, Well, I&#8217;ve got, if you&#8217;re interested in staying on, I got a PhD topic for you to work on, and we sort of made it work. And I was then doing modeling. So I basically, I modeled the test that I did earlier. 
+ So it was all, it all fit together, and it all worked out. And then I got my doctoral degree. And then this, again, similar, there was an opportunity to work at NASA, which is kind of a the way to get your foot in the door, start from the doing some as a student researcher, kind of moving up the up the ladder. So then I got to do additional experiments at NASA as a, essentially a real, full time employee. And that led into many, many combustion tests, both in drop towers, aircraft tests, where we did zero gravity tests and partial gravity tests. We actually did lunar tests and Martian G tests in the 90s, because that was still of interest. And actually one of my mentors at Glenn was Dr. Kurt Sacksteder. He was kind of the pioneer in that regard, and setting up these partial gravity testing combustion. So that was not, they&#8217;re talking like, you know, 30 years ago now, we did that. So this has always been an interest. And, you know, took some vision. He saw the direction that we&#8217;re moving generally, NASA&#8217;s exploring moving out to new worlds. So it&#8217;s going to happen. We&#8217;re gonna go to worlds with different gravity. So that&#8217;s ultimately the interest, and then the tie in. So that&#8217;s kind of how I got in a program, and I&#8217;ve been in a program now for 40 years. So.. 
+ &nbsp; 
+ Gary Jordan 
+ Wow, yeah, long time. Definitely something you love if you stuck with it, for sure. How did you make the migration from drop towers to combustion? 
+ &nbsp; 
+ Paul Ferkul 
+ Well, actually, the drop towers, we burn tests. We had a combustion chamber. So it was actually we dropped a chamber and we lit the samples during the drop. 
+ &nbsp; 
+ Gary Jordan 
+ During the drop&#8230; 
+ &nbsp; 
+ Paul Ferkul 
+ So it was a very small sample. We only had five seconds at NASA Glenn, the drop, the zero gravity facility is 5.2 seconds, so that you can do stuff, you can get zero g of course, when you go into free fall. But at 5.2 seconds, this has to be, usually a very small system so that keep the time scales short, so things can happen quickly enough to get make meaningful measurements or observations in a very short time. So you can&#8217;t burn a large piece of fuel, but you can, you can do small pieces of fuel and actually get a lot of information from that. 
+ &nbsp; 
+ Gary Jordan 
+ I think this is this leads nicely into talking about fires in space too, because with the very limited opportunities on Earth, on the ground, obviously there, or there may be some need to have more time to collect data and see how a fire spreads and propagates. So where can you find more time in the zero gravity environment than just the short amount of free fall that you get on earth, no better place than in space. 
+ &nbsp; 
+ Paul Ferkul 
+ Yeah, exactly. That&#8217;s the ultimate goal. And that&#8217;s why NASA has drop towers, because we can then do five second tests and then move on to aircraft, where you have parabolic flight trajectories for airplanes that fly. Used to be the KC 135 in Houston. That&#8217;s not here anymore, but that we get roughly 25 seconds of zero G and then ultimately go to the space station, where we have unlimited time. And that&#8217;s why we do all the tests on the ground, which are, you know, limited in time, greatly limited in time and shape and size and all that. But it does give us a huge amount of information for developing these big flight experiments on a space station, which are very expensive and complicated. So we want to make sure we nail that, and that&#8217;s why we do all these ground tests. And ultimately, when we get to the space station, then we have lots of time available to us. 
+ &nbsp; 
+ Gary Jordan 
+ Right. Being in public affairs, a lot of what we look for is a lot of imagery. When it comes to trying to share with the world why, you know, the science is so important in space, and just fantastic and a very engaging thing. And more often than not, it&#8217;s some of those combustion experiments on the space station that come up about, you know, igniting some sample that burns in this very bright ball and then slowly extinguishes over time and creates little blue balls. It&#8217;s very, very visually amazing and a good way to tell a story, at least from, from my side of the of this microphone. 
+ &nbsp; 
+ Paul Ferkul  
+ Well, we appreciate that. Yeah, we have the fortune of being a very photogenic research area. Some people don&#8217;t. I mean, if you&#8217;re talking about protein crystal growth or something, it&#8217;s maybe more difficult. Right to show compelling images. Obviously, the research is compelling, but flames tend to be- People can connect with flames directly, so it makes it easier. 
+ &nbsp; 
+ Gary Jordan  
+ Well why don&#8217;t we go into that next? Why don&#8217;t we talk about flames and what we know and you know, why is this a very interesting topic to explore. And why, when you take gravity away from the away from the equation, that flames become interesting. 
+ &nbsp; 
+ Paul Ferkul  
+ Well, to start from the most basic what is a flame and what makes a flame? We often talk about the fire triangle, which are three legs of a chair or three points of a triangle that you need to get a flame to burn on Earth. It&#8217;s basically: you need fuel, you need oxygen, and need an ignition source. So if you have those three components, then you can have, theoretically, you can have a flame. So we know on earth that happens all the time. We don&#8217;t even think about how often it happens on Earth. But of course, on, for example, pick a vehicle, a space vehicle, like the ISS. So the International Space Station is a orbiting laboratory. As everybody knows, it&#8217;s a very big laboratory, and it has, the most important part about that is that it has a large volume of oxygen, which the crew needs to breathe, of course. And consummate with that, you have a large amount of potential things that could burn, anything from crew clothing to plastic bags that things are shipped in. So all these things could potentially burn. So the only missing element then, is the ignition source. So NASA take goes to great lengths to, you know, reduce, eliminate, completely remove those ignition sources. But it is always a concern when you have an unintended fire, that you have an accidental ignition source, and then it could lead to a potentially having a fire. So that&#8217;s what NASA is concerned about. 
+ And again, just because you have Earth, we have one normal gravity. On Earth or the space station, we have zero gravity. Elements are there for fire, but the gravity makes a difference in terms of how the oxygen is transported to the flame. So on Earth, because you have buoyancy, hot air tends to rise, and also, similarly, cold air kind of falls. If you have a look at a candle flame, the hot air is rising upward, but replacing that at the base of the flame is cold air coming in, and that is fresh oxygen at the flame needs to sustain itself. So you could think, well, if you go to zero gravity, that that mechanism goes away, you no longer have any reason for there is no up or down. And perhaps people have seen some candle flames and zero gravity, it looks like a small blue ball burning, and yeah, there is no up or down, but there is a flow. If you have air flow on a space station, you have circulation to keep the astronaut breathing fresh air. So there actually is a pretty significant circulation current, if you could basically feel it blowing past your hands, because of the air circulation. So because of that, on a space station, that serves as a transport mechanism for the oxygen. So not on Earth, just having oxygen is enough, but you also have to transport it to the flame. And on a space station, the way that happens is with circulation. So it&#8217;s, again, you can have fires on a space station, and we&#8217;re interested in figuring out the conditions in terms of the flow environment where the fire could occur, and then other another important element is to what measures we take to minimize the chance of that happening if you do have a fire. So. 
+ &nbsp; 
+ Gary Jordan 
+ So, a lot of what you&#8217;re describing is very safety oriented. 
+ &nbsp; 
+ Paul Ferkul  
+ Oh yeah, that’s definitely the application that we&#8217;ve always had for the research that we do as NASA is interested in the very applied and important aspect of safety for the astronauts and the crew. And there&#8217;s- I don&#8217;t know if you want to talk about, there&#8217;s been, you know, incidents of fires, and actually the Mir space station. Yeah, that was a pretty significant fire event on that so that there&#8217;s clearly a very- could be very life threatening, and so that&#8217;s why we take it seriously. 
+ &nbsp; 
+ Gary Jordan  
+ Right. So, yeah, here at the Johnson Space Center, very close to where we&#8217;re sitting now, Building Nine, they do training for the astronauts just if there is an ignition source and that smoke does start to build up in in a mock up that the astronauts are well trained on exactly how to do in that scenario. So while you&#8217;re looking at the &#8220;where does, where can a flame come from? Are the astronauts safe? You know, what are ways to mitigate flame resistance?&#8221; The astronauts are training for: Well, if there is a flame, then we kind of know what to do and how to deal with it and be safe anyway. 
+ &nbsp; 
+ Emily Johnson  
+ They were just doing that training when I was on the tour yesterday. 
+ &nbsp; 
+ Gary Jordan  
+ Oh, no way! 
+ &nbsp; 
+ Emily Johnson  
+ So that was a fun coincidence. 
+ &nbsp; 
+ Gary Jordan  
+ Yes, yeah, that&#8217;s an in talks, and talks of flames being visual in terms of training. That&#8217;s a very visual one, because they actually introduce smoke into the into the mock ups. It&#8217;s very, very cool. 
+ &nbsp; 
+ Paul Ferkul  
+ And I should add just beside the direct application that NASA is interested in understanding how flame behaves in zero gravity is of vital scientific interest. So as a disconnected, fundamental investigation of the science of flames, that&#8217;s what the research community is interested in. Going to zero gravity enables us to study things that we just can&#8217;t do on Earth. So it leads to discoveries, and more importantly, model developments that would be we can&#8217;t normally do on Earth, so we can develop sophisticated computer models from this research that we get and then improve the computer models on Earth for other applications. So that&#8217;s that it&#8217;s not just applied, as far as NASA is concerned, that&#8217;s their main interest. But the science community has benefited greatly from the research that we do. 
+ &nbsp; 
+ Gary Jordan  
+ Yeah, let&#8217;s talk about some of the research that we have done in the past. I know, like, you know, I&#8217;ve done, I&#8217;ve sat in mission control and done commentary for a number of Cygnus flights, right? And one of our favorites to talk about after a Cygnus is unberthed and released from the end of the robotic arm is the Saffire experiment. It&#8217;s one that we talked about a lot, and we talked about, you know, how to tell the story. Nothing better visual than some of the video from those Saffire experiments. Do you mind talking about Saffire and some of the other investigations that have occurred in space and maybe what we&#8217;ve learned from them? 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah, of course, Saffire ended up being a total of six different investigations. So that, as you said, when the Cygnus undocks and then eventually burns up in the atmosphere, the idea was going way back that- I don&#8217;t know if you know or not, but the original plan was to set the entire vehicle on fire, the inside of it. But the vehicle owners did not like that idea, because- not because they&#8217;re gonna- they&#8217;re going to lose a vehicle anyway on re-entry, but there was a potential to lose control on re-entry. So they&#8217;re trying to make sure that when they do the orbital deburning that they need or, you know, to make it enter over the ocean so that hits where it wants and avoids land, of course. So that was the only concern. That&#8217;s the only reason we didn&#8217;t actually do the entire Just light the vehicle inside, which was, which would have been a wonderful full scale test. You know, we do this on earth all the time. We have building, mock building fires. You&#8217;ve probably seen firefighters going, you know, fire fighting a full scale house fire, for example, for training, so that we could do that on Earth. And I think it was a good idea, but it just didn&#8217;t pan out that we couldn&#8217;t do the whole vehicle. 
+ But as a concession, we did have we set up a large, I would say roughly refrigerator sized, test article, where we could do large fuel samples. So that&#8217;s what Saffire ended up doing. So we burned large fabric samples, plastics, other materials, including Nomex, that we burned. All, again, before re entering the atmosphere. It was all automated, and we just, you know, literally had the computer control which sample was burned. Some of them have multiple samples. One of the Saffires had nine different samples. More typically, some of them only had one. One big one. So that was, it depends on a particular whatever Saffire mission it was, they changed quite a bit. And the nice thing was, for the first time, we actually got not only zero gravity combustion of a solid material, but a large scale combustion event, which we couldn&#8217;t do on ISS typically, because, again, safety reasons and other other constraints. Really can&#8217;t burn a one meter size piece of fabric, for example, easily on the space station. We just couldn&#8217;t, that was not an option. But again, since Cygnus was unmanned and going to re-enter soon, that was something that we could do, and we learned, got a lot of good information from that. 
+ &nbsp; 
+ Gary Jordan  
+ Scientists pushing the boundaries by every means, right? Let&#8217;s light the whole spacecraft, yeah, but you want to do it for the sake of science. What does size have to do with what you can learn in terms of lighting a large sample? Why is that important? 
+ &nbsp; 
+ Paul Ferkul  
+ Again, going back to NASA&#8217;s practical interest in this, if we do have an unintended fire, you know, an unlikely event, hopefully that this won&#8217;t happen. But if we do, then you could imagine the fire is going to quickly get to be a large scale event. So it&#8217;s not going to be small samples that are candle sized, and a fire, once it gets going, it&#8217;s not going to be just a tiny flame burning. They tend to spread and grow. So that&#8217;s the, basically, the, again, for application reason. We expect if we have an unintended fire in a fire in a flames get very big. It&#8217;s a concern, because we, as we learn on Saffire, once the flames get big, they almost get a life of their own, in a sense, even though it&#8217;s in zero gravity, because the flame is so large and it&#8217;s a dynamic system. So there&#8217;s fuel vapor being generated. It leaves the fuel surface, which is a velocity. So basically, have fuel jetting off the fuel surface causes a puff to the flame. It also causes oxygen to come in. So again, it&#8217;s almost like a living entity at that point. Because as it&#8217;s consuming fuel it gets, when it&#8217;s very large, especially, it can actually, it can generate its own flow to keep itself going. We saw some of this with Saffire. So again, it&#8217;s just like the questions or the observations that we don&#8217;t typically have that we got from Saffire, are that large scale event could lead to, you know, unexpected outcomes for the flame, because we just look at small flames, but the large flames are different. They&#8217;re very different. So that was kind of the reason. 
+ &nbsp; 
+ Emily Johnson  
+ And not all materials burn cleanly too. Like there are some materials that, as they&#8217;re burning, they tend to kind of like come off in clumps, almost like little tear drops. And you can imagine that, if you&#8217;re in a micro gravity or partial gravity environment, those little teardrops are basically turning into little fireballs that could float away and catch something else on fire. So understanding the different properties of the different materials at the different scales of flames is also incredibly important. Not every material burns the same way. 
+ &nbsp; 
+ Gary Jordan  
+ Yeah, it shows that you can&#8217;t just light- you can&#8217;t just ignite a very small sample in space, and then call it good. No, you have to introduce- there&#8217;s different ways, because there&#8217;s so many you don&#8217;t really know, and it kind of adds to your general understanding. The more that you do it, and the more samples that you have. And repetition here is key. There&#8217;s also been a number of other experiments, right? I mean, Saffire is just one that I know, that I&#8217;ve talked about before, but there&#8217;s things called LUCI or SoFIE, I think is another one&#8230; 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah there&#8217;s, over the years, we&#8217;ve done quite a bit in combustion research. I should go back and say the Saffire also did different oxygen concentrations, where the space station is air at one atmosphere, kind of what we&#8217;re used to on Earth breathing. There is now talk of, as we move to other worlds and other habitats and even other vehicles, to increase the oxygen and decrease the pressure. So that was another parameter that Saffire looked at. So we did some tests at higher higher oxygen and lower pressure. So that, again, for the first time, we got some data in potential exploration atmospheres, which NASA then is very interested in looking at. Because, yeah, if you&#8217;re going to build a vehicle in these conditions, here is what the flame looks like, and here&#8217;s a whole new set of potential things we got to worry about. So that was just to finish that story. But yeah, there&#8217;s been many experiments that we&#8217;ve had to over the years have looked at combustion more recently. The LUCI experiment, which stands for lunar combustion investigation, was made use of a Blue Origin rocket, which for the first time. The Blue Origin was a sounding rocket, which means it basically just goes enters space and then comes back down to earth. So we typically get approximately two and a half or three minutes of zero gravity, and then the air the vehicle comes back down to earth and lands pretty much right at the launch site. So unlike the space shuttle days, which actually go to orbit and then go around the Earth, this just goes up and down. So we get two and a half minutes of zero gravity for a sounding rocket. But for the first time, uniquely, in February of this year, Blue Origin did a launch where they spun the entire capsule to generate a centrifugal force. So the rotation rate of the vehicle was 11 RPMs, and at that rotation rate, we got a net centrifugal force at our experiment location of lunar G so it&#8217;s the same as being on a merry go round, looking at playground. You run a merry go round, you spinner, spin around, you&#8217;re going to feel a force acting radially outward. That&#8217;s a centrifugal force, and it serves as a analogy, or a way to simulate lunar gravity if you go to inter rotation. So for the first time, we actually did a combustion attest for extended duration at Lunar g and this rotating environment, and it was the results were very successful. We got some nice data. We burned a fab a fabric sample, and we burned a plastic rod, and we just recently got the data back. Of course, we&#8217;re going through the analysis, and very shortly, we&#8217;ll publish paper on this. So we&#8217;re looking forward to that. Very exciting. So that was, again, that was a lunar G experiment, and going back a few years, there&#8217;s also a another ISS experiment called SoFIE, which stands for solid fuel investigation experiment, where we&#8217;re looking at burning different kinds of solid fuels, but now in zero gravity, but with the force flow. You know, as I said at the very beginning, you know the fire triangle, with oxygen, you need oxygen, but in space, you need to also transport that oxygen. So the way we do that for SoFIE is we, we had what we call a combustion tunnel. So it&#8217;s a kind of like a wind tunnel. We put the sample in a wind tunnel, and we blow air past it, and we&#8217;ve burned many different kinds of fuel samples, and there&#8217;s been five investigators in a program and got, again, lots of data. I would imagine, if you did a search, you would find as you talked about earlier, many compelling images from the flame test, because they do offer, afford very nice pictures. But anyway, that&#8217;s also another experiment that we&#8217;ve done looking at combustion. 
+ &nbsp; 
+ Gary Jordan  
+ There&#8217;s a lot here, right? And it&#8217;s, and here&#8217;s, here&#8217;s the theme that I think leads nicely into our conversation about FM Squared, is a lot of the investigations that you talked about, except for LUCI, really had to do with understanding the microgravity environment, what happens, what happens to flames in microgravity, which can add to the context of what we know about flames in 1g but changing the gravity equation and changing to and maybe LUCI was, was the experiment that really led to this is, hey, depending on the gravity, and you might have already known this by but from from micro gravity is, when you change the gravity, things change when it comes to flame behavior. Now, Emily, I remember us chatting a little bit before this conversation here, and you sort of described the. That lunar, the lunar environment, lunar gravity, is this Goldilocks zone. So hopefully you can kick us off by sort of leading into the this lunar component of flame behavior by describing what that is. 
+ &nbsp; 
+ Emily Johnson  
+ Yeah, absolutely. So when I first started working with with the combustion team on some of these projects, I was trying to understand, you know, these flame properties across the gravity spectrum. And someone had explained it to me that it&#8217;s kind of like partial gravity is like the Goldilocks zone, like in microgravity, the burn rate is a little too slow, and we get that nice, you know, circular flame shape, and it&#8217;s very hard for the flame to sustain itself without the flow that Paul has been talking about. And then, you know, on in 1g the reason that a flame flickers is because that burn rate is a little bit too fast. But then when you go to partial g, like in lunar gravity, you&#8217;ll notice that the flame is stable. The flame doesn&#8217;t flicker, and it&#8217;s because it&#8217;s in that Goldilocks zone of that burn rate, and we expect the Mars environment to be similar, but obviously a little bit different. I don&#8217;t know that we have a whole lot of Mars data, but that&#8217;ll be something really exciting to look forward to as well. 
+ &nbsp; 
+ Gary Jordan  
+ Right. Yeah. So this is something that probably is of particular interest to scientists that are looking at combustion, right? Emily showed me some photographs of the actual experiment and the videos of them. And it was, it was fascinating, right? Because at the other ends of the spectrum that she was describing in microgravity and 1g the flames extinguished, but lunar kept going. Was that on LUCI that you described, or is that a different experiment where you found&#8230; 
+ &nbsp; 
+ Emily Johnson  
+ That was the parabolic flight. 
+ &nbsp; 
+ Gary Jordan  
+ That was a parabolic flight, yes. 
+ &nbsp; 
+ Emily Johnson  
+ Yeah, we had tested a fabric in it was the exact same conditions in 1g and then also in lunar g on the parabolic flight. And in 1g the flame ignites, but it self extinguishes pretty quickly. But in the lunar g test, it ignites and it keeps burning. And that was, I think, the first time we&#8217;ve seen that behavior in this particular material that it that it would extinguish in 1g but it would keep burning in lunar g. 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah. And as Emily said, that Goldilocks zone, it&#8217;s a it ignites in 1g but the flow is so high that there&#8217;s a lot of cooling going on because the hot air rises, so the flame loses too much heat and it just goes out. But if you go to the reduced gravity, have a little bit much slower flow leaving the flame, and it&#8217;s actually the heat loss is less. So that&#8217;s how the flame can survive in these conditions, by just reducing that flow speed a little bit and minimizing the heat losses. 
+ &nbsp; 
+ Gary Jordan  
+ So is this? Was this, I guess, hypothesized before even lunar combustion experiments started, like, hey, we need, we probably need to start doing investigations into this, because we&#8217;re thinking that it&#8217;s going to be tough to extinguish, that these flames might not extinguish the way that we think. 
+ &nbsp; 
+ Paul Ferkul 
+ Yeah, definitely. In fact, going back to my advisor, undergraduate advisor. He actually was his theory, that he postulated this way back when looking at the data and saying, Well, just kind of logically, we think about it long enough, looking at zero g, where things really burn, very poorly, unless you have flow, and 1g where things burn, well, there&#8217;s got to in between. What&#8217;s going to happen in between? And he basically ended up theorizing that there&#8217;s probably a point in between that&#8217;s that&#8217;s ideal or optimized for burning. So he postulated this way back when, and even 1980s and the work we&#8217;ve been doing, experiments have sort of suggested this is the case in reality. So&#8230; 
+ &nbsp; 
+ Gary Jordan  
+ And here we are with this imagery that you showed me. It was, it was absolutely fascinating to see some of this now. Now the next steps, of course, are okay, well, this is probably something that we should investigate, right? We&#8217;re talking about returning humans to the moon, and of course, when they return, we want them to be safe right on the surface. So, so this is, this is definitely an investigation that we want to understand. Enter FM Squared, Emily, if you want to kick us off as to this experiment. 
+ &nbsp; 
+ Emily Johnson  
+ Sure. So yeah, FM Squared will be sort of a follow along experiment to, you know, like Paul was saying in the last 20 or 30 years of these combustion science tests and microgravity and then leading into partial gravity. So FM Squared will be a payload that will fly to the moon, we&#8217;re hoping in summer of 2026. We&#8217;re working with a commercial provider. We want to send four samples to the moon, and we&#8217;re going to light them on fire and observe that behavior and try to figure out, you know, where those samples will burn, and also will when they don&#8217;t burn. We&#8217;re going to look at different oxygen concentrations and really try to map out what happens in real partial gravity. 
+ &nbsp; 
+ Gary Jordan  
+ So there&#8217;s probably not a lot of you know you want to send something to the moon. You have to think about payload size. You have to think about payload design. You have to think about making sure. Or that, whatever, wherever you put this payload, you&#8217;re going to get the data that you want, which hopefully, fingers crossed, is video, yes? 
+ &nbsp; 
+ Paul Ferkul  
+ Yes. 
+ &nbsp; 
+ Gary Jordan  
+ All right! I&#8217;m very excited because that, because that is, you know, one of the perks about this kinds of, these kinds of physical sciences, is the is the videos there. So when it comes to experiment design and how to design the facility and make sure it&#8217;s going to get all the science that Dr Ferkul wants. What do you How is the facility itself designed? 
+ &nbsp; 
+ Emily Johnson  
+ So, we have an amazing engineering team working with us. They&#8217;re from Sierra Lobo contracting company, absolutely amazing team of engineers, and they have managed to come up with a hardware design that is actually capable of being used on multiple commercial providers. So going forward, if we wanted to do another one, and we will, you know, we can put this same hardware design on multiple providers and just swap the samples out. But the hardware consists of a combustion chamber with obviously, sample holders in the middle, and two cameras, some oxygen, an oxygen sensor, CO2 sensor, some temperature sensors to gather different kinds of data. And essentially how the experiment is going to work is when it lands on the Moon, it will already be pre-filled, actually, with the the environment for the first test. So the the igniter will kick off, sample will ignite, we&#8217;ll collect the data, then the chamber will vent to get that atmosphere out, all those combustion products out, the chamber will refill with the environment for the next test, and it will repeat that cycle four times. 
+ &nbsp; 
+ Gary Jordan  
+ Oh, and what are the different environments? 
+ &nbsp; 
+ Emily Johnson  
+ Different levels of oxygen. Paul, do you want to talk about that? Different ranges. 
+ &nbsp; 
+ Paul Ferkul  
+ We’re going to fill two different oxygen starting oxygen concentration is like one test. You might start at 30% oxygen, the next test at 25%. And the important thing here is, well, first of all, we will repeat these tests on Earth, and that will be our level of comparison. So going to duplicate exactly what we did on the Moon and do it on Earth. And what we&#8217;re going to see, besides the flame shape and structure being different, it&#8217;s we&#8217;re going to record oxygen during the burn. So because we it&#8217;s a unfortunate constraint that we have to be a very small volume. We don&#8217;t have a lot of of space because it&#8217;s, it&#8217;s, you know, that&#8217;s a commodity to go to the Moon, hence it can&#8217;t be a very big chamber. But the benefit is, as it burns, it&#8217;s going to consume oxygen and naturally deplete the oxygen in the chamber. So at some point it&#8217;s going to go out, and we can record the oxygen that it goes out. So that&#8217;s going to give us a, what you can call an extinction oxygen value. So if we say, ignite a particular sample at 30% and then do it on the Moon, it might go out at, say, 22% it&#8217;s going to consume some oxygen. So we record that, and then we can directly compare that to the test on Earth and see, does it also go out at 22% you know, we suspect not, based on what we believe, we think the Moon, as we talked about earlier, could be the more dangerous in terms of flammability from oxygen point of view. So that&#8217;s an immediate direct comparison that we can do from these tests. 
+ &nbsp; 
+ Gary Jordan  
+ Interesting. Multiple rounds, multiple samples, multiple environments. It&#8217;s it gives you a lot of flexibility. But here&#8217;s Paul over here, wanting to get a big thing to light on fire, as usual, but you gotta, you gotta pick very, very specifically. So I&#8217;m sure a lot of thought has been put into, okay, well, here&#8217;s, here&#8217;s the room that I&#8217;m giving with, here&#8217;s the, here&#8217;s the constraints that I&#8217;m giving with, if this is gonna get a first go. You know, here&#8217;s, here&#8217;s what&#8217;s important to me and the scientific community. 
+ &nbsp; 
+ Emily Johnson  
+ And timing of this experiment is really important too, you know, we want to get this up on the moon as soon as possible and get that data collected so we can feed that back to future Artemis experiments. So we&#8217;re really trying to get this on the Moon before the Artemis III mission, before the first crewed lunar landing, again. So 
+ &nbsp; 
+ Gary Jordan  
+ So then that would be important, mate, from a scientific perspective, a safety perspective, maybe both, 
+ &nbsp; 
+ Emily Johnson  
+ Yeah, both. For sure. 
+ &nbsp; 
+ Gary Jordan  
+ Yeah, okay, very cool. So, well, great. Where are you guys now, with the with the FM Squared experiment, hardware is in work? Done? Yeah, I&#8217;m sure you guys are here in Houston for a reason, right? 
+ &nbsp; 
+ Emily Johnson  
+ Right. So hardware is currently being built, yep, and we are on track to deliver the hardware next spring. Yeah, like I said, we&#8217;re working with a commercial provider that we&#8217;ll be launching. So yeah, hardware is being built as we speak. 
+ &nbsp; 
+ Gary Jordan  
+ Very cool. And what are you guys doing in Houston? 
+ &nbsp; 
+ Emily Johnson  
+ I&#8217;m actually here for the NASA Next program. Yeah, it&#8217;s a leadership training program. So that I&#8217;ve been here for the past week for that. 
+ &nbsp; 
+ Paul Ferkul  
+ And I took advantage of the travel today to talk to some of the ISS folks that I&#8217;ve been working with over the years and operations and and so on. So it&#8217;s nice to connect. 
+ &nbsp; 
+ Gary Jordan  
+ And it&#8217;s really good to have you guys here. So that&#8217;s good. I mean. Where you guys are on track, and a lot of work is being done, and very excited for future opportunities to get this tested. I wanted to kind of talk about the safety aspect of things now, in terms of the timing of you know, like you said, like you said, Emily, you want to do this as soon as possible. But of course, we do want to turn it around and get something valuable, right? And, of course, timelines for scientific experiments can be over lengthy periods of time is to actually prep science and prep operations and procedures. So how do you plan to you know, are you already connected with the scientific community, with the Artemis community to make sure that this is on track or this is being monitored, and people are aware and looking forward to what you have to share in terms of the results. 
+ &nbsp; 
+ Paul Ferkul  
+ Well, the obvious, again, is because we&#8217;re going to a different gravity level. That&#8217;s the big question. Gravity changes. Well, how are things going to change for safety, but also now that we&#8217;re talking about having a human presence extended, a human presence on the Moon, where you could have people living for, you know, upwards of weeks at a time, they&#8217;re going to be inside a habitat that&#8217;s going to be filled to some oxygen concentration. So that&#8217;s another question, is, because there&#8217;s, there&#8217;s actually reasons to to do have an environment that is higher oxygen but lower pressure, and has to do a lot with EVAs that the astronauts will be doing, or  this also has to do with the safety of the structure, so that lower pressure doesn&#8217;t need as much of a material to maintain that pressure difference. But so there&#8217;s reasons to go to higher oxygen low pressure, but there&#8217;s also definitely, we know that it&#8217;s going to increase flammability, so that&#8217;s a concern. So we wanted these tests that we&#8217;re doing, FM Squared will be at higher oxygens and lower pressures that are that are sort of envisioned. So that&#8217;s part of it. So not just the lunar g aspect, which is, of course, the main reason, but also the actual in situ environments that we&#8217;ll be looking at, high oxygen, low pressure. And lastly, of course, going back to the fuel triangle, is, is fuel. So what are we going to be burning? And that&#8217;s where we&#8217;re interacting with folks that are actually building these or considering building these habitats. So what kind of fabrics, for example, right now, we think a leading candidate might be something that&#8217;s used for a a typical, what&#8217;s called a cargo transfer bag. So it&#8217;s a, it&#8217;s a kind of Nomex that that&#8217;s very common for moving hardware around. So that&#8217;s a, like, a good representative fuel that we were considering burning as one of our samples, because that&#8217;s going to be up there, and we&#8217;re going to see how that actually burns on on the Moon compared to Earth. So that that&#8217;s pretty important, valuable data to get back from that. 
+ &nbsp; 
+ Gary Jordan  
+ Right. Yeah, and definitely something to consider, right? Those cargo transfer bags or tried and true materials have been flown on station, seem to be working fine. So use, use what you know for, for missions to the moon and see what, see exactly what happens. So this is this will, I think, and Emily might correct me if I&#8217;m wrong. Is this the first lunar surface flame test? 
+ &nbsp; 
+ Emily Johnson  
+ Yes, this will be the first ever flames on the lunar surface. 
+ &nbsp; 
+ Gary Jordan  
+ Very cool. There&#8217;s been, it&#8217;s been in lunar gravity, right with the parabolic flights, with the Blue Origin flight, with with the centrifugal force. But this one actually on the lunar surface. So I think the, yeah, scientific community is definitely looking forward to a lot of this. But you know, you have a little bit of of understanding of flames in the lunar environment based on the parabolic and centrifugal experiments that you&#8217;ve done. So you have some modeling and but this is really important, I think good to drive home is, you know, you can only fly to the surface so many times and have a good understanding. And I think this the flying when you do actually fly, it lends nicely to how you analyze that data on the ground. And so Paul, I&#8217;m sure that you know, whatever you learn on the surface really enhances the modeling, and that modeling can go a long way in terms of understanding the scientific value and the safety value that you know you just you burn it once, sure, but it&#8217;s all the work on the ground that you actually, that actually leads to something valuable. 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah, it&#8217;s an important piece. It&#8217;s like putting all together, yeah? So it&#8217;s not like sequential. You can&#8217;t just say, are we going to do the modeling today, we go to the Moon tomorrow, and then we&#8217;ll go back to do something else. So it just, it&#8217;s a network, really. So one one sort of bolsters and feeds on the other one. So the lunar tests are going to be getting will will aid the modeling results we get, which, in turn, would the modeling can then help us to develop better tests to do in the future for if we have opportunities to do additional testing. And that&#8217;s always how it works with modeling. It&#8217;s sort of, it&#8217;s a very interactive process. That&#8217;s why we always say modeling is is vital to any good research project, because you can get so much with experimental data, but then, like, if we after FM Squared is completed, then that was a tremendous opportunity, but it&#8217;s you know what then so what we still on earth we have, we can make benefit of that data and develop the model, and strengthen the model, and then actually predict what will happen in other cases that are similar, and then ultimately, again, produce even more, or produce other experiments that give us additional data that we&#8217;re missing. And again, it sort of feeds back and forth, and it bolsters, they bolster each other. 
+ &nbsp; 
+ Emily Johnson  
+ And one of the reasons that it&#8217;s so important for us to have FM Squared on the lunar surface is that a lot of our ground analog facilities either a parabolic flight or a drop tower, you know, to get simulated partial gravity we we have to use centrifuge most of the time. And in the parabolic flights, you know, there&#8217;s g-jitter. Essentially, these ground facilities in the way that we simulate partial gravity here on Earth is not perfect, and in order to get the best quality data to feed into those models, to have the most accurate results possible when we&#8217;re talking about astronaut safety, right, we really do need to go to the lunar surface to collect some of that data. 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah, that that gives the benchmark. I mean, that&#8217;s, that&#8217;s what the reality is. So we need to know what that is to develop the models. Yeah. 
+ &nbsp; 
+ Gary Jordan  
+ Very, very important. And I&#8217;m sure you guys are pretty excited to, you know, you said, like, next spring you could be ready. So that&#8217;s, that&#8217;s not too far away. So it&#8217;s, it&#8217;s got to be an exciting time for for the community to actually get this going. And see FM Squared, you know, hopefully fly very soon. 
+ &nbsp; 
+ Emily Johnson  
+ Yeah, absolutely. We are so proud of this and so excited for it. I think this just goes to show there&#8217;s, there&#8217;s a lot more work that needs to be done in this area of study. And we did just get approval to build a follow on FM Squared payload. So looking forward to that as well. There&#8217;s, there&#8217;s plenty more to come here, and we&#8217;re very excited for it. 
+ &nbsp; 
+ Gary Jordan  
+ Plenty more to do. That&#8217;s right! 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah, it&#8217;s pretty exciting. And as Emily said, we have a very, you know, a capable team and a pretty sizable team when we couldn&#8217;t do anything without the guys, they&#8217;re doing the engineering and the research analysis for us. But, you know, getting to think about this experiment, it&#8217;s the, as Emily said earlier, the first time we&#8217;re going to be burning using fire on another world in a in the manner that humans are used to using fire. So archeologically, I think I looked up the date that people think that we use fire on Earth first for for whatever cooking or tool making or whatever, and it&#8217;s roughly 800,000 years ago. So nearly a million years ago, they deduced the that&#8217;s when people started to use fire. So we don&#8217;t know the exact date, but we don&#8217;t we will know when FM Squared flies. We will know the date that we do a fire in an environment like people are used to burning for the first time on another world. So that&#8217;s pretty exciting that we&#8217;ll know the first time we actually burn something on another world. 
+ &nbsp; 
+ Gary Jordan  
+ Big picture, it&#8217;s, it&#8217;s, you know, intelligent beings using fire on another world. That&#8217;s very inspiring to think about it that way. 
+ &nbsp; 
+ Paul Ferkul  
+ Yeah, it&#8217;s like, almost like a benchmark for humanity too. When we, you know, explore other worlds, that&#8217;s one of the first ones will be well, when do you make use of the tools that we&#8217;ve used on on Earth, like like fire, for example? And then when you ultimately have a self sufficient colony at some point in the future, that will be another one, and then, and it just goes out from there. So it&#8217;s just a stepping stone, but it&#8217;s pretty significant. 
+ &nbsp; 
+ Gary Jordan  
+ Wow, this has been so cool to speak with both of you about this experiment. I know a lot of work has gone into this, but you know, it just to me, shows the value of just those what&#8217;s seemingly like, minor details, like, oh, what happens when you kind of change gravity a little bit, how the it can excite an entire community to really, to really do an investigation and and it really lends to making human spaceflight successful as well. The safety is huge, whether you&#8217;re going to the moon, whether you&#8217;re going to Mars, right? It&#8217;s very important to know how those different gravity environments, how this different composition of atmospheres, you know, the triangle that you mentioned, Dr. Ferkul,  is very important, and so this is this has been very exciting for me to chat with both of you today. Appreciate you, both Emily and Paul. Thank you for coming on. 
+ &nbsp; 
+ Paul Ferkul  
+ Thank you very much. 
+ &nbsp; 
+ Emily Johnson  
+ Thanks for having us. 
+ &nbsp; 
+ Gary Jordan 
+ Hey, thanks for sticking around. Hope you learned something today. 
+ You can check out the latest from around the agency at nasa.gov and you can find our full collection of episodes and all the other wonderful NASA podcasts we have at nasa.gov/podcasts . 
+ On social media we&#8217;re on the NASA Johnson Space Center pages of Facebook , X , and Instagram . If you have any questions for us or suggestions for future episodes, you can email us at NASA-Houstonpodcast@mail.nasa.gov 
+ This interview was Recorded on May 9, 2025. 
+ Our producer is Dane Turner. Audio engineers are Will Flato and Daniel Tohill, and our social media is managed by Dominique Crespo. Houston, We have a Podcast was created and is supervised by me, Gary Jordan. And of course, thanks again to Emily Johnson and Dr. Paul Ferkul, for taking the time to come on the show. 
+ Give us a rating and feedback on whatever platform you&#8217;re listening to us on, and tell us what you think of our podcast. We&#8217;ll be back next week. 
+ 
+
+	 
+
+		 
+			 
+		 
+
+		 
+			 
+
+				 
+					 
+						 National Aeronautics and Space Administration 
+						 NASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery. 
+
+						 
+							 About NASA&#039;s Mission 
+						 
+						 
+							 Join Us 
+							 
+						 
+					 
+				 
+
+				 
+					 
+						 
+							 
+								 Home 
+								 News &amp; Events 
+								 Multimedia 
+								 NASA+ 
+								 Missions 
+								 Humans in Space 
+								 Earth 
+								 The Solar System 
+								 The Universe 
+								 Science 
+								 Aeronautics 
+								 Technology 
+								 Learning Resources 
+								 About NASA 
+								 NASA en Español (opens in new tab) 
+							 
+						 
+					 
+				 
+
+				 
+					 
+						 
+							 Follow NASA 
+							 
+								 
+									 
+								 
+								 
+									 
+								 
+								 
+									 
+								 
+								 
+									 
+								 
+							 
+						 
+
+						 
+ More NASA Social Accounts 
+ NASA Newsletters 
+						 
+					 
+				 
+
+				 
+					 
+						 Sitemap 
+						 For Media 
+						 Privacy Policy 
+						 FOIA 
+						 No FEAR Act 
+						 Office of the IG (opens in new tab) 
+						 Budget &amp; Annual Reports 
+						 Agency Financial Reports 
+						 Contact NASA 
+						 Accessibility 
+					 
+				 
+
+				 
+					 
+													 
+								 
+									Page Last Updated:								 
+								 
+								May 27, 2025								 
+							 
+														 
+								 
+									Page Editor:								 
+								 
+									daturne2								 
+							 
+																			 
+							 
+								Responsible NASA Official:							 
+							 
+								Abigail Bowman							 
+						 
+					 
+					
+				 
+
+			 
+		 
+
+	 
+
+ 
+
+
+ 
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/nasa/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+ 
+ 
+
+	 
+
+				
+				
+		
+				 
+			 Was this page helpful? 
+ 					 
+						 &#916; 
+						 
+						 
+document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );
+ 
+
+					 
+ Was this page helpful? 
+			 
+					 
+					 Yes 
+			 
+			 
+					 
+					 No 
+			 
+ Submit 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+		 
+		 
+gform.initializeOnLoaded( function() {jQuery('#gform_ajax_frame_117').on('load',function(){var contents = jQuery(this).contents().find('*').html();var is_postback = contents.indexOf('GF_AJAX_POSTBACK') >= 0;if(!is_postback){return;}var form_content = jQuery(this).contents().find('#gform_wrapper_117');var is_confirmation = jQuery(this).contents().find('#gform_confirmation_wrapper_117').length > 0;var is_redirect = contents.indexOf('gformRedirect(){') >= 0;var is_form = form_content.length > 0 && ! is_redirect && ! is_confirmation;var mt = parseInt(jQuery('html').css('margin-top'), 10) + parseInt(jQuery('body').css('margin-top'), 10) + 100;if(is_form){jQuery('#gform_wrapper_117').html(form_content.html());if(form_content.hasClass('gform_validation_error')){jQuery('#gform_wrapper_117').addClass('gform_validation_error');} else {jQuery('#gform_wrapper_117').removeClass('gform_validation_error');}setTimeout( function() { /* delay the scroll by 50 milliseconds to fix a bug in chrome */ }, 50 );var current_page = jQuery('#gform_source_page_number_117').val();jQuery(document).trigger('gform_page_loaded', [117, current_page]);window['gf_submitting_117'] = false;}else if(!is_redirect){var confirmation_content = jQuery(this).contents().find('.GF_AJAX_POSTBACK').html();if(!confirmation_content){confirmation_content = contents;}jQuery('#gform_wrapper_117').replaceWith(confirmation_content);jQuery(document).trigger('gform_confirmation_loaded', [117]);if(window.gform && gform.pagination && gform.pagination.removePageQueryArg){gform.pagination.removePageQueryArg(117);}window['gf_submitting_117'] = false;wp.a11y.speak(jQuery('#gform_confirmation_message_117').text());}else{jQuery('#gform_117').append(contents);if(window['gformRedirect']) {gformRedirect();}}jQuery(document).trigger("gform_pre_post_render", [{ formId: "117", currentPage: "current_page", abort: function() { this.preventDefault(); } }]); if (event && event.defaultPrevented) { return; } const gformWrapperDiv = document.getElementById( "gform_wrapper_117" ); if ( gformWrapperDiv ) { const visibilitySpan = document.createElement( "span" ); visibilitySpan.id = "gform_visibility_test_117"; gformWrapperDiv.insertAdjacentElement( "afterend", visibilitySpan ); } const visibilityTestDiv = document.getElementById( "gform_visibility_test_117" ); let postRenderFired = false; function triggerPostRender() { if ( postRenderFired ) { return; } postRenderFired = true; gform.core.triggerPostRenderEvents( 117, current_page ); if ( visibilityTestDiv ) { visibilityTestDiv.parentNode.removeChild( visibilityTestDiv ); } } function debounce( func, wait, immediate ) { var timeout; return function() { var context = this, args = arguments; var later = function() { timeout = null; if ( !immediate ) func.apply( context, args ); }; var callNow = immediate && !timeout; clearTimeout( timeout ); timeout = setTimeout( later, wait ); if ( callNow ) func.apply( context, args ); }; } const debouncedTriggerPostRender = debounce( function() { triggerPostRender(); }, 200 ); if ( visibilityTestDiv && visibilityTestDiv.offsetParent === null ) { const observer = new MutationObserver( ( mutations ) => { mutations.forEach( ( mutation ) => { if ( mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null ) { debouncedTriggerPostRender(); observer.disconnect(); } }); }); observer.observe( document.body, { attributes: true, childList: false, subtree: true, attributeFilter: [ 'style', 'class' ], }); } else { triggerPostRender(); } } );} );
+ 
+ 		 
+
+				
+							 
+			×			 
+		
+	 
+
+ 
+ 
+ 
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+ 
+ 
+window.wpParselySiteId = 'nasa.gov';
+//# sourceURL=wp-parsely-loader-js-before
+ 
+ 
+ 
+window.PARSELY = window.PARSELY || (window.PARSELY = {});
+PARSELY.cookieDomain = window.location.host;
+//# sourceURL=wp-parsely-tracker-js-before
+ 
+ 
+ 
+var edac_frontend_fixes = [];
+//# sourceURL=edac-frontend-fixes-js-extra
+ 
+ 
+ 
+ 
+ 
+var gform_theme_config = {"common":{"form":{"honeypot":{"version_hash":"2f9b4ca12179b4ec60d030e7d34f8b18"},"ajax":{"ajaxurl":"https://www.nasa.gov/wp-admin/admin-ajax.php","ajax_submission_nonce":"c03c244840","i18n":{"step_announcement":"Step %1$s of %2$s, %3$s","unknown_error":"There was an unknown error processing your request. Please try again.","error_403":"The request was blocked (403 error) for unknown security reasons. Remove any code-like text (scripts or DB queries) and try again."}}}},"fields":{"repeater":{"strings":{"item_added":"added.","item_removed":"removed.","renumbered":"and above renumbered.","max_items":"You have reached the maximum number of repeated items.","confirm_delete":"Are you sure you want to remove {label} {number}?"}}},"hmr_dev":"","public_path":"https://www.nasa.gov/wp-content/plugins/gravityforms/assets/js/dist/","config_nonce":"c8d2f9ee68"};
+//# sourceURL=gform_gravityforms_theme-js-extra
+ 
+ 
+ 
+var pum_vars = {"version":"1.25.0","pm_dir_url":"https://www.nasa.gov/wp-content/plugins/popup-maker/","ajaxurl":"https://www.nasa.gov/wp-admin/admin-ajax.php","restapi":"https://www.nasa.gov/wp-json/pum/v1","rest_nonce":null,"default_theme":"862814","debug_mode":"","disable_tracking":"1","disable_url_params":"1","home_url":"/","message_position":"top","core_sub_forms_enabled":"1","popups":[],"cookie_domain":"","paramNames":{"popup_id":"pid","cta":"cta","notrack":"notrack"}};
+var pum_sub_vars = {"ajaxurl":"https://www.nasa.gov/wp-admin/admin-ajax.php","message_position":"top"};
+var pum_popups = {"pum-872473":{"triggers":[{"type":"auto_open","settings":{"cookie_name":["nasagov-survey"],"delay":"5000"}}],"cookies":[{"event":"form_submission","settings":{"form":"gravityforms_117","name":"nasagov-survey","time":"1 day","only_in_popup":true,"session":true,"path":true}}],"disable_on_mobile":false,"disable_on_tablet":false,"explain":null,"type_section":null,"theme_id":"862814","size":"custom","responsive_min_width":"0px","responsive_max_width":"100px","custom_width":"300px","custom_height_auto":true,"custom_height":"380px","scrollable_content":false,"animation_type":"slide","animation_speed":"350","animation_origin":"bottom","open_sound":"none","custom_sound":"","location":"right bottom","position_top":"100","position_bottom":"10","position_left":"0","position_right":"10","position_from_trigger":false,"position_fixed":true,"overlay_disabled":true,"stackable":true,"disable_reposition":false,"zindex":"1999999999","close_button_delay":"0","close_on_form_submission":true,"close_on_form_submission_delay":"2000","close_on_overlay_click":false,"close_on_esc_press":true,"close_on_f4_press":false,"disable_form_reopen":true,"disable_accessibility":false,"theme_slug":"content-only","id":872473,"slug":"was-this-page-helpful"}};
+//# sourceURL=popup-maker-site-js-extra
+ 
+ 
+gform.initializeOnLoaded( function() { jQuery(document).on('gform_post_render', function(event, formId, currentPage){if(formId == 117) {} } );jQuery(document).on('gform_post_conditional_logic', function(event, formId, fields, isInit){} ) } );
+ 
+ 
+gform.initializeOnLoaded( function() {jQuery(document).trigger("gform_pre_post_render", [{ formId: "117", currentPage: "1", abort: function() { this.preventDefault(); } }]); if (event && event.defaultPrevented) { return; } const gformWrapperDiv = document.getElementById( "gform_wrapper_117" ); if ( gformWrapperDiv ) { const visibilitySpan = document.createElement( "span" ); visibilitySpan.id = "gform_visibility_test_117"; gformWrapperDiv.insertAdjacentElement( "afterend", visibilitySpan ); } const visibilityTestDiv = document.getElementById( "gform_visibility_test_117" ); let postRenderFired = false; function triggerPostRender() { if ( postRenderFired ) { return; } postRenderFired = true; gform.core.triggerPostRenderEvents( 117, 1 ); if ( visibilityTestDiv ) { visibilityTestDiv.parentNode.removeChild( visibilityTestDiv ); } } function debounce( func, wait, immediate ) { var timeout; return function() { var context = this, args = arguments; var later = function() { timeout = null; if ( !immediate ) func.apply( context, args ); }; var callNow = immediate && !timeout; clearTimeout( timeout ); timeout = setTimeout( later, wait ); if ( callNow ) func.apply( context, args ); }; } const debouncedTriggerPostRender = debounce( function() { triggerPostRender(); }, 200 ); if ( visibilityTestDiv && visibilityTestDiv.offsetParent === null ) { const observer = new MutationObserver( ( mutations ) => { mutations.forEach( ( mutation ) => { if ( mutation.type === 'attributes' && visibilityTestDiv.offsetParent !== null ) { debouncedTriggerPostRender(); observer.disconnect(); } }); }); observer.observe( document.body, { attributes: true, childList: false, subtree: true, attributeFilter: [ 'style', 'class' ], }); } else { triggerPostRender(); } } );
+ 
+ 
+ 

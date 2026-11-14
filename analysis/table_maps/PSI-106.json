@@ -1,0 +1,27 @@
+{
+  "psi_id": "PSI-106",
+  "investigation_title": "SLICE",
+  "source_file": "raw_real/PSI-106/experimental_table/PSI-106_Experimental table_Slice.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Test Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar date",
+      "unit": null,
+      "reason": "Date string without physical measurement unit"
+    },
+    "Fuel Type": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel type"
+    }
+  },
+  "material_map": {
+    "100% CH4": "Methane",
+    "40% CH4 (balance N2) including 2 pyrometry calibration tests and 2 fan calibrations": "Methane mixture",
+    "70% CH4 (balance N2) including 1 pyrometry calibration test": "Methane mixture"
+  }
+}

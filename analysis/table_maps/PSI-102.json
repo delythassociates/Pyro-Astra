@@ -1,0 +1,51 @@
+{
+  "psi_id": "PSI-102",
+  "investigation_title": "SAME",
+  "source_file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+  "gravity_regime": "microgravity",
+  "note": "Authentic NASA PSI SAME experimental table. Rows 5-8 state 'same conditions as 1-4' in the material column but contain blank measurement cells; under Rule R1/R2, blanks remain null and are not interpolated.",
+  "column_mappings": {
+    "Sample #": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Sample / run number",
+      "unit": null,
+      "reason": "Unambiguously identifies sample run number"
+    },
+    "Sample Material  ": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Sample material",
+      "unit": null,
+      "reason": "Unambiguously names sample material substance"
+    },
+    "Air Flow (cm/s)": {
+      "mapped": true,
+      "canonical_field": "airflow_speed_cm_s",
+      "quantity": "Air flow velocity",
+      "unit": "cm/s",
+      "reason": "Unambiguously names airflow velocity and cm/s unit"
+    },
+    "Weight loss rate (mg/min)": {
+      "mapped": true,
+      "canonical_field": "weight_loss_rate_mg_min",
+      "quantity": "Weight loss rate",
+      "unit": "mg/min",
+      "reason": "Unambiguously names weight loss rate and mg/min unit"
+    },
+    "Aging Duration (minutes)": {
+      "mapped": true,
+      "canonical_field": "aging_duration_min",
+      "quantity": "Aging duration",
+      "unit": "minutes",
+      "reason": "Unambiguously names aging duration and minute unit"
+    }
+  },
+  "material_map": {
+    "Teflon": "Teflon",
+    "Kapton: same conditions as 1-4": "Kapton",
+    "Silicone Rubber: same conditions as 1-4": "Silicone",
+    "Lampwick: same conditions as 1-4": "Cotton lampwick",
+    "Dibutyl Phthalate: same conditions as 1-4": "Dibutyl phthalate"
+  }
+}

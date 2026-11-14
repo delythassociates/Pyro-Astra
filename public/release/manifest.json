@@ -1,0 +1,95 @@
+{
+  "_release_name": "PYRO-ASTRA NASA PSI Microgravity Fire Safety Data Release v1.0",
+  "_release_date": "2026-11-14T22:57:55.551121+00:00",
+  "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
+  "artifacts": [
+    {
+      "file_name": "investigations.csv",
+      "format": "CSV",
+      "byte_size": 14022,
+      "sha256": "231f3306076ae40646b902965d5cdeb0c676cda1b911926c7e3629bdde1b5582",
+      "description": "Complete flattened CSV export of all 18 NASA PSI investigations with column-level provenance",
+      "download_url": "/release/investigations.csv"
+    },
+    {
+      "file_name": "extractions.json",
+      "format": "JSON",
+      "byte_size": 19224,
+      "sha256": "79116b631f73aaa7a26562379454473d323ba520c8d19bde863375a1d39d0d4c",
+      "description": "Grounded physical condition extractions with verbatim quotes, source files, and JSON key paths",
+      "download_url": "/release/extractions.json"
+    },
+    {
+      "file_name": "table_5_1_bass2.csv",
+      "format": "CSV",
+      "byte_size": 2065,
+      "sha256": "fdc489eab6fe862bf9924ce2d1cb6f3a405e9e72d034818f7c8cb9f22bec7fe2",
+      "description": "Hand-verified flight test matrix of 20 BASS-II solid burn tests from NASA/TM-20210011385 Table 5.1",
+      "download_url": "/release/table_5_1_bass2.csv"
+    },
+    {
+      "file_name": "table_5_1.csv",
+      "format": "CSV",
+      "byte_size": 2065,
+      "sha256": "fdc489eab6fe862bf9924ce2d1cb6f3a405e9e72d034818f7c8cb9f22bec7fe2",
+      "description": "Standardized alias for BASS-II Table 5.1 flight test matrix (20 tests)",
+      "download_url": "/release/table_5_1.csv"
+    },
+    {
+      "file_name": "modeling_ready_runs.csv",
+      "format": "CSV",
+      "byte_size": 753823,
+      "sha256": "da77d09ef54990f233f396ec212935d64363a6c12c3a2f3a9ac1f182dbe09dfa",
+      "description": "Standardized tabular dataset of 1,843 experimental test runs with 44 physical columns and row-level SHA-256 provenance",
+      "download_url": "/release/modeling_ready_runs.csv"
+    },
+    {
+      "file_name": "modeling_ready_runs.json",
+      "format": "JSON",
+      "byte_size": 3229220,
+      "sha256": "41b5e565ca5284850f9bf1cd085c3b7df160755ee341e3418f893a8b29dc984b",
+      "description": "Machine-readable array of 1,843 experimental test runs with schema definitions and Rule G1 enforcement metadata",
+      "download_url": "/release/modeling_ready_runs.json"
+    },
+    {
+      "file_name": "availability.json",
+      "format": "JSON",
+      "byte_size": 23362,
+      "sha256": "d7d572544a6f74e53bb4a49ed809ca3bf0e6c8d3bcb37f00208f8016d5d90b3c",
+      "description": "Comprehensive availability catalog, S3 endpoints, GEODE status, and DOI verification for all 18 investigations",
+      "download_url": "/release/availability.json"
+    },
+    {
+      "file_name": "field_dictionary.json",
+      "format": "JSON",
+      "byte_size": 44467,
+      "sha256": "13c7e0901b82316582502d5dfdbf495c910c4cdf2768a88643ccdab955d4f3b4",
+      "description": "Complete field definitions, physical units, data types, and provenance constraints",
+      "download_url": "/release/field_dictionary.json"
+    },
+    {
+      "file_name": "DATASET_CARD.md",
+      "format": "MD",
+      "byte_size": 26145,
+      "sha256": "26ee2652330b43c7be8999a55cb8eae0b7607e94af0a74fc13cc025c68dc68f3",
+      "description": "Comprehensive scientific dataset card documenting investigations, 1,843 runs, G1 rules, and machine learning guidelines",
+      "download_url": "/release/DATASET_CARD.md"
+    },
+    {
+      "file_name": "DATACARD.md",
+      "format": "MD",
+      "byte_size": 26145,
+      "sha256": "26ee2652330b43c7be8999a55cb8eae0b7607e94af0a74fc13cc025c68dc68f3",
+      "description": "Formal scientific dataset card documenting scope, sources, extraction methodology, and known gaps",
+      "download_url": "/release/DATACARD.md"
+    },
+    {
+      "file_name": "LICENSE.txt",
+      "format": "TXT",
+      "byte_size": 3191,
+      "sha256": "2e0eedec6ce3eb037edb6036fcd0b6e5fb4302d79aa08cea9e0f62cccda75163",
+      "description": "NASA PSI Open Data terms, Registry of Open Data on AWS statement, and PYRO-ASTRA MIT license",
+      "download_url": "/release/LICENSE.txt"
+    }
+  ]
+}

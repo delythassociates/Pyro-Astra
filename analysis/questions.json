@@ -1,0 +1,322 @@
+[
+  {
+    "id": "Q01",
+    "text": "What is the flammability limit of solid polymers (e.g. PMMA acrylic) in a planned lunar habitat atmosphere (34% O2, 8.2 psi) under lunar partial gravity (0.16g)?",
+    "required_conditions": {
+      "material_class": "solid PMMA acrylic",
+      "o2_range": { "min": 34.0, "max": 34.0 },
+      "pressure_range": { "min": 8.2, "max": 8.2 },
+      "airflow_range": null,
+      "gravity_regime": "lunar_partial_g"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+      "verbatim_quote": "flammability limits are not expected to meet current requirements under elevated O2 (34%) and"
+    }
+  },
+  {
+    "id": "Q02",
+    "text": "How does microgravity affect the smoke particle size and morphology for pyrolysis products under standard cabin air (21% O2, 14.7 psi) at low flow?",
+    "required_conditions": {
+      "material_class": "pyrolysis products",
+      "o2_range": { "min": 20.9, "max": 21.0 },
+      "pressure_range": { "min": 14.2, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 20.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+      "verbatim_quote": "During SAME, smoke particles generated in"
+    }
+  },
+  {
+    "id": "Q03",
+    "text": "Are cotton fabrics (such as crew t-shirts) safe from ignition and sustained burning in elevated oxygen exploration atmospheres (34% O2, 8.2 psi) in microgravity?",
+    "required_conditions": {
+      "material_class": "cotton fabric / textiles",
+      "o2_range": { "min": 30.0, "max": 34.0 },
+      "pressure_range": { "min": 8.0, "max": 10.2 },
+      "airflow_range": { "min": 0.0, "max": 10.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+      "verbatim_quote": "cotton jersey t-shirts) may not be"
+    }
+  },
+  {
+    "id": "Q04",
+    "text": "What is the dependence of smoke particle size distribution on airflow velocity in lunar partial gravity (0.16g)?",
+    "required_conditions": {
+      "material_class": "pyrolysis products",
+      "o2_range": { "min": 21.0, "max": 34.0 },
+      "pressure_range": { "min": 8.2, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 10.0 },
+      "gravity_regime": "lunar_partial_g"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+      "verbatim_quote": "In lunar gravity, the dependence of smoke"
+    }
+  },
+  {
+    "id": "Q05",
+    "text": "What are the droplet extinction limits and cool flame burning behaviors of liquid alkane fuels in microgravity under nitrogen-diluted cabin air?",
+    "required_conditions": {
+      "material_class": "liquid fuel / droplet",
+      "o2_range": { "min": 15.0, "max": 21.0 },
+      "pressure_range": { "min": 7.0, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 0.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 7 Table 1, Fortenberry et al. (2021)",
+      "verbatim_quote": "CIR44 (ISS) Full burn 0 10-40 0.29-44"
+    }
+  },
+  {
+    "id": "Q06",
+    "text": "How does flame spread rate on solid acrylic (PMMA) compare between microgravity (0g) and normal gravity (1g) companion tests?",
+    "required_conditions": {
+      "material_class": "solid PMMA acrylic",
+      "o2_range": { "min": 21.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 10.0, "max": 20.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 9, Bounds Panel",
+      "verbatim_quote": "bounds, not predictions; the direction varies by material"
+    }
+  },
+  {
+    "id": "Q07",
+    "text": "What is the flammability and flame spread rate of cotton/fiberglass blend fabric (SIBAL) under 1g normal gravity versus microgravity?",
+    "required_conditions": {
+      "material_class": "cotton fabric / textiles",
+      "o2_range": { "min": 21.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 20.0, "max": 20.0 },
+      "gravity_regime": "1g"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 4, PSI-99 SAFFIRE-II",
+      "verbatim_quote": "has 0g and 1g pairs: source for the bounds panel"
+    }
+  },
+  {
+    "id": "Q08",
+    "text": "What is the material burning rate in a pure oxygen spacesuit environment (100% O2, 4.3 psi) in microgravity?",
+    "required_conditions": {
+      "material_class": "solid PMMA acrylic",
+      "o2_range": { "min": 100.0, "max": 100.0 },
+      "pressure_range": { "min": 4.3, "max": 4.3 },
+      "airflow_range": null,
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 7, Spacesuit Preset",
+      "verbatim_quote": "Spacesuit: O2 100 %, pressure 4.3 psi."
+    }
+  },
+  {
+    "id": "Q09",
+    "text": "How does elevated burner flow oxygen (up to 85% O2) in co-flow methane diffusion flames affect soot formation in microgravity?",
+    "required_conditions": {
+      "material_class": "gaseous fuel (methane)",
+      "o2_range": { "min": 40.0, "max": 85.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": null,
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 2 Rule 4 & Section 4, PSI-159 CFI-G",
+      "verbatim_quote": "Oxygen in burner flow (for example CFI-G, up to 85%) is not cabin oxygen."
+    }
+  },
+  {
+    "id": "Q10",
+    "text": "Can detector response differentiate smoke particles from suspended cabin and lunar dust in a lunar vehicle cabin?",
+    "required_conditions": {
+      "material_class": "pyrolysis products and lunar dust",
+      "o2_range": { "min": 21.0, "max": 34.0 },
+      "pressure_range": { "min": 8.2, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 20.0 },
+      "gravity_regime": "lunar_partial_g"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 7, Fortenberry et al. (2021)",
+      "verbatim_quote": "alarms from suspended cabin and lunar dust"
+    }
+  },
+  {
+    "id": "Q11",
+    "text": "What are the smoke particle size distributions generated during fuel overheating prior to flame development in microgravity?",
+    "required_conditions": {
+      "material_class": "pyrolysis products",
+      "o2_range": { "min": 20.9, "max": 21.0 },
+      "pressure_range": { "min": 14.2, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 20.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 3, Fortenberry et al. (2021)",
+      "verbatim_quote": "period of fuel overheating prior to flame development since early fire detection is preferred"
+    }
+  },
+  {
+    "id": "Q12",
+    "text": "What is the flammability of Delrin (POM) rods in concurrent low-speed airflow in microgravity under ISS normal conditions (21% O2, 14.7 psi)?",
+    "required_conditions": {
+      "material_class": "solid Delrin (POM)",
+      "o2_range": { "min": 15.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 0.5, "max": 8.5 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 5 Hardware",
+      "verbatim_quote": "MSG flow duct"
+    }
+  },
+  {
+    "id": "Q13",
+    "text": "How does flame spread across fire-resistant Nomex fabric compare at reduced oxygen versus standard 21% oxygen in microgravity?",
+    "required_conditions": {
+      "material_class": "Nomex fabric / textiles",
+      "o2_range": { "min": 15.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 1.0, "max": 5.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+      "verbatim_quote": "fabric for the crew to wear within the anticipated lunar habitat."
+    }
+  },
+  {
+    "id": "Q14",
+    "text": "What are the smoke characteristics of lithium-ion battery (LIB) thermal runaway in a pressurized spacecraft environment?",
+    "required_conditions": {
+      "material_class": "lithium-ion battery / electronics",
+      "o2_range": { "min": 21.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": null,
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+      "verbatim_quote": "characterized the properties of smoke particles from laptop LIB fires"
+    }
+  },
+  {
+    "id": "Q15",
+    "text": "What is the critical extinction oxygen index (LOI) for polymethyl methacrylate (PMMA) slabs in low-speed forced flow in microgravity?",
+    "required_conditions": {
+      "material_class": "solid PMMA acrylic",
+      "o2_range": { "min": 15.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 1.0, "max": 8.5 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+      "verbatim_quote": "polymethyl methacrylate combustion"
+    }
+  },
+  {
+    "id": "Q16",
+    "text": "How does buoyant upward flow in 1g alter smoke particle evolution and time-to-alarm compared to low air velocities in microgravity?",
+    "required_conditions": {
+      "material_class": "pyrolysis products",
+      "o2_range": { "min": 20.9, "max": 21.0 },
+      "pressure_range": { "min": 14.2, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 20.0 },
+      "gravity_regime": "1g"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+      "verbatim_quote": "Differences in particle formation and evolution in reduced gravity are attributable"
+    }
+  },
+  {
+    "id": "Q17",
+    "text": "What is the effect of an external electric field on soot distribution and flame stabilization as an analog for gravity in microgravity?",
+    "required_conditions": {
+      "material_class": "gaseous fuel (methane/ethylene)",
+      "o2_range": { "min": 21.0, "max": 30.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": null,
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 2 Rule 5, ACME E-FIELD Analog",
+      "verbatim_quote": "ACME E-FIELD Flames mimics partial gravity with an electric field: present it as an analog, never as partial gravity."
+    }
+  },
+  {
+    "id": "Q18",
+    "text": "What are the flame spread and extinction limits of silicone polymer sheets under varying air velocities in microgravity?",
+    "required_conditions": {
+      "material_class": "silicone / polymers",
+      "o2_range": { "min": 18.0, "max": 21.0 },
+      "pressure_range": { "min": 14.7, "max": 14.7 },
+      "airflow_range": { "min": 0.5, "max": 5.5 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 4, PSI-25 BASS-II",
+      "verbatim_quote": "material matrix. Fallback: NASA/TM-20210011385, Table 5.1 (20 tests), hand-entered with page numbers"
+    }
+  },
+  {
+    "id": "Q19",
+    "text": "How does Martian atmospheric surface gravity (0.38g) influence the flame spread rate of cellulose solid fuels?",
+    "required_conditions": {
+      "material_class": "cotton / cellulose",
+      "o2_range": { "min": 20.0, "max": 30.0 },
+      "pressure_range": { "min": 7.0, "max": 14.7 },
+      "airflow_range": { "min": 1.0, "max": 10.0 },
+      "gravity_regime": "martian_partial_g"
+    },
+    "source": {
+      "file": "raw_real/NTRS-20210022143.txt",
+      "citation": "NTRS-20210022143, p. 3, Fortenberry et al. (2021)",
+      "verbatim_quote": "lunar, Martian, and deep-space exploration."
+    }
+  },
+  {
+    "id": "Q20",
+    "text": "What is the fire suppression efficiency of helium versus carbon dioxide dilution on alkane droplet extinction in microgravity?",
+    "required_conditions": {
+      "material_class": "liquid fuel / droplet",
+      "o2_range": { "min": 15.0, "max": 21.0 },
+      "pressure_range": { "min": 7.0, "max": 14.7 },
+      "airflow_range": { "min": 0.0, "max": 0.0 },
+      "gravity_regime": "microgravity"
+    },
+    "source": {
+      "file": "SPEC.md",
+      "citation": "SPEC.md Section 4, PSI-69 FLEX",
+      "verbatim_quote": "CO2 and helium dilution. Row counts differ by file: report your own"
+    }
+  }
+]

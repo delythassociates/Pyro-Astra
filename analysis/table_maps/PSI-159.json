@@ -1,0 +1,143 @@
+{
+  "psi_id": "PSI-159",
+  "investigation_title": "CFI-G (Normal Flames)",
+  "source_file": "raw_real/PSI-159/experimental_table/PSI-159_Experimental table_CFI-G_Normal Flames (1).csv",
+  "gravity_regime": "microgravity",
+  "note": "PSI-159_Experimental table_CFI-G_Normal Flames (2).csv is byte-identical (sha256: d95a621c3fbd27d204dd32ed29fa17d68f2b779d6a523cde8479ed7ebaa5251a) and ingested once.",
+  "column_mappings": {
+    "Flame Type": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Flame category",
+      "unit": null,
+      "reason": "Qualitative flame category ('Normal'); no physical measurement unit"
+    },
+    "Day": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test day sequence",
+      "unit": null,
+      "reason": "Day sequence number without physical measurement unit"
+    },
+    "Fuel": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel gas substance"
+    },
+    "Test": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies individual test run"
+    },
+    "Cool flame?": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Cool flame observation",
+      "unit": null,
+      "reason": "Qualitative observation flag ('Yes', 'No', 'no, PCI-hot'); no physical measurement unit"
+    },
+    " XO2 before test": {
+      "mapped": true,
+      "canonical_field": "o2_initial_mole_fraction",
+      "quantity": "Initial oxygen mole fraction",
+      "unit": "mole fraction",
+      "reason": "Names initial oxygen mole fraction (standard chemical notation X denotes mole fraction). Note: ambient chamber oxygen, distinct from burner-flow O2 (up to 85%) and cabin O2 per Rule R3"
+    },
+    "XO2  after test": {
+      "mapped": true,
+      "canonical_field": "o2_final_mole_fraction",
+      "quantity": "Final oxygen mole fraction",
+      "unit": "mole fraction",
+      "reason": "Names final oxygen mole fraction (standard chemical notation X denotes mole fraction)"
+    },
+    "approx p (bar)": {
+      "mapped": true,
+      "canonical_field": "pressure_bar",
+      "quantity": "Chamber pressure (approximate)",
+      "unit": "bar",
+      "reason": "Unambiguously names pressure and bar unit (convertible to psi via 1 bar = 14.50377 psi)"
+    },
+    "Xf": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Fuel mole fraction",
+      "unit": null,
+      "reason": "Header 'Xf' lacks explicit unit specification in column title"
+    },
+    "mHC (mg/s)": {
+      "mapped": true,
+      "canonical_field": "fuel_mass_flow_mg_s",
+      "quantity": "Hydrocarbon mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names hydrocarbon mass flow rate and mg/s unit"
+    },
+    "TFP": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "TFP flag",
+      "unit": null,
+      "reason": "Acronym without unit or unambiguous physical quantity definition"
+    },
+    "Tad (K)": {
+      "mapped": true,
+      "canonical_field": "adiabatic_temperature_k",
+      "quantity": "Adiabatic flame temperature",
+      "unit": "K",
+      "reason": "Unambiguously names adiabatic flame temperature and Kelvin unit"
+    },
+    "Zst": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Stoichiometric mixture fraction",
+      "unit": null,
+      "reason": "Stoichiometric mixture fraction (dimensionless); lacks unit specification in header"
+    },
+    "Hot ignition": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Hot ignition flag",
+      "unit": null,
+      "reason": "Qualitative observation flag ('Yes', 'No'); no physical measurement unit"
+    },
+    "burn time (sec)": {
+      "mapped": true,
+      "canonical_field": "burn_time_s",
+      "quantity": "Burn duration",
+      "unit": "sec",
+      "reason": "Unambiguously names burn duration and second unit"
+    },
+    "Self-ext or flow term": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Extinction mechanism",
+      "unit": null,
+      "reason": "Qualitative extinction mechanism code ('SE', 'FT'); no physical measurement unit"
+    },
+    "Peak burner T (C )": {
+      "mapped": true,
+      "canonical_field": "peak_burner_temperature_c",
+      "quantity": "Peak burner temperature",
+      "unit": "C",
+      "reason": "Unambiguously names burner temperature and Celsius unit"
+    },
+    "Comments": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Operator comments",
+      "unit": null,
+      "reason": "Free-text operator remarks; no physical measurement unit"
+    }
+  },
+  "material_map": {
+    "ethane": "ethane",
+    "propane": "propane",
+    "30% ethane": "ethane mixture",
+    "30% propane": "propane mixture",
+    "30% butane": "butane mixture",
+    "50% butane": "butane mixture"
+  }
+}

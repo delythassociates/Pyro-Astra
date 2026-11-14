@@ -1,0 +1,278 @@
+{
+  "dataset_name": "FLEX (PSI-69) Droplet Combustion",
+  "model_label": "Demonstrator on liquid droplets, NOT a habitat safety predictor",
+  "sample_size_physical": 189,
+  "complete_combustion_excluded_rows": 8,
+  "discrete_condition_clusters": 77,
+  "features": [
+    "d0",
+    "o2",
+    "pressure_psi",
+    "is_methanol"
+  ],
+  "target": "extinction_diameter_mm",
+  "target_range_mm": [
+    0.12,
+    4.6
+  ],
+  "loco_results": {
+    "Dummy (Mean)": {
+      "mae": 0.8213,
+      "mae_95_ci": [
+        0.7444,
+        0.903
+      ],
+      "rmse": 0.9827,
+      "r2": -0.0163
+    },
+    "Dummy (Median)": {
+      "mae": 0.8117,
+      "mae_95_ci": [
+        0.7279,
+        0.9027
+      ],
+      "rmse": 1.0017,
+      "r2": -0.0561
+    },
+    "1-NN": {
+      "mae": 0.6843,
+      "mae_95_ci": [
+        0.5976,
+        0.7655
+      ],
+      "rmse": 0.9029,
+      "r2": 0.1421
+    },
+    "3-NN": {
+      "mae": 0.5931,
+      "mae_95_ci": [
+        0.5216,
+        0.6631
+      ],
+      "rmse": 0.7605,
+      "r2": 0.3912
+    },
+    "Linear Regression": {
+      "mae": 0.432,
+      "mae_95_ci": [
+        0.3857,
+        0.4821
+      ],
+      "rmse": 0.5486,
+      "r2": 0.6833
+    },
+    "Ridge": {
+      "mae": 0.5184,
+      "mae_95_ci": [
+        0.4654,
+        0.5729
+      ],
+      "rmse": 0.639,
+      "r2": 0.5703
+    },
+    "Poly-2": {
+      "mae": 0.43,
+      "mae_95_ci": [
+        0.3835,
+        0.4777
+      ],
+      "rmse": 0.5313,
+      "r2": 0.7029
+    },
+    "Random Forest": {
+      "mae": 0.3622,
+      "mae_95_ci": [
+        0.3189,
+        0.4046
+      ],
+      "rmse": 0.4678,
+      "r2": 0.7697
+    }
+  },
+  "repeated_cv_summary": {
+    "Dummy (Mean)": {
+      "mae_mean": 0.8213,
+      "mae_std": 0.0923,
+      "mae_95_ci": [
+        0.8029,
+        0.8386
+      ],
+      "rmse_mean": 0.9778,
+      "r2_mean": -0.0619
+    },
+    "Dummy (Median)": {
+      "mae_mean": 0.8142,
+      "mae_std": 0.1005,
+      "mae_95_ci": [
+        0.7942,
+        0.8327
+      ],
+      "rmse_mean": 0.9945,
+      "r2_mean": -0.0956
+    },
+    "1-NN": {
+      "mae_mean": 0.6975,
+      "mae_std": 0.1113,
+      "mae_95_ci": [
+        0.6751,
+        0.7191
+      ],
+      "rmse_mean": 0.9077,
+      "r2_mean": 0.029
+    },
+    "3-NN": {
+      "mae_mean": 0.6088,
+      "mae_std": 0.0842,
+      "mae_95_ci": [
+        0.5925,
+        0.6252
+      ],
+      "rmse_mean": 0.7675,
+      "r2_mean": 0.3142
+    },
+    "Linear Regression": {
+      "mae_mean": 0.4332,
+      "mae_std": 0.0501,
+      "mae_95_ci": [
+        0.4242,
+        0.4429
+      ],
+      "rmse_mean": 0.5472,
+      "r2_mean": 0.6527
+    },
+    "Ridge": {
+      "mae_mean": 0.5298,
+      "mae_std": 0.0589,
+      "mae_95_ci": [
+        0.5178,
+        0.541
+      ],
+      "rmse_mean": 0.6468,
+      "r2_mean": 0.5176
+    },
+    "Poly-2": {
+      "mae_mean": 0.445,
+      "mae_std": 0.0759,
+      "mae_95_ci": [
+        0.4312,
+        0.4601
+      ],
+      "rmse_mean": 0.5763,
+      "r2_mean": 0.583
+    },
+    "Random Forest": {
+      "mae_mean": 0.3808,
+      "mae_std": 0.0623,
+      "mae_95_ci": [
+        0.3694,
+        0.3923
+      ],
+      "rmse_mean": 0.4816,
+      "r2_mean": 0.7277
+    }
+  },
+  "extrapolation_test": {
+    "held_out_rows": 8,
+    "held_out_condition_criterion": "pressure_psi > 20.0 psi OR o2 >= 0.30",
+    "model_results": {
+      "Dummy (Mean)": {
+        "extrapolation_mae": 0.9559,
+        "loco_in_domain_mae": 0.8213,
+        "pct_error_change": 16.4
+      },
+      "Dummy (Median)": {
+        "extrapolation_mae": 0.785,
+        "loco_in_domain_mae": 0.8117,
+        "pct_error_change": -3.3
+      },
+      "1-NN": {
+        "extrapolation_mae": 0.605,
+        "loco_in_domain_mae": 0.6843,
+        "pct_error_change": -11.6
+      },
+      "3-NN": {
+        "extrapolation_mae": 0.7542,
+        "loco_in_domain_mae": 0.5931,
+        "pct_error_change": 27.2
+      },
+      "Linear Regression": {
+        "extrapolation_mae": 1.345,
+        "loco_in_domain_mae": 0.432,
+        "pct_error_change": 211.3
+      },
+      "Ridge": {
+        "extrapolation_mae": 0.7113,
+        "loco_in_domain_mae": 0.5184,
+        "pct_error_change": 37.2
+      },
+      "Poly-2": {
+        "extrapolation_mae": 1.8491,
+        "loco_in_domain_mae": 0.43,
+        "pct_error_change": 330.0
+      },
+      "Random Forest": {
+        "extrapolation_mae": 0.5487,
+        "loco_in_domain_mae": 0.3622,
+        "pct_error_change": 51.5
+      }
+    },
+    "finding_statement": "On the FLEX droplet data, error rose by 211.3% when the highest-pressure or highest-O2 conditions were held out; the lunar habitat point is outside every measured range and is refused."
+  },
+  "per_fuel_applicability_domains": {
+    "Methanol": {
+      "n_samples": 117,
+      "feature_ranges": {
+        "d0": [
+          1.61,
+          4.35
+        ],
+        "o2": [
+          0.12,
+          0.34
+        ],
+        "pressure_psi": [
+          0.0,
+          40.068
+        ]
+      },
+      "p95_nearest_neighbor_distance": 0.1252,
+      "d_max_threshold": 0.1878,
+      "convention_note": "The 1.50 distance multiplier threshold is an established engineering convention (1.5x of the 95th percentile nearest-neighbor distance in normalized feature space)."
+    },
+    "Heptane": {
+      "n_samples": 72,
+      "feature_ranges": {
+        "d0": [
+          1.34,
+          4.67
+        ],
+        "o2": [
+          0.13,
+          0.24
+        ],
+        "pressure_psi": [
+          10.21,
+          30.045
+        ]
+      },
+      "p95_nearest_neighbor_distance": 0.1864,
+      "d_max_threshold": 0.2796,
+      "convention_note": "The 1.50 distance multiplier threshold is an established engineering convention (1.5x of the 95th percentile nearest-neighbor distance in normalized feature space)."
+    }
+  },
+  "lunar_habitat_evaluation": {
+    "condition": {
+      "cabin_o2_pct": 34.0,
+      "pressure_psi": 8.2
+    },
+    "verdict": "REFUSED (Out-of-Domain / Outside Convex Hull)",
+    "heptane_status": "Out-of-domain (O2 0.34 exceeds maximum flight-tested 0.24)",
+    "methanol_status": "Out-of-domain / Outside convex hull (all flight tests with O2 >= 0.30 were at pressure >= 10.33 psi; zero tests at 8.2 psi)",
+    "rule_citations": [
+      "Section 2 Rule 5",
+      "Rule G4",
+      "Rule G5",
+      "Rule 7"
+    ]
+  }
+}

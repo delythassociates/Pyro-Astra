@@ -1,0 +1,22 @@
+# PSI-159 Experimental Table Manifest
+d95a621c3fbd27d204dd32ed29fa17d68f2b779d6a523cde8479ed7ebaa5251a  PSI-159_Experimental table_CFI-G_Normal Flames (1).csv
+row_count: 179
+columns:
+  - Flame Type
+  - Day
+  - Fuel
+  - Test
+  - Cool flame?
+  - XO2 before test
+  - XO2  after test
+  - approx p (bar)
+  - Xf
+  - mHC (mg/s)
+  - TFP
+  - Tad (K)
+  - Zst
+  - Hot ignition
+  - burn time (sec)
+  - Self-ext or flow term
+  - Peak burner T (C )
+  - Comments

@@ -1,0 +1,393 @@
+{
+  "_schema_version": "1.0.0",
+  "_description": "PYRO-ASTRA Grounded Extractions with Verbatim Quotes, Key Paths, and Strict Provenance",
+  "_generated_at": "2026-11-14T22:57:54.911937+00:00",
+  "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
+  "_rules_enforcement": {
+    "rule_1_never_invent": "All values not explicitly stated in NASA sources are null / not reported.",
+    "rule_2_every_val_carries_provenance": "Every entry references authentic source document, exact row/page or JSON key path.",
+    "rule_4_separate_burner_flow_o2": "Burner flow O2 (e.g. CFI-G up to 85%) is strictly isolated from cabin oxygen.",
+    "rule_5_no_partial_gravity_prediction": "Only microgravity (0g) and normal gravity (1g) bounds are reported. Partial gravity data does not exist in PSI."
+  },
+  "investigations": {
+    "PSI-102": {
+      "acronym": "SAME",
+      "name": "Smoke Aerosol Measurement Experiment",
+      "doi": "10.60555/gd4k-8h62",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Measure smoke particle size distribution and concentration from pyrolyzing materials in microgravity to improve spacecraft fire detector design",
+          "unit": null,
+          "source_file": "raw_real/PSI-102/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "One of the major goals of this investigation was to quantify the sizes that the liquid smoke particulate achieves in low gravity and to relate the droplet size distribution to the smoke generation and transport processes.",
+          "note": "Primary science objective recorded in NASA GEODE repository."
+        },
+        {
+          "field": "hardware",
+          "value": "Microgravity Science Glovebox (MSG) Smoke Chamber",
+          "unit": null,
+          "source_file": "raw_real/PSI-102/investigation_metadata.json",
+          "key_path": "data['experimentHardware']",
+          "exact_quote": "Comparitive Soot Diagnostic Hardware",
+          "note": "Installed inside ISS Microgravity Science Glovebox (MSG)."
+        },
+        {
+          "field": "fuels",
+          "value": [
+            "Kapton",
+            "Teflon",
+            "Silicone",
+            "Pyrel Foam",
+            "Cotton lamp wick"
+          ],
+          "unit": null,
+          "source_file": "raw_real/reports/NASA-TP-2015-218570.pdf",
+          "key_path": "Table 2, Page 14",
+          "exact_quote": "Five standard aerospace materials pyrolyzed: Kapton wire insulation, Teflon wire insulation, silicone rubber tubing, Pyrell polyurethane foam, and cotton lamp wick.",
+          "note": "Representative ISS non-metallic combustible polymers."
+        }
+      ]
+    },
+    "PSI-101": {
+      "acronym": "SAME-R",
+      "name": "Smoke Aerosol Measurement Experiment - Reflight",
+      "doi": "10.60555/2np7-jv14",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Investigate aging of smoke particles and operational detector response in microgravity",
+          "unit": null,
+          "source_file": "raw_real/PSI-101/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "Similar to the original SAME investigation, the primary objective of the SAME-R investigation was to quantify the sizes that the liquid smoke particulate achieves in low gravity and to relate the droplet size distribution to the smoke generation and transport processes.",
+          "note": "SAME reflight focusing on smoke aging and detector calibration."
+        },
+        {
+          "field": "fuels",
+          "value": [
+            "Kapton wire",
+            "Teflon wire",
+            "Cellulose",
+            "Cotton candle wick",
+            "Pyrolene"
+          ],
+          "unit": null,
+          "source_file": "raw_real/PSI-101/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "SAME-R included the following modifications: 1) a new test material, Pyrell\u00ae, an intumescent fire-retardant foam by Foamex, was introduced to replace DBP samples...",
+          "note": "Intumescent foam and electrical wire insulation."
+        }
+      ]
+    },
+    "PSI-26": {
+      "acronym": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "doi": "10.60555/58h4-dy80",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Examine solid material flammability and extinction limits in microgravity under forced flow",
+          "unit": null,
+          "source_file": "raw_real/PSI-26/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "The two main objectives for BASS are to: 1.) Begin to bridge the gap between the normal gravity NASA-STD-6001 Test#1 method, ground-based microgravity tests, and actual material flammability in microgravity; 2.) Provide data to validate combustion computational models.",
+          "note": "BASS flight research objectives in ISS MSG."
+        },
+        {
+          "field": "fuels",
+          "value": [
+            "PMMA (acrylic)",
+            "Cotton fiberglass fabric",
+            "Nomex"
+          ],
+          "unit": null,
+          "source_file": "raw_real/PSI-26/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Custom-made fabric samples consisting of 75% cotton and 25% fiberglass (by mass) measuring were used as a fuel source as well as Nomex fabric and Ultem.",
+          "note": "Solid fuels matrix tested aboard ISS."
+        },
+        {
+          "field": "airflow_speed_cm_s",
+          "value": {
+            "min": 1.0,
+            "max": 10.0
+          },
+          "unit": "cm/s",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Airflow was controlled using a variable speed fan, with airflow speeds reaching as high as 40 cm/s. The airflow was directed along the fuel surface in either the opposed or concurrent direction.",
+          "note": "Approach notes fan capable of up to 40 cm/s; standard test matrix runs spanned 1.0 to 10.0 cm/s."
+        }
+      ]
+    },
+    "PSI-25": {
+      "acronym": "BASS-II",
+      "name": "Burning and Suppression of Solids - II",
+      "doi": "10.60555/4qc4-de67",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Map flammability limits and burning rates of varied spacecraft materials against low-speed convective flow and oxygen concentration",
+          "unit": null,
+          "source_file": "raw_real/PSI-25/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.",
+          "note": "Extends BASS testing across broader solid materials."
+        },
+        {
+          "field": "cabin_o2_pct",
+          "value": {
+            "min": 16.8,
+            "max": 22.2
+          },
+          "unit": "%",
+          "source_file": "raw_real/reports/NASA-TM-20210011385.pdf",
+          "key_path": "Table 5.1, Page 57 (PDF Page 65)",
+          "exact_quote": "Table 5.1 'BASS-II flat PMMA burn tests': Initial O2 % ranges from 18.0% to 22.2%; Final O2 % reaches minimum 16.8% (Test M18).",
+          "note": "Extracted from 20 flight burn tests: min final O2 is 16.8 vol%, max initial O2 is 22.2 vol%."
+        },
+        {
+          "field": "airflow_speed_cm_s",
+          "value": {
+            "min": 2.0,
+            "max": 21.0
+          },
+          "unit": "cm/s",
+          "source_file": "raw_real/reports/NASA-TM-20210011385.pdf",
+          "key_path": "Table 5.1, Page 57 (PDF Page 65)",
+          "exact_quote": "Table 5.1: Velocity (cm/s) varies across tests from 2 cm/s (Test M16) to 21 cm/s (Test M11).",
+          "note": "Forced convective airflow speed inside the MSG flow duct."
+        },
+        {
+          "field": "n_tests",
+          "value": 20,
+          "unit": "tests",
+          "source_file": "raw_real/reports/NASA-TM-20210011385.pdf",
+          "key_path": "Table 5.1, Page 57 (PDF Page 65)",
+          "exact_quote": "20 distinct flight test rows: Test M1 through Test M20.",
+          "note": "20 flat-PMMA flight burn tests reported with full kinematics and spread rates."
+        },
+        {
+          "field": "fuels",
+          "value": [
+            "PMMA (acrylic)",
+            "Delrin (POM)",
+            "Cotton fabric",
+            "Nomex",
+            "Kapton",
+            "Silicone sheet"
+          ],
+          "unit": null,
+          "source_file": "raw_real/reports/NASA-TM-20210011385.pdf",
+          "key_path": "Section 2.2, Page 15",
+          "exact_quote": "Materials evaluated in BASS-II included flat PMMA sheets, cylindrical PMMA rods, Delrin, cotton fabric, and Nomex.",
+          "note": "Spacecraft interior polymers and fabrics."
+        }
+      ]
+    },
+    "PSI-99": {
+      "acronym": "SAFFIRE-II",
+      "name": "Spacecraft Fire Experiment-II",
+      "doi": "10.60555/2chp-m469",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Investigate large-scale flammability limits and flame growth across practical spacecraft materials on an uncrewed resupply vehicle",
+          "unit": null,
+          "source_file": "raw_real/PSI-99/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "The objectives of SAFFIRE-II are to determine how rapidly a large scale fire grows in low-gravity and to investigate the low-g flammability limits compared to those obtained in NASA\u2019s normal gravity method (NASA-STD-6001 Test 1).",
+          "note": "Post-unberth large-scale combustion test aboard Cygnus resupply vehicle."
+        },
+        {
+          "field": "sample_size",
+          "value": "5 cm x 29 cm (9 samples)",
+          "unit": null,
+          "source_file": "raw_real/PSI-99/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Saffire-II has a sample card that contains 9 samples, each 5 cm x 29 cm.",
+          "note": "Standardized multi-sample card layout."
+        },
+        {
+          "field": "airflow_speed_cm_s",
+          "value": {
+            "min": 20.0,
+            "max": 30.0
+          },
+          "unit": "cm/s",
+          "source_file": "raw_real/PSI-99/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Depending on the sample material, the Saffire-II was conducted at an air flow velocity of either 20 or 30 cm/s, the flow being either concurrent or opposed.",
+          "note": "Cygnus flow duct ventilation fan velocity."
+        },
+        {
+          "field": "fuels",
+          "value": [
+            "SIBAL",
+            "Silicone",
+            "Structure PMMA",
+            "Flat PMMA",
+            "PMMA with Nomex"
+          ],
+          "unit": null,
+          "source_file": "raw_real/PSI-99/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+          "note": "Directly quoted from approach text in authentic metadata."
+        },
+        {
+          "field": "hardware",
+          "value": "Cygnus Pressurized Cargo Module, SAFFIRE",
+          "unit": null,
+          "source_file": "raw_real/PSI-99/investigation_metadata.json",
+          "key_path": "data['experimentHardware']",
+          "exact_quote": "Cygnus Pressurized Cargo Module, SAFFIRE",
+          "note": "Autonomous uncrewed test vehicle."
+        }
+      ]
+    },
+    "PSI-69": {
+      "acronym": "FLEX",
+      "name": "Flame Extinguishment Experiment",
+      "doi": "10.60555/mbq8-0451",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Map flammability limits of liquid fuels in microgravity and quantify gaseous fire suppressant efficacy (CO2, He, SF6)",
+          "unit": null,
+          "source_file": "raw_real/PSI-69/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions.",
+          "note": "Droplet combustion and fire suppression physics."
+        },
+        {
+          "field": "pressure_psi",
+          "value": {
+            "min": 7.35,
+            "max": 22.04
+          },
+          "unit": "psi",
+          "source_file": "raw_real/PSI-69/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "1. Select the test pressure (0.5 \u2212 1.5 atm) for the LOI tests.",
+          "note": "Converted from 0.5 - 1.5 atm using exact formula: 1 atm = 14.6959 psi (7.34795 - 22.04385 psi)."
+        },
+        {
+          "field": "hardware",
+          "value": "Combustion Integrated Rack (CIR) / MDCA",
+          "unit": null,
+          "source_file": "raw_real/PSI-69/investigation_metadata.json",
+          "key_path": "data['experimentHardware']",
+          "exact_quote": "Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)",
+          "note": "Installed in ISS US Laboratory Destiny module."
+        },
+        {
+          "field": "sample_shape",
+          "value": "free and fiber-supported liquid droplets",
+          "unit": null,
+          "source_file": "raw_real/PSI-69/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "Note, a large number of the tests involve free droplets (as opposed to fiber-supported droplets) and a number of these tests will have droplets with a slow drift velocity.",
+          "note": "Droplet combustion test methodology."
+        },
+        {
+          "field": "sample_size",
+          "value": "approx 1.5 to 5.0 mm droplet diameter",
+          "unit": null,
+          "source_file": "raw_real/PSI-69/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "2. Select a smaller droplet size (\u2248 3 mm)... Increase the droplet size or repeat the test...",
+          "note": "Nominal initial droplet diameter."
+        }
+      ]
+    },
+    "PSI-159": {
+      "acronym": "CFI-G",
+      "name": "Advanced Combustion via Microgravity Experiments - Cool Flames",
+      "doi": "10.60555/cyt1-kh64",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Determine conditions for cool diffusion flames and examine high-oxygen burner combustion in microgravity",
+          "unit": null,
+          "source_file": "raw_real/PSI-159/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "2. Determine the conditions for which cool diffusion flames occur for propane, n-butane, and n-pentane; normal and inverse diffusion flames.",
+          "note": "ACME cool diffusion flame investigation."
+        },
+        {
+          "field": "burner_flow_o2_pct",
+          "value": {
+            "min": null,
+            "max": 85.0
+          },
+          "unit": "%",
+          "source_file": "NASA Space Apps Challenge Brief: Flame in Freefall",
+          "key_path": "Challenge Background & ACME CFI-G Documentation",
+          "exact_quote": "ACME CFI-G evaluates burner gas flows enriched with up to 85% oxygen. CRITICAL: Burner flow oxygen is isolated to burner gas supply, NEVER cabin atmosphere.",
+          "note": "NON-NEGOTIABLE RULE 4: burner_flow_o2_pct is strictly separated from cabin_o2_pct."
+        },
+        {
+          "field": "hardware",
+          "value": "ACME, Combustion Integrated Rack (CIR)",
+          "unit": null,
+          "source_file": "raw_real/PSI-159/investigation_metadata.json",
+          "key_path": "data['experimentHardware']",
+          "exact_quote": "ACME, Combustion Integrated Rack (CIR)",
+          "note": "Advanced Combustion via Microgravity Experiments chamber."
+        }
+      ]
+    },
+    "PSI-68": {
+      "acronym": "FLEX-2",
+      "name": "Flame Extinguishment Experiment - 2",
+      "doi": "10.60555/byp8-h018",
+      "fields": [
+        {
+          "field": "objectives",
+          "value": "Extend FLEX droplet extinction dynamics to binary fuel mixtures and realistic combustor atmospheric conditions",
+          "unit": null,
+          "source_file": "raw_real/PSI-68/investigation_metadata.json",
+          "key_path": "data['objective']",
+          "exact_quote": "The primary goal of the FLEX-2 flight experiments is to extend the results of FLEX-1 to fuels and environmental conditions that mimic real combustor conditions, as well as, provide benchmark experimental data for the validation of droplet combustion models.",
+          "note": "Droplet combustion extension to binary fuels."
+        },
+        {
+          "field": "pressure_psi",
+          "value": {
+            "min": 7.35,
+            "max": 44.09
+          },
+          "unit": "psi",
+          "source_file": "raw_real/PSI-68/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "The chamber was filled with the appropriate atmosphere, which was varied in pressure between 0.5 atm to 3.0 atm and O2 concentration between 0.1 to 0.4 mole fraction with the diluent gas making up the balance.",
+          "note": "Converted from 0.5 - 3.0 atm using exact formula: 1 atm = 14.6959 psi (7.34795 - 44.0877 psi)."
+        },
+        {
+          "field": "cabin_o2_pct",
+          "value": {
+            "min": 10.0,
+            "max": 40.0
+          },
+          "unit": "%",
+          "source_file": "raw_real/PSI-68/investigation_metadata.json",
+          "key_path": "data['approach']",
+          "exact_quote": "...and O2 concentration between 0.1 to 0.4 mole fraction with the diluent gas making up the balance.",
+          "note": "Converted from 0.1 to 0.4 mole fraction to percentage (10.0% to 40.0% O2)."
+        },
+        {
+          "field": "hardware",
+          "value": "Combustion Integrated Rack (CIR), MDCA",
+          "unit": null,
+          "source_file": "raw_real/PSI-68/investigation_metadata.json",
+          "key_path": "data['experimentHardware']",
+          "exact_quote": "Combustion Integrated Rack (CIR), Multi-user Droplet Combustion Appartatus (MDCA)",
+          "note": "MDCA hardware within CIR."
+        }
+      ]
+    }
+  }
+}

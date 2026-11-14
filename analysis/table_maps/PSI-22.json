@@ -1,0 +1,83 @@
+{
+  "psi_id": "PSI-22",
+  "investigation_title": "ACME E-FIELD Flames",
+  "source_file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+  "gravity_regime": "electric-field-analog",
+  "note": "MANDATORY: E-FIELD Flames uses an electric field to mimic buoyant convection. Stored strictly under gravity_regime 'electric-field-analog' as an analogue, NEVER as partial gravity per Rule 5.",
+  "column_mappings": {
+    "Test Type": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test configuration description",
+      "unit": null,
+      "reason": "Qualitative test configuration description without physical measurement unit"
+    },
+    "Test Day": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test day identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies test run day (YYDDD format)"
+    },
+    "Year": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar year",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Month": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar month",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar day",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Mesh Polarity": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Electrode mesh polarity",
+      "unit": null,
+      "reason": "Qualitative electrode polarity ('positive', 'negative'); no physical measurement unit"
+    },
+    "Fuel Bottle": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel gas mixture"
+    },
+    "Fuel Conc": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Fuel concentration",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title ('Fuel Conc' has no unit; cell has '100%')"
+    },
+    "Flames Ignited": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Ignited flame count",
+      "unit": null,
+      "reason": "Integer count of test ignitions without physical measurement unit"
+    },
+    "Notes": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Operator notes",
+      "unit": null,
+      "reason": "Free-text documentation notes without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "100% CH4": "Methane",
+    "100% C2H4": "Ethylene"
+  }
+}

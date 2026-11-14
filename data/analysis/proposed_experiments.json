@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "title": "Proposed Candidate Experiment Design for Lunar Exploration Atmosphere",
+  "description": "Proposed experimental test matrix to document solid material flammability in planned lunar habitat atmospheres (34% O2, 8.2 psi). Conditions were chosen by the team by hand around the planned lunar habitat and Table 5.1 ranges; no computed gap analysis was performed. Contains ZERO predicted outcomes.",
+  "label": "defined by the PYRO-ASTRA team",
+  "disclaimer": "Proposed conditions to document. Not safety advice.",
+  "hand_chosen_statement": "Conditions were chosen by the team by hand around the planned lunar habitat and Table 5.1 ranges, and no computed gap analysis was performed.",
+  "solid_fuel_o2_constraint": "the only solid-fuel O2 values we could source are BASS-II Table 5.1 (20 flat-PMMA tests, 16.8-22.2% O2); BASS, SAFFIRE-II and SAME do not report O2 in the public metadata.",
+  "fixed_seed": 42,
+  "material_class": "flat PMMA (polymethyl methacrylate)",
+  "sample_dimensions": "10 cm length x 2.2 cm width x 1.0 mm thickness (standard Table 5.1 MSG flow duct geometry)",
+  "atmosphere_source": "NASA NTRS-20210022143 (34% O2, 8.2 psi)",
+  "airflow_source": "NASA/TM-20210011385 Table 5.1, Page 57 (2.0 to 21.0 cm/s for flat PMMA)",
+  "gravity_regimes_tested": "microgravity (flight) and 1g (ground) companion bounds",
+  "partial_gravity_note": "NASA PSI currently holds no partial-gravity combustion data. Future partial-gravity data are expected from the LUCI (Lunar Combustion Investigation) and FM2 (Flammability of Materials on the Moon) spaceflight experiments. No partial-gravity predictions are made.",
+  "total_runs": 12,
+  "anchor_run_id": "RUN-01-ANCHOR",
+  "runs": [
+    {
+      "run_id": "RUN-01-ANCHOR",
+      "is_anchor": true,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 22.2,
+      "pressure_psi": null,
+      "airflow_speed_cm_s": 9.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Baseline Anchor Run matching documented BASS-II flight test M1 (NASA/TM-20210011385 Table 5.1, Page 57, PDF Page 65) to calibrate flammability thresholds across identical flight hardware. Pressure was not reported in Table 5.1.",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.0,
+      "documentation_source": "NASA/TM-20210011385 Table 5.1, Page 57 (PDF Page 65), Row 1 (Test M1, 1 mm thick flat PMMA, 22.2% initial O2, 9.0 cm/s velocity; pressure not reported in Table 5.1)"
+    },
+    {
+      "run_id": "RUN-02",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.2,
+      "airflow_speed_cm_s": 9.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Nominal planned lunar exploration habitat design point (NTRS-20210022143: 34% O2, 8.2 psi) matching anchor convective flow speed (9.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.118,
+      "documentation_source": "Planned lunar habitat baseline (NTRS-20210022143)"
+    },
+    {
+      "run_id": "RUN-03",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 32.0,
+      "pressure_psi": 7.8,
+      "airflow_speed_cm_s": 2.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Lower envelope bound for O2 and pressure at minimum documented Table 5.1 flow velocity (2.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.1524,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-04",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 32.0,
+      "pressure_psi": 8.6,
+      "airflow_speed_cm_s": 21.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Lower O2 with upper cabin pressure bound at maximum documented Table 5.1 flow velocity (21.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.2227,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-05",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 36.0,
+      "pressure_psi": 7.8,
+      "airflow_speed_cm_s": 21.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Elevated O2 limit (36%) at reduced pressure and maximum flow velocity (21.0 cm/s) to test forced convective spread vs blow-off.",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.243,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-06",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 36.0,
+      "pressure_psi": 8.6,
+      "airflow_speed_cm_s": 2.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Worst-case flammability bound: high O2 (36%), high pressure (8.6 psi) at minimum convective velocity (2.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.1807,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-07",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.2,
+      "airflow_speed_cm_s": 2.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Nominal lunar atmosphere (34% O2, 8.2 psi) at minimum Table 5.1 flow boundary (2.0 cm/s) to document near-quiescent limit.",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.1659,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-08",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.2,
+      "airflow_speed_cm_s": 21.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Nominal lunar atmosphere (34% O2, 8.2 psi) at maximum Table 5.1 flow boundary (21.0 cm/s) to document forced convection limit.",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.2322,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-09",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 33.0,
+      "pressure_psi": 8.0,
+      "airflow_speed_cm_s": 5.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Interior intermediate condition documenting pressure sensitivity around 8.0 psi with moderate flow (5.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.1269,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-10",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 35.0,
+      "pressure_psi": 8.4,
+      "airflow_speed_cm_s": 15.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Interior intermediate condition documenting enriched oxygen sensitivity around 35% O2 with high flow (15.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.1624,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-11",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 34.0,
+      "pressure_psi": 7.8,
+      "airflow_speed_cm_s": 9.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Pressure excursion minimum (7.8 psi) at nominal 34% O2 matching anchor flow speed (9.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.118,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    },
+    {
+      "run_id": "RUN-12",
+      "is_anchor": false,
+      "material": "flat PMMA",
+      "sample_geometry": "slab (1.0 mm thick x 2.2 cm width, 1 side burning, Table 5.1)",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.6,
+      "airflow_speed_cm_s": 9.0,
+      "target_gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "why_chosen": "Pressure excursion maximum (8.6 psi) at nominal 34% O2 matching anchor flow speed (9.0 cm/s).",
+      "nearest_investigation": "BASS-II (PSI-25)",
+      "gap_distance_normalized": 0.118,
+      "documentation_source": "NTRS-20210022143 lunar envelope candidate test design"
+    }
+  ]
+}

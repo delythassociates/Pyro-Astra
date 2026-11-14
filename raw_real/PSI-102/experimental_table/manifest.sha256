@@ -1,0 +1,9 @@
+# PSI-102 Experimental Table Manifest
+268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af  PSI-102_Experimental table_SAME.csv
+row_count: 8
+columns:
+  - Sample #
+  - Sample Material
+  - Air Flow (cm/s)
+  - Weight loss rate (mg/min)
+  - Aging Duration (minutes)

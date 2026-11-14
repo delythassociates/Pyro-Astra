@@ -1,0 +1,124 @@
+db4f5fcc2416fd2150e58c2d73d761090106271a640ecd189297eb7c3cf2951f  raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv
+row_count: 129
+columns: PI, Test #, Date, GMT, Sample #, Fuel Sample Material, Flow restrictor, Fan display, Air display, Radiometer gain   (1000   250   50   10), Total Frames Shot, Calibrated  initial O2 % by vol, Calibrated final O2 % by vol, Initial CO2 % by vol, Final CO2 % by vol, Initial CO (ppm), Final CO (ppm)
+
+cc57ad1bd9977aa13e7ac6c3aa618303012686e232b36c052c6a9f1a74e5f528  raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv
+row_count: 8
+columns: Sample (Fuel Type), Initial Droplet Diameter (mm), Ambient Gas Mixture, Oxygen Mole Fraction, Ambient Pressure (atm), Ambient Temperature (C), Flow Velocity (cm/s)
+
+37c88ce8ae9391b7544ff630a45ce87543d04d317cdbfbed104fe7d5c27e1b96  raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv
+row_count: 274
+columns: FLEX Test #, FLEX Identifier, Test Date, Test GMT, Fuel, Ambient pressure; mmHg, O initial ambient composition; mole fraction, N initial ambient composition; mole fraction, CO initial ambient composition; mole fraction, He initial ambient composition; mole fraction, Droplet initial diameter; mm, Visible flame extinction diameter; mm, Burning rate; mm, Burn time; s, Test end
+
+3c24390b9ef86f3d1ebaab911a1a3cc95a8759aebf42062371370e6d4b31b8ac  raw_real/PSI-99/experimental_table/PSI-99_Experimental table_SAFFIRE-2.csv
+row_count: 15
+columns: Sample Number, Material, Samle Thickness, Sample Length, Sample Width (cm), Air Flow (cm/s), Percent O2 (Note 1), Ignition Power (W), Ignition Time (s), Burn Time (s), Flow Direction, ?-g Burn Length, ?-g Spread Length, 1-g Burn Length, 1-g Spread Rate, Camera 1, Camera 2
+
+d95a621c3fbd27d204dd32ed29fa17d68f2b779d6a523cde8479ed7ebaa5251a  raw_real/PSI-159/experimental_table/PSI-159_Experimental table_CFI-G_Normal Flames (1).csv
+row_count: 179
+columns: Flame Type, Day, Fuel, Test, Cool flame?, XO2 before test, XO2  after test, approx p (bar), Xf, mHC (mg/s), TFP, Tad (K), Zst, Hot ignition, burn time (sec), Self-ext or flow term, Peak burner T (C ), Comments
+
+d95a621c3fbd27d204dd32ed29fa17d68f2b779d6a523cde8479ed7ebaa5251a  raw_real/PSI-159/experimental_table/PSI-159_Experimental table_CFI-G_Normal Flames (2).csv
+row_count: 179
+columns: Flame Type, Day, Fuel, Test, Cool flame?, XO2 before test, XO2  after test, approx p (bar), Xf, mHC (mg/s), TFP, Tad (K), Zst, Hot ignition, burn time (sec), Self-ext or flow term, Peak burner T (C ), Comments
+
+ccfc3c54d948b64a1c5d2596a63c7c8019e51df0c91a1d62f039f48fa28c300f  raw_real/PSI-26/experimental_table/PSI-26_Experimental table_BASS.csv
+row_count: 122
+columns: Date, GMT, As Run Test #, Test #, Sample #, Fuel Sample Material
+
+87164b7dc9168a4273c159f7a9f23699afbd06ad97b77974377e79b9bf8a3bef  raw_real/PSI-101/experimental_table/PSI-101_Experimental table_SAME-R.csv
+row_count: 109
+columns: Sample Type, SAME Test #, Description, Date, Inlet velocity (cm/s), Rt/R0, Duration (sec), Primary aging time (sec), Primary mixing time (sec), Net aging time (sec)
+
+268d1e121d2f211b124407dd32b9475617bd269ede2c2d1749441da3e949a2af  raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv
+row_count: 8
+columns: Sample #, Sample Material, Air Flow (cm/s), Weight loss rate (mg/min), Aging Duration (minutes)
+
+c01f29c62455f0a3b512290ab85e5687ecded326733189f002f580368402308d  raw_real/PSI-98/experimental_table/PSI-98_Experimental table_SAFFIRE-1.csv
+row_count: 4
+columns: Sample Number, Material, Sample Thickness (cm), Sample Length (cm), Sample Width (cm), Air Flow (cm/s), Percent O2, Ignition Power (W), Ignition Time (s), Burn Time (s), Flow Direction, Camera 1, Camera 2
+
+4d3c717ec20dd0247db670b2784a9fd7d746788bc54a936f80693e48eb8cd117  raw_real/PSI-100/experimental_table/PSI-100_Experimental table_SAFFIRE-3.csv
+row_count: 2
+columns: Sample Number, Material, Sample Thickness, Sample Length, Sample Width, Air Flow, Direction, Camera 1, Camera 2
+
+fb898e28762353aa132c16b886dbd207a024b1dd3c9bed5928d70d8036d2ec7e  raw_real/PSI-39/experimental_table/PSI-39_Experimental table_CFI.csv
+row_count: 87
+columns: Flex Number, Test Date, Local Time, CIR, Pressure, Oxygen, Nitrogen, Helium, Fiber, Fuel
+
+4a663292bd3f65201943cc71bd661a70383639276a9176f64105b285bf0b6deb  raw_real/PSI-10/experimental_table/PSI-10_Experimental table_Flame Design_Normal Flame (1).csv
+row_count: 207
+columns: Flame Type, Day, Fuel, Test, Xfuel, mfuel (mg/s), mN2 (mg/s), mtot (mg/s), XO2 (init), XO2 (final), pinit (atm), pfinal (atm), pmean (atm), mean Zst, Tad (K)
+
+97933ee9ae0b9ebc6b948a67485a0fe2f8218f753253a4f2be93c40d374c44e4  raw_real/PSI-10/experimental_table/PSI-10_Experimental table_Flame Design_Inverse Flame.csv
+row_count: 120
+columns: Flame Type, Day, Test, XO2, mO2 (mg/s), mN2 (mg/s), mtot (mg/s), XC2H4 initial, XC2H4 final, pinit (atm), pfinal (atm), pmean (atm), mean Zst, Tad (K)
+
+69090c357b83ae38d161d29001d1d32b40fd77b13324ca6585ee990cdceef524  raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv
+row_count: 32
+columns: Test Type, Test Day, Year, Month, Date, Mesh Polarity, Fuel Bottle, Fuel Conc, Flames Ignited, Notes
+
+16cd10f50bd2e962887c8eb4077e5a9b3e790c78de8e0361c0b77e19300be7cf  raw_real/PSI-23/experimental_table/PSI-23_Experimental table_ACME s-Flame.csv
+row_count: 18
+columns: Test Type, Test Day*, Year, Month, Date, Atmosphere*, Fuel Bottle, Flames Ignited*, Notes
+
+4aa5d3f98708ceacced5c620d46858b9965f8d4d941b203229f46467d53e5ab7  raw_real/PSI-20/experimental_table/PSI-20_Experimental table_ACME BRE.csv
+row_count: 18
+columns: Year, Month, Date, Burner Size (mm), Fuel Bottle, Oxygen Conc (percent), Flames Ignited, Notes
+
+fb0d7e60cf5367afb429089e9901d27288f78038efd26c8de1db4fbe04117136  raw_real/PSI-107/experimental_table/PSI-107_Experimental table_Spice.csv
+row_count: 469
+columns: GMT date, GMT ignition, GMT  Flame Off, Fuel, Nozzle (mm), Fuel Rate (sccm), Fuel Rate (mg/s), HC Fuel Rate (mg/s), Air Rate (cm/s)
+
+89ef980810ca6d9aa8be817b42e36cd2adff23f5e9058361b5a33d18b4363f4d  raw_real/PSI-106/experimental_table/PSI-106_Experimental table_Slice.csv
+row_count: 12
+columns: Test Date, Fuel Type
+
+d9d1a436c6e7bbc410b433e04575fe7dedaff763b5237d688089929b7393b5c0  raw_real/PSI-47/experimental_table/PSI-47_Experimental table_DAFT.csv
+row_count: 2
+columns: Session Name, Actual Day, Hardware Description, Sample Material, Sampled Location
+
+c66d135b0053590d239f06b9e8627d826e3d726b8443fd2cbccc37484b6a8e7f  raw_real/PSI-142/experimental_table/PSI-142_Experimental table_Data Summary Table.csv
+row_count: 8
+columns: ﻿Data ID, Data Description, Reference Publication Link, Figure ID in Reference
+
+81e6b16c355bc64a226cf638f51156758c6a259ed10bc372c1612a0984cc7bc9  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_MST_2024_Burning_history_Flame_diameter.csv
+row_count: 683
+columns: ﻿, t, d^2 (mm^2), , t, dflame (mm), , time, Q (W), time, Q (W), , Model, t, d^2 (mm^2), dflame (mm), , Model, t, Q (W)
+
+2ed485fec6fad15c1409cd9b5c558ecf7bee262df29c832e9a54f3befc9c2e46  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_MST_2024_Dext.csv
+row_count: 9
+columns: ﻿Model, Pressure, Dext_cool, Dext_hot, , Expt, Pressure, Dext_cool_Expt
+
+a89e0639567f05f19a6d0dffa9b2f659048358dee1c603b6c65bfcebd1101796  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_MST_2024_Kavg.csv
+row_count: 19
+columns: Experiment, Pressure, Kavg_CF, , Model, Pressure, kb (mm2/s)
+
+277998f5c80c08907f2c05e362e7a13a507ce4ebc967418ca883db2811a84d0d  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_MST_2024_Radiance_Flame_Diameter.csv
+row_count: 683
+columns: ﻿, time, Radiance (W), time, df (mm), , , , time, Radiance (W), time, df (mm), , , Simulation, , time (s), Q(W), , Simulation, time (s), Q (W), , , Simulation, Time(sec), Dflame (mm), , Simulation, Time(sec), Dflame (mm), , , Simulation, Time(sec), T_max(K), , Simulation, Time(sec), T_max(K)
+
+5d329362ea8b6ff78cded953b289b95c83c45956ae36d136bfd33750a80a5a11  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_PROCI_2019_Oscillatory_Cool_Flame.csv
+row_count: 640
+columns: ﻿Time(sec), Diameter(mm), K(mm^2/sec), T_max(K), D_Tmax/D_drop, D_OHm/D_drop, (D/Do)2
+
+c0713c4ad79d1d20832d5ab9582d1bef6d184cff1a86bc3565d059f44998ed6f  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_PROCI_2019_Stable_Cool.csv
+row_count: 243
+columns: ﻿Time(sec), Diameter(mm), K(mm^2/sec), T_max(K), D_Tmax/D_drop, D_OHm/D_drop, (D/Do)2
+
+2b3c8edcfbba8916da95d1e13200310b5a30fa2e62dc8d77145a6ac3c206deb3  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_PROCI_2023_Alkane_Extinction_Diameter_1atm.csv
+row_count: 6
+columns: ﻿C7, Do, Dext_HF, Dext_CF, , C7, Do, Dext_HF, Dext_CF, , C10, Do, Dext_HF, Dext_CF, , C10, Do, Dext_HF, Dext_CF, , C12, Do, Dext_HF, Dext_CF, , C12, Do, Dext_HF, Dext_CF
+
+4ab6f8c19f40a3349096eab8bdceb0a62611020af15e63f816922b149cfa7001  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_PROCI_2023_C12_Extinction_Diameter_vs_pressure.csv
+row_count: 6
+columns: ﻿P (atm), Dext_HF_EXPT, , P (atm), Dext_HF_model, , P (atm), Dext_CF_EXPT, , P (atm), Dext_CF_Model, , P (atm), Dext_CF_ErrorBar+, , P (atm), Dext_CF_ErrorBar-
+
+0e7c8c7e9ea35bd139ba52c9f2118724b8cc9f251d82b9222adf03cb67317809  raw_real/PSI-117/analyzed_csv/PSI-117_Analyzed Data_PROCI_C12_2019_Three_Stage.csv
+row_count: 571
+columns: ﻿, t/(Do)2 (s/mm2), (D/Do)2, , , t/(Do)2 (s/mm2), Dflame/Dodrop, , t/(Do)2 (s/mm2), Dflame (mm), , Flame Radiance I, t/(Do)2, Flame Radiance (W), , Flame Radiance II, t/(Do)2, Flame Radiance (W), , , t/(Do)2, Cool Flame Dia (HWFM), , t/(Do)2, Cool Flame Dia (peak-peak), , , Simulations, t (s), D (mm), K(mm^2/sec), T_max(K), D_Tmax/D_drop, D_OHm/D_drop, , t/do^2 (s/mm2), (d/do)^2, Dflame(mm), , t/do2(s/mm2), Radiance (W), , , 
+
+c51022d75ca50928673dd2864ec39d9cce9feeaad006bd574e406a276a77ff7d  raw_real/PSI-60/PSI-60_metadata_NEWID-5_Computational and Ex.zip
+
+a3e2c30f0e6f379599638534571de281f504abbc407c3058f86a411df5008550  raw_real/PSI-106/PSI-106_metadata_PSI-174_SLICE.zip
+

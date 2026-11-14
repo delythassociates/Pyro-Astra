@@ -1,0 +1,108 @@
+[
+  {
+    "id": "demo-1",
+    "query": "What solid materials were tested in the BASS-II investigation?",
+    "sentences": [
+      {
+        "text": "The Burning and Suppression of Solids - II investigation tested solid fuels in the Microgravity Science Glovebox flow duct.",
+        "evidence": [
+          "PSI-25.hardware",
+          "PSI-25.objectives"
+        ]
+      },
+      {
+        "text": "The series comprises 20 flat-PMMA tests reported in Table 5.1 of NASA/TM-20210011385.",
+        "evidence": [
+          "PSI-25.n_tests"
+        ]
+      },
+      {
+        "text": "Tests were conducted at initial cabin oxygen levels between 16.8% and 22.2% with airflow speeds from 2.0 cm/s to 21.0 cm/s.",
+        "evidence": [
+          "PSI-25.cabin_o2_pct",
+          "PSI-25.airflow_speed_cm_s"
+        ]
+      }
+    ],
+    "refusal": null
+  },
+  {
+    "id": "demo-2",
+    "query": "What are the test conditions for the SAME smoke detection experiment?",
+    "sentences": [
+      {
+        "text": "The Smoke Aerosol Measurement Experiment operated in the Microgravity Science Glovebox to evaluate particulate fire signatures.",
+        "evidence": [
+          "PSI-102.hardware",
+          "PSI-102.objectives"
+        ]
+      },
+      {
+        "text": "Specific atmospheric oxygen, pressure, and airflow velocity parameters were not reported in the public investigation metadata.",
+        "evidence": [
+          "PSI-102.objectives",
+          "PSI-102.hardware"
+        ]
+      }
+    ],
+    "refusal": null
+  },
+  {
+    "id": "demo-3",
+    "query": "Can Ask ASTRA predict material flammability in lunar partial gravity (0.16g)?",
+    "sentences": [],
+    "refusal": "Refusal: PSI contains no partial-gravity combustion data. Lunar (0.16g) and Martian (0.38g) gravity predictions are refused per safety rules. You may inspect microgravity (0g) and normal gravity (1g) companion tests as physical bounds."
+  },
+  {
+    "id": "demo-4",
+    "query": "What suppressants and pressure ranges were evaluated in the FLEX droplet experiment?",
+    "sentences": [
+      {
+        "text": "The Flame Extinction Experiment tested droplet extinction for liquid fuels in the Combustion Integrated Rack.",
+        "evidence": [
+          "PSI-69.objectives",
+          "PSI-69.hardware"
+        ]
+      },
+      {
+        "text": "Chamber pressures ranged from 7.35 psi to 22.04 psi (0.5 to 1.5 atm) during droplet combustion tests.",
+        "evidence": [
+          "PSI-69.pressure_psi"
+        ]
+      }
+    ],
+    "refusal": null
+  },
+  {
+    "id": "demo-5",
+    "query": "Can you provide combustion simulations for rocket engines and propellants?",
+    "sentences": [],
+    "refusal": "Refusal: Rocket propulsion, propellants, and thruster combustion are outside the scope of PYRO-ASTRA. Ask ASTRA only interprets spacecraft cabin fire safety data from NASA PSI."
+  },
+  {
+    "id": "demo-6",
+    "query": "What oxygen concentrations and flow speeds were tested in SAFFIRE-II?",
+    "sentences": [
+      {
+        "text": "Spacecraft Fire Safety Experiment - II evaluated flammability of materials inside the Cygnus vehicle flow duct.",
+        "evidence": [
+          "PSI-99.objectives",
+          "PSI-99.hardware"
+        ]
+      },
+      {
+        "text": "Specific cabin oxygen percentages and chamber pressures were not reported in the public metadata record.",
+        "evidence": [
+          "PSI-99.objectives"
+        ]
+      },
+      {
+        "text": "Microgravity flight tests and normal gravity ground tests serve as bounding regimes.",
+        "evidence": [
+          "PSI-99.gravity_regimes"
+        ]
+      }
+    ],
+    "refusal": null
+  }
+]

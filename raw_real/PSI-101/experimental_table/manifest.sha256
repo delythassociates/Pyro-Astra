@@ -1,0 +1,14 @@
+# PSI-101 Experimental Table Manifest
+87164b7dc9168a4273c159f7a9f23699afbd06ad97b77974377e79b9bf8a3bef  PSI-101_Experimental table_SAME-R.csv
+row_count: 109
+columns:
+  - Sample Type
+  - SAME Test #
+  - Description
+  - Date
+  - Inlet velocity (cm/s)
+  - Rt/R0
+  - Duration (sec)
+  - Primary aging time (sec)
+  - Primary mixing time (sec)
+  - Net aging time (sec)

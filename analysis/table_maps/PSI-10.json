@@ -1,0 +1,116 @@
+{
+  "psi_id": "PSI-10",
+  "investigation_title": "Flame Design",
+  "source_file": "raw_real/PSI-10/experimental_table/PSI-10_Experimental table_Flame Design_Normal Flame (1).csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Flame Type": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Flame geometry category",
+      "unit": null,
+      "reason": "Qualitative flame category ('Normal', 'Inverse'); no physical measurement unit"
+    },
+    "Day": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test day",
+      "unit": null,
+      "reason": "Day sequence number without physical measurement unit"
+    },
+    "Fuel": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel gas substance"
+    },
+    "Test": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies individual test run"
+    },
+    "Xfuel": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Fuel mole fraction",
+      "unit": null,
+      "reason": "Header lacks explicit unit specification in column title"
+    },
+    "mfuel (mg/s)": {
+      "mapped": true,
+      "canonical_field": "fuel_mass_flow_mg_s",
+      "quantity": "Fuel mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names fuel mass flow rate and mg/s unit"
+    },
+    "mN2 (mg/s)": {
+      "mapped": true,
+      "canonical_field": "nitrogen_mass_flow_mg_s",
+      "quantity": "Nitrogen mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names nitrogen mass flow rate and mg/s unit"
+    },
+    "mtot (mg/s)": {
+      "mapped": true,
+      "canonical_field": "total_mass_flow_mg_s",
+      "quantity": "Total reactant mass flow rate",
+      "unit": "mg/s",
+      "reason": "Unambiguously names total reactant mass flow rate and mg/s unit"
+    },
+    "XO2 (init)": {
+      "mapped": true,
+      "canonical_field": "o2_initial_mole_fraction",
+      "quantity": "Initial oxygen mole fraction",
+      "unit": "mole fraction",
+      "reason": "Names initial oxygen mole fraction (standard notation X denotes mole fraction)"
+    },
+    "XO2 (final)": {
+      "mapped": true,
+      "canonical_field": "o2_final_mole_fraction",
+      "quantity": "Final oxygen mole fraction",
+      "unit": "mole fraction",
+      "reason": "Names final oxygen mole fraction (standard notation X denotes mole fraction)"
+    },
+    "pinit (atm)": {
+      "mapped": true,
+      "canonical_field": "pressure_initial_atm",
+      "quantity": "Initial chamber pressure",
+      "unit": "atm",
+      "reason": "Unambiguously names initial pressure and atmosphere unit"
+    },
+    "pfinal (atm)": {
+      "mapped": true,
+      "canonical_field": "pressure_final_atm",
+      "quantity": "Final chamber pressure",
+      "unit": "atm",
+      "reason": "Unambiguously names final pressure and atmosphere unit"
+    },
+    "pmean (atm)": {
+      "mapped": true,
+      "canonical_field": "pressure_atm",
+      "quantity": "Mean chamber pressure",
+      "unit": "atm",
+      "reason": "Unambiguously names mean chamber pressure and atmosphere unit (convertible to psi via 1 atm = 14.6959 psi)"
+    },
+    "mean Zst": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Stoichiometric mixture fraction",
+      "unit": null,
+      "reason": "Dimensionless stoichiometric mixture fraction; lacks unit specification in header"
+    },
+    "Tad (K)": {
+      "mapped": true,
+      "canonical_field": "adiabatic_temperature_k",
+      "quantity": "Adiabatic flame temperature",
+      "unit": "K",
+      "reason": "Unambiguously names adiabatic flame temperature and Kelvin unit"
+    }
+  },
+  "material_map": {
+    "C2H4": "Ethylene"
+  }
+}

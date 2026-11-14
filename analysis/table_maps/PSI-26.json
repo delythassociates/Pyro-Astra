@@ -1,0 +1,88 @@
+{
+  "psi_id": "PSI-26",
+  "investigation_title": "BASS",
+  "source_file": "raw_real/PSI-26/experimental_table/PSI-26_Experimental table_BASS.csv",
+  "encoding": "utf-8-sig",
+  "gravity_regime": "microgravity",
+  "note": "Authentic NASA PSI BASS experimental table. Flow speeds and chamber pressures are not reported in this flight log table (metadata prose states airflow up to 40 cm/s).",
+  "column_mappings": {
+    "Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar date",
+      "unit": null,
+      "reason": "Date string without physical measurement unit"
+    },
+    "GMT": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "GMT timestamp",
+      "unit": null,
+      "reason": "Day of year / time string without physical measurement unit"
+    },
+    "As Run Test #": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "As run test counter",
+      "unit": null,
+      "reason": "Sequential execution counter; canonical test_id mapped from 'Test #'"
+    },
+    "Test #": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies test run"
+    },
+    "Sample #": {
+      "mapped": true,
+      "canonical_field": "sample_no",
+      "quantity": "Sample identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies sample number"
+    },
+    "Fuel Sample Material": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel sample material",
+      "unit": null,
+      "reason": "Unambiguously names fuel sample material"
+    }
+  },
+  "material_map": {
+    "1 cm sphere": "unmapped",
+    "1 cm sphere   wake": "unmapped",
+    "1 cm wake sphere": "unmapped",
+    "2 cm sphere": "unmapped",
+    "2 cm sphere   wake ign": "unmapped",
+    "2 cm pmma sphere": "PMMA sphere",
+    "PMMA sphere 1 cm": "PMMA sphere",
+    "PMMA sphere 2 cm": "PMMA sphere",
+    "pmma sphere": "PMMA sphere",
+    "PMMA 1 cm": "PMMA slab",
+    "PMMA 2 cm": "PMMA slab",
+    "PMMA slab": "PMMA slab",
+    "pmma 1 cm": "PMMA slab",
+    "pmma 2 cm": "PMMA slab",
+    "pmma slab": "PMMA slab",
+    "pmma slab   oppsed": "PMMA slab",
+    "pmma slab opposed": "PMMA slab",
+    "SIBAL 1 cm": "SIBAL",
+    "SIBAL 2 cm": "SIBAL",
+    "SIBAL 2 cm   opposed flow": "SIBAL",
+    "candle": "candle",
+    "candle    paraffin   wake": "candle",
+    "candle   Japan wax": "candle",
+    "Japan Wax Candle   wake": "candle",
+    "flat wax slab": "candle",
+    "paraffin wax candle": "candle",
+    "paraffin wax slab": "candle",
+    "parrafin wax candle": "candle",
+    "parrafin wax slab": "candle",
+    "Nomex III Natural": "Nomex III",
+    "nomex natural III": "Nomex III",
+    "Nomex blend 2 cm": "Nomex blend",
+    "ultem sheet": "Ultem",
+    "SOOT Cleaning": "unmapped"
+  }
+}

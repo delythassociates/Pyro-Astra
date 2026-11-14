@@ -1,0 +1,68 @@
+{
+  "psi_id": "PSI-20",
+  "investigation_title": "ACME BRE",
+  "source_file": "raw_real/PSI-20/experimental_table/PSI-20_Experimental table_ACME BRE.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Year": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar year",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Month": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar month",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar day",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Burner Size (mm)": {
+      "mapped": true,
+      "canonical_field": "burner_diameter_mm",
+      "quantity": "Burner diameter",
+      "unit": "mm",
+      "reason": "Unambiguously names burner size and millimeter unit"
+    },
+    "Fuel Bottle": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel bottle identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel bottle mixture"
+    },
+    "Oxygen Conc (percent)": {
+      "mapped": true,
+      "canonical_field": "o2_initial_pct",
+      "quantity": "Oxygen concentration",
+      "unit": "percent",
+      "reason": "Unambiguously names oxygen concentration and percent unit"
+    },
+    "Flames Ignited": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Ignited flame count",
+      "unit": null,
+      "reason": "Integer count of test ignitions without physical measurement unit"
+    },
+    "Notes": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Operator notes",
+      "unit": null,
+      "reason": "Free-text documentation notes without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "100% C2H4": "Ethylene",
+    "50% C2H4": "Ethylene mixture"
+  }
+}

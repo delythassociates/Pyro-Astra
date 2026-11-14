@@ -1,0 +1,76 @@
+{
+  "psi_id": "PSI-23",
+  "investigation_title": "ACME s-Flame",
+  "source_file": "raw_real/PSI-23/experimental_table/PSI-23_Experimental table_ACME s-Flame.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Test Type": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test type description",
+      "unit": null,
+      "reason": "Qualitative test configuration description without physical measurement unit"
+    },
+    "Test Day*": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test day identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies test run day (YYDDD format)"
+    },
+    "Year": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar year",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Month": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar month",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar day",
+      "unit": null,
+      "reason": "Date field without physical measurement unit"
+    },
+    "Atmosphere*": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Atmosphere description",
+      "unit": null,
+      "reason": "Qualitative atmosphere description ('~21% O2 with N2'); no physical measurement unit in header"
+    },
+    "Fuel Bottle": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel bottle mixture"
+    },
+    "Flames Ignited*": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Ignited flame count",
+      "unit": null,
+      "reason": "Integer count of test ignitions without physical measurement unit"
+    },
+    "Notes": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Operator notes",
+      "unit": null,
+      "reason": "Free-text documentation notes without physical measurement unit"
+    }
+  },
+  "material_map": {
+    "50% C2H4 with N2": "Ethylene mixture",
+    "50% C2H4 with N3": "Ethylene mixture",
+    "45% CH4 with N2": "Methane mixture"
+  }
+}

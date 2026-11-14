@@ -1,0 +1,82 @@
+{
+  "psi_id": "PSI-39",
+  "investigation_title": "CFI",
+  "source_file": "raw_real/PSI-39/experimental_table/PSI-39_Experimental table_CFI.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Flex Number": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies individual test run"
+    },
+    "Test Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar date",
+      "unit": null,
+      "reason": "Calendar date string without physical measurement unit"
+    },
+    "Local Time": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Time stamp",
+      "unit": null,
+      "reason": "Time string without physical measurement unit"
+    },
+    "CIR": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Chamber run code",
+      "unit": null,
+      "reason": "Instrument run identifier code without physical measurement unit"
+    },
+    "Pressure": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Chamber pressure",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title (cells contain string '1 atm')"
+    },
+    "Oxygen": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Oxygen mole fraction",
+      "unit": null,
+      "reason": "Header lacks unit specification in column title (dimensionless mole fraction implied by cell values '0.21')"
+    },
+    "Nitrogen": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Nitrogen mole fraction",
+      "unit": null,
+      "reason": "Secondary inert gas component; lacks unit specification in header"
+    },
+    "Helium": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Helium mole fraction",
+      "unit": null,
+      "reason": "Secondary inert gas component; lacks unit specification in header"
+    },
+    "Fiber": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Tether fiber presence",
+      "unit": null,
+      "reason": "Binary observation flag ('Yes', 'No'); no physical measurement unit"
+    },
+    "Fuel": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel substance"
+    }
+  },
+  "material_map": {
+    "C12H26": "n-Dodecane",
+    "C7H16": "n-Heptane"
+  }
+}

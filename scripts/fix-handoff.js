@@ -1,0 +1,12 @@
+const fs = require('fs');
+const file = 'C:/Users/Nevan/.gemini/antigravity/brain/19fc75ae-315e-4146-8ef2-d4d88976c01c/scratch/.agents/teamwork/reviewer_m1_r2_1/handoff.md';
+let content = fs.readFileSync(file, 'utf-8');
+content = content.replace('teamwork_reviewer (eviewer_m1_r2_1)', 'teamwork_reviewer (`reviewer_m1_r2_1`)');
+content = content.replace('30-Probe Evaluation Suite (`npx tsx scripts/run-ask-eval.ts)', '30-Probe Evaluation Suite (`npx tsx scripts/run-ask-eval.ts`)');
+content = content.replace(/- Command: `npx tsx scripts\/run-ask-eval\.ts\r?\n/, '- Command: `npx tsx scripts/run-ask-eval.ts`\n');
+content = content.replace('-  burner_vs_cabin_o2: 2/2 passed', '- burner_vs_cabin_o2: 2/2 passed');
+content = content.replace('-  erifier_catches: 2/2 passed', '- verifier_catches: 2/2 passed');
+content = content.replace(/3\. \*\*Production Build \(\r?\npm run build\)\*\*:/, '3. **Production Build (`npm run build`)**:');
+content = content.replace(/- Command: \r?\npm run build/, '- Command: `npm run build`');
+fs.writeFileSync(file, content, 'utf-8');
+console.log('Fixed cleanly via script');

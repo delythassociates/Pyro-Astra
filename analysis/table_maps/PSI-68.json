@@ -1,0 +1,67 @@
+{
+  "psi_id": "PSI-68",
+  "investigation_title": "FLEX-2",
+  "source_file": "raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Sample (Fuel Type)": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Fuel identity",
+      "unit": null,
+      "reason": "Unambiguously names fuel sample substance"
+    },
+    "Initial Droplet Diameter (mm)": {
+      "mapped": true,
+      "canonical_field": "droplet_diameter_initial_mm",
+      "quantity": "Initial droplet diameter",
+      "unit": "mm",
+      "reason": "Unambiguously names initial droplet diameter and millimeter unit"
+    },
+    "Ambient Gas Mixture ": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Ambient gas mixture",
+      "unit": null,
+      "reason": "Qualitative gas mixture descriptor (e.g. 'O2/N2 or O2/He') without physical measurement unit"
+    },
+    "Oxygen Mole Fraction": {
+      "mapped": true,
+      "canonical_field": "o2_initial_mole_fraction",
+      "quantity": "Oxygen initial concentration",
+      "unit": "mole fraction",
+      "reason": "Unambiguously names oxygen quantity and mole fraction unit"
+    },
+    "Ambient Pressure (atm)": {
+      "mapped": true,
+      "canonical_field": "pressure_atm",
+      "quantity": "Ambient pressure",
+      "unit": "atm",
+      "reason": "Unambiguously names ambient pressure and atmosphere unit (convertible to psi via 1 atm = 14.6959 psi)"
+    },
+    " Ambient Temperature (C)": {
+      "mapped": true,
+      "canonical_field": "temperature_c",
+      "quantity": "Ambient temperature",
+      "unit": "C",
+      "reason": "Unambiguously names temperature and Celsius unit"
+    },
+    "Flow Velocity (cm/s)": {
+      "mapped": true,
+      "canonical_field": "airflow_speed_cm_s",
+      "quantity": "Flow velocity",
+      "unit": "cm/s",
+      "reason": "Unambiguously names flow velocity and cm/s unit"
+    }
+  },
+  "material_map": {
+    "IsoOctane (pure)": "IsoOctane",
+    "n-Octane (pure)": "n-Octane",
+    "Heptane (pure)": "Heptane",
+    "Decane (pure)": "Decane",
+    "Ethanol (pure)": "Ethanol",
+    "Propanol (95%) Glycerol (5%) (mixture)": "Propanol/Glycerol mixture",
+    "Heptane (50%) IsoOctane (50%) (mixture)": "Heptane/IsoOctane mixture",
+    "Propanol (80%) Glycerol (20%) (mixture)": "Propanol/Glycerol mixture"
+  }
+}

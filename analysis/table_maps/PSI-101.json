@@ -1,0 +1,85 @@
+{
+  "psi_id": "PSI-101",
+  "investigation_title": "SAME-R",
+  "source_file": "raw_real/PSI-101/experimental_table/PSI-101_Experimental table_SAME-R.csv",
+  "gravity_regime": "microgravity",
+  "column_mappings": {
+    "Sample Type": {
+      "mapped": true,
+      "canonical_field": "fuel",
+      "quantity": "Sample material type",
+      "unit": null,
+      "reason": "Unambiguously names sample material type"
+    },
+    "SAME Test #": {
+      "mapped": true,
+      "canonical_field": "test_id",
+      "quantity": "Test identifier",
+      "unit": null,
+      "reason": "Unambiguously identifies individual test run"
+    },
+    "Description": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Test description",
+      "unit": null,
+      "reason": "Qualitative test description string ('B.L. new formula', 'Baseline Aging'); no physical measurement unit"
+    },
+    "Date": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Calendar date",
+      "unit": null,
+      "reason": "Calendar date string without physical measurement unit"
+    },
+    "Inlet velocity (cm/s)": {
+      "mapped": true,
+      "canonical_field": "airflow_speed_cm_s",
+      "quantity": "Inlet flow velocity",
+      "unit": "cm/s",
+      "reason": "Unambiguously names flow velocity and cm/s unit"
+    },
+    "Rt/R0": {
+      "mapped": false,
+      "canonical_field": null,
+      "quantity": "Sensor resistance ratio",
+      "unit": null,
+      "reason": "Sensor resistance ratio; dimensionless quantity without unit specification in header"
+    },
+    "Duration (sec)": {
+      "mapped": true,
+      "canonical_field": "duration_s",
+      "quantity": "Test duration",
+      "unit": "sec",
+      "reason": "Unambiguously names duration and second unit"
+    },
+    "Primary aging time (sec)": {
+      "mapped": true,
+      "canonical_field": "primary_aging_time_s",
+      "quantity": "Primary aging time",
+      "unit": "sec",
+      "reason": "Unambiguously names aging time and second unit"
+    },
+    "Primary mixing time (sec)": {
+      "mapped": true,
+      "canonical_field": "primary_mixing_time_s",
+      "quantity": "Primary mixing time",
+      "unit": "sec",
+      "reason": "Unambiguously names mixing time and second unit"
+    },
+    "Net aging time (sec)": {
+      "mapped": true,
+      "canonical_field": "net_aging_time_s",
+      "quantity": "Net aging time",
+      "unit": "sec",
+      "reason": "Unambiguously names aging time and second unit"
+    }
+  },
+  "material_map": {
+    "Kapton": "Kapton",
+    "Lampwick": "Cotton lampwick",
+    "Pyrell": "Pyrell foam",
+    "Silicone": "Silicone",
+    "Teflon": "Teflon"
+  }
+}

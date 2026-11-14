@@ -1,0 +1,271 @@
+{
+  "label": "AI-drafted from NASA metadata; not independently reviewed",
+  "meta": {
+    "total_deep_records": 8,
+    "total_catalog_records": 10,
+    "safety_areas_covered": [
+      "prevention",
+      "detection",
+      "suppression",
+      "other"
+    ]
+  },
+  "digests": [
+    {
+      "id": "PSI-102",
+      "acronym": "SAME",
+      "name": "Smoke Aerosol Measurement Experiment",
+      "doi": "10.60555/gd4k-8h62",
+      "sentences": [
+        {
+          "text": "The Smoke Aerosol Measurement Experiment operated in the Microgravity Science Glovebox on the International Space Station.",
+          "record_ids": [
+            "PSI-102"
+          ]
+        },
+        {
+          "text": "The primary objective was quantifying smoke particle size distributions from overheated spacecraft materials in low gravity to improve smoke detector response.",
+          "record_ids": [
+            "PSI-102"
+          ]
+        },
+        {
+          "text": "Diagnostics utilized comparative soot hardware including ionization and photoelectric smoke detectors, video cameras, and thermophoretic soot samplers.",
+          "record_ids": [
+            "PSI-102"
+          ]
+        },
+        {
+          "text": "Specific cabin atmospheric conditions and exact run counts were not reported in the public investigation metadata.",
+          "record_ids": [
+            "PSI-102"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-101",
+      "acronym": "SAME-R",
+      "name": "Smoke Aerosol Measurement Experiment - Reflight",
+      "doi": "10.60555/2np7-jv14",
+      "sentences": [
+        {
+          "text": "SAME-R re-flew the smoke aerosol payload in the Microgravity Science Glovebox to evaluate smoke particulate aging and real-time detector responses.",
+          "record_ids": [
+            "PSI-101"
+          ]
+        },
+        {
+          "text": "The reflight investigation introduced Pyrell intumescent fire-retardant foam to study particulate generation under broadened heating conditions.",
+          "record_ids": [
+            "PSI-101"
+          ]
+        },
+        {
+          "text": "Diagnostics incorporated the GRC M-pass instrument alongside commercial diagnostic ionization and optical detector units.",
+          "record_ids": [
+            "PSI-101"
+          ]
+        },
+        {
+          "text": "Environmental conditions and run matrices were not reported in the public metadata record.",
+          "record_ids": [
+            "PSI-101"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-26",
+      "acronym": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "doi": "10.60555/58h4-dy80",
+      "sentences": [
+        {
+          "text": "The Burning and Suppression of Solids investigation examined solid material burning and extinction limits in the Microgravity Science Glovebox.",
+          "record_ids": [
+            "PSI-26"
+          ]
+        },
+        {
+          "text": "Fuels investigated included custom-made cotton and fiberglass fabric samples, Nomex fabric, and Ultem.",
+          "record_ids": [
+            "PSI-26"
+          ]
+        },
+        {
+          "text": "Combustion tests explored concurrent-flow and opposed-flow configurations inside a small flow duct with a variable-speed fan.",
+          "record_ids": [
+            "PSI-26"
+          ]
+        },
+        {
+          "text": "The investigation aimed to bridge the gap between terrestrial standard flammability screening and actual microgravity fire behavior.",
+          "record_ids": [
+            "PSI-26"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-25",
+      "acronym": "BASS-II",
+      "name": "Burning and Suppression of Solids - II",
+      "doi": "10.60555/4qc4-de67",
+      "sentences": [
+        {
+          "text": "BASS-II systematically evaluated flammability boundaries and burning rates across solid materials in the Microgravity Science Glovebox flow duct.",
+          "record_ids": [
+            "PSI-25"
+          ]
+        },
+        {
+          "text": "The series comprises 20 flat-PMMA tests reported in Table 5.1 of NASA/TM-20210011385.",
+          "record_ids": [
+            "PSI-25"
+          ]
+        },
+        {
+          "text": "Tests were conducted at initial cabin oxygen levels ranging from 16.8% to 22.2% by volume.",
+          "record_ids": [
+            "PSI-25"
+          ]
+        },
+        {
+          "text": "Forced flow velocities ranged from 2.0 cm/s to 21.0 cm/s in concurrent and opposed orientations.",
+          "record_ids": [
+            "PSI-25"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-99",
+      "acronym": "SAFFIRE-II",
+      "name": "Spacecraft Fire Safety Experiment - II",
+      "doi": "10.60555/2chp-m469",
+      "sentences": [
+        {
+          "text": "The Spacecraft Fire Safety Experiment - II assessed the flammability of materials inside the Cygnus vehicle flow duct after ISS unberthing.",
+          "record_ids": [
+            "PSI-99"
+          ]
+        },
+        {
+          "text": "Specimens evaluated included cotton-fiberglass SIBAL fabric, silicone, and polymethyl methacrylate acrylic sheets.",
+          "record_ids": [
+            "PSI-99"
+          ]
+        },
+        {
+          "text": "Diagnostics monitored flow and flame temperatures with thermocouples, flame radiation with radiometers, and air speed with anemometers.",
+          "record_ids": [
+            "PSI-99"
+          ]
+        },
+        {
+          "text": "Microgravity and normal-gravity companion tests serve as bounding regimes, not partial-gravity predictions.",
+          "record_ids": [
+            "PSI-99"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-69",
+      "acronym": "FLEX",
+      "name": "Flame Extinction Experiment",
+      "doi": "10.60555/mbq8-0451",
+      "sentences": [
+        {
+          "text": "The Flame Extinction Experiment measured burning rates and radiative extinction of liquid fuel droplets in the Combustion Integrated Rack.",
+          "record_ids": [
+            "PSI-69"
+          ]
+        },
+        {
+          "text": "The primary objective was mapping flammability limits and gaseous suppressant efficacy in microgravity.",
+          "record_ids": [
+            "PSI-69"
+          ]
+        },
+        {
+          "text": "Chamber pressures ranged from 7.35 psi to 22.04 psi during limiting oxygen index combustion tests.",
+          "record_ids": [
+            "PSI-69"
+          ]
+        },
+        {
+          "text": "Liquid droplet burns were conducted in quiescent microgravity conditions using the Multi-user Droplet Combustion Apparatus.",
+          "record_ids": [
+            "PSI-69"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-159",
+      "acronym": "CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "doi": "10.60555/cyt1-kh64",
+      "sentences": [
+        {
+          "text": "CFI-G studied cool diffusion flames and low-temperature combustion kinetics for gaseous fuels on the International Space Station.",
+          "record_ids": [
+            "PSI-159"
+          ]
+        },
+        {
+          "text": "Gaseous fuels investigated included propane, n-butane, and n-pentane on spherical porous burners inside the ACME chamber.",
+          "record_ids": [
+            "PSI-159"
+          ]
+        },
+        {
+          "text": "Oxygen concentrations between 21.0% and 85.0% were delivered in the burner flow (source: challenge brief), which is strictly isolated from cabin air.",
+          "record_ids": [
+            "PSI-159"
+          ]
+        },
+        {
+          "text": "Flames were observed with cameras, radiometers, photomultiplier tubes, and thermocouples under normal and inverse flow directions.",
+          "record_ids": [
+            "PSI-159"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PSI-68",
+      "acronym": "FLEX-2",
+      "name": "Flame Extinction Experiment - 2",
+      "doi": "10.60555/byp8-h018",
+      "sentences": [
+        {
+          "text": "Flame Extinguishment Experiment reflight extended droplet extinction studies to bi-component fuel mixtures and droplet arrays inside the Combustion Integrated Rack.",
+          "record_ids": [
+            "PSI-68"
+          ]
+        },
+        {
+          "text": "Objectives included investigating liquid-phase mixing, soot formation dynamics, and theoretical combustion model validation.",
+          "record_ids": [
+            "PSI-68"
+          ]
+        },
+        {
+          "text": "Experiments utilized color video and high-speed photography to monitor droplet deployment and flame extinction.",
+          "record_ids": [
+            "PSI-68"
+          ]
+        },
+        {
+          "text": "Detailed test condition matrices were not reported in the public metadata record.",
+          "record_ids": [
+            "PSI-68"
+          ]
+        }
+      ]
+    }
+  ]
+}
