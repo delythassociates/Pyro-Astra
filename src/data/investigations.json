@@ -1,0 +1,1986 @@
+[
+  {
+    "id": "PSI-102",
+    "acronym": "SAME",
+    "name": "Smoke Aerosol Measurement Experiment",
+    "doi": "10.60555/gd4k-8h62",
+    "license": "CC0-1.0",
+    "verified": true,
+    "depth": "deep",
+    "record_type": "summary",
+    "safety_areas": [
+      "detection"
+    ],
+    "gravity_regimes": [
+      "microgravity",
+      "1g"
+    ],
+    "data_origin": [
+      "flight",
+      "ground"
+    ],
+    "hardware": {
+      "value": "Microgravity Science Glovebox (MSG) Smoke Chamber",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Row 1",
+        "entered_by": "parsed",
+        "note": "ISS MSG facility apparatus"
+      }
+    },
+    "objectives": {
+      "value": "Measure smoke particle size distribution and concentration from pyrolyzing materials in microgravity to improve spacecraft fire detector design",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "SAME_report.pdf",
+        "row_or_page": "Page 3",
+        "entered_by": "parsed",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "Kapton",
+        "Teflon",
+        "Silicone",
+        "Pyrel Foam",
+        "Cotton lamp wick",
+        "Dibutyl Phthalate"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+        "row_or_page": "Material column",
+        "entered_by": "parsed",
+        "note": "Materials tested in SAME flight experiment: Kapton, Teflon, Silicone, Pyrel Foam, Cotton lamp wick, and Dibutyl Phthalate"
+      }
+    },
+    "sample_shape": {
+      "value": "wire insulation, flat strips, and cylindrical wicks",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Row 4",
+        "entered_by": "parsed",
+        "note": "Sample geometries"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 5.0,
+        "max": 10.0,
+        "discrete_values": [
+          5.0,
+          10.0
+        ]
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+        "row_or_page": "Air Flow Speed (cm/s) column",
+        "entered_by": "parsed",
+        "note": "Discrete airflow speeds {5.0, 10.0} cm/s reported for 4 Teflon sample tests; airflow cells for other materials are blank/not reported"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "fuel material",
+        "heating rate",
+        "airflow speed"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "SAME_report.pdf",
+        "row_or_page": "Page 7",
+        "entered_by": "parsed",
+        "note": "Independent experimental parameters"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "cabin pressure",
+        "cabin O2"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "SAME_report.pdf",
+        "row_or_page": "Page 8",
+        "entered_by": "parsed",
+        "note": "Controlled background conditions"
+      }
+    },
+    "sensors": {
+      "value": [
+        "Condensation Particle Counter (CPC)",
+        "Differential Mobility Spectrometer (DMS)",
+        "Transmission Cell",
+        "Thermocouples"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "SAME_report.pdf",
+        "row_or_page": "Page 12",
+        "entered_by": "parsed",
+        "note": "Instrument suite"
+      }
+    },
+    "n_tests": {
+      "value": 8,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+        "row_or_page": "Rows 1-8",
+        "entered_by": "parsed",
+        "note": "8 flight test runs reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "smoke",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "row_or_page": "data['objective']",
+        "entered_by": "parsed",
+        "note": "Smoke and aerosol measurement experiment"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi"
+    ]
+  },
+  {
+    "id": "PSI-101",
+    "acronym": "SAME-R",
+    "name": "Smoke Aerosol Measurement Experiment - Reflight",
+    "doi": "10.60555/2np7-jv14",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "summary",
+    "safety_areas": [
+      "detection"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "Microgravity Science Glovebox (MSG) SAME-R Payload Module",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Row 1",
+        "entered_by": "hand",
+        "note": "ISS MSG facility apparatus"
+      }
+    },
+    "objectives": {
+      "value": "Investigate aging of smoke particles and operational detector response in microgravity",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "SAME_R_report.pdf",
+        "row_or_page": "Page 2",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "Kapton wire",
+        "Teflon wire",
+        "Cellulose",
+        "Cotton candle wick",
+        "Pyrolene"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Table 1",
+        "entered_by": "hand",
+        "note": "Overheated wire and wick samples"
+      }
+    },
+    "sample_shape": {
+      "value": "insulated wire segments and flat strips",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Col 3",
+        "entered_by": "hand",
+        "note": "Sample geometry"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 0.0,
+        "max": 8.1,
+        "discrete_values": [
+          0.0,
+          1.0,
+          2.0,
+          8.0,
+          8.1
+        ]
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "raw_real/PSI-101/experimental_table/PSI-101_Experimental table_SAME-R.csv",
+        "row_or_page": "Inlet velocity (cm/s) column",
+        "entered_by": "parsed",
+        "note": "Discrete inlet velocities {0.0, 1.0, 2.0, 8.0, 8.1} cm/s reported across 109 test rows (sha256: 87164b7dc9168a4273c159f7a9f23699afbd06ad97b77974377e79b9bf8a3bef)"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "aging time",
+        "airflow speed",
+        "fuel type"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "SAME_R_report.pdf",
+        "row_or_page": "Page 5",
+        "entered_by": "hand",
+        "note": "Test matrix parameters"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "cabin O2",
+        "pressure"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "SAME_R_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Maintained ambient environment"
+      }
+    },
+    "sensors": {
+      "value": [
+        "Optical particle counter",
+        "Ionization smoke detector",
+        "Photoelectric detector"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "SAME_R_report.pdf",
+        "row_or_page": "Page 10",
+        "entered_by": "hand",
+        "note": "Detector array"
+      }
+    },
+    "n_tests": {
+      "value": 109,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "raw_real/PSI-101/experimental_table/PSI-101_Experimental table_SAME-R.csv",
+        "row_or_page": "Rows 1-109",
+        "entered_by": "parsed",
+        "note": "109 flight test rows reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "smoke",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-101",
+        "doi": "10.60555/2np7-jv14",
+        "file": "raw_real/PSI-101/investigation_metadata.json",
+        "row_or_page": "data['objective']",
+        "entered_by": "parsed",
+        "note": "Smoke and aerosol measurement experiment"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi"
+    ]
+  },
+  {
+    "id": "PSI-26",
+    "acronym": "BASS",
+    "name": "Burning and Suppression of Solids",
+    "doi": "10.60555/58h4-dy80",
+    "license": "CC0-1.0",
+    "verified": true,
+    "depth": "deep",
+    "record_type": "test_matrix",
+    "safety_areas": [
+      "prevention",
+      "suppression"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "Microgravity Science Glovebox (MSG) Flow Duct",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "raw_real/PSI-26/investigation_metadata.json",
+        "row_or_page": "data['hardware']",
+        "entered_by": "parsed",
+        "note": "ISS MSG facility apparatus"
+      }
+    },
+    "objectives": {
+      "value": "Examine solid material flammability and extinction limits in microgravity under forced flow",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "BASS_report.pdf",
+        "row_or_page": "Page 1",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "PMMA (acrylic)",
+        "Cotton fiberglass fabric",
+        "Nomex"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "raw_real/PSI-26/investigation_metadata.json",
+        "row_or_page": "data['fuels']",
+        "entered_by": "parsed",
+        "note": "Solid fuels matrix"
+      }
+    },
+    "sample_shape": {
+      "value": "flat slabs and cylindrical rods",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "raw_real/PSI-26/investigation_metadata.json",
+        "row_or_page": "data['sample_shape']",
+        "entered_by": "parsed",
+        "note": "Sample geometry"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": null,
+        "max": 40
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/318t-7t35",
+        "file": "raw_real/PSI-26/investigation_metadata.json",
+        "row_or_page": "data['approach']",
+        "entered_by": "parsed",
+        "note": "Airflow speeds reaching as high as 40 cm/s; minimum not reported"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "airflow speed",
+        "fuel thickness",
+        "ambient O2 concentration"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "BASS_report.pdf",
+        "row_or_page": "Page 4",
+        "entered_by": "hand",
+        "note": "Test matrix variations"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "chamber pressure",
+        "convective flow direction"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "BASS_report.pdf",
+        "row_or_page": "Page 4",
+        "entered_by": "hand",
+        "note": "Fixed variables"
+      }
+    },
+    "sensors": {
+      "value": [
+        "Color video camera",
+        "Narrow-angle radiometer",
+        "Thermocouple array"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "file": "BASS_report.pdf",
+        "row_or_page": "Page 2",
+        "entered_by": "hand",
+        "note": "Diagnostics"
+      }
+    },
+    "n_tests": null,
+    "fuel_phase": {
+      "value": "solid",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/318t-7t35",
+        "file": "raw_real/PSI-26/investigation_metadata.json",
+        "row_or_page": "data['title']",
+        "entered_by": "parsed",
+        "note": "Solid fuel combustion (Burning and Suppression of Solids)"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-25",
+    "acronym": "BASS-II",
+    "name": "Burning and Suppression of Solids - II",
+    "doi": "10.60555/4qc4-de67",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "test_matrix",
+    "safety_areas": [
+      "prevention",
+      "suppression"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "Microgravity Science Glovebox (MSG) Flow Duct",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "NASA/TM-20210011385",
+        "row_or_page": "Section 2.1, p. 12",
+        "entered_by": "hand",
+        "note": "ISS MSG facility flow duct apparatus"
+      }
+    },
+    "objectives": {
+      "value": "Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "row_or_page": "data['objective']",
+        "entered_by": "parsed",
+        "note": "Primary science objectives from NASA metadata"
+      }
+    },
+    "fuels": {
+      "value": [
+        "PMMA rods",
+        "PMMA films",
+        "PMMA slabs",
+        "SIBAL",
+        "Nomex III",
+        "Japan Wax candle"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv",
+        "row_or_page": "Material column, 129 test rows",
+        "entered_by": "parsed",
+        "note": "Materials reported in BASS-II experimental table: PMMA rods, PMMA films, PMMA slabs, SIBAL, Nomex III, and Japan Wax candle"
+      }
+    },
+    "sample_shape": {
+      "value": "cylindrical rods, thin films, flat slabs, fabric strips, and candle",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv",
+        "row_or_page": "Test Description and Dimensions columns",
+        "entered_by": "parsed",
+        "note": "Sample geometry classification"
+      }
+    },
+    "sample_size": {
+      "value": "0.635-1.27 cm diameter rods; 1.5-2.2 cm width films and slabs; 10 cm length",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv",
+        "row_or_page": "Dimensions column",
+        "entered_by": "parsed",
+        "note": "Sample dimensions reported across test matrix"
+      }
+    },
+    "cabin_o2_pct": {
+      "value": {
+        "min": 13.6,
+        "max": 22.2
+      },
+      "unit": "%",
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv",
+        "row_or_page": "125 non-suspect tests (53 PMMA rods, 22 PMMA films, 20 PMMA slabs, 26 SIBAL, 3 Nomex III, 1 candle)",
+        "entered_by": "parsed",
+        "note": "Overall solid initial O2 range 13.6-22.2% across 125 non-suspect test runs (sha256: db4f5fcc2416fd2150e58c2d73d761090106271a640ecd189297eb7c3cf2951f)"
+      }
+    },
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 2.0,
+        "max": 21.0
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "NASA-TM-20210011385.pdf",
+        "row_or_page": "Table 5.1, Page 57 (PDF Page 65)",
+        "entered_by": "hand",
+        "note": "Table 5.1 cm/s (2.0-21.0) applies to 20 flat-PMMA slab tests only; airflow in full experimental table reported in instrument dial units only"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "material type",
+        "sample geometry",
+        "forced airflow speed (dial)",
+        "oxygen concentration"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "row_or_page": "data['approach']",
+        "entered_by": "parsed",
+        "note": "Experimental varied variables"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "ambient pressure (~1 atm)",
+        "duct geometry"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "NASA/TM-20210011385",
+        "row_or_page": "Section 5.2, p. 50",
+        "entered_by": "hand",
+        "note": "Experimental constants"
+      }
+    },
+    "sensors": {
+      "value": [
+        "High-resolution video camera",
+        "Narrow-angle radiometer",
+        "Flame-front tracking software"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "NASA/TM-20210011385",
+        "row_or_page": "Section 3.1, p. 25",
+        "entered_by": "hand",
+        "note": "Sensor suite"
+      }
+    },
+    "n_tests": {
+      "value": 20,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "NASA-TM-20210011385.pdf",
+        "row_or_page": "Table 5.1, Page 57 (PDF Page 65)",
+        "entered_by": "hand",
+        "note": "20 flat-PMMA tests reported in Table 5.1"
+      }
+    },
+    "fuel_phase": {
+      "value": "solid",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "row_or_page": "data['objective']",
+        "entered_by": "parsed",
+        "note": "Solid fuels burning in low-velocity forced flows in microgravity"
+      }
+    },
+    "stratified_o2_pct": {
+      "PMMA rods": {
+        "min": 13.6,
+        "max": 22.2,
+        "n_tests": 53
+      },
+      "PMMA films": {
+        "min": 15.0,
+        "max": 22.2,
+        "n_tests": 22
+      },
+      "PMMA slabs": {
+        "min": 17.9,
+        "max": 22.2,
+        "n_tests": 20
+      },
+      "SIBAL": {
+        "min": 16.4,
+        "max": 20.8,
+        "n_tests": 26
+      },
+      "Nomex III": {
+        "min": 21.0,
+        "max": 22.2,
+        "n_tests": 3
+      },
+      "candle": {
+        "min": 17.4,
+        "max": 17.4,
+        "n_tests": 1
+      },
+      "overall_solid": {
+        "min": 13.6,
+        "max": 22.2,
+        "n_tests": 125
+      }
+    },
+    "not_reported": [
+      "burner_flow_o2_pct",
+      "pressure_psi"
+    ]
+  },
+  {
+    "id": "PSI-99",
+    "acronym": "SAFFIRE-II",
+    "name": "Spacecraft Fire Safety Experiment - II",
+    "doi": "10.60555/2chp-m469",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "mixed",
+    "safety_areas": [
+      "prevention"
+    ],
+    "gravity_regimes": [
+      "microgravity",
+      "1g"
+    ],
+    "data_origin": [
+      "flight",
+      "ground"
+    ],
+    "hardware": {
+      "value": "Saffire Flow Duct in Cygnus Cargo Module (OA-5)",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "SAFFIRE_II_overview.pdf",
+        "row_or_page": "Section 1",
+        "entered_by": "hand",
+        "note": "Cygnus uncrewed cargo resupply vehicle test rig"
+      }
+    },
+    "objectives": {
+      "value": "Assess the flammability of mixed materials and sample thicknesses in low-gravity and normal-gravity companion tests",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "SAFFIRE_II_report.pdf",
+        "row_or_page": "Page 3",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "SIBAL fabric",
+        "PMMA (acrylic)",
+        "Nomex",
+        "Silicone sheet"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "row_or_page": "data['fuels']",
+        "entered_by": "parsed",
+        "note": "Fuel samples tested"
+      }
+    },
+    "sample_shape": {
+      "value": "thin fabric cards and thick solid slabs",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "row_or_page": "data['sample_shape']",
+        "entered_by": "parsed",
+        "note": "Specimen geometries"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 20.0,
+        "max": 30.0,
+        "discrete_values": [
+          20.0,
+          30.0
+        ]
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "raw_real/PSI-99/experimental_table/PSI-99_Experimental table_SAFFIRE-2.csv",
+        "row_or_page": "Air Flow Speed (cm/s) column",
+        "entered_by": "parsed",
+        "note": "Airflow speed of 20 cm/s reported in 9 of 15 table rows (6 rows unlisted/blank); metadata approach cites nominal test velocities of 20 and 30 cm/s"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "material type",
+        "thickness",
+        "airflow speed",
+        "gravity regime (0g vs 1g)"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "SAFFIRE_II_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Independent variables"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "cabin oxygen mole fraction (~21%)",
+        "duct cross-section"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "SAFFIRE_II_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Controlled variables"
+      }
+    },
+    "sensors": {
+      "value": [
+        "Calibrated video cameras",
+        "Thermocouple rake",
+        "Flow anemometers",
+        "Radiometers",
+        "Pressure sensors"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "SAFFIRE_II_report.pdf",
+        "row_or_page": "Page 11",
+        "entered_by": "hand",
+        "note": "Diagnostics"
+      }
+    },
+    "n_tests": {
+      "value": 15,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "file": "raw_real/PSI-99/experimental_table/PSI-99_Experimental table_SAFFIRE-2.csv",
+        "row_or_page": "Rows 1-15",
+        "entered_by": "parsed",
+        "note": "15 test runs reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "solid",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-99",
+        "doi": "10.60555/y4z3-t452",
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "row_or_page": "data['approach']",
+        "entered_by": "parsed",
+        "note": "Solid sample card testing (SIBAL, silicone, PMMA, Nomex)"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi"
+    ]
+  },
+  {
+    "id": "PSI-69",
+    "acronym": "FLEX",
+    "name": "Flame Extinction Experiment",
+    "doi": "10.60555/mbq8-0451",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "suppression"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "MDCA / Combustion Integrated Rack (CIR)",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Row 1",
+        "entered_by": "hand",
+        "note": "ISS CIR facility"
+      }
+    },
+    "objectives": {
+      "value": "Measure flame extinction of isolated liquid fuel droplets under varied diluents (CO2, N2, He) and pressures to study radiative and diffusive extinction",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 2",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "n-Heptane",
+        "Methanol",
+        "Ethanol",
+        "n-Decane"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Table 1",
+        "entered_by": "hand",
+        "note": "Liquid hydrocarbon and alcohol fuels"
+      }
+    },
+    "sample_shape": {
+      "value": "spherical liquid droplet on SiC fibers",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 5",
+        "entered_by": "hand",
+        "note": "Droplet geometry"
+      }
+    },
+    "sample_size": {
+      "value": "1.5 to 5.0 mm diameter",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 5",
+        "entered_by": "hand",
+        "note": "Droplet diameter range"
+      }
+    },
+    "cabin_o2_pct": {
+      "value": {
+        "min": 12.0,
+        "max": 34.0
+      },
+      "unit": "%",
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv",
+        "row_or_page": "Oxygen Index (%) column",
+        "entered_by": "parsed",
+        "note": "Tested cabin O2 range 12.0-34.0% reported across 271 test rows in authentic experimental table (sha256: 37c88ce8ae9391b7544ff630a45ce87543d04d317cdbfbed104fe7d5c27e1b96)"
+      }
+    },
+    "burner_flow_o2_pct": null,
+    "pressure_psi": {
+      "value": {
+        "min": null,
+        "max": 44.86
+      },
+      "unit": "psi",
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv",
+        "row_or_page": "Pressure (mmHg) column",
+        "entered_by": "parsed",
+        "note": "Converted from 2319.9 mmHg via exact formula 1 mmHg = 14.6959488/760 psi; 0.0 mmHg values treated as null (unpressurized/not reported)"
+      }
+    },
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 0.0,
+        "max": 0.0
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "investigation_metadata.json",
+        "row_or_page": "Row 4",
+        "entered_by": "hand",
+        "note": "Quiescent microgravity chamber (no forced flow)"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "initial droplet diameter",
+        "diluent species (CO2, He, N2)",
+        "chamber pressure",
+        "oxygen dilution mole fraction"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 7",
+        "entered_by": "hand",
+        "note": "Experimental variations"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "ambient temperature (298 K)",
+        "quiescent flow environment"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 7",
+        "entered_by": "hand",
+        "note": "Constants"
+      }
+    },
+    "sensors": {
+      "value": [
+        "High-speed color camera",
+        "UV radiometer",
+        "Infrared radiometer",
+        "Backlit droplet camera"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_report.pdf",
+        "row_or_page": "Page 10",
+        "entered_by": "hand",
+        "note": "Optical diagnostics"
+      }
+    },
+    "n_tests": {
+      "value": 271,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv",
+        "row_or_page": "Rows 1-271",
+        "entered_by": "parsed",
+        "note": "271 flight test runs reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "liquid droplet",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "raw_real/PSI-69/investigation_metadata.json",
+        "row_or_page": "data['objective']",
+        "entered_by": "parsed",
+        "note": "Droplet combustion and flame extinction in microgravity"
+      }
+    },
+    "not_reported": [
+      "burner_flow_o2_pct"
+    ]
+  },
+  {
+    "id": "PSI-159",
+    "acronym": "CFI-G",
+    "name": "Cool Flames Investigation with Gases",
+    "doi": "10.60555/cyt1-kh64",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "ACME / Combustion Integrated Rack (CIR)",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "raw_real/PSI-159/investigation_metadata.json",
+        "row_or_page": "data['hardware']",
+        "entered_by": "parsed",
+        "note": "ISS CIR facility"
+      }
+    },
+    "objectives": {
+      "value": "Study the flammability boundaries, low-temperature combustion kinetics, and extinction of non-premixed cool diffusion flames in microgravity under oxygen-enriched coflow",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "CFI_G_report.pdf",
+        "row_or_page": "Page 2",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "30% butane",
+        "30% ethane",
+        "30% propane",
+        "50% butane",
+        "ethane",
+        "propane"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "raw_real/PSI-159/experimental_table/PSI-159_Experimental table_CFI-G_Normal Flames (1).csv",
+        "row_or_page": "Fuel column, 168 rows",
+        "entered_by": "parsed",
+        "note": "Fuels listed in authentic experimental table: 30% butane, 30% ethane, 30% propane, 50% butane, ethane, propane; metadata hypothesis mentions propane, butane, pentane; methane and ethylene are not table-listed"
+      }
+    },
+    "sample_shape": {
+      "value": "coflow diffusion burner flame",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "CFI_G_report.pdf",
+        "row_or_page": "Page 4",
+        "entered_by": "hand",
+        "note": "Flame configuration"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": {
+      "value": {
+        "min": null,
+        "max": 85
+      },
+      "unit": "% (burner stream)",
+      "provenance": {
+        "source_id": "challenge-brief",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "NASA Space Apps Challenge Brief: Flame in Freefall",
+        "row_or_page": "Challenge Background",
+        "entered_by": "hand",
+        "note": "source: challenge brief"
+      }
+    },
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": {
+      "value": [
+        "fuel gas species",
+        "burner flow O2 concentration (21-85%)",
+        "coflow velocity",
+        "diluent type (N2 vs He)"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "CFI_G_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Varied parameters"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "chamber pressure (1 atm)",
+        "nozzle temperature"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "CFI_G_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Constants"
+      }
+    },
+    "sensors": {
+      "value": [
+        "Photomultiplier Tube (PMT)",
+        "Color video cameras",
+        "Chamber gas chromatograph",
+        "Broadband radiometer"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "CFI_G_report.pdf",
+        "row_or_page": "Page 9",
+        "entered_by": "hand",
+        "note": "Diagnostics"
+      }
+    },
+    "n_tests": {
+      "value": 168,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "raw_real/PSI-159/experimental_table/PSI-159_Experimental table_CFI-G_Normal Flames (1).csv",
+        "row_or_page": "Rows 1-168",
+        "entered_by": "parsed",
+        "note": "168 test runs reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "gas",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-159",
+        "doi": "10.60555/cyt1-kh64",
+        "file": "raw_real/PSI-159/investigation_metadata.json",
+        "row_or_page": "data['title']",
+        "entered_by": "parsed",
+        "note": "Gaseous fuel burner flames (Cool Flames Investigation with Gases)"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "cabin_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s"
+    ]
+  },
+  {
+    "id": "PSI-68",
+    "acronym": "FLEX-2",
+    "name": "Flame Extinction Experiment - 2",
+    "doi": "10.60555/byp8-h018",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "deep",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "suppression"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": {
+      "value": "MDCA / Combustion Integrated Rack (CIR)",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "row_or_page": "data['hardware']",
+        "entered_by": "parsed",
+        "note": "ISS CIR facility"
+      }
+    },
+    "objectives": {
+      "value": "Study droplet extinction dynamics, burning rates, and limiting oxygen indices for binary fuel droplets and droplet arrays in microgravity",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "FLEX2_report.pdf",
+        "row_or_page": "Page 2",
+        "entered_by": "hand",
+        "note": "Primary science objectives"
+      }
+    },
+    "fuels": {
+      "value": [
+        "Heptane/hexadecane mixtures",
+        "Methanol/water mixtures",
+        "Ethanol",
+        "Decane"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "row_or_page": "data['fuels']",
+        "entered_by": "parsed",
+        "note": "Binary mixtures and single component fuels"
+      }
+    },
+    "sample_shape": {
+      "value": "droplet pairs and small droplet arrays",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "FLEX2_report.pdf",
+        "row_or_page": "Page 4",
+        "entered_by": "hand",
+        "note": "Droplet array geometry"
+      }
+    },
+    "sample_size": null,
+    "cabin_o2_pct": {
+      "value": {
+        "min": 10.0,
+        "max": 40.0
+      },
+      "unit": "% (vol)",
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "row_or_page": "data['approach']",
+        "entered_by": "parsed",
+        "note": "Stated envelope 10-40% O2 mole fraction in metadata (0.1 mole fraction = 10% O2, 0.4 mole fraction = 40% O2 exact). Table-listed flight test runs report discrete oxygen concentrations {17, 21, 25, 30}% across 8 rows in PSI-68_Experimental table_Flex2.csv"
+      }
+    },
+    "table_listed_o2_pct": {
+      "value": {
+        "min": 17.0,
+        "max": 30.0,
+        "discrete_values": [
+          17,
+          21,
+          25,
+          30
+        ]
+      },
+      "unit": "%",
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv",
+        "row_or_page": "Oxygen (%) column, Rows 1-8",
+        "entered_by": "parsed",
+        "note": "Discrete oxygen concentrations {17, 21, 25, 30}% reported across 8 flight test rows in authentic experimental table (sha256: 4b2cb5d243bfca177a419ebf9f592a95c9dbfe59247eb108192ddbbf39ec0a38)"
+      }
+    },
+    "burner_flow_o2_pct": null,
+    "pressure_psi": {
+      "value": {
+        "min": 7.35,
+        "max": 44.09
+      },
+      "unit": "psi",
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "row_or_page": "data['approach']",
+        "entered_by": "parsed",
+        "note": "Converted from 0.5 - 3.0 atm using exact formula 1 atm = 14.6959 psi"
+      }
+    },
+    "airflow_speed_cm_s": {
+      "value": {
+        "min": 0.1,
+        "max": 5.0
+      },
+      "unit": "cm/s",
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv",
+        "row_or_page": "Flow Velocity (cm/s) column, Rows 1-8",
+        "entered_by": "parsed",
+        "note": "Tested convective flow velocities 0.1-5.0 cm/s reported across 8 test rows in authentic experimental table"
+      }
+    },
+    "varied_variables": {
+      "value": [
+        "binary mixture composition",
+        "droplet spacing ratio",
+        "diluent gas concentration"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "FLEX2_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Varied parameters"
+      }
+    },
+    "constant_variables": {
+      "value": [
+        "ambient temperature (298 K)",
+        "quiescent flow"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "FLEX2_report.pdf",
+        "row_or_page": "Page 6",
+        "entered_by": "hand",
+        "note": "Constants"
+      }
+    },
+    "sensors": {
+      "value": [
+        "High-speed video camera",
+        "OH* chemiluminescence radiometer",
+        "Infrared radiometer"
+      ],
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "FLEX2_report.pdf",
+        "row_or_page": "Page 9",
+        "entered_by": "hand",
+        "note": "Diagnostics"
+      }
+    },
+    "n_tests": {
+      "value": 8,
+      "unit": "tests",
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/byp8-h018",
+        "file": "raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv",
+        "row_or_page": "Rows 1-8",
+        "entered_by": "parsed",
+        "note": "8 flight test runs reported in authentic experimental table"
+      }
+    },
+    "fuel_phase": {
+      "value": "liquid droplet",
+      "unit": null,
+      "provenance": {
+        "source_id": "PSI-68",
+        "doi": "10.60555/b2r8-tz10",
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "row_or_page": "data['proposalTitle']",
+        "entered_by": "parsed",
+        "note": "Droplet combustion (Fundamental Studies in Droplet Combustion and Flame Extinguishment)"
+      }
+    },
+    "not_reported": [
+      "sample_size",
+      "burner_flow_o2_pct"
+    ]
+  },
+  {
+    "id": "PSI-98",
+    "acronym": "SAFFIRE-I",
+    "name": "Spacecraft Fire Safety Experiment - I",
+    "doi": "10.60555/0t15-1z43",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "summary",
+    "safety_areas": [
+      "prevention"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-100",
+    "acronym": "SAFFIRE-III",
+    "name": "Spacecraft Fire Safety Experiment - III",
+    "doi": "10.60555/040q-4h36",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "telemetry",
+    "safety_areas": [
+      "prevention"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-39",
+    "acronym": "CFI",
+    "name": "Cool Flames Investigation",
+    "doi": "10.60555/psi-39-cfi",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "summary",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-20",
+    "acronym": "ACME-BRE",
+    "name": "Burning Rate Emulator",
+    "doi": "10.60555/psi-20-bre",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "summary",
+    "safety_areas": [
+      "prevention"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-21",
+    "acronym": "ACME-CLD",
+    "name": "Confined Combustion / Co-Flow Laminar Diffusion",
+    "doi": "10.60555/23e1-9950",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-10",
+    "acronym": "Flame Design",
+    "name": "Flame Design",
+    "doi": "10.60555/w4zy-bt45",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-22",
+    "acronym": "ACME E-FIELD",
+    "name": "Electric-Field Effects on Laminar Diffusion Flames",
+    "doi": "10.60555/psi-22-efield",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "electric-field-analog",
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-23",
+    "acronym": "ACME S-Flames",
+    "name": "Structure and Response of Spherical Diffusion Flames",
+    "doi": "10.60555/psi-23-sflames",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "condition_range",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-107",
+    "acronym": "SPICE",
+    "name": "Smoke Point In Co-flow Experiment",
+    "doi": "10.60555/psi-107-spice",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "summary",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  },
+  {
+    "id": "PSI-106",
+    "acronym": "SLICE",
+    "name": "Structure & Liftoff In Combustion Experiment",
+    "doi": "10.60555/psi-106-slice",
+    "license": "CC0-1.0",
+    "verified": false,
+    "depth": "catalog",
+    "record_type": "summary",
+    "safety_areas": [
+      "other"
+    ],
+    "gravity_regimes": [
+      "microgravity"
+    ],
+    "data_origin": [
+      "flight"
+    ],
+    "hardware": null,
+    "objectives": null,
+    "fuels": null,
+    "sample_shape": null,
+    "sample_size": null,
+    "cabin_o2_pct": null,
+    "burner_flow_o2_pct": null,
+    "pressure_psi": null,
+    "airflow_speed_cm_s": null,
+    "varied_variables": null,
+    "constant_variables": null,
+    "sensors": null,
+    "n_tests": null,
+    "not_reported": [
+      "hardware",
+      "objectives",
+      "fuels",
+      "sample_shape",
+      "sample_size",
+      "cabin_o2_pct",
+      "burner_flow_o2_pct",
+      "pressure_psi",
+      "airflow_speed_cm_s",
+      "varied_variables",
+      "constant_variables",
+      "sensors",
+      "n_tests"
+    ]
+  }
+]

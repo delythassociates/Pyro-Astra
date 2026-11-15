@@ -1,0 +1,1741 @@
+{
+  "title": "PYRO-ASTRA Habitat Fire-Safety Documentation Readiness Analysis",
+  "label": "defined by the PYRO-ASTRA team",
+  "disclaimer": "A documentation check, not a safety assessment. Ranges are envelopes; individual combinations are not confirmed.",
+  "preregistered_reference": "analysis/PREREGISTERED.md",
+  "same_record_rule": "A parameter counts as covered only if the SAME matched record reports it for the matched material. Table 5.1 airflow applies to flat PMMA only.",
+  "solid_fuel_statement": "of 3 solid-fuel investigations only BASS-II reports initial O2 ranges (overall solid range 13.6-22.2%, stratified per material class in authentic experimental table; no pressure); BASS and SAFFIRE-II report no O2 or pressure in the public table data.",
+  "parameter_reporting_summary": [
+    {
+      "investigation_id": "PSI-102",
+      "acronym": "SAME",
+      "name": "Smoke Aerosol Measurement Experiment",
+      "fuel_phase": "smoke",
+      "cabin_o2": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 5.0,
+          "max": 10.0,
+          "discrete_values": [
+            5.0,
+            10.0
+          ]
+        },
+        "unit": "cm/s",
+        "key_path": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv [Air Flow Speed (cm/s) column]"
+      }
+    },
+    {
+      "investigation_id": "PSI-101",
+      "acronym": "SAME-R",
+      "name": "Smoke Aerosol Measurement Experiment - Reflight",
+      "fuel_phase": "smoke",
+      "cabin_o2": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 0.0,
+          "max": 8.1,
+          "discrete_values": [
+            0.0,
+            1.0,
+            2.0,
+            8.0,
+            8.1
+          ]
+        },
+        "unit": "cm/s",
+        "key_path": "raw_real/PSI-101/experimental_table/PSI-101_Experimental table_SAME-R.csv [Inlet velocity (cm/s) column]"
+      }
+    },
+    {
+      "investigation_id": "PSI-26",
+      "acronym": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "fuel_phase": "solid",
+      "cabin_o2": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": null,
+          "max": 40
+        },
+        "unit": "cm/s",
+        "key_path": "raw_real/PSI-26/investigation_metadata.json [data['approach']]"
+      }
+    },
+    {
+      "investigation_id": "PSI-25",
+      "acronym": "BASS-II",
+      "name": "Burning and Suppression of Solids - II",
+      "fuel_phase": "solid",
+      "cabin_o2": {
+        "reported": "yes",
+        "value": {
+          "min": 13.6,
+          "max": 22.2
+        },
+        "unit": "%",
+        "key_path": "raw_real/PSI-25/experimental_table/PSI-25_Experimental_table_BASS-II.csv [125 non-suspect tests (53 PMMA rods, 22 PMMA films, 20 PMMA slabs, 26 SIBAL, 3 Nomex III, 1 candle)]"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 2.0,
+          "max": 21.0
+        },
+        "unit": "cm/s",
+        "key_path": "NASA-TM-20210011385.pdf [Table 5.1, Page 57 (PDF Page 65)]"
+      }
+    },
+    {
+      "investigation_id": "PSI-99",
+      "acronym": "SAFFIRE-II",
+      "name": "Spacecraft Fire Safety Experiment - II",
+      "fuel_phase": "solid",
+      "cabin_o2": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 20.0,
+          "max": 30.0,
+          "discrete_values": [
+            20.0,
+            30.0
+          ]
+        },
+        "unit": "cm/s",
+        "key_path": "raw_real/PSI-99/experimental_table/PSI-99_Experimental table_SAFFIRE-2.csv [Air Flow Speed (cm/s) column]"
+      }
+    },
+    {
+      "investigation_id": "PSI-69",
+      "acronym": "FLEX",
+      "name": "Flame Extinction Experiment",
+      "fuel_phase": "liquid droplet",
+      "cabin_o2": {
+        "reported": "yes",
+        "value": {
+          "min": 12.0,
+          "max": 34.0
+        },
+        "unit": "%",
+        "key_path": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv [Oxygen Index (%) column]"
+      },
+      "pressure": {
+        "reported": "yes",
+        "value": {
+          "min": null,
+          "max": 44.86
+        },
+        "unit": "psi",
+        "key_path": "raw_real/PSI-69/experimental_table/PSI-69_Experimental table_FLEX.csv [Pressure (mmHg) column]"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "unit": "cm/s",
+        "key_path": "investigation_metadata.json [Row 4]"
+      }
+    },
+    {
+      "investigation_id": "PSI-159",
+      "acronym": "CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "fuel_phase": "gas",
+      "cabin_o2": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "pressure": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      },
+      "airflow": {
+        "reported": "no",
+        "value": null,
+        "unit": null,
+        "key_path": "not reported (null)"
+      }
+    },
+    {
+      "investigation_id": "PSI-68",
+      "acronym": "FLEX-2",
+      "name": "Flame Extinction Experiment - 2",
+      "fuel_phase": "liquid droplet",
+      "cabin_o2": {
+        "reported": "yes",
+        "value": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "unit": "% (vol)",
+        "key_path": "raw_real/PSI-68/investigation_metadata.json [data['approach']]"
+      },
+      "pressure": {
+        "reported": "yes",
+        "value": {
+          "min": 7.35,
+          "max": 44.09
+        },
+        "unit": "psi",
+        "key_path": "raw_real/PSI-68/investigation_metadata.json [data['approach']]"
+      },
+      "airflow": {
+        "reported": "yes",
+        "value": {
+          "min": 0.1,
+          "max": 5.0
+        },
+        "unit": "cm/s",
+        "key_path": "raw_real/PSI-68/experimental_table/PSI-68_Experimental table_Flex2.csv [Flow Velocity (cm/s) column, Rows 1-8]"
+      }
+    }
+  ],
+  "summary": {
+    "total_questions": 20,
+    "deep_investigations_analyzed": 8,
+    "catalog_investigations_unmined": 10,
+    "counts": {
+      "Documented": 0,
+      "Partially documented": 5,
+      "Not documented": 8,
+      "Not assessable": 7
+    },
+    "percentages": {
+      "Documented": 0.0,
+      "Partially documented": 25.0,
+      "Not documented": 40.0,
+      "Not assessable": 35.0
+    }
+  },
+  "sensitivity_report": {
+    "description": "Comparison of documentation verdicts under varying envelope overlap thresholds: Baseline (SAME record covers parameter for matched material; zero partial-g), Strict (all active bounded with zero nulls), and Broad (any overlap in same record).",
+    "baseline_counts": {
+      "Documented": 0,
+      "Partially documented": 5,
+      "Not documented": 8,
+      "Not assessable": 7
+    },
+    "strict_counts": {
+      "Documented": 0,
+      "Partially documented": 5,
+      "Not documented": 8,
+      "Not assessable": 7
+    },
+    "broad_counts": {
+      "Documented": 5,
+      "Partially documented": 0,
+      "Not documented": 8,
+      "Not assessable": 7
+    },
+    "stability_note": "Partial gravity verdicts (4 questions) remain invariant at 100% 'Not assessable' across all thresholds because NASA PSI contains no partial-gravity combustion data."
+  },
+  "questions": [
+    {
+      "id": "Q01",
+      "text": "What is the flammability limit of solid polymers (e.g. PMMA acrylic) in a planned lunar habitat atmosphere (34% O2, 8.2 psi) under lunar partial gravity (0.16g)?",
+      "required_conditions": {
+        "material_class": "solid PMMA acrylic",
+        "o2_range": {
+          "min": 34.0,
+          "max": 34.0
+        },
+        "pressure_range": {
+          "min": 8.2,
+          "max": 8.2
+        },
+        "airflow_range": null,
+        "gravity_regime": "lunar_partial_g"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+        "verbatim_quote": "flammability limits are not expected to meet current requirements under elevated O2 (34%) and"
+      },
+      "material_matched": true,
+      "material_quote": "Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "key_path": "data['objective']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "No public partial-gravity combustion data (source: challenge brief). Intermediate gravity cannot be evaluated from PSI records.",
+      "rule": "Section 2 Rule 5: No partial-gravity prediction or assessment allowed",
+      "evidence": [
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 17.9,
+            "max": 22.2,
+            "n_tests": 20
+          },
+          "pressure": null,
+          "airflow": {
+            "min": 2.0,
+            "max": 21.0
+          },
+          "null_required_parameters": [
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q02",
+      "text": "How does microgravity affect the smoke particle size and morphology for pyrolysis products under standard cabin air (21% O2, 14.7 psi) at low flow?",
+      "required_conditions": {
+        "material_class": "pyrolysis products",
+        "o2_range": {
+          "min": 20.9,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.2,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 20.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+        "verbatim_quote": "During SAME, smoke particles generated in"
+      },
+      "material_matched": true,
+      "material_quote": "Smoke and Aerosol Measurement Experiment",
+      "material_quote_source": {
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "key_path": "data['title']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "required parameters null in every matched record: cabin_o2_pct, pressure_psi, airflow_speed_cm_s are null in PSI-102, PSI-101.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        },
+        {
+          "record_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q03",
+      "text": "Are cotton fabrics (such as crew t-shirts) safe from ignition and sustained burning in elevated oxygen exploration atmospheres (34% O2, 8.2 psi) in microgravity?",
+      "required_conditions": {
+        "material_class": "cotton fabric / textiles",
+        "o2_range": {
+          "min": 30.0,
+          "max": 34.0
+        },
+        "pressure_range": {
+          "min": 8.0,
+          "max": 10.2
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 10.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+        "verbatim_quote": "cotton jersey t-shirts) may not be"
+      },
+      "material_matched": true,
+      "material_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "key_path": "data['approach']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "Material matched (PSI-99, PSI-26, PSI-25), but 0 required parameters covered by documented flight ranges.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 16.4,
+            "max": 20.8,
+            "n_tests": 26
+          },
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q04",
+      "text": "What is the dependence of smoke particle size distribution on airflow velocity in lunar partial gravity (0.16g)?",
+      "required_conditions": {
+        "material_class": "pyrolysis products",
+        "o2_range": {
+          "min": 21.0,
+          "max": 34.0
+        },
+        "pressure_range": {
+          "min": 8.2,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 10.0
+        },
+        "gravity_regime": "lunar_partial_g"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+        "verbatim_quote": "In lunar gravity, the dependence of smoke"
+      },
+      "material_matched": true,
+      "material_quote": "Smoke and Aerosol Measurement Experiment",
+      "material_quote_source": {
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "key_path": "data['title']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "No public partial-gravity combustion data (source: challenge brief). Intermediate gravity cannot be evaluated from PSI records.",
+      "rule": "Section 2 Rule 5: No partial-gravity prediction or assessment allowed",
+      "evidence": [
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        },
+        {
+          "record_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q05",
+      "text": "What are the droplet extinction limits and cool flame burning behaviors of liquid alkane fuels in microgravity under nitrogen-diluted cabin air?",
+      "required_conditions": {
+        "material_class": "liquid fuel / droplet",
+        "o2_range": {
+          "min": 15.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 7.0,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 7 Table 1, Fortenberry et al. (2021)",
+        "verbatim_quote": "CIR44 (ISS) Full burn 0 10-40 0.29-44"
+      },
+      "material_matched": true,
+      "material_quote": "The Fundamental Studies in Droplet Combustion and Flame Extinguishment in Microgravity",
+      "material_quote_source": {
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "key_path": "data['proposalTitle']"
+      },
+      "o2_covered": true,
+      "pressure_covered": true,
+      "airflow_covered": false,
+      "verdict": "Partially documented",
+      "reason": "Partially documented in PSI-68: material matched; covered: O2, pressure; uncovered/null: airflow.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinction Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "cabin_o2": {
+            "min": 10.0,
+            "max": 40.0
+          },
+          "pressure": {
+            "min": 7.35,
+            "max": 44.09
+          },
+          "airflow": {
+            "min": 0.1,
+            "max": 5.0
+          },
+          "null_required_parameters": []
+        },
+        {
+          "record_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinction Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "cabin_o2": {
+            "min": 12.0,
+            "max": 34.0
+          },
+          "pressure": {
+            "min": null,
+            "max": 44.86
+          },
+          "airflow": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "null_required_parameters": []
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Partially documented",
+        "broad_verdict": "Documented"
+      }
+    },
+    {
+      "id": "Q06",
+      "text": "How does flame spread rate on solid acrylic (PMMA) compare between microgravity (0g) and normal gravity (1g) companion tests?",
+      "required_conditions": {
+        "material_class": "solid PMMA acrylic",
+        "o2_range": {
+          "min": 21.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 10.0,
+          "max": 20.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 9, Bounds Panel",
+        "verbatim_quote": "bounds, not predictions; the direction varies by material"
+      },
+      "material_matched": true,
+      "material_quote": "Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "key_path": "data['objective']"
+      },
+      "o2_covered": true,
+      "pressure_covered": false,
+      "airflow_covered": true,
+      "verdict": "Partially documented",
+      "reason": "Partially documented in PSI-25: material matched; covered: O2, airflow; uncovered/null: pressure.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 17.9,
+            "max": 22.2,
+            "n_tests": 20
+          },
+          "pressure": null,
+          "airflow": {
+            "min": 2.0,
+            "max": 21.0
+          },
+          "null_required_parameters": [
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Partially documented",
+        "broad_verdict": "Documented"
+      }
+    },
+    {
+      "id": "Q07",
+      "text": "What is the flammability and flame spread rate of cotton/fiberglass blend fabric (SIBAL) under 1g normal gravity versus microgravity?",
+      "required_conditions": {
+        "material_class": "cotton fabric / textiles",
+        "o2_range": {
+          "min": 21.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 20.0,
+          "max": 20.0
+        },
+        "gravity_regime": "1g"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 4, PSI-99 SAFFIRE-II",
+        "verbatim_quote": "has 0g and 1g pairs: source for the bounds panel"
+      },
+      "material_matched": true,
+      "material_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "key_path": "data['approach']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": true,
+      "verdict": "Partially documented",
+      "reason": "Partially documented in PSI-99: material matched; covered: airflow; uncovered/null: O2, pressure.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Partially documented",
+        "broad_verdict": "Documented"
+      }
+    },
+    {
+      "id": "Q08",
+      "text": "What is the material burning rate in a pure oxygen spacesuit environment (100% O2, 4.3 psi) in microgravity?",
+      "required_conditions": {
+        "material_class": "solid PMMA acrylic",
+        "o2_range": {
+          "min": 100.0,
+          "max": 100.0
+        },
+        "pressure_range": {
+          "min": 4.3,
+          "max": 4.3
+        },
+        "airflow_range": null,
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 7, Spacesuit Preset",
+        "verbatim_quote": "Spacesuit: O2 100 %, pressure 4.3 psi."
+      },
+      "material_matched": true,
+      "material_quote": "Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "key_path": "data['objective']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "Material matched (PSI-25, PSI-26, PSI-99), but 0 required parameters covered by documented flight ranges.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 17.9,
+            "max": 22.2,
+            "n_tests": 20
+          },
+          "pressure": null,
+          "airflow": {
+            "min": 2.0,
+            "max": 21.0
+          },
+          "null_required_parameters": [
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q09",
+      "text": "How does elevated burner flow oxygen (up to 85% O2) in co-flow methane diffusion flames affect soot formation in microgravity?",
+      "required_conditions": {
+        "material_class": "gaseous fuel (methane)",
+        "o2_range": {
+          "min": 40.0,
+          "max": 85.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": null,
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 2 Rule 4 & Section 4, PSI-159 CFI-G",
+        "verbatim_quote": "Oxygen in burner flow (for example CFI-G, up to 85%) is not cabin oxygen."
+      },
+      "material_matched": false,
+      "material_quote": null,
+      "material_quote_source": null,
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "no material match: gaseous fuel (methane) was not tested in the 8 deep investigations mined (not reported in the public sources we processed; 10 catalogued ones were not mined).",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q10",
+      "text": "Can detector response differentiate smoke particles from suspended cabin and lunar dust in a lunar vehicle cabin?",
+      "required_conditions": {
+        "material_class": "pyrolysis products and lunar dust",
+        "o2_range": {
+          "min": 21.0,
+          "max": 34.0
+        },
+        "pressure_range": {
+          "min": 8.2,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 20.0
+        },
+        "gravity_regime": "lunar_partial_g"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 7, Fortenberry et al. (2021)",
+        "verbatim_quote": "alarms from suspended cabin and lunar dust"
+      },
+      "material_matched": true,
+      "material_quote": "Smoke and Aerosol Measurement Experiment",
+      "material_quote_source": {
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "key_path": "data['title']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "No public partial-gravity combustion data (source: challenge brief). Intermediate gravity cannot be evaluated from PSI records.",
+      "rule": "Section 2 Rule 5: No partial-gravity prediction or assessment allowed",
+      "evidence": [
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        },
+        {
+          "record_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q11",
+      "text": "What are the smoke particle size distributions generated during fuel overheating prior to flame development in microgravity?",
+      "required_conditions": {
+        "material_class": "pyrolysis products",
+        "o2_range": {
+          "min": 20.9,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.2,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 20.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 3, Fortenberry et al. (2021)",
+        "verbatim_quote": "period of fuel overheating prior to flame development since early fire detection is preferred"
+      },
+      "material_matched": true,
+      "material_quote": "Smoke and Aerosol Measurement Experiment",
+      "material_quote_source": {
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "key_path": "data['title']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "required parameters null in every matched record: cabin_o2_pct, pressure_psi, airflow_speed_cm_s are null in PSI-102, PSI-101.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        },
+        {
+          "record_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q12",
+      "text": "What is the flammability of Delrin (POM) rods in concurrent low-speed airflow in microgravity under ISS normal conditions (21% O2, 14.7 psi)?",
+      "required_conditions": {
+        "material_class": "solid Delrin (POM)",
+        "o2_range": {
+          "min": 15.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.5,
+          "max": 8.5
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 5 Hardware",
+        "verbatim_quote": "MSG flow duct"
+      },
+      "material_matched": false,
+      "material_quote": null,
+      "material_quote_source": null,
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "no material match: solid Delrin (POM) was not tested in the 8 deep investigations mined (not reported in the public sources we processed; 10 catalogued ones were not mined).",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q13",
+      "text": "How does flame spread across fire-resistant Nomex fabric compare at reduced oxygen versus standard 21% oxygen in microgravity?",
+      "required_conditions": {
+        "material_class": "Nomex fabric / textiles",
+        "o2_range": {
+          "min": 15.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 1.0,
+          "max": 5.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+        "verbatim_quote": "fabric for the crew to wear within the anticipated lunar habitat."
+      },
+      "material_matched": true,
+      "material_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "key_path": "data['approach']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "Material matched (PSI-99, PSI-26), but 0 required parameters covered by documented flight ranges.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q14",
+      "text": "What are the smoke characteristics of lithium-ion battery (LIB) thermal runaway in a pressurized spacecraft environment?",
+      "required_conditions": {
+        "material_class": "lithium-ion battery / electronics",
+        "o2_range": {
+          "min": 21.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": null,
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+        "verbatim_quote": "characterized the properties of smoke particles from laptop LIB fires"
+      },
+      "material_matched": false,
+      "material_quote": null,
+      "material_quote_source": null,
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "no material match: lithium-ion battery / electronics was not tested in the 8 deep investigations mined (not reported in the public sources we processed; 10 catalogued ones were not mined).",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q15",
+      "text": "What is the critical extinction oxygen index (LOI) for polymethyl methacrylate (PMMA) slabs in low-speed forced flow in microgravity?",
+      "required_conditions": {
+        "material_class": "solid PMMA acrylic",
+        "o2_range": {
+          "min": 15.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 1.0,
+          "max": 8.5
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 4, Fortenberry et al. (2021)",
+        "verbatim_quote": "polymethyl methacrylate combustion"
+      },
+      "material_matched": true,
+      "material_quote": "Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-25/investigation_metadata.json",
+        "key_path": "data['objective']"
+      },
+      "o2_covered": true,
+      "pressure_covered": false,
+      "airflow_covered": true,
+      "verdict": "Partially documented",
+      "reason": "Partially documented in PSI-25: material matched; covered: O2, airflow; uncovered/null: pressure.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 17.9,
+            "max": 22.2,
+            "n_tests": 20
+          },
+          "pressure": null,
+          "airflow": {
+            "min": 2.0,
+            "max": 21.0
+          },
+          "null_required_parameters": [
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Partially documented",
+        "broad_verdict": "Documented"
+      }
+    },
+    {
+      "id": "Q16",
+      "text": "How does buoyant upward flow in 1g alter smoke particle evolution and time-to-alarm compared to low air velocities in microgravity?",
+      "required_conditions": {
+        "material_class": "pyrolysis products",
+        "o2_range": {
+          "min": 20.9,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.2,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 20.0
+        },
+        "gravity_regime": "1g"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 5, Fortenberry et al. (2021)",
+        "verbatim_quote": "Differences in particle formation and evolution in reduced gravity are attributable"
+      },
+      "material_matched": true,
+      "material_quote": "Smoke and Aerosol Measurement Experiment",
+      "material_quote_source": {
+        "file": "raw_real/PSI-102/investigation_metadata.json",
+        "key_path": "data['title']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "required parameters null in every matched record: cabin_o2_pct, pressure_psi, airflow_speed_cm_s are null in PSI-102.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q17",
+      "text": "What is the effect of an external electric field on soot distribution and flame stabilization as an analog for gravity in microgravity?",
+      "required_conditions": {
+        "material_class": "gaseous fuel (methane/ethylene)",
+        "o2_range": {
+          "min": 21.0,
+          "max": 30.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": null,
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 2 Rule 5, ACME E-FIELD Analog",
+        "verbatim_quote": "ACME E-FIELD Flames mimics partial gravity with an electric field: present it as an analog, never as partial gravity."
+      },
+      "material_matched": false,
+      "material_quote": null,
+      "material_quote_source": null,
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "no material match: gaseous fuel (methane/ethylene) was not tested in the 8 deep investigations mined (not reported in the public sources we processed; 10 catalogued ones were not mined).",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q18",
+      "text": "What are the flame spread and extinction limits of silicone polymer sheets under varying air velocities in microgravity?",
+      "required_conditions": {
+        "material_class": "silicone / polymers",
+        "o2_range": {
+          "min": 18.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 14.7,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.5,
+          "max": 5.5
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 4, PSI-25 BASS-II",
+        "verbatim_quote": "material matrix. Fallback: NASA/TM-20210011385, Table 5.1 (20 tests), hand-entered with page numbers"
+      },
+      "material_matched": true,
+      "material_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "key_path": "data['approach']"
+      },
+      "o2_covered": false,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not documented",
+      "reason": "Material matched (PSI-99, PSI-102), but 0 required parameters covered by documented flight ranges.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not documented",
+        "broad_verdict": "Not documented"
+      }
+    },
+    {
+      "id": "Q19",
+      "text": "How does Martian atmospheric surface gravity (0.38g) influence the flame spread rate of cellulose solid fuels?",
+      "required_conditions": {
+        "material_class": "cotton / cellulose",
+        "o2_range": {
+          "min": 20.0,
+          "max": 30.0
+        },
+        "pressure_range": {
+          "min": 7.0,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 1.0,
+          "max": 10.0
+        },
+        "gravity_regime": "martian_partial_g"
+      },
+      "source": {
+        "file": "raw_real/NTRS-20210022143.txt",
+        "citation": "NTRS-20210022143, p. 3, Fortenberry et al. (2021)",
+        "verbatim_quote": "lunar, Martian, and deep-space exploration."
+      },
+      "material_matched": true,
+      "material_quote": "Saffire-II investigation added more samples including SIBAL, silicone, structure PMMA, flat PMMA, and PMMA with Nomex.",
+      "material_quote_source": {
+        "file": "raw_real/PSI-99/investigation_metadata.json",
+        "key_path": "data['approach']"
+      },
+      "o2_covered": true,
+      "pressure_covered": false,
+      "airflow_covered": false,
+      "verdict": "Not assessable",
+      "reason": "No public partial-gravity combustion data (source: challenge brief). Intermediate gravity cannot be evaluated from PSI records.",
+      "rule": "Section 2 Rule 5: No partial-gravity prediction or assessment allowed",
+      "evidence": [
+        {
+          "record_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Safety Experiment - II",
+          "doi": "10.60555/2chp-m469",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": 20.0,
+            "max": 30.0,
+            "discrete_values": [
+              20.0,
+              30.0
+            ]
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "cabin_o2": null,
+          "pressure": null,
+          "airflow": {
+            "min": null,
+            "max": 40
+          },
+          "null_required_parameters": [
+            "cabin_o2_pct",
+            "pressure_psi"
+          ]
+        },
+        {
+          "record_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "cabin_o2": {
+            "min": 16.4,
+            "max": 20.8,
+            "n_tests": 26
+          },
+          "pressure": null,
+          "airflow": null,
+          "null_required_parameters": [
+            "pressure_psi",
+            "airflow_speed_cm_s"
+          ]
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Not assessable",
+        "broad_verdict": "Not assessable"
+      }
+    },
+    {
+      "id": "Q20",
+      "text": "What is the fire suppression efficiency of helium versus carbon dioxide dilution on alkane droplet extinction in microgravity?",
+      "required_conditions": {
+        "material_class": "liquid fuel / droplet",
+        "o2_range": {
+          "min": 15.0,
+          "max": 21.0
+        },
+        "pressure_range": {
+          "min": 7.0,
+          "max": 14.7
+        },
+        "airflow_range": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "gravity_regime": "microgravity"
+      },
+      "source": {
+        "file": "SPEC.md",
+        "citation": "SPEC.md Section 4, PSI-69 FLEX",
+        "verbatim_quote": "CO2 and helium dilution. Row counts differ by file: report your own"
+      },
+      "material_matched": true,
+      "material_quote": "The Fundamental Studies in Droplet Combustion and Flame Extinguishment in Microgravity",
+      "material_quote_source": {
+        "file": "raw_real/PSI-68/investigation_metadata.json",
+        "key_path": "data['proposalTitle']"
+      },
+      "o2_covered": true,
+      "pressure_covered": true,
+      "airflow_covered": false,
+      "verdict": "Partially documented",
+      "reason": "Partially documented in PSI-68: material matched; covered: O2, pressure; uncovered/null: airflow.",
+      "rule": "PREREGISTERED.md Section 3.2 Protocol",
+      "evidence": [
+        {
+          "record_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinction Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "cabin_o2": {
+            "min": 10.0,
+            "max": 40.0
+          },
+          "pressure": {
+            "min": 7.35,
+            "max": 44.09
+          },
+          "airflow": {
+            "min": 0.1,
+            "max": 5.0
+          },
+          "null_required_parameters": []
+        },
+        {
+          "record_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinction Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "cabin_o2": {
+            "min": 12.0,
+            "max": 34.0
+          },
+          "pressure": {
+            "min": null,
+            "max": 44.86
+          },
+          "airflow": {
+            "min": 0.0,
+            "max": 0.0
+          },
+          "null_required_parameters": []
+        }
+      ],
+      "sensitivity": {
+        "strict_verdict": "Partially documented",
+        "broad_verdict": "Documented"
+      }
+    }
+  ]
+}

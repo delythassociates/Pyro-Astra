@@ -1,5 +1,5 @@
 import type { Investigation } from '@/data/schema';
-import rawInvestigations from '../../data/investigations.json';
+import rawInvestigations from '@/data/investigations.json';
 
 // Verified 8 deep investigations plus catalog records according to Section 4 & 5
 export const DEFAULT_INVESTIGATIONS: Investigation[] = rawInvestigations as unknown as Investigation[];

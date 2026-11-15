@@ -5,7 +5,7 @@ import { MaterialOutcomeVisualizer, RunDataPoint } from './MaterialOutcomeVisual
 import { BeginnerDataTable } from './BeginnerDataTable';
 import { ReferencesCard } from './ReferencesCard';
 import { InfoButton } from './InfoButton';
-import table51Data from '../../data/bass2_table_5_1.json';
+import table51Data from '@/data/bass2_table_5_1.json';
 
 interface EnvironmentPreset {
   id: string;

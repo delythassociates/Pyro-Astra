@@ -1,0 +1,2899 @@
+{
+  "title": "PYRO-ASTRA Exploration Transit Documentation Path",
+  "label": "defined by the PYRO-ASTRA team",
+  "mission_note": "illustrative, not a mission profile.",
+  "scientific_disclaimer": "distance measures documentation distance, not hazard.",
+  "normalization": "Normalized 2D Euclidean distance on axes (O2 / 100, pressure / 14.7) per Section 8.",
+  "waypoints": [
+    {
+      "id": "iss_cabin",
+      "name": "ISS Cabin Reference",
+      "o2_pct": 21.0,
+      "pressure_psi": 14.7,
+      "source": "Earth-air approximation (presets.ts), sea level 14.7 psi",
+      "description": "Standard Earth-normal pressurized station cabin environment."
+    },
+    {
+      "id": "lunar_habitat",
+      "name": "Lunar Habitat",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.2,
+      "source": "NTRS-20210022143 p. 4 & p. 6, Fortenberry et al. (2021)",
+      "description": "Exploration atmosphere targeted for future pressurized lunar surface habitat."
+    },
+    {
+      "id": "spacesuit",
+      "name": "Spacesuit EVA",
+      "o2_pct": 100.0,
+      "pressure_psi": 4.3,
+      "source": "Challenge brief & presets.ts (100% O2, 4.3 psi)",
+      "description": "Pure-oxygen low-pressure extravehicular activity spacesuit environment."
+    }
+  ],
+  "summary": {
+    "total_steps": 101,
+    "max_documentation_distance": {
+      "step": 100,
+      "distance": 0.6349,
+      "o2_pct": 100.0,
+      "pressure_psi": 4.3,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "nearest_record": "FLEX-2"
+    },
+    "min_documentation_distance": {
+      "step": 0,
+      "distance": 0.0,
+      "o2_pct": 21.0,
+      "pressure_psi": 14.7,
+      "nearest_record": "FLEX-2"
+    },
+    "lunar_habitat_comparison": {
+      "waypoint": "Lunar Habitat (34.0% O2, 8.2 psi)",
+      "stated_envelope_distance": 0.0,
+      "stated_envelope_o2_range": [
+        10.0,
+        40.0
+      ],
+      "table_listed_distance": 0.04,
+      "table_listed_o2_range": [
+        17.0,
+        30.0
+      ],
+      "explanation": "On stated envelope (10-40% O2), Lunar Habitat falls inside envelope (distance 0.0000). On authentic table-listed runs (17-30% O2), Lunar Habitat requires +4.0% O2 extrapolation beyond 30.0% max, yielding normalized distance 0.0400."
+    },
+    "plottable_investigations_count": 1,
+    "unplottable_burner_flow_only": [
+      "PSI-159 (CFI-G: burner-flow oxidizer only; Rule 4)"
+    ]
+  },
+  "path_steps": [
+    {
+      "step": 0,
+      "path_fraction": 0.0,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 21.0,
+      "pressure_psi": 14.7,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 1,
+      "path_fraction": 0.01,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 21.26,
+      "pressure_psi": 14.57,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 2,
+      "path_fraction": 0.02,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 21.52,
+      "pressure_psi": 14.44,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 3,
+      "path_fraction": 0.03,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 21.78,
+      "pressure_psi": 14.31,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 4,
+      "path_fraction": 0.04,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 22.04,
+      "pressure_psi": 14.18,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 5,
+      "path_fraction": 0.05,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 22.3,
+      "pressure_psi": 14.05,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 6,
+      "path_fraction": 0.06,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 22.56,
+      "pressure_psi": 13.92,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 7,
+      "path_fraction": 0.07,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 22.82,
+      "pressure_psi": 13.79,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 8,
+      "path_fraction": 0.08,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 23.08,
+      "pressure_psi": 13.66,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 9,
+      "path_fraction": 0.09,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 23.34,
+      "pressure_psi": 13.53,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 10,
+      "path_fraction": 0.1,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 23.6,
+      "pressure_psi": 13.4,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 11,
+      "path_fraction": 0.11,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 23.86,
+      "pressure_psi": 13.27,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 12,
+      "path_fraction": 0.12,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 24.12,
+      "pressure_psi": 13.14,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 13,
+      "path_fraction": 0.13,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 24.38,
+      "pressure_psi": 13.01,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 14,
+      "path_fraction": 0.14,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 24.64,
+      "pressure_psi": 12.88,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 15,
+      "path_fraction": 0.15,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 24.9,
+      "pressure_psi": 12.75,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 16,
+      "path_fraction": 0.16,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 25.16,
+      "pressure_psi": 12.62,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 17,
+      "path_fraction": 0.17,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 25.42,
+      "pressure_psi": 12.49,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 18,
+      "path_fraction": 0.18,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 25.68,
+      "pressure_psi": 12.36,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 19,
+      "path_fraction": 0.19,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 25.94,
+      "pressure_psi": 12.23,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 20,
+      "path_fraction": 0.2,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 26.2,
+      "pressure_psi": 12.1,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 21,
+      "path_fraction": 0.21,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 26.46,
+      "pressure_psi": 11.97,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 22,
+      "path_fraction": 0.22,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 26.72,
+      "pressure_psi": 11.84,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 23,
+      "path_fraction": 0.23,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 26.98,
+      "pressure_psi": 11.71,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 24,
+      "path_fraction": 0.24,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 27.24,
+      "pressure_psi": 11.58,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 25,
+      "path_fraction": 0.25,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 27.5,
+      "pressure_psi": 11.45,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 26,
+      "path_fraction": 0.26,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 27.76,
+      "pressure_psi": 11.32,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 27,
+      "path_fraction": 0.27,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 28.02,
+      "pressure_psi": 11.19,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 28,
+      "path_fraction": 0.28,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 28.28,
+      "pressure_psi": 11.06,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 29,
+      "path_fraction": 0.29,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 28.54,
+      "pressure_psi": 10.93,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 30,
+      "path_fraction": 0.3,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 28.8,
+      "pressure_psi": 10.8,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 31,
+      "path_fraction": 0.31,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 29.06,
+      "pressure_psi": 10.67,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 32,
+      "path_fraction": 0.32,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 29.32,
+      "pressure_psi": 10.54,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 33,
+      "path_fraction": 0.33,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 29.58,
+      "pressure_psi": 10.41,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 34,
+      "path_fraction": 0.34,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 29.84,
+      "pressure_psi": 10.28,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 35,
+      "path_fraction": 0.35,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 30.1,
+      "pressure_psi": 10.15,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.001,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 36,
+      "path_fraction": 0.36,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 30.36,
+      "pressure_psi": 10.02,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0036,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 37,
+      "path_fraction": 0.37,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 30.62,
+      "pressure_psi": 9.89,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0062,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 38,
+      "path_fraction": 0.38,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 30.88,
+      "pressure_psi": 9.76,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0088,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 39,
+      "path_fraction": 0.39,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 31.14,
+      "pressure_psi": 9.63,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0114,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 40,
+      "path_fraction": 0.4,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 31.4,
+      "pressure_psi": 9.5,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.014,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 41,
+      "path_fraction": 0.41,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 31.66,
+      "pressure_psi": 9.37,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0166,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 42,
+      "path_fraction": 0.42,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 31.92,
+      "pressure_psi": 9.24,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0192,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 43,
+      "path_fraction": 0.43,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 32.18,
+      "pressure_psi": 9.11,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0218,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 44,
+      "path_fraction": 0.44,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 32.44,
+      "pressure_psi": 8.98,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0244,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 45,
+      "path_fraction": 0.45,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 32.7,
+      "pressure_psi": 8.85,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.027,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 46,
+      "path_fraction": 0.46,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 32.96,
+      "pressure_psi": 8.72,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0296,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 47,
+      "path_fraction": 0.47,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 33.22,
+      "pressure_psi": 8.59,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0322,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 48,
+      "path_fraction": 0.48,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 33.48,
+      "pressure_psi": 8.46,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0348,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 49,
+      "path_fraction": 0.49,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 33.74,
+      "pressure_psi": 8.33,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0374,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 50,
+      "path_fraction": 0.5,
+      "segment": "ISS Cabin -> Lunar Habitat",
+      "o2_pct": 34.0,
+      "pressure_psi": 8.2,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.04,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 51,
+      "path_fraction": 0.51,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 35.32,
+      "pressure_psi": 8.12,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0532,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 52,
+      "path_fraction": 0.52,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 36.64,
+      "pressure_psi": 8.04,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0664,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 53,
+      "path_fraction": 0.53,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 37.96,
+      "pressure_psi": 7.97,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0796,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 54,
+      "path_fraction": 0.54,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 39.28,
+      "pressure_psi": 7.89,
+      "evidence_distance": 0.0,
+      "table_listed_distance": 0.0928,
+      "intersects_tested": true,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 55,
+      "path_fraction": 0.55,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 40.6,
+      "pressure_psi": 7.81,
+      "evidence_distance": 0.006,
+      "table_listed_distance": 0.106,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.006,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 56,
+      "path_fraction": 0.56,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 41.92,
+      "pressure_psi": 7.73,
+      "evidence_distance": 0.0192,
+      "table_listed_distance": 0.1192,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0192,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 57,
+      "path_fraction": 0.57,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 43.24,
+      "pressure_psi": 7.65,
+      "evidence_distance": 0.0324,
+      "table_listed_distance": 0.1324,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0324,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 58,
+      "path_fraction": 0.58,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 44.56,
+      "pressure_psi": 7.58,
+      "evidence_distance": 0.0456,
+      "table_listed_distance": 0.1456,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0456,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 59,
+      "path_fraction": 0.59,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 45.88,
+      "pressure_psi": 7.5,
+      "evidence_distance": 0.0588,
+      "table_listed_distance": 0.1588,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0588,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 60,
+      "path_fraction": 0.6,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 47.2,
+      "pressure_psi": 7.42,
+      "evidence_distance": 0.072,
+      "table_listed_distance": 0.172,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.072,
+        "normalized_d_pressure": 0.0
+      }
+    },
+    {
+      "step": 61,
+      "path_fraction": 0.61,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 48.52,
+      "pressure_psi": 7.34,
+      "evidence_distance": 0.0852,
+      "table_listed_distance": 0.1852,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0852,
+        "normalized_d_pressure": 0.0007
+      }
+    },
+    {
+      "step": 62,
+      "path_fraction": 0.62,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 49.84,
+      "pressure_psi": 7.26,
+      "evidence_distance": 0.0986,
+      "table_listed_distance": 0.1985,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.0984,
+        "normalized_d_pressure": 0.0061
+      }
+    },
+    {
+      "step": 63,
+      "path_fraction": 0.63,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 51.16,
+      "pressure_psi": 7.19,
+      "evidence_distance": 0.1121,
+      "table_listed_distance": 0.2119,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1116,
+        "normalized_d_pressure": 0.0109
+      }
+    },
+    {
+      "step": 64,
+      "path_fraction": 0.64,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 52.48,
+      "pressure_psi": 7.11,
+      "evidence_distance": 0.1259,
+      "table_listed_distance": 0.2254,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1248,
+        "normalized_d_pressure": 0.0163
+      }
+    },
+    {
+      "step": 65,
+      "path_fraction": 0.65,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 53.8,
+      "pressure_psi": 7.03,
+      "evidence_distance": 0.1397,
+      "table_listed_distance": 0.239,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.138,
+        "normalized_d_pressure": 0.0218
+      }
+    },
+    {
+      "step": 66,
+      "path_fraction": 0.66,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 55.12,
+      "pressure_psi": 6.95,
+      "evidence_distance": 0.1536,
+      "table_listed_distance": 0.2527,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1512,
+        "normalized_d_pressure": 0.0272
+      }
+    },
+    {
+      "step": 67,
+      "path_fraction": 0.67,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 56.44,
+      "pressure_psi": 6.87,
+      "evidence_distance": 0.1676,
+      "table_listed_distance": 0.2664,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1644,
+        "normalized_d_pressure": 0.0327
+      }
+    },
+    {
+      "step": 68,
+      "path_fraction": 0.68,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 57.76,
+      "pressure_psi": 6.8,
+      "evidence_distance": 0.1815,
+      "table_listed_distance": 0.2801,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1776,
+        "normalized_d_pressure": 0.0374
+      }
+    },
+    {
+      "step": 69,
+      "path_fraction": 0.69,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 59.08,
+      "pressure_psi": 6.72,
+      "evidence_distance": 0.1956,
+      "table_listed_distance": 0.2939,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.1908,
+        "normalized_d_pressure": 0.0429
+      }
+    },
+    {
+      "step": 70,
+      "path_fraction": 0.7,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 60.4,
+      "pressure_psi": 6.64,
+      "evidence_distance": 0.2096,
+      "table_listed_distance": 0.3078,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.204,
+        "normalized_d_pressure": 0.0483
+      }
+    },
+    {
+      "step": 71,
+      "path_fraction": 0.71,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 61.72,
+      "pressure_psi": 6.56,
+      "evidence_distance": 0.2237,
+      "table_listed_distance": 0.3217,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2172,
+        "normalized_d_pressure": 0.0537
+      }
+    },
+    {
+      "step": 72,
+      "path_fraction": 0.72,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 63.04,
+      "pressure_psi": 6.48,
+      "evidence_distance": 0.2379,
+      "table_listed_distance": 0.3357,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2304,
+        "normalized_d_pressure": 0.0592
+      }
+    },
+    {
+      "step": 73,
+      "path_fraction": 0.73,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 64.36,
+      "pressure_psi": 6.41,
+      "evidence_distance": 0.2519,
+      "table_listed_distance": 0.3495,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2436,
+        "normalized_d_pressure": 0.0639
+      }
+    },
+    {
+      "step": 74,
+      "path_fraction": 0.74,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 65.68,
+      "pressure_psi": 6.33,
+      "evidence_distance": 0.266,
+      "table_listed_distance": 0.3635,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2568,
+        "normalized_d_pressure": 0.0694
+      }
+    },
+    {
+      "step": 75,
+      "path_fraction": 0.75,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 67.0,
+      "pressure_psi": 6.25,
+      "evidence_distance": 0.2802,
+      "table_listed_distance": 0.3775,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.27,
+        "normalized_d_pressure": 0.0748
+      }
+    },
+    {
+      "step": 76,
+      "path_fraction": 0.76,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 68.32,
+      "pressure_psi": 6.17,
+      "evidence_distance": 0.2944,
+      "table_listed_distance": 0.3915,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2832,
+        "normalized_d_pressure": 0.0803
+      }
+    },
+    {
+      "step": 77,
+      "path_fraction": 0.77,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 69.64,
+      "pressure_psi": 6.09,
+      "evidence_distance": 0.3085,
+      "table_listed_distance": 0.4056,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.2964,
+        "normalized_d_pressure": 0.0857
+      }
+    },
+    {
+      "step": 78,
+      "path_fraction": 0.78,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 70.96,
+      "pressure_psi": 6.02,
+      "evidence_distance": 0.3225,
+      "table_listed_distance": 0.4195,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3096,
+        "normalized_d_pressure": 0.0905
+      }
+    },
+    {
+      "step": 79,
+      "path_fraction": 0.79,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 72.28,
+      "pressure_psi": 5.94,
+      "evidence_distance": 0.3367,
+      "table_listed_distance": 0.4335,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3228,
+        "normalized_d_pressure": 0.0959
+      }
+    },
+    {
+      "step": 80,
+      "path_fraction": 0.8,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 73.6,
+      "pressure_psi": 5.86,
+      "evidence_distance": 0.351,
+      "table_listed_distance": 0.4476,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.336,
+        "normalized_d_pressure": 0.1014
+      }
+    },
+    {
+      "step": 81,
+      "path_fraction": 0.81,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 74.92,
+      "pressure_psi": 5.78,
+      "evidence_distance": 0.3652,
+      "table_listed_distance": 0.4617,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3492,
+        "normalized_d_pressure": 0.1068
+      }
+    },
+    {
+      "step": 82,
+      "path_fraction": 0.82,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 76.24,
+      "pressure_psi": 5.7,
+      "evidence_distance": 0.3794,
+      "table_listed_distance": 0.4758,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3624,
+        "normalized_d_pressure": 0.1122
+      }
+    },
+    {
+      "step": 83,
+      "path_fraction": 0.83,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 77.56,
+      "pressure_psi": 5.63,
+      "evidence_distance": 0.3934,
+      "table_listed_distance": 0.4898,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3756,
+        "normalized_d_pressure": 0.117
+      }
+    },
+    {
+      "step": 84,
+      "path_fraction": 0.84,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 78.88,
+      "pressure_psi": 5.55,
+      "evidence_distance": 0.4076,
+      "table_listed_distance": 0.5039,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.3888,
+        "normalized_d_pressure": 0.1224
+      }
+    },
+    {
+      "step": 85,
+      "path_fraction": 0.85,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 80.2,
+      "pressure_psi": 5.47,
+      "evidence_distance": 0.4219,
+      "table_listed_distance": 0.518,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.402,
+        "normalized_d_pressure": 0.1279
+      }
+    },
+    {
+      "step": 86,
+      "path_fraction": 0.86,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 81.52,
+      "pressure_psi": 5.39,
+      "evidence_distance": 0.4361,
+      "table_listed_distance": 0.5322,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4152,
+        "normalized_d_pressure": 0.1333
+      }
+    },
+    {
+      "step": 87,
+      "path_fraction": 0.87,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 82.84,
+      "pressure_psi": 5.31,
+      "evidence_distance": 0.4503,
+      "table_listed_distance": 0.5463,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4284,
+        "normalized_d_pressure": 0.1388
+      }
+    },
+    {
+      "step": 88,
+      "path_fraction": 0.88,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 84.16,
+      "pressure_psi": 5.24,
+      "evidence_distance": 0.4643,
+      "table_listed_distance": 0.5603,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4416,
+        "normalized_d_pressure": 0.1435
+      }
+    },
+    {
+      "step": 89,
+      "path_fraction": 0.89,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 85.48,
+      "pressure_psi": 5.16,
+      "evidence_distance": 0.4786,
+      "table_listed_distance": 0.5745,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4548,
+        "normalized_d_pressure": 0.149
+      }
+    },
+    {
+      "step": 90,
+      "path_fraction": 0.9,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 86.8,
+      "pressure_psi": 5.08,
+      "evidence_distance": 0.4928,
+      "table_listed_distance": 0.5886,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.468,
+        "normalized_d_pressure": 0.1544
+      }
+    },
+    {
+      "step": 91,
+      "path_fraction": 0.91,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 88.12,
+      "pressure_psi": 5.0,
+      "evidence_distance": 0.5071,
+      "table_listed_distance": 0.6028,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4812,
+        "normalized_d_pressure": 0.1599
+      }
+    },
+    {
+      "step": 92,
+      "path_fraction": 0.92,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 89.44,
+      "pressure_psi": 4.92,
+      "evidence_distance": 0.5213,
+      "table_listed_distance": 0.617,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.4944,
+        "normalized_d_pressure": 0.1653
+      }
+    },
+    {
+      "step": 93,
+      "path_fraction": 0.93,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 90.76,
+      "pressure_psi": 4.85,
+      "evidence_distance": 0.5353,
+      "table_listed_distance": 0.631,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5076,
+        "normalized_d_pressure": 0.1701
+      }
+    },
+    {
+      "step": 94,
+      "path_fraction": 0.94,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 92.08,
+      "pressure_psi": 4.77,
+      "evidence_distance": 0.5496,
+      "table_listed_distance": 0.6451,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5208,
+        "normalized_d_pressure": 0.1755
+      }
+    },
+    {
+      "step": 95,
+      "path_fraction": 0.95,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 93.4,
+      "pressure_psi": 4.69,
+      "evidence_distance": 0.5638,
+      "table_listed_distance": 0.6593,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.534,
+        "normalized_d_pressure": 0.181
+      }
+    },
+    {
+      "step": 96,
+      "path_fraction": 0.96,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 94.72,
+      "pressure_psi": 4.61,
+      "evidence_distance": 0.5781,
+      "table_listed_distance": 0.6735,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5472,
+        "normalized_d_pressure": 0.1864
+      }
+    },
+    {
+      "step": 97,
+      "path_fraction": 0.97,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 96.04,
+      "pressure_psi": 4.53,
+      "evidence_distance": 0.5923,
+      "table_listed_distance": 0.6877,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5604,
+        "normalized_d_pressure": 0.1918
+      }
+    },
+    {
+      "step": 98,
+      "path_fraction": 0.98,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 97.36,
+      "pressure_psi": 4.46,
+      "evidence_distance": 0.6064,
+      "table_listed_distance": 0.7017,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5736,
+        "normalized_d_pressure": 0.1966
+      }
+    },
+    {
+      "step": 99,
+      "path_fraction": 0.99,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 98.68,
+      "pressure_psi": 4.38,
+      "evidence_distance": 0.6206,
+      "table_listed_distance": 0.7159,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.5868,
+        "normalized_d_pressure": 0.202
+      }
+    },
+    {
+      "step": 100,
+      "path_fraction": 1.0,
+      "segment": "Lunar Habitat -> Spacesuit EVA",
+      "o2_pct": 100.0,
+      "pressure_psi": 4.3,
+      "evidence_distance": 0.6349,
+      "table_listed_distance": 0.7301,
+      "intersects_tested": false,
+      "nearest_investigation": {
+        "id": "PSI-68",
+        "acronym": "FLEX-2",
+        "name": "Flame Extinction Experiment - 2",
+        "doi": "10.60555/byp8-h018",
+        "tested_o2": {
+          "min": 10.0,
+          "max": 40.0
+        },
+        "tested_pressure_psi": {
+          "min": 7.35,
+          "max": 44.09
+        }
+      },
+      "component_distances": {
+        "normalized_d_o2": 0.6,
+        "normalized_d_pressure": 0.2075
+      }
+    }
+  ]
+}

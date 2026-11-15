@@ -9,7 +9,7 @@ import {
   ShieldCheck,
   AlertTriangle,
 } from 'lucide-react';
-import pathData from '../../../data/analysis/path.json';
+import pathData from '@/data/analysis/path.json';
 import { NearestPathBridge } from '@/components/NearestPathBridge';
 import { AtmosphereFlowController } from '@/components/AtmosphereFlowController';
 import { HoverTitleExplanation } from '@/components/HoverTitleExplanation';

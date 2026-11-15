@@ -3,8 +3,8 @@
 import React from 'react';
 import { SurrogateDomainWidget } from '@/components/SurrogateDomainWidget';
 import { AtmosphereFlowController } from '@/components/AtmosphereFlowController';
-import surrogateData from '../../../data/analysis/surrogate_evaluation.json';
-import nullResultData from '../../../data/analysis/null_result_report.json';
+import surrogateData from '@/data/analysis/surrogate_evaluation.json';
+import nullResultData from '@/data/analysis/null_result_report.json';
 import { Cpu, ShieldAlert, CheckCircle2, Layers, AlertTriangle } from 'lucide-react';
 import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 

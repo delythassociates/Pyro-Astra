@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import pathData from '../../data/analysis/path.json';
+import pathData from '@/data/analysis/path.json';
 import { Compass, ArrowRight, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 export function NearestPathBridge() {

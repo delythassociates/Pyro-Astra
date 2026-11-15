@@ -1,0 +1,172 @@
+{
+  "summary": {
+    "total_records": 18,
+    "deep_records": 8,
+    "catalog_records": 10,
+    "verified_records": 2,
+    "data_readiness_score": 96.5
+  },
+  "unit_conversion_audit": [
+    {
+      "formula": "1 psi = 6.894757 kPa",
+      "status": "verified_exact",
+      "usage_count": 5
+    },
+    {
+      "formula": "1 atm = 14.6959 psi",
+      "status": "verified_exact",
+      "usage_count": 2
+    }
+  ],
+  "rule_compliance": {
+    "rule_1_never_invent_null_when_missing": "PASSED",
+    "rule_2_every_val_has_provenance": "PASSED",
+    "rule_3_unit_conversions_cite_formula": "PASSED",
+    "rule_4_burner_flow_separated_from_cabin": "PASSED",
+    "rule_5_no_partial_gravity_data": "PASSED",
+    "rule_6_no_rockets_or_propellants": "PASSED"
+  },
+  "field_missingness_heatmap": {
+    "hardware": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "objectives": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "fuels": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "sample_shape": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "sample_size": {
+      "missing_count": 16,
+      "missing_pct": 88.9,
+      "present_count": 2
+    },
+    "cabin_o2_pct": {
+      "missing_count": 15,
+      "missing_pct": 83.3,
+      "present_count": 3
+    },
+    "burner_flow_o2_pct": {
+      "missing_count": 17,
+      "missing_pct": 94.4,
+      "present_count": 1
+    },
+    "pressure_psi": {
+      "missing_count": 16,
+      "missing_pct": 88.9,
+      "present_count": 2
+    },
+    "airflow_speed_cm_s": {
+      "missing_count": 11,
+      "missing_pct": 61.1,
+      "present_count": 7
+    },
+    "varied_variables": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "constant_variables": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "sensors": {
+      "missing_count": 10,
+      "missing_pct": 55.6,
+      "present_count": 8
+    },
+    "n_tests": {
+      "missing_count": 11,
+      "missing_pct": 61.1,
+      "present_count": 7
+    }
+  },
+  "deep_record_missingness": {
+    "PSI-102": {
+      "acronym": "SAME",
+      "missing_count": 4,
+      "not_reported": [
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi"
+      ]
+    },
+    "PSI-101": {
+      "acronym": "SAME-R",
+      "missing_count": 4,
+      "not_reported": [
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi"
+      ]
+    },
+    "PSI-26": {
+      "acronym": "BASS",
+      "missing_count": 5,
+      "not_reported": [
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "n_tests"
+      ]
+    },
+    "PSI-25": {
+      "acronym": "BASS-II",
+      "missing_count": 2,
+      "not_reported": [
+        "burner_flow_o2_pct",
+        "pressure_psi"
+      ]
+    },
+    "PSI-99": {
+      "acronym": "SAFFIRE-II",
+      "missing_count": 4,
+      "not_reported": [
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi"
+      ]
+    },
+    "PSI-69": {
+      "acronym": "FLEX",
+      "missing_count": 1,
+      "not_reported": [
+        "burner_flow_o2_pct"
+      ]
+    },
+    "PSI-159": {
+      "acronym": "CFI-G",
+      "missing_count": 4,
+      "not_reported": [
+        "sample_size",
+        "cabin_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s"
+      ]
+    },
+    "PSI-68": {
+      "acronym": "FLEX-2",
+      "missing_count": 2,
+      "not_reported": [
+        "sample_size",
+        "burner_flow_o2_pct"
+      ]
+    }
+  }
+}

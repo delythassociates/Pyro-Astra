@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import bass2Data from '../../data/bass2_table_5_1.json';
+import bass2Data from '@/data/bass2_table_5_1.json';
 
 interface TableRow {
   test_no: string;

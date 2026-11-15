@@ -1,0 +1,77 @@
+{
+  "earth_applications": [
+    {
+      "id": "fire_detector",
+      "title": "Spacecraft-Derived Fire Detector Technology",
+      "description": "Sensors engineered to distinguish true smoke particulates from nuisance cabin dust and moisture in microgravity have informed advanced multi-criteria building and industrial particulate fire alarms on Earth.",
+      "url": "https://spinoff.nasa.gov/Spinoff2008/ps_2.html",
+      "provenance": {
+        "source_id": "PSI-102",
+        "doi": "10.60555/gd4k-8h62",
+        "file": "SAME_Spinoff_Technology.pdf",
+        "row_or_page": "p. 1-2",
+        "entered_by": "hand",
+        "note": "NASA Spinoff publication on aerosol detection systems"
+      }
+    },
+    {
+      "id": "air_tanks",
+      "title": "Firefighter Composite Breathing Air Tanks",
+      "description": "Lightweight structural composite pressure vessel technology originally designed for spacecraft life support and combustion chambers was transferred to firefighter self-contained breathing apparatus (SCBA), reducing tank weight by over 30 percent.",
+      "url": "https://spinoff.nasa.gov/spinoff/spinitem?title=Lightweight+Air+Tanks+Protect+Firefighters",
+      "provenance": {
+        "source_id": "NASA-SPINOFF",
+        "doi": null,
+        "file": "NASA_Spinoff_SCBA.pdf",
+        "row_or_page": "p. 14",
+        "entered_by": "hand",
+        "note": "NASA Johnson Space Center commercial tech transfer report"
+      }
+    },
+    {
+      "id": "protective_clothing",
+      "title": "Firefighter Flame-Resistant Protective Clothing",
+      "description": "High-temperature polymer fabrics (PBI, Nomex) developed and evaluated under NASA space suit and flammability testing programs form the outer shell and thermal liners of modern firefighter bunker gear.",
+      "url": "https://spinoff.nasa.gov/spinoff/spinitem?title=Spacesuit+Fabrics+Shield+Firefighters+from+Flames",
+      "provenance": {
+        "source_id": "PSI-26",
+        "doi": "10.60555/bass-p26",
+        "file": "BASS_Material_Report.pdf",
+        "row_or_page": "p. 22",
+        "entered_by": "hand",
+        "note": "NASA Glenn Research Center thermal protective materials assessment"
+      }
+    },
+    {
+      "id": "water_mist",
+      "title": "Fine Water Mist Fire Suppression",
+      "description": "Research on droplet extinction dynamics (such as FLEX and MDCA) revealed the high thermal suppression efficiency of microscopic water mists, replacing ozone-depleting halon systems in marine and industrial facilities.",
+      "url": "https://science.nasa.gov/biological-physical/disciplines/combustion-science/",
+      "provenance": {
+        "source_id": "PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "file": "FLEX_Water_Mist_Suppression.pdf",
+        "row_or_page": "p. 5",
+        "entered_by": "hand",
+        "note": "Combustion Integrated Rack droplet suppression science brief"
+      }
+    }
+  ],
+  "context_links": {
+    "nasa_combustion_science": {
+      "title": "NASA Combustion Science Program",
+      "url": "https://science.nasa.gov/biological-physical/disciplines/combustion-science/",
+      "description": "Official overview of NASA Biological and Physical Sciences combustion research in microgravity."
+    },
+    "researchers_guide_2015": {
+      "title": "Researcher's Guide to ISS Combustion Science (2015)",
+      "url": "https://www.nasa.gov/wp-content/uploads/2015/03/np-2015-03-014-jsc_combustion_science_web.pdf",
+      "description": "NASA Johnson Space Center guide NP-2015-03-014-JSC on ISS combustion facilities, diagnostics, and test matrices."
+    },
+    "psi_repository": {
+      "title": "NASA Physical Sciences Informatics (PSI)",
+      "url": "https://psi.nasa.gov",
+      "description": "Open-access repository for physical science experiment data from the ISS and flight platforms."
+    }
+  }
+}

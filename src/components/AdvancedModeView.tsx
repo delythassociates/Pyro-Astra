@@ -8,7 +8,7 @@ import { Bass2SpreadRateChart } from './Bass2SpreadRateChart';
 import { DualSourceComparisonChart } from './DualSourceComparisonChart';
 import { SurrogateDomainWidget } from './SurrogateDomainWidget';
 import { InfoButton } from './InfoButton';
-import table51Data from '../../data/bass2_table_5_1.json';
+import table51Data from '@/data/bass2_table_5_1.json';
 
 export function AdvancedModeView() {
   // Workbench state

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import proposedData from '../../../data/analysis/proposed_experiments.json';
+import proposedData from '@/data/analysis/proposed_experiments.json';
 import { Sparkles, Info, ShieldAlert, ArrowRight, Layers, FileSpreadsheet } from 'lucide-react';
 import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 

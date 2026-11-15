@@ -1,0 +1,428 @@
+{
+  "metadata": {
+    "psi_id": "PSI-102",
+    "source_file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+    "encoding": "utf-8",
+    "total_rows": 8,
+    "columns_normalized": [
+      "Sample #",
+      "Sample Material",
+      "Air Flow (cm/s)",
+      "Weight loss rate (mg/min)",
+      "Aging Duration (minutes)"
+    ],
+    "suspect_rows": [],
+    "gravity_regime": "microgravity",
+    "note": "Ingested directly from authentic NASA PSI PSI-102 experimental table."
+  },
+  "runs": [
+    {
+      "row_index": 1,
+      "test_id": "1",
+      "fuel_raw": "Teflon",
+      "material_class": "Teflon",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "1",
+        "fuel": "Teflon",
+        "airflow_speed_cm_s": 5.0,
+        "weight_loss_rate_mg_min": 2.0,
+        "aging_duration_min": 1.0
+      },
+      "raw": {
+        "Sample #": "1",
+        "Sample Material": "Teflon",
+        "Air Flow (cm/s)": "5",
+        "Weight loss rate (mg/min)": "2",
+        "Aging Duration (minutes)": "1"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "1",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "1",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "1",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "1",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "1",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 2,
+      "test_id": "2",
+      "fuel_raw": "Teflon",
+      "material_class": "Teflon",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "2",
+        "fuel": "Teflon",
+        "airflow_speed_cm_s": 5.0,
+        "weight_loss_rate_mg_min": 1.0,
+        "aging_duration_min": 1.0
+      },
+      "raw": {
+        "Sample #": "2",
+        "Sample Material": "Teflon",
+        "Air Flow (cm/s)": "5",
+        "Weight loss rate (mg/min)": "1",
+        "Aging Duration (minutes)": "1"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "2",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "2",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "2",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "2",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "2",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 3,
+      "test_id": "3",
+      "fuel_raw": "Teflon",
+      "material_class": "Teflon",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "3",
+        "fuel": "Teflon",
+        "airflow_speed_cm_s": 5.0,
+        "weight_loss_rate_mg_min": 2.0,
+        "aging_duration_min": 20.0
+      },
+      "raw": {
+        "Sample #": "3",
+        "Sample Material": "Teflon",
+        "Air Flow (cm/s)": "5",
+        "Weight loss rate (mg/min)": "2",
+        "Aging Duration (minutes)": "20"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "3",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "3",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "3",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "3",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "3",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 4,
+      "test_id": "4",
+      "fuel_raw": "Teflon",
+      "material_class": "Teflon",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "4",
+        "fuel": "Teflon",
+        "airflow_speed_cm_s": 10.0,
+        "weight_loss_rate_mg_min": 2.0,
+        "aging_duration_min": 1.0
+      },
+      "raw": {
+        "Sample #": "4",
+        "Sample Material": "Teflon",
+        "Air Flow (cm/s)": "10",
+        "Weight loss rate (mg/min)": "2",
+        "Aging Duration (minutes)": "1"
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "4",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "4",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "4",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "4",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "4",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 5,
+      "test_id": "5",
+      "fuel_raw": "Kapton: same conditions as 1-4",
+      "material_class": "Kapton",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "5",
+        "fuel": "Kapton: same conditions as 1-4",
+        "airflow_speed_cm_s": null,
+        "weight_loss_rate_mg_min": null,
+        "aging_duration_min": null
+      },
+      "raw": {
+        "Sample #": "5",
+        "Sample Material": "Kapton: same conditions as 1-4",
+        "Air Flow (cm/s)": "",
+        "Weight loss rate (mg/min)": "",
+        "Aging Duration (minutes)": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "5",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "5",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "5",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "5",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "5",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 6,
+      "test_id": "6",
+      "fuel_raw": "Silicone Rubber: same conditions as 1-4",
+      "material_class": "Silicone",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "6",
+        "fuel": "Silicone Rubber: same conditions as 1-4",
+        "airflow_speed_cm_s": null,
+        "weight_loss_rate_mg_min": null,
+        "aging_duration_min": null
+      },
+      "raw": {
+        "Sample #": "6",
+        "Sample Material": "Silicone Rubber: same conditions as 1-4",
+        "Air Flow (cm/s)": "",
+        "Weight loss rate (mg/min)": "",
+        "Aging Duration (minutes)": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "6",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "6",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "6",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "6",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "6",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 7,
+      "test_id": "7",
+      "fuel_raw": "Lampwick: same conditions as 1-4",
+      "material_class": "Cotton lampwick",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "7",
+        "fuel": "Lampwick: same conditions as 1-4",
+        "airflow_speed_cm_s": null,
+        "weight_loss_rate_mg_min": null,
+        "aging_duration_min": null
+      },
+      "raw": {
+        "Sample #": "7",
+        "Sample Material": "Lampwick: same conditions as 1-4",
+        "Air Flow (cm/s)": "",
+        "Weight loss rate (mg/min)": "",
+        "Aging Duration (minutes)": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "7",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "7",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "7",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "7",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "7",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    },
+    {
+      "row_index": 8,
+      "test_id": "8",
+      "fuel_raw": "Dibutyl Phthalate: same conditions as 1-4",
+      "material_class": "Dibutyl phthalate",
+      "gravity_regime": "microgravity",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "8",
+        "fuel": "Dibutyl Phthalate: same conditions as 1-4",
+        "airflow_speed_cm_s": null,
+        "weight_loss_rate_mg_min": null,
+        "aging_duration_min": null
+      },
+      "raw": {
+        "Sample #": "8",
+        "Sample Material": "Dibutyl Phthalate: same conditions as 1-4",
+        "Air Flow (cm/s)": "",
+        "Weight loss rate (mg/min)": "",
+        "Aging Duration (minutes)": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "8",
+          "column": "Sample #"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "8",
+          "column": "Sample Material"
+        },
+        "airflow_speed_cm_s": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "8",
+          "column": "Air Flow (cm/s)"
+        },
+        "weight_loss_rate_mg_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "8",
+          "column": "Weight loss rate (mg/min)"
+        },
+        "aging_duration_min": {
+          "file": "raw_real/PSI-102/experimental_table/PSI-102_Experimental table_SAME.csv",
+          "test_id": "8",
+          "column": "Aging Duration (minutes)"
+        }
+      }
+    }
+  ]
+}

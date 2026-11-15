@@ -1,0 +1,1339 @@
+{
+  "metadata": {
+    "psi_id": "PSI-22",
+    "source_file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+    "encoding": "utf-8",
+    "total_rows": 32,
+    "columns_normalized": [
+      "Test Type",
+      "Test Day",
+      "Year",
+      "Month",
+      "Date",
+      "Mesh Polarity",
+      "Fuel Bottle",
+      "Fuel Conc",
+      "Flames Ignited",
+      "Notes"
+    ],
+    "suspect_rows": [],
+    "gravity_regime": "electric-field-analog",
+    "note": "Ingested directly from authentic NASA PSI PSI-22 experimental table.",
+    "analogue_evidence_only": true,
+    "partial_gravity_disclaimer": "Electric-field-induced buoyancy analog only; never to be cited or displayed as partial gravity data."
+  },
+  "runs": [
+    {
+      "row_index": 1,
+      "test_id": "18073",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18073",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18073",
+        "Year": "2018",
+        "Month": "3",
+        "Date": "14",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "10",
+        "Notes": "Test day is formatted YYDDD where YY identifies year and DDD identifies day of year (GMT). "
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18073",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18073",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 2,
+      "test_id": "18078",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18078",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18078",
+        "Year": "2018",
+        "Month": "3",
+        "Date": "19",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "70%",
+        "Flames Ignited": "10",
+        "Notes": "Mesh polarity refers to the polarity of the high-voltage power supply and the copper electrode relative to the burner. "
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18078",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18078",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 3,
+      "test_id": "PSI-22-ROW-3",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-3",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": "Fuel Conc. (diluted with nitrogen on a volume basis) was varied between tests, but typically matched the bottle. The list only accounts for flames ignited. "
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-3",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-3",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 4,
+      "test_id": "18080",
+      "fuel_raw": "40% CH4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18080",
+        "fuel": "40% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18080",
+        "Year": "2018",
+        "Month": "3",
+        "Date": "21",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "40% CH4",
+        "Fuel Conc": "40%",
+        "Flames Ignited": "8",
+        "Notes": "Flames Ignited is the number ignited on that day (neglecting the day change on ISS). "
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18080",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18080",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 5,
+      "test_id": "18087",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18087",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18087",
+        "Year": "2018",
+        "Month": "3",
+        "Date": "28",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "80%",
+        "Flames Ignited": "10",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18087",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18087",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 6,
+      "test_id": "PSI-22-ROW-6",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-6",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-6",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-6",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 7,
+      "test_id": "18092",
+      "fuel_raw": "30% C2H4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18092",
+        "fuel": "30% C2H4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18092",
+        "Year": "2018",
+        "Month": "4",
+        "Date": "2",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "30% C2H4",
+        "Fuel Conc": "30%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18092",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18092",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 8,
+      "test_id": "18095",
+      "fuel_raw": "30% C2H4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18095",
+        "fuel": "30% C2H4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18095",
+        "Year": "2018",
+        "Month": "4",
+        "Date": "5",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "30% C2H4",
+        "Fuel Conc": "30%",
+        "Flames Ignited": "10",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18095",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18095",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 9,
+      "test_id": "18102",
+      "fuel_raw": "40% CH4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18102",
+        "fuel": "40% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18102",
+        "Year": "2018",
+        "Month": "4",
+        "Date": "12",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "40% CH4",
+        "Fuel Conc": "40%",
+        "Flames Ignited": "8",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18102",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18102",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 10,
+      "test_id": "18106",
+      "fuel_raw": "40% CH4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18106",
+        "fuel": "40% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18106",
+        "Year": "2018",
+        "Month": "4",
+        "Date": "16",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "40% CH4",
+        "Fuel Conc": "40%",
+        "Flames Ignited": "13",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18106",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18106",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 11,
+      "test_id": "18113",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18113",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18113",
+        "Year": "2018",
+        "Month": "4",
+        "Date": "23",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "15",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18113",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18113",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 12,
+      "test_id": "18130",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18130",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18130",
+        "Year": "2018",
+        "Month": "5",
+        "Date": "10",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "70%",
+        "Flames Ignited": "13",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18130",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18130",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 13,
+      "test_id": "18137",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18137",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "First round of tests with coflow burner",
+        "Test Day": "18137",
+        "Year": "2018",
+        "Month": "5",
+        "Date": "17",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "80%",
+        "Flames Ignited": "12",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18137",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18137",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 14,
+      "test_id": "PSI-22-ROW-14",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-14",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-14",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-14",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 15,
+      "test_id": "18269",
+      "fuel_raw": "40% CH4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18269",
+        "fuel": "40% CH4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18269",
+        "Year": "2018",
+        "Month": "9",
+        "Date": "26",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "40% CH4",
+        "Fuel Conc": "40%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18269",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18269",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 16,
+      "test_id": "18274",
+      "fuel_raw": "30% C2H4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18274",
+        "fuel": "30% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18274",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "1",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "30% C2H4",
+        "Fuel Conc": "30%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18274",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18274",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 17,
+      "test_id": "18282",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18282",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18282",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "9",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "70%",
+        "Flames Ignited": "13",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18282",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18282",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 18,
+      "test_id": "PSI-22-ROW-18",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-18",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-18",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-18",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 19,
+      "test_id": "18285",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18285",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18285",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "12",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "10",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18285",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18285",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 20,
+      "test_id": "18290",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18290",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18290",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "17",
+        "Mesh Polarity": "negative",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "80%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18290",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18290",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 21,
+      "test_id": "18298",
+      "fuel_raw": "40% CH4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18298",
+        "fuel": "40% CH4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18298",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "25",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "40% CH4",
+        "Fuel Conc": "40%",
+        "Flames Ignited": "9",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18298",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18298",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 22,
+      "test_id": "18302",
+      "fuel_raw": "30% C2H4",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18302",
+        "fuel": "30% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18302",
+        "Year": "2018",
+        "Month": "10",
+        "Date": "29",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "30% C2H4",
+        "Fuel Conc": "30%",
+        "Flames Ignited": "10",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18302",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18302",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 23,
+      "test_id": "18312",
+      "fuel_raw": "100% CH4",
+      "material_class": "Methane",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18312",
+        "fuel": "100% CH4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18312",
+        "Year": "2018",
+        "Month": "11",
+        "Date": "8",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% CH4",
+        "Fuel Conc": "70%",
+        "Flames Ignited": "13",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18312",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18312",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 24,
+      "test_id": "PSI-22-ROW-24",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-24",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-24",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-24",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 25,
+      "test_id": "18319",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18319",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18319",
+        "Year": "2018",
+        "Month": "11",
+        "Date": "15",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "25%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18319",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18319",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 26,
+      "test_id": "PSI-22-ROW-26",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-26",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "50%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-26",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-26",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 27,
+      "test_id": "PSI-22-ROW-27",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-27",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "80%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-27",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-27",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 28,
+      "test_id": "PSI-22-ROW-28",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-28",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-28",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-28",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 29,
+      "test_id": "18319",
+      "fuel_raw": "100% C2H4",
+      "material_class": "Ethylene",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "18319",
+        "fuel": "100% C2H4"
+      },
+      "raw": {
+        "Test Type": "Second round of tests with gas-jet burner",
+        "Test Day": "18319",
+        "Year": "2018",
+        "Month": "11",
+        "Date": "15",
+        "Mesh Polarity": "positive",
+        "Fuel Bottle": "100% C2H4",
+        "Fuel Conc": "25%",
+        "Flames Ignited": "11",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18319",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "18319",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 30,
+      "test_id": "PSI-22-ROW-30",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-30",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "50%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-30",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-30",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 31,
+      "test_id": "PSI-22-ROW-31",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-31",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "80%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-31",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-31",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    },
+    {
+      "row_index": 32,
+      "test_id": "PSI-22-ROW-32",
+      "fuel_raw": "",
+      "material_class": "unmapped",
+      "gravity_regime": "electric-field-analog",
+      "is_footnote_or_non_test": false,
+      "is_suspect": false,
+      "suspect_reason": null,
+      "mapped_fields": {
+        "test_id": "PSI-22-ROW-32",
+        "fuel": ""
+      },
+      "raw": {
+        "Test Type": "",
+        "Test Day": "",
+        "Year": "",
+        "Month": "",
+        "Date": "",
+        "Mesh Polarity": "",
+        "Fuel Bottle": "",
+        "Fuel Conc": "100%",
+        "Flames Ignited": "",
+        "Notes": ""
+      },
+      "provenance": {
+        "test_id": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-32",
+          "column": "Test Day"
+        },
+        "fuel": {
+          "file": "raw_real/PSI-22/experimental_table/PSI-22_Experimental table_ACME E-FIELD Flames.csv",
+          "test_id": "PSI-22-ROW-32",
+          "column": "Fuel Bottle"
+        }
+      },
+      "analogue_evidence_only": true,
+      "is_partial_gravity": false,
+      "analogue_note": "ACME E-FIELD Flames uses high-voltage electric fields to mimic buoyant convection. Classified strictly as analogue evidence, never partial-gravity per PYRO-ASTRA Rule 5."
+    }
+  ]
+}

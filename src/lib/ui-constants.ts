@@ -6,7 +6,7 @@
  * identical, verified figures with zero discrepancies.
  */
 
-import lunarRowCheck from '../../data/analysis/lunar_row_check.json';
+import lunarRowCheck from '@/data/analysis/lunar_row_check.json';
 
 // Total Ingested Table Rows: 1,807 flight runs + 8 FLEX-2 candidate sets = 1,815
 export const TOTAL_INGESTED_TABLE_ROWS = 1815;

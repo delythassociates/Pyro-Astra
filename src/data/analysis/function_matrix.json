@@ -1,0 +1,805 @@
+{
+  "label": "defined by the PYRO-ASTRA team",
+  "description": "Matrix mapping 6 spacecraft fire safety functions across 8 deep investigations using verbatim metadata statements.",
+  "footer_notice": "empty cell = no matching statement in the metadata we processed.",
+  "summary": {
+    "total_functions": 6,
+    "total_deep_investigations": 8,
+    "total_tags_with_quotes": 25,
+    "total_empty_cells": 23,
+    "function_stats": {
+      "detection": {
+        "name": "Detection",
+        "tagged_count": 3,
+        "empty_count": 5
+      },
+      "suppression": {
+        "name": "Suppression",
+        "tagged_count": 6,
+        "empty_count": 2
+      },
+      "material_screening": {
+        "name": "Material flammability screening",
+        "tagged_count": 3,
+        "empty_count": 5
+      },
+      "fire_growth_spread": {
+        "name": "Fire growth and spread",
+        "tagged_count": 3,
+        "empty_count": 5
+      },
+      "ventilation_airflow": {
+        "name": "Ventilation/airflow effects",
+        "tagged_count": 5,
+        "empty_count": 3
+      },
+      "extinction_limits": {
+        "name": "Extinction limits",
+        "tagged_count": 5,
+        "empty_count": 3
+      }
+    }
+  },
+  "investigations_meta": [
+    {
+      "id": "PSI-102",
+      "acronym": "SAME",
+      "name": "Smoke and Aerosol Measurement Experiment",
+      "doi": "10.60555/gd4k-8h62"
+    },
+    {
+      "id": "PSI-101",
+      "acronym": "SAME-R",
+      "name": "Smoke Aerosol Measurement Experiment - Reflight",
+      "doi": "10.60555/2np7-jv14"
+    },
+    {
+      "id": "PSI-26",
+      "acronym": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "doi": "10.60555/58h4-dy80"
+    },
+    {
+      "id": "PSI-25",
+      "acronym": "BASS-II",
+      "name": "Burning and Suppression of Solids - II",
+      "doi": "10.60555/4qc4-de67"
+    },
+    {
+      "id": "PSI-99",
+      "acronym": "SAFFIRE-II",
+      "name": "Spacecraft Fire Experiment-II",
+      "doi": "10.60555/2chp-m469"
+    },
+    {
+      "id": "PSI-69",
+      "acronym": "FLEX",
+      "name": "Flame Extinguishment Experiment",
+      "doi": "10.60555/mbq8-0451"
+    },
+    {
+      "id": "PSI-159",
+      "acronym": "CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "doi": "10.60555/cyt1-kh64"
+    },
+    {
+      "id": "PSI-68",
+      "acronym": "FLEX-2",
+      "name": "Flame Extinguishment Experiment - 2",
+      "doi": "10.60555/byp8-h018"
+    }
+  ],
+  "matrix": [
+    {
+      "function_id": "detection",
+      "function_name": "Detection",
+      "description": "Smoke, aerosol, gas, or particulate detection and sensor response under microgravity conditions.",
+      "keywords": [
+        "smoke",
+        "detector",
+        "detection",
+        "aerosol",
+        "particulate",
+        "fire detector",
+        "smoke particulate"
+      ],
+      "earth_transfer": {
+        "id": "fire_detector",
+        "title": "Spacecraft-Derived Fire Detector Technology",
+        "description": "Sensors engineered to distinguish true smoke particulates from nuisance cabin dust and moisture in microgravity have informed advanced multi-criteria building and industrial particulate fire alarms on Earth.",
+        "url": "https://spinoff.nasa.gov/Spinoff2008/ps_2.html",
+        "provenance": {
+          "source_id": "PSI-102",
+          "doi": "10.60555/gd4k-8h62",
+          "file": "SAME_Spinoff_Technology.pdf",
+          "row_or_page": "p. 1-2",
+          "entered_by": "hand",
+          "note": "NASA Spinoff publication on aerosol detection systems"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": true,
+          "quote": "One of the major goals of this investigation was to quantify the sizes that the liquid smoke particulate achieves in low gravity and to relate the droplet size distribution to the smoke generation and smoke transport conditions in the experiment.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-102/investigation_metadata.json"
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": true,
+          "quote": "Similar to the original SAME investigation, the primary objective of the SAME-R investigation was to quantify the sizes that the liquid smoke particulate achieves in low gravity and to relate the droplet size distribution to the smoke generation and smoke transport conditions in the experiment.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-101/investigation_metadata.json"
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "detection",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        }
+      ]
+    },
+    {
+      "function_id": "suppression",
+      "function_name": "Suppression",
+      "description": "Physical and chemical fire extinguishment, gaseous suppressants (CO2, He, N2), water mist, and quenching.",
+      "keywords": [
+        "suppression",
+        "extinguish",
+        "fire extinguishing",
+        "extinguishment",
+        "suppressant",
+        "suppress",
+        "extinguisher"
+      ],
+      "earth_transfer": {
+        "id": "water_mist",
+        "title": "Fine Water Mist Fire Suppression",
+        "description": "Research on droplet extinction dynamics (such as FLEX and MDCA) revealed the high thermal suppression efficiency of microscopic water mists, replacing ozone-depleting halon systems in marine and industrial facilities.",
+        "url": "https://science.nasa.gov/biological-physical/disciplines/combustion-science/",
+        "provenance": {
+          "source_id": "PSI-69",
+          "doi": "10.60555/mbq8-0451",
+          "file": "FLEX_Water_Mist_Suppression.pdf",
+          "row_or_page": "p. 5",
+          "entered_by": "hand",
+          "note": "Combustion Integrated Rack droplet suppression science brief"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": true,
+          "quote": "The current Fire Prevention, Detection, and Suppression (FPDS) program plan allows for the re-evaluation of future sensor technology, to allow new technology and capability to be utilized.",
+          "key_path": "researchImpacts",
+          "source_file": "raw_real/PSI-102/investigation_metadata.json"
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": true,
+          "quote": "The current Fire Prevention, Detection, and Suppression (FPDS) program plan allows for the re-evaluation of future sensor technology, to allow new technology and capability to be utilized.",
+          "key_path": "researchImpacts",
+          "source_file": "raw_real/PSI-101/investigation_metadata.json"
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": true,
+          "quote": "2.) Assess the effectiveness of an inert, gaseous extinguishing agent (similar to that used on ISS) in putting out flames over different materials, geometries, preheating, and flow.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json"
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": true,
+          "quote": "The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions. The mission seeks to validate and improve simplified models by incorporating detailed chemical reactions, heat transfer, and material movement, using both space-based data and extensive ground-based tests. Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations. These investigations are essential for advancing the fundamental understanding of combustion processes in microgravity and enhancing fire safety protocols for future space missions.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-69/investigation_metadata.json"
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "suppression",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": true,
+          "quote": "Flame Extinguishment Experiment - 2",
+          "key_path": "title",
+          "source_file": "raw_real/PSI-68/investigation_metadata.json"
+        }
+      ]
+    },
+    {
+      "function_id": "material_screening",
+      "function_name": "Material flammability screening",
+      "description": "Solid material flammability screening protocols, bridging normal-gravity standards (NASA-STD-6001 Test 1) to flight environments.",
+      "keywords": [
+        "NASA-STD-6001",
+        "screening",
+        "materials selection",
+        "standard test method",
+        "standard test",
+        "flammability screening"
+      ],
+      "earth_transfer": {
+        "id": "protective_clothing",
+        "title": "Firefighter Flame-Resistant Protective Clothing",
+        "description": "High-temperature polymer fabrics (PBI, Nomex) developed and evaluated under NASA space suit and flammability testing programs form the outer shell and thermal liners of modern firefighter bunker gear.",
+        "url": "https://spinoff.nasa.gov/spinoff/spinitem?title=Spacesuit+Fabrics+Shield+Firefighters+from+Flames",
+        "provenance": {
+          "source_id": "PSI-26",
+          "doi": "10.60555/bass-p26",
+          "file": "BASS_Material_Report.pdf",
+          "row_or_page": "p. 22",
+          "entered_by": "hand",
+          "note": "NASA Glenn Research Center thermal protective materials assessment"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": true,
+          "quote": "The two main objectives for BASS are to:\n    1.) Begin to bridge the gap between the normal gravity NASA-STD-6001 Test#1 method, ground-based microgravity tests, and actual material flammability in microgravity.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json"
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "2) Begin to bridge the gap between the normal gravity NASA-STD-6001 Test #1 method, ground-based microgravity tests, and actual material flammability in microgravity.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": true,
+          "quote": "The objectives of SAFFIRE-II are to determine how rapidly a large scale fire grows in low-gravity and to investigate the low-g flammability limits compared to those obtained in NASA\u2019s normal gravity material flammability screening test.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-99/investigation_metadata.json"
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "material_screening",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        }
+      ]
+    },
+    {
+      "function_id": "fire_growth_spread",
+      "function_name": "Fire growth and spread",
+      "description": "Empirical rates of flame spread, propagation directions (concurrent vs opposed), and large-scale fire growth.",
+      "keywords": [
+        "fire grow",
+        "flame spread",
+        "fire growth",
+        "spread rate",
+        "flame propagation",
+        "growth and spread",
+        "fire grows"
+      ],
+      "earth_transfer": {
+        "id": "air_tanks",
+        "title": "Firefighter Composite Breathing Air Tanks",
+        "description": "Lightweight structural composite pressure vessel technology originally designed for spacecraft life support and combustion chambers was transferred to firefighter self-contained breathing apparatus (SCBA), reducing tank weight by over 30 percent.",
+        "url": "https://spinoff.nasa.gov/spinoff/spinitem?title=Lightweight+Air+Tanks+Protect+Firefighters",
+        "provenance": {
+          "source_id": "NASA-SPINOFF",
+          "doi": null,
+          "file": "NASA_Spinoff_SCBA.pdf",
+          "row_or_page": "p. 14",
+          "entered_by": "hand",
+          "note": "NASA Johnson Space Center commercial tech transfer report"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": true,
+          "quote": "With concurrent-flow air flows in the same direction as the flame spread and in opposed-flow air flows in the opposite direction of flame spread.",
+          "key_path": "approach",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json"
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "Objectives Include:\n  1) Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": true,
+          "quote": "The objectives of SAFFIRE-II are to determine how rapidly a large scale fire grows in low-gravity and to investigate the low-g flammability limits compared to those obtained in NASA\u2019s normal gravity material flammability screening test.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-99/investigation_metadata.json"
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "fire_growth_spread",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        }
+      ]
+    },
+    {
+      "function_id": "ventilation_airflow",
+      "function_name": "Ventilation/airflow effects",
+      "description": "Effects of low-velocity convective airflow, forced duct ventilation, and sub-buoyant flow speeds on combustion.",
+      "keywords": [
+        "airflow",
+        "ventilation",
+        "convection",
+        "forced flow",
+        "flow duct",
+        "convective flow",
+        "low-velocity flows",
+        "flow velocity",
+        "forced convective flow"
+      ],
+      "earth_transfer": {
+        "id": "ventilation_enclosures",
+        "title": "Industrial Enclosure & Mine Ventilation Safety",
+        "description": "Sub-buoyant convective flow modeling developed for spacecraft ducts informs safety ventilation systems for aircraft avionics bays and enclosed mining tunnels.",
+        "url": "https://science.nasa.gov/biological-physical/disciplines/combustion-science/",
+        "provenance": {
+          "source_id": "PSI-26",
+          "doi": "10.60555/58h4-dy80",
+          "file": "BASS_Operations_Log.xlsx",
+          "row_or_page": "p. 22",
+          "entered_by": "hand",
+          "note": "Flow duct ventilation research brief"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": true,
+          "quote": "BASS experiments were based on the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, oxygen concentration, temperature, etc.) To test this hypothesis with any but the thinnest materials requires extended microgravity time \u2013 longer than available in drop towers or parabolic aircraft.",
+          "key_path": "hypothesis",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json"
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "The primary variables include:\n     \u2022 Forced flow velocity (speed and direction)\n     \u2022 Ambient oxygen concentration (via working volume nitrogen vitiation)\n     \u2022 Sample geometry (rods, spherical section, slabs, films, and fabric sheets",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": true,
+          "quote": "The Saffire-1I flight unit had a sample card installed in the middle of a large flow duct.",
+          "key_path": "approach",
+          "source_file": "raw_real/PSI-99/investigation_metadata.json"
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": true,
+          "quote": "Specifically, the hypothesis posits that the lack of buoyant convection in microgravity will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions.",
+          "key_path": "hypothesis",
+          "source_file": "raw_real/PSI-69/investigation_metadata.json"
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": true,
+          "quote": "Consider multiple fuels, a range of reactant dilutions, flow rates, and pressures for normal and inverse convection directions.",
+          "key_path": "approach",
+          "source_file": "raw_real/PSI-159/investigation_metadata.json"
+        },
+        {
+          "function_id": "ventilation_airflow",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        }
+      ]
+    },
+    {
+      "function_id": "extinction_limits",
+      "function_name": "Extinction limits",
+      "description": "Limiting oxygen index (LOI), radiative and diffusive extinction boundaries, and low-speed flame quench limits.",
+      "keywords": [
+        "extinction",
+        "limiting oxygen",
+        "extinction limits",
+        "quench",
+        "flammability boundary",
+        "extinction limit",
+        "extinction mechanisms",
+        "flame extinction"
+      ],
+      "earth_transfer": {
+        "id": "inerting_standards",
+        "title": "Industrial Flame Arresting & Nitrogen Inerting Standards",
+        "description": "Limiting oxygen index (LOI) and radiative extinction boundaries established in microgravity droplet tests calibrate terrestrial ASTM flammability limits and chemical storage inerting.",
+        "url": "https://science.nasa.gov/biological-physical/disciplines/combustion-science/",
+        "provenance": {
+          "source_id": "PSI-69",
+          "doi": "10.60555/mbq8-0451",
+          "file": "FLEX_Extinction_Summary.csv",
+          "row_or_page": "Table 3",
+          "entered_by": "hand",
+          "note": "Combustion Integrated Rack extinction standard"
+        }
+      },
+      "investigations": [
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-102",
+          "acronym": "SAME",
+          "name": "Smoke and Aerosol Measurement Experiment",
+          "doi": "10.60555/gd4k-8h62",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-101",
+          "acronym": "SAME-R",
+          "name": "Smoke Aerosol Measurement Experiment - Reflight",
+          "doi": "10.60555/2np7-jv14",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-26",
+          "acronym": "BASS",
+          "name": "Burning and Suppression of Solids",
+          "doi": "10.60555/58h4-dy80",
+          "tagged": true,
+          "quote": "This investigation explored two primary air flow configurations; concurrent-flow and opposed-flow. With concurrent-flow air flows in the same direction as the flame spread and in opposed-flow air flows in the opposite direction of flame spread. Flames were observed in the top and edge profiles and data was collected on flame size, shape, color, spread rate, and potential flame quenching. The samples were placed in a small flow duct (76 mm x 76 mm cross section) that allowed for airflow across the fabric. Other sample shapes were utilized as well including spheres and cylinders.",
+          "key_path": "approach",
+          "source_file": "raw_real/PSI-26/investigation_metadata.json"
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-25",
+          "acronym": "BASS-II",
+          "name": "Burning and Suppression of Solids - II",
+          "doi": "10.60555/4qc4-de67",
+          "tagged": true,
+          "quote": "Objectives Include:\n  1) Study the ignition, flame growth, flame spread, and extinction limits for solid fuels burning in low-velocity forced flows in microgravity.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-25/investigation_metadata.json"
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-99",
+          "acronym": "SAFFIRE-II",
+          "name": "Spacecraft Fire Experiment-II",
+          "doi": "10.60555/2chp-m469",
+          "tagged": false,
+          "quote": null,
+          "key_path": null,
+          "source_file": null
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-69",
+          "acronym": "FLEX",
+          "name": "Flame Extinguishment Experiment",
+          "doi": "10.60555/mbq8-0451",
+          "tagged": true,
+          "quote": "Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-69/investigation_metadata.json"
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-159",
+          "acronym": "CFI-G",
+          "name": "Cool Flames Investigation with Gases",
+          "doi": "10.60555/cyt1-kh64",
+          "tagged": true,
+          "quote": "Cool diffusion flames for which a decrease in fluent flow rate will cause extinction, whereas an increase will cause a transition to a hot diffusion flame, with oscillation possible between hot and cool flames.",
+          "key_path": "hypothesis",
+          "source_file": "raw_real/PSI-159/investigation_metadata.json"
+        },
+        {
+          "function_id": "extinction_limits",
+          "investigation_id": "PSI-68",
+          "acronym": "FLEX-2",
+          "name": "Flame Extinguishment Experiment - 2",
+          "doi": "10.60555/byp8-h018",
+          "tagged": true,
+          "quote": "Study flame extinction mechanisms and their boundaries.",
+          "key_path": "objective",
+          "source_file": "raw_real/PSI-68/investigation_metadata.json"
+        }
+      ]
+    }
+  ]
+}

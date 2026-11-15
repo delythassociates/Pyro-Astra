@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import surrogateData from '../../data/analysis/surrogate_evaluation.json';
+import surrogateData from '@/data/analysis/surrogate_evaluation.json';
 import { ShieldCheck, ShieldAlert, AlertTriangle, Layers } from 'lucide-react';
 
 export function SurrogateDomainWidget() {

@@ -10,7 +10,7 @@ import {
   Search,
   Layers,
 } from 'lucide-react';
-import table51Data from '../../data/bass2_table_5_1.json';
+import table51Data from '@/data/bass2_table_5_1.json';
 
 export interface RunDataPoint {
   run_id: string;

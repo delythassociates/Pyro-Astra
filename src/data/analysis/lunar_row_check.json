@@ -1,0 +1,189 @@
+{
+  "description": "Evaluation of raw CSV experimental table rows against lunar exploration atmosphere conditions (O2 >= 30% and Pressure <= 10.2 psi). Scoped strictly to table rows.",
+  "exact_formulas": {
+    "mmHg_to_psi": "1 mmHg = 14.6959488 / 760 psi (approx 0.01933678 psi)",
+    "bar_to_psi": "1 bar = 100 kPa = 100000 / 6894.757293168361 psi (approx 14.5037738 psi)",
+    "atm_to_psi": "1 atm = 14.6959488 psi",
+    "mole_fraction_to_percent": "O2% = mole_fraction * 100"
+  },
+  "investigations": {
+    "PSI-69": {
+      "name": "FLEX",
+      "fuel_phase": "liquid droplet",
+      "source_file": "raw_real\\PSI-69\\experimental_table\\PSI-69_Experimental table_FLEX.csv",
+      "total_rows": 274,
+      "atmosphere_type": "Cabin ambient atmosphere",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows in the table combine O2 >= 30% AND pressure <= 10.2 psi",
+      "o2_ge_30_count": 24,
+      "p_le_10_2_count": 2,
+      "near_miss_note": "Near-miss: every FLEX row with O2 >= 30% operates at pressure >= 10.33 psi (534.3 mmHg to 770.6 mmHg, spanning 10.33 to 14.91 psi)."
+    },
+    "PSI-68": {
+      "name": "FLEX-2",
+      "fuel_phase": "liquid droplet",
+      "source_file": "raw_real\\PSI-68\\experimental_table\\PSI-68_Experimental table_Flex2.csv",
+      "total_rows": 8,
+      "atmosphere_type": "Cabin ambient atmosphere (candidate parameter sets)",
+      "cabin_both_count": 0,
+      "both_verdict": "0 confirmed run combinations in table (lists candidate sets: 17, 21, 25, 30% O2 and 0.5 to 3.0 atm)",
+      "o2_ge_30_count": 8,
+      "p_le_10_2_count": 8,
+      "candidate_set_note": "FLEX-2 candidate sets reach 30% O2 and 0.5 atm (7.35 psi), unconfirmed combination across individual flight runs."
+    },
+    "PSI-39": {
+      "name": "CFI",
+      "fuel_phase": "liquid droplet",
+      "source_file": "raw_real\\PSI-39\\experimental_table\\PSI-39_Experimental table_CFI.csv",
+      "total_rows": 87,
+      "atmosphere_type": "Chamber atmosphere",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (O2 is 17% or 21% only; 0.5 atm runs are at 21% O2).",
+      "o2_ge_30_count": 0,
+      "p_le_10_2_count": 3
+    },
+    "PSI-159": {
+      "name": "CFI-G",
+      "fuel_phase": "gas flame",
+      "source_file": "raw_real\\PSI-159\\experimental_table\\PSI-159_Experimental table_CFI-G_Normal Flames (1).csv",
+      "total_rows": 179,
+      "atmosphere_type": "Burner co-flow oxidizer ONLY (Rule 4: NOT cabin air)",
+      "cabin_both_count": 0,
+      "burner_stream_both_count": 0,
+      "both_verdict": "0 cabin rows. (20 rows at 7.35 psi with burner O2 35.85-39.26%, burner flow only, not cabin air).",
+      "rule_4_note": "Rule 4: Oxygen in burner flow is strictly isolated from cabin air. Cabin O2 is not reported."
+    },
+    "PSI-10": {
+      "name": "Flame Design",
+      "fuel_phase": "gas flame",
+      "total_rows": 327,
+      "atmosphere_type": "Reported oxidizer O2 mole fraction (gas flame, not cabin air)",
+      "cabin_both_count": 0,
+      "oxidizer_stream_both_count": 18,
+      "both_verdict": "0 cabin rows. (18 rows in Inverse Flame at 6.26-7.57 psi with oxidizer O2 31.97-85.0%, reported oxidizer stream O2 mole fraction only, not cabin air).",
+      "rule_4_note": "Rule 4 & Condition 5: Flame Design X_O2 = 'reported oxidizer O2 mole fraction' in gaseous diffusion flames; not cabin air."
+    },
+    "PSI-20": {
+      "name": "ACME BRE",
+      "fuel_phase": "gas flame",
+      "source_file": "raw_real\\PSI-20\\experimental_table\\PSI-20_Experimental table_ACME BRE.csv",
+      "total_rows": 18,
+      "atmosphere_type": "Burner oxygen concentration (diluted with N2)",
+      "cabin_both_count": 0,
+      "pressure_status": "pressure not reported",
+      "both_verdict": "Pressure not reported in table (explicitly states 'chamber pressures were also varied but are not identified in this summary table'). Never counted as a match or a miss."
+    },
+    "PSI-22": {
+      "name": "ACME E-FIELD Flames",
+      "fuel_phase": "gas flame (electric-field-analog)",
+      "total_rows": 32,
+      "atmosphere_type": "Electric field buoyancy analog (Rule 5: NEVER partial gravity)",
+      "cabin_both_count": 0,
+      "both_verdict": "Neither cabin O2 nor pressure reported in table rows. Analogue evidence only, never partial-g data."
+    },
+    "PSI-23": {
+      "name": "ACME s-Flame",
+      "fuel_phase": "gas flame",
+      "total_rows": 18,
+      "atmosphere_type": "Diluted gas atmosphere (~21% O2 qualitative note)",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (pressure null, O2 ~21% qualitative)."
+    },
+    "PSI-107": {
+      "name": "Spice",
+      "fuel_phase": "gas flame",
+      "total_rows": 469,
+      "atmosphere_type": "Co-flow air rate",
+      "cabin_both_count": 0,
+      "both_verdict": "Neither O2 concentration nor chamber pressure reported in table rows."
+    },
+    "PSI-106": {
+      "name": "SLICE",
+      "fuel_phase": "gas flame",
+      "total_rows": 12,
+      "atmosphere_type": "Gas fuel mixtures",
+      "cabin_both_count": 0,
+      "both_verdict": "Neither O2 nor pressure reported in table rows."
+    },
+    "PSI-25": {
+      "name": "BASS-II",
+      "fuel_phase": "solid fuel",
+      "total_rows": 129,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Initial O2 13.6-22.2% (max 22.2%, strictly < 30%); pressure not reported)."
+    },
+    "PSI-26": {
+      "name": "BASS",
+      "fuel_phase": "solid fuel",
+      "total_rows": 122,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Neither O2 nor pressure reported in table rows)."
+    },
+    "PSI-98": {
+      "name": "SAFFIRE-I",
+      "fuel_phase": "solid fuel",
+      "total_rows": 4,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (O2 reported as 21.0%; pressure not reported)."
+    },
+    "PSI-99": {
+      "name": "SAFFIRE-II",
+      "fuel_phase": "solid fuel",
+      "total_rows": 15,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Neither O2 nor pressure reported in table rows)."
+    },
+    "PSI-100": {
+      "name": "SAFFIRE-III",
+      "fuel_phase": "solid fuel",
+      "total_rows": 2,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Neither O2 nor pressure reported in table rows)."
+    },
+    "PSI-101": {
+      "name": "SAME-R",
+      "fuel_phase": "solid fuel",
+      "total_rows": 109,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Neither O2 nor pressure reported in table rows)."
+    },
+    "PSI-102": {
+      "name": "SAME",
+      "fuel_phase": "solid fuel",
+      "total_rows": 8,
+      "atmosphere_type": "Cabin ambient",
+      "cabin_both_count": 0,
+      "both_verdict": "0 rows combine O2 >= 30% and pressure <= 10.2 psi (Neither O2 nor pressure reported in table rows)."
+    },
+    "PSI-47": {
+      "name": "DAFT",
+      "fuel_phase": "dust / particulate",
+      "total_rows": 2,
+      "cabin_both_count": 0,
+      "both_verdict": "Neither O2 nor pressure reported in table rows."
+    },
+    "PSI-142": {
+      "name": "CFE Data Summary",
+      "fuel_phase": "bibliographic figure index",
+      "total_rows": 8,
+      "cabin_both_count": 0,
+      "both_verdict": "Bibliographic index table, not individual test runs."
+    }
+  },
+  "summary": {
+    "total_tables_audited": 19,
+    "total_table_rows_audited": 1823,
+    "confirmed_cabin_rows_combining_lunar_conditions": 0,
+    "verdict": "Across all 19 ingested experimental tables (1,823 total rows), EXACTLY 0 flight test rows combine cabin O2 >= 30% and chamber pressure <= 10.2 psi.",
+    "closest_liquid_droplet": "PSI-69 FLEX tested O2 >= 30% (24 rows), but all at pressure >= 10.33 psi (10.33 to 14.91 psi). PSI-68 FLEX-2 candidate parameter sets reach 30% O2 and 0.5 atm (7.35 psi), but combinations were not confirmed row-by-row in flight table.",
+    "closest_solid_fuel": "PSI-25 BASS-II tested initial O2 up to 22.2% across 129 rows (max 22.2%, strictly below >= 30% lunar atmosphere); chamber pressure is not reported.",
+    "gaseous_burner_isolation": "PSI-159 CFI-G has 20 rows at 7.35 psi with burner O2 35.85-39.26% and PSI-10 Flame Design has 18 rows at 6.26-7.57 psi with oxidizer O2 31.97-85.0%, but these are strictly co-flow burner oxidizer streams, NEVER cabin air (Rule 4).",
+    "acme_bre_pressure_policy": "PSI-20 ACME BRE tested O2 up to 40%, but chamber pressure is NOT reported in table rows ('chamber pressures were also varied but are not identified in this summary table'). Per rule, reported as 'pressure not reported', never counted as a match or a miss."
+  }
+}

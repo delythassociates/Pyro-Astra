@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import readinessData from '../../../data/analysis/readiness.json';
+import readinessData from '@/data/analysis/readiness.json';
 import {
   ShieldCheck,
   AlertTriangle,

@@ -3,9 +3,9 @@ import { rankInvestigations, scoreInvestigation } from './score';
 import { findNearestEvidence } from './nearest';
 import { validateAgentAnswer, AgentAnswer, AgentAnswerSentence } from './validate';
 
-import rawInvestigations from '../../data/investigations.json';
-import rawBounds from '../../data/bounds.json';
-import rawDemoAnswers from '../../data/demo-answers.json';
+import rawInvestigations from '@/data/investigations.json';
+import rawBounds from '@/data/bounds.json';
+import rawDemoAnswers from '@/data/demo-answers.json';
 
 const investigations: Investigation[] = rawInvestigations as Investigation[];
 const recordsMap: Map<string, Investigation> = new Map(investigations.map((r) => [r.id, r]));

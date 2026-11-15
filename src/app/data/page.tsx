@@ -5,7 +5,7 @@ import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import manifestData from '../../../release/manifest.json';
 import extractionsData from '../../../release/extractions.json';
 import fieldDictionaryData from '../../../release/field_dictionary.json';
-import table51Data from '../../../data/bass2_table_5_1.json';
+import table51Data from '@/data/bass2_table_5_1.json';
 
 export default function DataDownloadCenter() {
   const [activeTab, setActiveTab] = useState<'investigations' | 'table51' | 'extractions' | 'dictionary' | 'manifest'>('investigations');

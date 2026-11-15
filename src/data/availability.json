@@ -1,0 +1,705 @@
+{
+  "_catalog_version": "1.0.0",
+  "_description": "PYRO-ASTRA NASA PSI Investigation Availability, Endpoint Catalog, and Provenance Ledger",
+  "_updated_at": "2026-11-14T01:50:50.152169+00:00",
+  "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
+  "summary": {
+    "total_investigations": 18,
+    "deep_investigations": 8,
+    "catalog_investigations": 10,
+    "verified_dois": 2,
+    "total_flight_burn_tests_in_release": 20,
+    "partial_gravity_data_count": 0,
+    "partial_gravity_note": "NASA PSI contains zero partial-gravity datasets. Lunar and Martian predictions are strictly disallowed per Rule 5."
+  },
+  "investigations": [
+    {
+      "id": "PSI-102",
+      "acronym": "SAME",
+      "name": "Smoke Aerosol Measurement Experiment",
+      "doi": "10.60555/gd4k-8h62",
+      "verified": true,
+      "depth": "deep",
+      "record_type": "summary",
+      "safety_areas": [
+        "detection"
+      ],
+      "gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "data_origin": [
+        "flight",
+        "ground"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-102",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-102/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 2,
+      "not_reported_fields": [
+        "sample_size",
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-101",
+      "acronym": "SAME-R",
+      "name": "Smoke Aerosol Measurement Experiment - Reflight",
+      "doi": "10.60555/2np7-jv14",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "summary",
+      "safety_areas": [
+        "detection"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-101",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-101/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 2,
+      "not_reported_fields": [
+        "sample_size",
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-26",
+      "acronym": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "doi": "10.60555/58h4-dy80",
+      "verified": true,
+      "depth": "deep",
+      "record_type": "test_matrix",
+      "safety_areas": [
+        "prevention",
+        "suppression"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-26",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-26/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 1,
+      "not_reported_fields": [
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-25",
+      "acronym": "BASS-II",
+      "name": "Burning and Suppression of Solids - II",
+      "doi": "10.60555/4qc4-de67",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "test_matrix",
+      "safety_areas": [
+        "prevention",
+        "suppression"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-25",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-25/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": true,
+      "tabular_run_source": "NASA/TM-20210011385 Table 5.1 (20 tests)",
+      "not_reported_fields_count": 1,
+      "not_reported_fields": [
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-99",
+      "acronym": "SAFFIRE-II",
+      "name": "Spacecraft Fire Safety Experiment - II",
+      "doi": "10.60555/2chp-m469",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "mixed",
+      "safety_areas": [
+        "prevention"
+      ],
+      "gravity_regimes": [
+        "microgravity",
+        "1g"
+      ],
+      "data_origin": [
+        "flight",
+        "ground"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-99",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-99/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 1,
+      "not_reported_fields": [
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-69",
+      "acronym": "FLEX",
+      "name": "Flame Extinction Experiment",
+      "doi": "10.60555/mbq8-0451",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "suppression"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-69",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-69/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 2,
+      "not_reported_fields": [
+        "cabin_o2_pct",
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-159",
+      "acronym": "CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "doi": "10.60555/cyt1-kh64",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-159",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-159",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-159/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 1,
+      "not_reported_fields": [
+        "cabin_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-68",
+      "acronym": "FLEX-2",
+      "name": "Flame Extinction Experiment - 2",
+      "doi": "10.60555/byp8-h018",
+      "verified": false,
+      "depth": "deep",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "suppression"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-68",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-68",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-68/",
+      "raw_metadata_extracted": true,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 1,
+      "not_reported_fields": [
+        "burner_flow_o2_pct"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-98",
+      "acronym": "SAFFIRE-I",
+      "name": "Spacecraft Fire Safety Experiment - I",
+      "doi": "10.60555/0t15-1z43",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "summary",
+      "safety_areas": [
+        "prevention"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-98",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-98/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-100",
+      "acronym": "SAFFIRE-III",
+      "name": "Spacecraft Fire Safety Experiment - III",
+      "doi": "10.60555/040q-4h36",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "telemetry",
+      "safety_areas": [
+        "prevention"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-100",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-100/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-39",
+      "acronym": "CFI",
+      "name": "Cool Flames Investigation",
+      "doi": "10.60555/psi-39-cfi",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "summary",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-39",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-39",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-39/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-20",
+      "acronym": "ACME-BRE",
+      "name": "Burning Rate Emulator",
+      "doi": "10.60555/psi-20-bre",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "summary",
+      "safety_areas": [
+        "prevention"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-20",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-20",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-20/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-21",
+      "acronym": "ACME-CLD",
+      "name": "Confined Combustion / Co-Flow Laminar Diffusion",
+      "doi": "10.60555/23e1-9950",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-21",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-21",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-21/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-10",
+      "acronym": "Flame Design",
+      "name": "Flame Design",
+      "doi": "10.60555/w4zy-bt45",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-10",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-10/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-22",
+      "acronym": "ACME E-FIELD",
+      "name": "Electric-Field Effects on Laminar Diffusion Flames",
+      "doi": "10.60555/psi-22-efield",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "electric-field-analog",
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-22",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-22",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-22/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-23",
+      "acronym": "ACME S-Flames",
+      "name": "Structure and Response of Spherical Diffusion Flames",
+      "doi": "10.60555/psi-23-sflames",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "condition_range",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-23",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-23",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-23/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-107",
+      "acronym": "SPICE",
+      "name": "Smoke Point In Co-flow Experiment",
+      "doi": "10.60555/psi-107-spice",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "summary",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-107",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-107/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    },
+    {
+      "id": "PSI-106",
+      "acronym": "SLICE",
+      "name": "Structure & Liftoff In Combustion Experiment",
+      "doi": "10.60555/psi-106-slice",
+      "verified": false,
+      "depth": "catalog",
+      "record_type": "summary",
+      "safety_areas": [
+        "other"
+      ],
+      "gravity_regimes": [
+        "microgravity"
+      ],
+      "data_origin": [
+        "flight"
+      ],
+      "psi_repository_url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-106",
+      "geode_api_url": "https://psi.nasa.gov/geode-py/ws/repo/investigations/PSI-106",
+      "s3_bucket_uri": "s3://nasa-psi/",
+      "s3_investigation_prefix": "s3://nasa-psi/investigations/PSI-106/",
+      "raw_metadata_extracted": false,
+      "tabular_run_data_available": false,
+      "tabular_run_source": "Not present in public JSONs (assays/studies empty)",
+      "not_reported_fields_count": 13,
+      "not_reported_fields": [
+        "hardware",
+        "objectives",
+        "fuels",
+        "sample_shape",
+        "sample_size",
+        "cabin_o2_pct",
+        "burner_flow_o2_pct",
+        "pressure_psi",
+        "airflow_speed_cm_s",
+        "varied_variables",
+        "constant_variables",
+        "sensors",
+        "n_tests"
+      ],
+      "partial_gravity_available": false,
+      "license": "CC0-1.0"
+    }
+  ]
+}
