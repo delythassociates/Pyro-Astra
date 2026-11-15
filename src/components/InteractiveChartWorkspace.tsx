@@ -118,6 +118,28 @@ export const AXIS_CONFIG: Record<
   },
 };
 
+// Dynamic Nice Tick Generator for True Data-Domain Scaling
+export function generateNiceTicks(min: number, max: number, count = 6): number[] {
+  if (min >= max) return [min];
+  const span = max - min;
+  const rawStep = span / Math.max(1, count);
+  const power = Math.pow(10, Math.floor(Math.log10(rawStep || 1)));
+  const fraction = rawStep / power;
+  let niceFraction = 1;
+  if (fraction > 1.5 && fraction <= 3) niceFraction = 2;
+  else if (fraction > 3 && fraction <= 7) niceFraction = 5;
+  else if (fraction > 7) niceFraction = 10;
+  const step = niceFraction * power;
+
+  const first = Math.ceil(min / step) * step;
+  const ticks: number[] = [];
+  for (let val = first; val <= max + 0.0001 * step; val += step) {
+    const decimals = step < 0.1 ? 2 : step < 1 ? 1 : 0;
+    ticks.push(Number(val.toFixed(decimals)));
+  }
+  return ticks.length >= 2 ? ticks : [Number(min.toFixed(1)), Number(max.toFixed(1))];
+}
+
 // Shape & Color Mapper for Multi-Shape/Color Data Points
 export function getPointShapeAndColor(run: RunDataPoint, isBurner: boolean, is0g: boolean) {
   const mat = (run.material_class || '').toLowerCase();
@@ -365,17 +387,19 @@ export function InteractiveChartWorkspace() {
     return valid;
   }, [filteredRuns, xAxis, yAxis]);
 
-  // Compute dynamic domain bounds with fallback
-  const { xMin, xMax, yMin, yMax } = useMemo(() => {
+  // Maximum allowed spans for zoom out bounds
+  const maxAllowedXSpan = (AXIS_CONFIG[xAxis].max - AXIS_CONFIG[xAxis].min) * 2;
+  const maxAllowedYSpan = (AXIS_CONFIG[yAxis].max - AXIS_CONFIG[yAxis].min) * 2;
+
+  // Compute dynamic initial domain bounds with padding
+  const initialDomain = useMemo(() => {
     const xConf = AXIS_CONFIG[xAxis];
     const yConf = AXIS_CONFIG[yAxis];
 
     if (plottablePoints.length === 0) {
       return {
-        xMin: xConf.min,
-        xMax: xConf.max,
-        yMin: yConf.min,
-        yMax: yConf.max,
+        x: [xConf.min, xConf.max] as [number, number],
+        y: [yConf.min, yConf.max] as [number, number],
       };
     }
 
@@ -395,12 +419,20 @@ export function InteractiveChartWorkspace() {
     const yPad = (maxY - minY) * 0.1 || (yConf.max - yConf.min) * 0.1;
 
     return {
-      xMin: Math.max(0, minX - xPad),
-      xMax: maxX + xPad,
-      yMin: Math.max(0, minY - yPad),
-      yMax: maxY + yPad,
+      x: [Math.max(0, Number((minX - xPad).toFixed(2))), Number((maxX + xPad).toFixed(2))] as [number, number],
+      y: [Math.max(0, Number((minY - yPad).toFixed(2))), Number((maxY + yPad).toFixed(2))] as [number, number],
     };
   }, [plottablePoints, xAxis, yAxis]);
+
+  // Numerical Visible Coordinate Bounds State (True Domain Zooming)
+  const [xDomain, setXDomain] = useState<[number, number]>(initialDomain.x);
+  const [yDomain, setYDomain] = useState<[number, number]>(initialDomain.y);
+
+  // Reset xDomain and yDomain automatically whenever the user switches the X-axis variable, Y-axis variable, or active Material filter
+  useEffect(() => {
+    setXDomain(initialDomain.x);
+    setYDomain(initialDomain.y);
+  }, [initialDomain]);
 
   // Chart Canvas Dimensions
   const SVG_WIDTH = 900;
@@ -409,41 +441,34 @@ export function InteractiveChartWorkspace() {
   const PLOT_WIDTH = SVG_WIDTH - MARGIN.left - MARGIN.right;
   const PLOT_HEIGHT = SVG_HEIGHT - MARGIN.top - MARGIN.bottom;
 
-  // Coordinate Mapping Function
+  // Coordinate Mapping Function (Maps Data Value -> SVG Pixel)
   const mapCoords = useCallback(
     (x: number, y: number) => {
+      const [xMin, xMax] = xDomain;
+      const [yMin, yMax] = yDomain;
+
       const xNorm = (x - xMin) / (xMax - xMin || 1);
       const yNorm = (y - yMin) / (yMax - yMin || 1);
 
       const rawX = MARGIN.left + xNorm * PLOT_WIDTH;
       const rawY = MARGIN.top + (1 - yNorm) * PLOT_HEIGHT;
 
-      const centerX = SVG_WIDTH / 2;
-      const centerY = SVG_HEIGHT / 2;
-
-      const zoomedX = centerX + (rawX - centerX) * zoomLevel + panOffset.x;
-      const zoomedY = centerY + (rawY - centerY) * zoomLevel + panOffset.y;
-
-      return { x: zoomedX, y: zoomedY };
+      return { x: rawX, y: rawY };
     },
-    [xMin, xMax, yMin, yMax, zoomLevel, panOffset]
+    [xDomain, yDomain, PLOT_WIDTH, PLOT_HEIGHT, MARGIN.left, MARGIN.top]
   );
 
-  // Exact Track 4 Zoom Handler logic
-  const zoomAroundPoint = useCallback((factor: number, relX: number, relY: number) => {
-    setZoomLevel((prevZoom) => {
-      const nextZoom = Math.max(0.5, Math.min(10.0, factor < 1 ? prevZoom * 1.25 : prevZoom * 0.8));
-      return nextZoom;
-    });
-  }, []);
+  // Dynamic Tick Generation for real-time scale update
+  const xTicks = useMemo(() => generateNiceTicks(xDomain[0], xDomain[1], 6), [xDomain]);
+  const yTicks = useMemo(() => generateNiceTicks(yDomain[0], yDomain[1], 6), [yDomain]);
 
-  // Track 4 Native Wheel Listener attached strictly to plotAreaRef
+  // Native Non-Passive Wheel Listener attached strictly to plotAreaRef
   useEffect(() => {
     const el = plotAreaRef.current;
     if (!el) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // 1. If mouse is NOT strictly inside the plot canvas bounding rect, do nothing
+      // 1. If mouse cursor is outside plotArea bounding rect, return immediately
       const rect = el.getBoundingClientRect();
       const isInside =
         e.clientX >= rect.left &&
@@ -452,73 +477,76 @@ export function InteractiveChartWorkspace() {
         e.clientY <= rect.bottom;
       if (!isInside) return;
 
-      // 2. If user holds CTRL/META, block browser page zoom and do NOTHING
+      // 2. If user holds CTRL/META, block browser page zoom and return immediately
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
         e.stopPropagation();
         return;
       }
 
-      // 3. Normal scroll inside chart plot area: prevent page scroll & zoom chart smoothly
+      // 3. Normal scroll inside chart plot area: prevent page scroll & zoom chart dynamically
       e.preventDefault();
       e.stopPropagation();
 
-      const zoomFactor = e.deltaY < 0 ? 0.85 : 1.18; // Scroll up = zoom in, Scroll down = zoom out
-      const relX = (e.clientX - rect.left) / rect.width;
-      const relY = 1 - (e.clientY - rect.top) / rect.height;
+      const zoomFactor = e.deltaY < 0 ? 0.82 : 1.22; // Scroll up = zoom in, Scroll down = zoom out
+      const mouseRatioX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const mouseRatioY = Math.max(0, Math.min(1, 1 - (e.clientY - rect.top) / rect.height));
 
-      zoomAroundPoint(zoomFactor, relX, relY);
+      setXDomain(([xMin, xMax]) => {
+        const span = xMax - xMin;
+        const newSpan = Math.max(0.05, Math.min(maxAllowedXSpan, span * zoomFactor));
+        const anchorX = xMin + mouseRatioX * span;
+        const nextMin = Math.max(0, anchorX - mouseRatioX * newSpan);
+        return [Number(nextMin.toFixed(2)), Number((nextMin + newSpan).toFixed(2))];
+      });
+
+      setYDomain(([yMin, yMax]) => {
+        const span = yMax - yMin;
+        const newSpan = Math.max(0.05, Math.min(maxAllowedYSpan, span * zoomFactor));
+        const anchorY = yMin + mouseRatioY * span;
+        const nextMin = Math.max(0, anchorY - mouseRatioY * newSpan);
+        return [Number(nextMin.toFixed(2)), Number((nextMin + newSpan).toFixed(2))];
+      });
     };
 
     el.addEventListener('wheel', handleWheel, { passive: false });
     return () => el.removeEventListener('wheel', handleWheel);
-  }, [zoomAroundPoint]);
+  }, [maxAllowedXSpan, maxAllowedYSpan]);
 
-  // Pan Handlers
+  // Panning Handlers (Drag shifts xDomain and yDomain proportionally)
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (brushMode) {
-      const rect = svgRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setBrushStart({ x, y });
-      setBrushCurrent({ x, y });
-    } else {
-      setIsPanning(true);
-      setPanStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
-    }
+    setIsPanning(true);
+    setPanStart({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (brushMode && brushStart) {
-      const rect = svgRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setBrushCurrent({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    } else if (isPanning) {
-      setPanOffset({
-        x: e.clientX - panStart.x,
-        y: e.clientY - panStart.y,
-      });
-    }
+    if (!isPanning) return;
+    const dx = e.clientX - panStart.x;
+    const dy = e.clientY - panStart.y;
+    setPanStart({ x: e.clientX, y: e.clientY });
+
+    const xSpan = xDomain[1] - xDomain[0];
+    const ySpan = yDomain[1] - yDomain[0];
+    const deltaX = -(dx / PLOT_WIDTH) * xSpan;
+    const deltaY = (dy / PLOT_HEIGHT) * ySpan;
+
+    setXDomain(([xMin, xMax]) => [
+      Number((xMin + deltaX).toFixed(2)),
+      Number((xMax + deltaX).toFixed(2)),
+    ]);
+    setYDomain(([yMin, yMax]) => [
+      Number((yMin + deltaY).toFixed(2)),
+      Number((yMax + deltaY).toFixed(2)),
+    ]);
   };
 
   const handleMouseUp = () => {
-    if (brushMode && brushStart && brushCurrent) {
-      const dx = Math.abs(brushCurrent.x - brushStart.x);
-      const dy = Math.abs(brushCurrent.y - brushStart.y);
-      if (dx > 20 && dy > 20) {
-        setZoomLevel((prev) => Math.min(10.0, prev * 2.0));
-      }
-      setBrushStart(null);
-      setBrushCurrent(null);
-      setBrushMode(false);
-    }
     setIsPanning(false);
   };
 
   const handleResetZoom = () => {
-    setZoomLevel(1.0);
-    setPanOffset({ x: 0, y: 0 });
+    setXDomain(initialDomain.x);
+    setYDomain(initialDomain.y);
   };
 
   // Filtered Table Rows
@@ -558,11 +586,24 @@ export function InteractiveChartWorkspace() {
                 </span>
               </div>
 
-              {/* Zoom & Brush Control Buttons (Text-Only, No Emojis) */}
+              {/* Zoom & Reset Control Buttons (Dynamic Numerical Domain Rescaling) */}
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
-                  onClick={() => setZoomLevel((z) => Math.min(10.0, z * 1.25))}
+                  onClick={() => {
+                    setXDomain(([xMin, xMax]) => {
+                      const span = xMax - xMin;
+                      const center = (xMin + xMax) / 2;
+                      const newSpan = Math.max(0.05, span * 0.82);
+                      return [Number((center - newSpan / 2).toFixed(2)), Number((center + newSpan / 2).toFixed(2))];
+                    });
+                    setYDomain(([yMin, yMax]) => {
+                      const span = yMax - yMin;
+                      const center = (yMin + yMax) / 2;
+                      const newSpan = Math.max(0.05, span * 0.82);
+                      return [Number((center - newSpan / 2).toFixed(2)), Number((center + newSpan / 2).toFixed(2))];
+                    });
+                  }}
                   className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors flex items-center gap-1 font-bold text-[11px]"
                   title="Zoom In (+)"
                 >
@@ -571,7 +612,20 @@ export function InteractiveChartWorkspace() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setZoomLevel((z) => Math.max(0.5, z * 0.8))}
+                  onClick={() => {
+                    setXDomain(([xMin, xMax]) => {
+                      const span = xMax - xMin;
+                      const center = (xMin + xMax) / 2;
+                      const newSpan = Math.min(maxAllowedXSpan, span * 1.22);
+                      return [Number((center - newSpan / 2).toFixed(2)), Number((center + newSpan / 2).toFixed(2))];
+                    });
+                    setYDomain(([yMin, yMax]) => {
+                      const span = yMax - yMin;
+                      const center = (yMin + yMax) / 2;
+                      const newSpan = Math.min(maxAllowedYSpan, span * 1.22);
+                      return [Number((center - newSpan / 2).toFixed(2)), Number((center + newSpan / 2).toFixed(2))];
+                    });
+                  }}
                   className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors flex items-center gap-1 font-bold text-[11px]"
                   title="Zoom Out (-)"
                 >
@@ -580,21 +634,9 @@ export function InteractiveChartWorkspace() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setBrushMode(!brushMode)}
-                  className={`px-2.5 py-1 border text-[11px] font-bold transition-colors ${
-                    brushMode
-                      ? 'bg-[#181615] text-[#FAF8F3] border-[#181615]'
-                      : 'bg-[#EAE5DB] hover:bg-[#D5CFC2] border-[#B8B0A0] text-[#181615]'
-                  }`}
-                  title="Box Zoom: Drag a rectangle to zoom in"
-                >
-                  [BOX ZOOM]
-                </button>
-                <button
-                  type="button"
                   onClick={handleResetZoom}
                   className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold transition-colors flex items-center gap-1"
-                  title="Reset Zoom & Pan"
+                  title="Reset Zoom & Pan to Fit Data"
                 >
                   <RotateCcw className="w-3 h-3" />
                   <span>RESET (1.0x)</span>
@@ -623,30 +665,42 @@ export function InteractiveChartWorkspace() {
                   onMouseUp={handleMouseUp}
                   onMouseLeave={handleMouseUp}
                 >
-                  {/* Grid Lines */}
+                  <defs>
+                    <clipPath id="plotAreaClip">
+                      <rect x={MARGIN.left} y={MARGIN.top} width={PLOT_WIDTH} height={PLOT_HEIGHT} />
+                    </clipPath>
+                  </defs>
+
+                  {/* Grid Lines computed dynamically from xTicks and yTicks */}
                   <g className="opacity-40">
-                    {[0, 0.25, 0.5, 0.75, 1.0].map((t, idx) => {
-                      const yPos = MARGIN.top + t * PLOT_HEIGHT;
-                      const xPos = MARGIN.left + t * PLOT_WIDTH;
+                    {xTicks.map((xVal, idx) => {
+                      const pos = mapCoords(xVal, yDomain[0]);
+                      if (pos.x < MARGIN.left || pos.x > MARGIN.left + PLOT_WIDTH) return null;
                       return (
-                        <React.Fragment key={idx}>
-                          <line
-                            x1={MARGIN.left}
-                            y1={yPos}
-                            x2={MARGIN.left + PLOT_WIDTH}
-                            y2={yPos}
-                            stroke="#D5CFC2"
-                            strokeDasharray="3 3"
-                          />
-                          <line
-                            x1={xPos}
-                            y1={MARGIN.top}
-                            x2={xPos}
-                            y2={MARGIN.top + PLOT_HEIGHT}
-                            stroke="#D5CFC2"
-                            strokeDasharray="3 3"
-                          />
-                        </React.Fragment>
+                        <line
+                          key={`grid-x-${idx}`}
+                          x1={pos.x}
+                          y1={MARGIN.top}
+                          x2={pos.x}
+                          y2={MARGIN.top + PLOT_HEIGHT}
+                          stroke="#D5CFC2"
+                          strokeDasharray="3 3"
+                        />
+                      );
+                    })}
+                    {yTicks.map((yVal, idx) => {
+                      const pos = mapCoords(xDomain[0], yVal);
+                      if (pos.y < MARGIN.top || pos.y > MARGIN.top + PLOT_HEIGHT) return null;
+                      return (
+                        <line
+                          key={`grid-y-${idx}`}
+                          x1={MARGIN.left}
+                          y1={pos.y}
+                          x2={MARGIN.left + PLOT_WIDTH}
+                          y2={pos.y}
+                          stroke="#D5CFC2"
+                          strokeDasharray="3 3"
+                        />
                       );
                     })}
                   </g>
@@ -669,24 +723,24 @@ export function InteractiveChartWorkspace() {
                     strokeWidth="1.5"
                   />
 
-                  {/* Axis Tick Labels */}
+                  {/* Axis Tick Labels from dynamic numerical domain */}
                   <g className="text-[10px] font-mono fill-[#5A544A]">
-                    {[0, 0.5, 1.0].map((t, idx) => {
-                      const val = (yMin + (1 - t) * (yMax - yMin)).toFixed(1);
-                      const yPos = MARGIN.top + t * PLOT_HEIGHT;
+                    {yTicks.map((yVal, idx) => {
+                      const pos = mapCoords(xDomain[0], yVal);
+                      if (pos.y < MARGIN.top - 5 || pos.y > MARGIN.top + PLOT_HEIGHT + 5) return null;
                       return (
-                        <text key={idx} x={MARGIN.left - 8} y={yPos + 4} textAnchor="end">
-                          {val}
+                        <text key={`y-label-${idx}`} x={MARGIN.left - 8} y={pos.y + 4} textAnchor="end">
+                          {yVal}
                         </text>
                       );
                     })}
 
-                    {[0, 0.5, 1.0].map((t, idx) => {
-                      const val = (xMin + t * (xMax - xMin)).toFixed(1);
-                      const xPos = MARGIN.left + t * PLOT_WIDTH;
+                    {xTicks.map((xVal, idx) => {
+                      const pos = mapCoords(xVal, yDomain[0]);
+                      if (pos.x < MARGIN.left - 5 || pos.x > MARGIN.left + PLOT_WIDTH + 5) return null;
                       return (
-                        <text key={idx} x={xPos} y={MARGIN.top + PLOT_HEIGHT + 18} textAnchor="middle">
-                          {val}
+                        <text key={`x-label-${idx}`} x={pos.x} y={MARGIN.top + PLOT_HEIGHT + 18} textAnchor="middle">
+                          {xVal}
                         </text>
                       );
                     })}
@@ -711,8 +765,8 @@ export function InteractiveChartWorkspace() {
                     {AXIS_CONFIG[yAxis].label} ({AXIS_CONFIG[yAxis].unit})
                   </text>
 
-                  {/* Multi-Shape & Multi-Color Plotted Data Points */}
-                  <g>
+                  {/* Multi-Shape & Multi-Color Plotted Data Points with Plot-Area Clipping */}
+                  <g clipPath="url(#plotAreaClip)">
                     {plottablePoints.map((pt, idx) => {
                       const pos = mapCoords(pt.x, pt.y);
                       if (

@@ -1,68 +1,227 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import {
-  Wind,
-  Flame,
-  Gauge,
-  RotateCcw,
-  Sparkles,
-  Layers,
-  AlertTriangle,
-  Info,
   Play,
   Pause,
+  RotateCcw,
+  Box,
+  Flame,
+  Wind,
+  ArrowRight,
+  ShieldAlert,
+  CheckCircle2,
+  Atom,
+  ChevronDown,
+  Info,
+  Layers,
 } from 'lucide-react';
+import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
+import { findNearestEvidence } from '@/lib/nearest';
 import { Val } from './Val';
 
-export type FuelGeometryType = 'pmma_slab' | 'liquid_droplet';
-export type GravityMode = '0g' | '1g';
-export type FlowDirection = 'opposed' | 'concurrent';
+export type GravityRegime = '0g' | '0.16g' | '0.38g' | '1g';
+export type FuelType = 'pmma_solid' | 'nomex_fabric' | 'heptane_droplet' | 'methanol_droplet';
+
+interface ScenarioPreset {
+  id: string;
+  label: string;
+  o2: number; // %
+  pressureKPa: number; // kPa
+  airflow: number; // cm/s
+  gravity: GravityRegime;
+  fuel: FuelType;
+}
+
+const PRESETS: ScenarioPreset[] = [
+  {
+    id: 'iss_nominal',
+    label: 'ISS Cabin Nominal (21% O₂, 101.3 kPa, 5 cm/s)',
+    o2: 21,
+    pressureKPa: 101.3,
+    airflow: 5,
+    gravity: '0g',
+    fuel: 'pmma_solid',
+  },
+  {
+    id: 'lunar_habitat',
+    label: 'Artemis Lunar Habitat (34% O₂, 56.5 kPa / 8.2 psi)',
+    o2: 34,
+    pressureKPa: 56.5,
+    airflow: 5,
+    gravity: '0.16g',
+    fuel: 'pmma_solid',
+  },
+  {
+    id: 'spacesuit_eva',
+    label: 'Spacesuit EVA (100% O₂, 29.6 kPa / 4.3 psi)',
+    o2: 40, // capped to max slider
+    pressureKPa: 29.6,
+    airflow: 0,
+    gravity: '0g',
+    fuel: 'nomex_fabric',
+  },
+  {
+    id: 'bass2_m14',
+    label: 'BASS-II Run M14 (PMMA, 9 cm/s)',
+    o2: 21,
+    pressureKPa: 101.3,
+    airflow: 9,
+    gravity: '0g',
+    fuel: 'pmma_solid',
+  },
+  {
+    id: 'flex_run24',
+    label: 'FLEX Run 24 (Heptane, 30% O₂, 71.2 kPa)',
+    o2: 30,
+    pressureKPa: 71.2,
+    airflow: 0,
+    gravity: '0g',
+    fuel: 'heptane_droplet',
+  },
+];
+
+// Helper to create soft radial gradient additive particle sprite texture
+function createParticleTexture(colorHex = '#38bdf8'): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d')!;
+
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.2, colorHex);
+  gradient.addColorStop(0.55, 'rgba(2, 132, 199, 0.4)');
+  gradient.addColorStop(1, 'rgba(2, 132, 199, 0)');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  return texture;
+}
+
+function createSootTexture(): THREE.CanvasTexture {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d')!;
+
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, '#fef08a');
+  gradient.addColorStop(0.3, '#f97316');
+  gradient.addColorStop(0.7, 'rgba(234, 88, 12, 0.3)');
+  gradient.addColorStop(1, 'rgba(234, 88, 12, 0)');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+
+  return new THREE.CanvasTexture(canvas);
+}
 
 export function Combustion3DSimulator() {
   const mountRef = useRef<HTMLDivElement>(null);
 
-  // Simulation State
-  const [gravity, setGravity] = useState<GravityMode>('0g');
-  const [airflow, setAirflow] = useState<number>(5.0); // cm/s
-  const [direction, setDirection] = useState<FlowDirection>('opposed');
-  const [fuelType, setFuelType] = useState<FuelGeometryType>('pmma_slab');
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  // Mode: 'explore' | 'replay'
+  const [labMode, setLabMode] = useState<'explore' | 'replay'>('explore');
 
-  // Selected Educational Regime
-  const [selectedRegime, setSelectedRegime] = useState<1 | 2 | 3>(2);
+  // Simulation Parametric State
+  const [o2, setO2] = useState<number>(21); // %
+  const [airflow, setAirflow] = useState<number>(5.0); // cm/s
+  const [pressureKPa, setPressureKPa] = useState<number>(101.3); // kPa
+  const [gravity, setGravity] = useState<GravityRegime>('0g');
+  const [fuel, setFuel] = useState<FuelType>('pmma_solid');
+  const [selectedPresetId, setSelectedPresetId] = useState<string>('iss_nominal');
+
+  // Playback & Animation State
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [simSpeed, setSimSpeed] = useState<number>(1.0);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   // References for Three.js objects
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
-  const flameMeshRef = useRef<THREE.Mesh | null>(null);
-  const flameInnerRef = useRef<THREE.Mesh | null>(null);
+  const flameCoreRef = useRef<THREE.Mesh | null>(null);
+  const flameWireframeRef = useRef<THREE.LineSegments | null>(null);
+  const gasParticlesRef = useRef<THREE.Points | null>(null);
+  const sootParticlesRef = useRef<THREE.Points | null>(null);
   const fuelMeshRef = useRef<THREE.Mesh | null>(null);
-  const particlesRef = useRef<THREE.Points | null>(null);
-  const particleVelocitiesRef = useRef<Float32Array | null>(null);
+  const flameLightRef = useRef<THREE.PointLight | null>(null);
   const animFrameIdRef = useRef<number | null>(null);
 
-  // Set regime preset
-  const applyRegime = (regime: 1 | 2 | 3) => {
-    setSelectedRegime(regime);
-    if (regime === 1) {
-      setAirflow(0.5);
-    } else if (regime === 2) {
-      setAirflow(5.0);
-    } else if (regime === 3) {
-      setAirflow(22.0);
+  // Particle positions & initial offsets
+  const gasCount = 200;
+  const sootCount = 40;
+  const gasBasePos = useRef<Float32Array>(new Float32Array(gasCount * 3));
+  const sootBasePos = useRef<Float32Array>(new Float32Array(sootCount * 3));
+
+  // Initialize random particle offsets once
+  useEffect(() => {
+    for (let i = 0; i < gasCount; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 0.2 + Math.random() * 0.55;
+      gasBasePos.current[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      gasBasePos.current[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      gasBasePos.current[i * 3 + 2] = r * Math.cos(phi);
+    }
+    for (let i = 0; i < sootCount; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const r = 0.15 + Math.random() * 0.35;
+      sootBasePos.current[i * 3] = r * Math.cos(theta);
+      sootBasePos.current[i * 3 + 1] = 0.1 + Math.random() * 0.5;
+      sootBasePos.current[i * 3 + 2] = r * Math.sin(theta);
+    }
+  }, []);
+
+  // Compute live physics readouts
+  const pressurePsi = Number((pressureKPa / 6.894757).toFixed(1));
+  const o2PartialPressureKPa = Number(((o2 / 100) * pressureKPa).toFixed(2));
+
+  const animationIntensity = useMemo(() => {
+    if (o2PartialPressureKPa < 17.5) return 'Low (Oxygen-Starved)';
+    if (o2PartialPressureKPa <= 28.0) return 'Moderate';
+    return 'High (Enriched O₂)';
+  }, [o2PartialPressureKPa]);
+
+  // Compute nearest evidence via Section 8
+  const nearestOutput = useMemo(() => {
+    return findNearestEvidence(DEFAULT_INVESTIGATIONS, {
+      o2: { min: o2, max: o2 },
+      pressure: { min: pressurePsi, max: pressurePsi },
+    });
+  }, [o2, pressurePsi]);
+
+  // Handle Preset selection
+  const handleSelectPreset = (presetId: string) => {
+    setSelectedPresetId(presetId);
+    const p = PRESETS.find((x) => x.id === presetId);
+    if (!p) return;
+    setO2(p.o2);
+    setPressureKPa(p.pressureKPa);
+    setAirflow(p.airflow);
+    setGravity(p.gravity);
+    setFuel(p.fuel);
+  };
+
+  // Reset Camera to Orbit Home
+  const handleResetCamera = () => {
+    if (cameraRef.current && controlsRef.current) {
+      cameraRef.current.position.set(0, 3.5, 8.5);
+      controlsRef.current.target.set(0, 0.2, 0);
+      controlsRef.current.update();
     }
   };
 
-  // Reset Camera View
-  const handleResetCamera = () => {
+  // Set Camera to Isometric View
+  const handleIsometricView = () => {
     if (cameraRef.current && controlsRef.current) {
-      cameraRef.current.position.set(0, 4, 10);
-      controlsRef.current.target.set(0, 0, 0);
+      cameraRef.current.position.set(6.5, 5.0, 7.5);
+      controlsRef.current.target.set(0, 0.2, 0);
       controlsRef.current.update();
     }
   };
@@ -72,527 +231,778 @@ export function Combustion3DSimulator() {
     const container = mountRef.current;
     if (!container) return;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight || 560;
+    const width = container.clientWidth || 800;
+    const height = container.clientHeight || 620;
 
-    // 1. Scene
+    // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x181615); // Deep Charcoal Black for flame contrast
+    scene.background = new THREE.Color(0x070a10);
     sceneRef.current = scene;
 
-    // 2. Camera
+    // Camera
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 4, 10);
+    camera.position.set(0, 3.5, 8.5);
     cameraRef.current = camera;
 
-    // 3. Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
     container.innerHTML = '';
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // 4. OrbitControls
+    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.maxDistance = 25;
-    controls.minDistance = 3;
+    controls.target.set(0, 0.2, 0);
+    controls.maxPolarAngle = Math.PI / 2 + 0.05; // Don't flip below floor
     controlsRef.current = controls;
 
-    // 5. Lights
-    const ambientLight = new THREE.AmbientLight(0xfff7ed, 0.6);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.9);
-    dirLight.position.set(5, 10, 7);
-    scene.add(dirLight);
-
-    const flameLight = new THREE.PointLight(0xff7700, 2.5, 15);
-    flameLight.position.set(0, 0.8, 0);
-    scene.add(flameLight);
-
-    // 6. Grid Ground Plane
-    const gridHelper = new THREE.GridHelper(16, 16, 0x5a544a, 0x2a2723);
+    // 1. Perspective 3D Floor Grid
+    const gridHelper = new THREE.GridHelper(16, 20, 0x1e293b, 0x131c2e);
     gridHelper.position.y = -1.2;
     scene.add(gridHelper);
 
-    // 7. Fuel Sample Mesh
-    const fuelGroup = new THREE.Group();
-    scene.add(fuelGroup);
-
-    // PMMA Slab
-    const slabGeo = new THREE.BoxGeometry(4.5, 0.3, 1.4);
-    const slabMat = new THREE.MeshStandardMaterial({
-      color: 0xefece6,
-      roughness: 0.25,
-      metalness: 0.1,
-      transparent: true,
-      opacity: 0.85,
+    // 2. Concentric Measurement Rings
+    [1.4, 2.8, 4.2].forEach((radius) => {
+      const ringGeo = new THREE.RingGeometry(radius, radius + 0.02, 64);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0x1e293b,
+        side: THREE.DoubleSide,
+      });
+      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+      ringMesh.rotation.x = -Math.PI / 2;
+      ringMesh.position.y = -1.19;
+      scene.add(ringMesh);
     });
-    const slabMesh = new THREE.Mesh(slabGeo, slabMat);
-    slabMesh.position.set(0, -0.15, 0);
-    slabMesh.castShadow = true;
-    fuelGroup.add(slabMesh);
-    fuelMeshRef.current = slabMesh;
 
-    // 8. Flame Meshes
-    // Outer Flame Mantle (Blue Chemiluminescent / Glowing)
-    const flameGeo = new THREE.SphereGeometry(1.2, 32, 32);
-    const flameMat = new THREE.MeshStandardMaterial({
-      color: 0x3b82f6,
-      emissive: 0x1d4ed8,
-      emissiveIntensity: 0.8,
-      transparent: true,
-      opacity: 0.55,
-      roughness: 0.1,
+    // 3. Burner Pedestal & Metal Stem
+    const baseGeo = new THREE.CylinderGeometry(0.75, 0.95, 0.35, 32);
+    const baseMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.8,
     });
-    const flameMesh = new THREE.Mesh(flameGeo, flameMat);
-    flameMesh.position.set(0, 0.8, 0);
-    scene.add(flameMesh);
-    flameMeshRef.current = flameMesh;
+    const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+    baseMesh.position.y = -1.02;
+    scene.add(baseMesh);
 
-    // Inner Flame Core (Yellow/Orange Soot Reaction Zone)
-    const innerGeo = new THREE.SphereGeometry(0.7, 24, 24);
-    const innerMat = new THREE.MeshStandardMaterial({
-      color: 0xfbbf24,
-      emissive: 0xf97316,
-      emissiveIntensity: 1.2,
+    const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 16);
+    const stemMat = new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      metalness: 0.8,
+      roughness: 0.3,
+    });
+    const stemMesh = new THREE.Mesh(stemGeo, stemMat);
+    stemMesh.position.y = -0.45;
+    scene.add(stemMesh);
+
+    // 4. Sample Holder Rack
+    const rackGeo = new THREE.BoxGeometry(2.0, 0.04, 1.2);
+    const rackWireGeo = new THREE.WireframeGeometry(rackGeo);
+    const rackWireMat = new THREE.LineBasicMaterial({ color: 0x334155, linewidth: 1 });
+    const rackWire = new THREE.LineSegments(rackWireGeo, rackWireMat);
+    rackWire.position.y = -0.05;
+    scene.add(rackWire);
+
+    // 5. Fuel Sample Geometry Placeholder
+    const fuelGeo = new THREE.BoxGeometry(1.6, 0.06, 0.8);
+    const fuelMat = new THREE.MeshStandardMaterial({
+      color: 0x93c5fd,
       transparent: true,
       opacity: 0.8,
-      roughness: 0.2,
+      roughness: 0.3,
     });
-    const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-    innerMesh.position.set(0, 0.7, 0);
-    scene.add(innerMesh);
-    flameInnerRef.current = innerMesh;
+    const fuelMesh = new THREE.Mesh(fuelGeo, fuelMat);
+    fuelMesh.position.y = 0;
+    scene.add(fuelMesh);
+    fuelMeshRef.current = fuelMesh;
 
-    // 9. Particle Streamlines (Airflow Velocity Visualization)
-    const particleCount = 280;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount);
+    // 6. Volumetric Gaseous Blue Flame Cloud: Soft Inner Core
+    const coreGeo = new THREE.SphereGeometry(0.4, 32, 32);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.45,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+    coreMesh.position.y = 0.2;
+    scene.add(coreMesh);
+    flameCoreRef.current = coreMesh;
 
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 12; // X
-      positions[i * 3 + 1] = Math.random() * 3.5 - 0.5; // Y
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 4; // Z
-      velocities[i] = 0.5 + Math.random() * 0.5;
-    }
+    // Wireframe Outline for Partial-G freeze (0.16g / 0.38g)
+    const wireGeo = new THREE.WireframeGeometry(new THREE.SphereGeometry(0.65, 16, 16));
+    const wireMat = new THREE.LineBasicMaterial({
+      color: 0xf43f5e,
+      transparent: true,
+      opacity: 0.8,
+    });
+    const flameWire = new THREE.LineSegments(wireGeo, wireMat);
+    flameWire.position.y = 0.25;
+    flameWire.visible = false;
+    scene.add(flameWire);
+    flameWireframeRef.current = flameWire;
 
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleVelocitiesRef.current = velocities;
+    // 7. Volumetric Additive Particle System (200 gas particles)
+    const gasTexture = createParticleTexture('#38bdf8');
+    const gasGeometry = new THREE.BufferGeometry();
+    const gasPositions = new Float32Array(gasCount * 3);
+    gasGeometry.setAttribute('position', new THREE.BufferAttribute(gasPositions, 3));
 
-    const particleMat = new THREE.PointsMaterial({
-      color: 0x93c5fd,
-      size: 0.08,
+    const gasMaterial = new THREE.PointsMaterial({
+      size: 0.55,
+      map: gasTexture,
       transparent: true,
       opacity: 0.65,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
+    const gasPoints = new THREE.Points(gasGeometry, gasMaterial);
+    scene.add(gasPoints);
+    gasParticlesRef.current = gasPoints;
 
-    const particles = new THREE.Points(particleGeo, particleMat);
-    scene.add(particles);
-    particlesRef.current = particles;
+    // 8. Glowing Soot Radical Specks (40 micro-particles)
+    const sootTexture = createSootTexture();
+    const sootGeometry = new THREE.BufferGeometry();
+    const sootPositions = new Float32Array(sootCount * 3);
+    sootGeometry.setAttribute('position', new THREE.BufferAttribute(sootPositions, 3));
 
-    // 10. Resize Listener
+    const sootMaterial = new THREE.PointsMaterial({
+      size: 0.22,
+      map: sootTexture,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const sootPoints = new THREE.Points(sootGeometry, sootMaterial);
+    scene.add(sootPoints);
+    sootParticlesRef.current = sootPoints;
+
+    // 9. Scene Lighting
+    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.2);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0x94a3b8, 0.7);
+    dirLight.position.set(5, 10, 7);
+    scene.add(dirLight);
+
+    const flameLight = new THREE.PointLight(0x38bdf8, 3.0, 7, 1.8);
+    flameLight.position.set(0, 0.35, 0);
+    scene.add(flameLight);
+    flameLightRef.current = flameLight;
+
+    // Handle Resize
     const handleResize = () => {
-      if (!container || !renderer || !camera) return;
-      const newW = container.clientWidth;
-      const newH = container.clientHeight || 560;
-      camera.aspect = newW / newH;
+      if (!container || !camera || !renderer) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(newW, newH);
+      renderer.setSize(w, h);
     };
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
       if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
       renderer.dispose();
+      container.innerHTML = '';
     };
   }, []);
 
-  // Update Fuel Geometry when fuelType changes
+  // Update Fuel Sample Geometry when Fuel Type changes
   useEffect(() => {
-    if (!fuelMeshRef.current) return;
-    fuelMeshRef.current.geometry.dispose();
+    const mesh = fuelMeshRef.current;
+    if (!mesh) return;
 
-    if (fuelType === 'pmma_slab') {
-      fuelMeshRef.current.geometry = new THREE.BoxGeometry(4.5, 0.3, 1.4);
-      fuelMeshRef.current.position.set(0, -0.15, 0);
+    if (fuel === 'pmma_solid') {
+      mesh.geometry.dispose();
+      mesh.geometry = new THREE.BoxGeometry(1.6, 0.06, 0.8);
+      (mesh.material as THREE.MeshStandardMaterial).color.set(0x93c5fd);
+      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.75;
+    } else if (fuel === 'nomex_fabric') {
+      mesh.geometry.dispose();
+      mesh.geometry = new THREE.BoxGeometry(1.6, 0.02, 0.5);
+      (mesh.material as THREE.MeshStandardMaterial).color.set(0xca8a04);
+      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.95;
     } else {
-      fuelMeshRef.current.geometry = new THREE.SphereGeometry(0.45, 32, 32);
-      fuelMeshRef.current.position.set(0, 0.1, 0);
+      // Liquid Droplet (Heptane / Methanol)
+      mesh.geometry.dispose();
+      mesh.geometry = new THREE.SphereGeometry(0.2, 32, 32);
+      (mesh.material as THREE.MeshStandardMaterial).color.set(
+        fuel === 'heptane_droplet' ? 0x38bdf8 : 0x67e8f9
+      );
+      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.85;
     }
-  }, [fuelType]);
+  }, [fuel]);
 
-  // Main Animation Loop with Dynamic Flame Physics Deformation
+  // Main Physics Animation Loop
   useEffect(() => {
-    let clock = new THREE.Clock();
+    let clock = 0;
 
     const animate = () => {
       animFrameIdRef.current = requestAnimationFrame(animate);
 
-      if (!isPlaying) return;
+      if (controlsRef.current) {
+        controlsRef.current.update();
+      }
 
-      const elapsed = clock.getElapsedTime();
-      const controls = controlsRef.current;
-      const renderer = rendererRef.current;
-      const scene = sceneRef.current;
-      const camera = cameraRef.current;
-      const flame = flameMeshRef.current;
-      const inner = flameInnerRef.current;
-      const particles = particlesRef.current;
+      const isPartialG = gravity === '0.16g' || gravity === '0.38g';
+      const isEarth1g = gravity === '1g';
 
-      if (controls) controls.update();
-
-      // Dynamic Flame Physics deformation based on Gravity & Airflow
-      if (flame && inner) {
-        const flicker = Math.sin(elapsed * 12) * 0.04 + Math.cos(elapsed * 19) * 0.02;
-
-        if (gravity === '0g') {
-          // Microgravity: Natural convection is zero
-          if (airflow < 1.0) {
-            // Stage 1: Stagnant Air / Suffocation
-            // Spherical, dim, faint blue mantle
-            flame.scale.set(1.1 + flicker, 1.1 + flicker, 1.1 + flicker);
-            inner.scale.set(0.4 + flicker, 0.4 + flicker, 0.4 + flicker);
-            (flame.material as THREE.MeshStandardMaterial).color.setHex(0x2563eb);
-            (flame.material as THREE.MeshStandardMaterial).opacity = 0.35;
-            (inner.material as THREE.MeshStandardMaterial).opacity = 0.25;
-            flame.position.set(0, 0.7, 0);
-          } else if (airflow <= 12.0) {
-            // Stage 2: 1 - 10 cm/s PEAK HAZARD
-            // Flame elongates downstream, bright yellow/orange core
-            const stretch = (airflow / 10) * 0.8;
-            const dirMultiplier = direction === 'opposed' ? -1 : 1;
-
-            flame.scale.set(1.2 + stretch, 0.95 + flicker, 0.95 + flicker);
-            inner.scale.set(0.85 + stretch * 0.7, 0.7 + flicker, 0.7 + flicker);
-            flame.position.set(dirMultiplier * stretch * 0.6, 0.75, 0);
-            inner.position.set(dirMultiplier * stretch * 0.5, 0.7, 0);
-
-            (flame.material as THREE.MeshStandardMaterial).color.setHex(0x3b82f6);
-            (flame.material as THREE.MeshStandardMaterial).opacity = 0.65;
-            (inner.material as THREE.MeshStandardMaterial).opacity = 0.85;
-          } else {
-            // Stage 3: > 15 cm/s Strong Airflow Blowoff / Extinction
-            // Flame stretched thin, wavering wildly, blown away
-            const blowoffOffset = (airflow - 12) * 0.15;
-            const dirMultiplier = direction === 'opposed' ? -1 : 1;
-            const violentFlicker = Math.sin(elapsed * 35) * 0.15;
-
-            flame.scale.set(1.9 + violentFlicker, 0.4 + violentFlicker * 0.5, 0.5);
-            inner.scale.set(0.6 + violentFlicker, 0.3, 0.3);
-            flame.position.set(dirMultiplier * (1.2 + blowoffOffset), 0.75, 0);
-            inner.position.set(dirMultiplier * (1.0 + blowoffOffset), 0.7, 0);
-
-            (flame.material as THREE.MeshStandardMaterial).opacity = Math.max(0.1, 0.55 - blowoffOffset * 0.25);
-            (inner.material as THREE.MeshStandardMaterial).opacity = Math.max(0.1, 0.6 - blowoffOffset * 0.3);
+      // 1. Partial Gravity Wireframe Freeze (Rule 5 Compliance)
+      if (flameWireframeRef.current && flameCoreRef.current) {
+        if (isPartialG) {
+          flameWireframeRef.current.visible = true;
+          flameCoreRef.current.visible = false;
+          if (gasParticlesRef.current) gasParticlesRef.current.visible = false;
+          if (sootParticlesRef.current) sootParticlesRef.current.visible = false;
+          if (rendererRef.current && sceneRef.current && cameraRef.current) {
+            rendererRef.current.render(sceneRef.current, cameraRef.current);
           }
+          return;
         } else {
-          // 1g Earth Normal: Strong buoyant upward convection plume
-          const buoyantStretch = 2.2 + flicker * 2;
-          flame.scale.set(0.7 + flicker * 0.5, buoyantStretch, 0.7 + flicker * 0.5);
-          inner.scale.set(0.45 + flicker * 0.3, buoyantStretch * 0.75, 0.45 + flicker * 0.3);
-          flame.position.set(0, 1.2 + flicker * 0.1, 0);
-          inner.position.set(0, 0.95 + flicker * 0.1, 0);
-
-          (flame.material as THREE.MeshStandardMaterial).color.setHex(0xf59e0b);
-          (flame.material as THREE.MeshStandardMaterial).opacity = 0.75;
-          (inner.material as THREE.MeshStandardMaterial).opacity = 0.95;
+          flameWireframeRef.current.visible = false;
+          flameCoreRef.current.visible = true;
+          if (gasParticlesRef.current) gasParticlesRef.current.visible = true;
+          if (sootParticlesRef.current) sootParticlesRef.current.visible = true;
         }
       }
 
-      // Animate Airflow Streamline Particles
-      if (particles && particleVelocitiesRef.current) {
-        const posAttr = particles.geometry.getAttribute('position') as THREE.BufferAttribute;
-        const positions = posAttr.array as Float32Array;
-        const vels = particleVelocitiesRef.current;
-        const speed = (airflow / 10) * 0.08;
-        const flowDir = direction === 'opposed' ? -1 : 1;
+      if (isPlaying) {
+        clock += 0.025 * simSpeed;
+      }
 
-        for (let i = 0; i < vels.length; i++) {
-          if (airflow > 0.1) {
-            positions[i * 3] += speed * vels[i] * flowDir;
+      // Physics deformation scaling based on O2 and Pressure
+      const o2Scale = Math.max(0.65, Math.min(1.45, o2 / 21));
+      const pScale = Math.max(0.7, Math.min(1.3, pressureKPa / 101.3));
+      const combinedScale = o2Scale * Math.sqrt(pScale);
 
-            // Loop particles around
-            if (flowDir < 0 && positions[i * 3] < -6) {
-              positions[i * 3] = 6;
-            } else if (flowDir > 0 && positions[i * 3] > 6) {
-              positions[i * 3] = -6;
-            }
+      // Light intensity
+      if (flameLightRef.current) {
+        flameLightRef.current.intensity = 2.0 * o2Scale * (1 + 0.1 * Math.sin(clock * 5));
+      }
+
+      // 2. Animate Inner Core
+      if (flameCoreRef.current) {
+        if (isEarth1g) {
+          // Earth 1g: Convective upward elongation
+          flameCoreRef.current.scale.set(
+            0.65 * combinedScale,
+            (1.5 + 0.15 * Math.sin(clock * 8)) * combinedScale,
+            0.65 * combinedScale
+          );
+          flameCoreRef.current.position.set(0, 0.45 * combinedScale, 0);
+          (flameCoreRef.current.material as THREE.MeshBasicMaterial).color.set(0x60a5fa);
+        } else {
+          // 0g Microgravity
+          const stretchX = 1.0 + (airflow / 10.0) * 1.5;
+          const squashYZ = Math.max(0.65, 1.0 - (airflow / 20.0) * 0.35);
+
+          flameCoreRef.current.scale.set(
+            stretchX * combinedScale,
+            squashYZ * combinedScale * (1 + 0.05 * Math.sin(clock * 4)),
+            squashYZ * combinedScale
+          );
+          // Shift downstream if airflow > 0
+          flameCoreRef.current.position.set(
+            (airflow / 20.0) * 0.45,
+            0.2,
+            0
+          );
+          (flameCoreRef.current.material as THREE.MeshBasicMaterial).color.set(0x38bdf8);
+        }
+      }
+
+      // 3. Animate Volumetric Gas Particles
+      if (gasParticlesRef.current) {
+        const positions = gasParticlesRef.current.geometry.attributes.position.array as Float32Array;
+
+        for (let i = 0; i < gasCount; i++) {
+          const bx = gasBasePos.current[i * 3];
+          const by = gasBasePos.current[i * 3 + 1];
+          const bz = gasBasePos.current[i * 3 + 2];
+
+          const noise = Math.sin(clock * 3 + i * 0.5) * 0.08;
+
+          if (isEarth1g) {
+            // Convective buoyancy upward
+            const riseCycle = ((clock * 1.5 + i * 0.05) % 1.0);
+            positions[i * 3] = bx * 0.7 * (1 - riseCycle * 0.5) * combinedScale;
+            positions[i * 3 + 1] = (0.2 + riseCycle * 1.6 + noise) * combinedScale;
+            positions[i * 3 + 2] = bz * 0.7 * (1 - riseCycle * 0.5) * combinedScale;
+          } else {
+            // 0g Microgravity + Ventilated Airflow Streamlines
+            const flowOffset = (airflow / 15.0) * (0.4 + (i % 5) * 0.15);
+            positions[i * 3] = (bx * (1 + airflow * 0.08) + flowOffset + noise) * combinedScale;
+            positions[i * 3 + 1] = (0.2 + by * Math.max(0.6, 1 - airflow * 0.02) + noise) * combinedScale;
+            positions[i * 3 + 2] = (bz * Math.max(0.6, 1 - airflow * 0.02)) * combinedScale;
           }
         }
-        posAttr.needsUpdate = true;
+        gasParticlesRef.current.geometry.attributes.position.needsUpdate = true;
       }
 
-      if (renderer && scene && camera) {
-        renderer.render(scene, camera);
+      // 4. Animate Soot Radical Particles
+      if (sootParticlesRef.current) {
+        const sPositions = sootParticlesRef.current.geometry.attributes.position.array as Float32Array;
+
+        for (let i = 0; i < sootCount; i++) {
+          const bx = sootBasePos.current[i * 3];
+          const by = sootBasePos.current[i * 3 + 1];
+          const bz = sootBasePos.current[i * 3 + 2];
+
+          if (isEarth1g) {
+            const sRise = ((clock * 2.0 + i * 0.1) % 1.2);
+            sPositions[i * 3] = bx * 0.6 * combinedScale;
+            sPositions[i * 3 + 1] = (0.3 + sRise * 1.5) * combinedScale;
+            sPositions[i * 3 + 2] = bz * 0.6 * combinedScale;
+          } else {
+            sPositions[i * 3] = (bx + (airflow / 15.0) * 0.6 + Math.sin(clock * 4 + i) * 0.05) * combinedScale;
+            sPositions[i * 3 + 1] = (by + 0.1) * combinedScale;
+            sPositions[i * 3 + 2] = bz * combinedScale;
+          }
+        }
+        sootParticlesRef.current.geometry.attributes.position.needsUpdate = true;
+      }
+
+      if (rendererRef.current && sceneRef.current && cameraRef.current) {
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
       }
     };
 
-    animate();
-
+    animFrameIdRef.current = requestAnimationFrame(animate);
     return () => {
       if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
     };
-  }, [isPlaying, gravity, airflow, direction]);
+  }, [gravity, airflow, o2, pressureKPa, isPlaying, simSpeed]);
 
   return (
-    <div className="w-full space-y-8 font-sans">
-      {/* 70/30 Physics Studio Grid */}
-      <div className="grid grid-cols-12 gap-6 items-start">
-        {/* 70% Left 3D WebGL Canvas (col-span-12 lg:col-span-8) */}
-        <div className="col-span-12 lg:col-span-8 space-y-4">
-          <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-3">
-            {/* 3D Header Strip */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5CFC2] pb-3 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[#181615] uppercase tracking-wider">
-                  Three.js 3D Combustion &amp; Boundary-Layer Engine
+    <div className="w-full bg-[#0B0F17] text-[#F1F5F9] border border-[#1E293B] shadow-2xl font-sans overflow-hidden">
+      {/* A. Top Header Bar */}
+      <div className="h-14 px-6 border-b border-[#1E293B] flex items-center justify-between bg-[#0E131F]">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs font-bold text-slate-400">
+            01 / The combustion lab
+          </span>
+          <span className="px-2 py-0.5 rounded bg-[#1E293B] text-sky-400 font-mono text-[10px] font-bold uppercase tracking-wider">
+            [Interactive 3D]
+          </span>
+        </div>
+
+        {/* Mode Toggle: Explore vs Measured Replay */}
+        <div className="flex items-center gap-1 bg-[#0B0F17] p-1 border border-[#1E293B] rounded text-xs font-mono">
+          <button
+            type="button"
+            onClick={() => setLabMode('explore')}
+            className={`px-3 py-1 font-bold rounded transition-colors ${
+              labMode === 'explore'
+                ? 'bg-[#1E293B] text-white shadow-xs'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            Explore
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setLabMode('replay');
+              handleSelectPreset('bass2_m14');
+            }}
+            className={`px-3 py-1 font-bold rounded transition-colors ${
+              labMode === 'replay'
+                ? 'bg-[#1E293B] text-white shadow-xs'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            Measured replay
+          </button>
+        </div>
+      </div>
+
+      {/* Main Grid: 75% 3D Viewport on Left, 25% Control Panel on Right */}
+      <div className="grid grid-cols-12 min-h-[640px]">
+        {/* B. Left 75% Viewport: Interactive 3D Combustion Chamber */}
+        <div className="col-span-12 lg:col-span-9 relative min-h-[620px] bg-[#070A10] flex flex-col justify-between">
+          {/* Top Overlay Controls Inside 3D Chamber */}
+          <div className="absolute top-4 left-6 right-6 z-10 flex items-start justify-between pointer-events-none">
+            {/* Top-Left Gravity & Chamber Readout */}
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">
+                COMBUSTION CHAMBER
+              </span>
+              <div className="text-4xl font-light text-white font-mono tracking-tight flex items-baseline gap-2">
+                <span>
+                  {gravity === '0g'
+                    ? 'μg'
+                    : gravity === '1g'
+                    ? '1g'
+                    : gravity === '0.16g'
+                    ? '0.16g'
+                    : '0.38g'}
                 </span>
-                <span className="text-[#A8A296]">|</span>
-                <span className="text-[#1D4ED8] font-bold">
-                  {gravity === '0g' ? 'Microgravity (0g Diffusion)' : 'Earth Normal (1g Buoyant Plume)'}
+                <span className="text-xs font-normal text-slate-400">
+                  {gravity === '0g'
+                    ? 'Microgravity'
+                    : gravity === '1g'
+                    ? 'Earth Gravity'
+                    : gravity === '0.16g'
+                    ? 'Lunar Partial-G [Unmeasured]'
+                    : 'Martian Partial-G [Unmeasured]'}
                 </span>
               </div>
+            </div>
 
-              <div className="flex items-center gap-2">
+            {/* Top-Right Toolbar Buttons */}
+            <div className="flex flex-col items-end gap-2 pointer-events-auto">
+              <div className="flex items-center gap-1.5 bg-[#0E131F]/90 border border-[#1E293B] p-1 rounded backdrop-blur-md">
                 <button
                   type="button"
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="px-2 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold flex items-center gap-1"
+                  onClick={handleIsometricView}
+                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
+                  title="Isometric View"
                 >
-                  {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
-                  <span>{isPlaying ? 'Pause' : 'Play'}</span>
+                  <Box className="w-4 h-4" />
                 </button>
                 <button
                   type="button"
                   onClick={handleResetCamera}
-                  className="px-2 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold flex items-center gap-1"
+                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
+                  title="Reset Orbit Camera"
                 >
-                  <RotateCcw className="w-3 h-3" />
-                  <span>Reset Camera</span>
+                  <RotateCcw className="w-4 h-4" />
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
+                  title={isPlaying ? 'Pause Simulation' : 'Resume Simulation'}
+                >
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                </button>
+                <select
+                  value={simSpeed}
+                  onChange={(e) => setSimSpeed(parseFloat(e.target.value))}
+                  className="bg-[#0B0F17] border border-[#1E293B] text-slate-300 rounded px-1.5 py-1 text-[11px] font-mono focus:outline-none"
+                >
+                  <option value={0.5}>0.5x</option>
+                  <option value={1.0}>1.0x</option>
+                  <option value={2.0}>2.0x</option>
+                </select>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 pr-1">
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-slate-500'
+                  }`}
+                />
+                <span>{isPlaying ? 'Fire animation live' : 'Simulation paused'}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Three.js Canvas Mount */}
+          <div ref={mountRef} className="w-full flex-1 min-h-[500px] cursor-grab active:cursor-grabbing" />
+
+          {/* Partial-G Rule 5 Warning Watermark Overlay */}
+          {(gravity === '0.16g' || gravity === '0.38g') && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center p-6 bg-black/40 backdrop-blur-[2px] pointer-events-none">
+              <div className="p-4 bg-[#1E1114] border border-[#E11D48] text-[#FDA4AF] max-w-lg space-y-1.5 text-center font-mono">
+                <div className="flex items-center justify-center gap-2 font-bold text-sm text-[#F43F5E]">
+                  <ShieldAlert className="w-5 h-5 shrink-0" />
+                  <span>SPEC Rule 5 Non-Negotiable Refusal</span>
+                </div>
+                <p className="text-xs leading-relaxed">
+                  0 NASA PSI flight records exist at {gravity}. Partial-gravity fire behavior is strictly unmeasured. Simulation is paused in wireframe boundary mode.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Bottom HUD Overlay Inside 3D Chamber */}
+          <div className="relative z-10 px-6 py-4 bg-gradient-to-t from-[#070A10] via-[#070A10]/80 to-transparent border-t border-[#1E293B]/60">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs items-end">
+              {/* Readout 1: Animation Intensity */}
+              <div className="space-y-0.5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                  ANIMATION INTENSITY
+                </span>
+                <div className="text-sm font-bold text-white">
+                  {animationIntensity}
+                </div>
+                <span className="text-[10px] text-slate-500 block">
+                  Authored for the picture, not measured
+                </span>
+              </div>
+
+              {/* Readout 2: Live O2 Partial Pressure Equation */}
+              <div className="space-y-0.5">
+                <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                  O₂ PARTIAL PRESSURE
+                </span>
+                <div className="text-sm font-bold text-sky-400">
+                  {o2PartialPressureKPa} kPa
+                </div>
+                <span className="text-[10px] text-slate-500 block font-mono">
+                  {(o2 / 100).toFixed(2)} × {pressureKPa.toFixed(1)} kPa = {o2PartialPressureKPa} kPa
+                </span>
+              </div>
+
+              {/* Readout 3: Illustrative Model Badge */}
+              <div className="flex sm:justify-end items-center gap-2 text-slate-400">
+                <div className="px-2.5 py-1 bg-[#0E131F] border border-[#1E293B] rounded text-[10px] font-bold text-slate-300 flex items-center gap-1.5">
+                  <Atom className="w-3.5 h-3.5 text-sky-400" />
+                  <span>ILLUSTRATIVE MODEL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Footer Strip */}
+          <div className="border-t border-[#1E293B] px-6 py-2.5 text-[11px] font-mono text-slate-400 flex items-center justify-between bg-[#0B0F17]">
+            <span>Drag to orbit · Scroll to zoom</span>
+            <span>Conceptual view · not to scale</span>
+          </div>
+        </div>
+
+        {/* C. Right 25% Control Panel: SET THE CONDITIONS */}
+        <div className="col-span-12 lg:col-span-3 bg-[#0E131F] border-l border-[#1E293B] p-6 flex flex-col justify-between space-y-6">
+          <div className="space-y-6">
+            <div className="border-b border-[#1E293B] pb-3">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+                Set The Conditions
+              </h3>
+              <p className="text-[11px] text-slate-400 font-sans mt-0.5">
+                Adjust environment parameters to observe volumetric flame physics.
+              </p>
+            </div>
+
+            {/* 1. Scenario Preset Dropdown */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-mono text-slate-400 block font-bold">
+                Choose a scenario
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedPresetId}
+                  onChange={(e) => handleSelectPreset(e.target.value)}
+                  className="w-full bg-[#0B0F17] border border-[#1E293B] text-slate-200 text-xs font-mono p-2.5 rounded focus:outline-none focus:border-sky-500 appearance-none pr-8 cursor-pointer"
+                >
+                  {PRESETS.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="w-4 h-4 text-slate-400 absolute right-2.5 top-3 pointer-events-none" />
               </div>
             </div>
 
-            {/* 3D WebGL Viewport */}
-            <div
-              ref={mountRef}
-              className="relative w-full h-[520px] bg-[#181615] border border-[#33302C] overflow-hidden select-none cursor-grab active:cursor-grabbing"
-            >
-              {/* Overlay HUD Badges */}
-              <div className="absolute top-3 left-3 z-10 space-y-1 font-mono text-[11px] pointer-events-none">
-                <div className="px-2.5 py-1 bg-[#181615]/80 text-[#FAF8F3] border border-[#33302C] backdrop-blur-xs">
-                  Airflow Velocity:{' '}
-                  <strong className="text-[#93c5fd]">{airflow.toFixed(1)} cm/s</strong>
-                </div>
-                <div className="px-2.5 py-1 bg-[#181615]/80 text-[#FAF8F3] border border-[#33302C] backdrop-blur-xs">
-                  Regime:{' '}
-                  <strong
-                    className={
-                      airflow < 1.0
-                        ? 'text-[#f59e0b]'
-                        : airflow <= 12.0
-                        ? 'text-[#ef4444]'
-                        : 'text-[#93c5fd]'
-                    }
-                  >
-                    {airflow < 1.0
-                      ? 'Stagnant (Suffocation)'
-                      : airflow <= 12.0
-                      ? 'Peak Hazard (Max Spread)'
-                      : 'Blowoff (Convective Cooling)'}
-                  </strong>
-                </div>
-              </div>
-
-              {/* Viewport Hint */}
-              <div className="absolute bottom-3 right-3 z-10 text-[10px] font-mono text-[#A8A296] pointer-events-none bg-[#181615]/80 px-2 py-1 border border-[#33302C]">
-                Left-Click + Drag: Rotate · Scroll: Zoom · Right-Click: Pan
+            {/* 2. 4-Button Gravity Selector Grid */}
+            <div className="space-y-1.5 font-mono text-xs">
+              <label className="text-[11px] text-slate-400 font-bold block">
+                Gravity Environment
+              </label>
+              <div className="grid grid-cols-4 gap-1.5">
+                {(['0g', '0.16g', '0.38g', '1g'] as GravityRegime[]).map((g) => {
+                  const isActive = gravity === g;
+                  return (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => setGravity(g)}
+                      className={`p-2 rounded border text-center transition-all ${
+                        isActive
+                          ? 'bg-[#1E293B] text-white border-sky-500 shadow-xs font-bold'
+                          : 'bg-[#0B0F17] text-slate-400 border-[#1E293B] hover:text-white'
+                      }`}
+                    >
+                      <div className="text-xs font-bold">
+                        {g === '0g' ? 'μg' : g === '1g' ? '1g' : g}
+                      </div>
+                      <div className="text-[9px] text-slate-400 mt-0.5 capitalize">
+                        {g === '0g' ? 'Orbit' : g === '0.16g' ? 'Moon' : g === '0.38g' ? 'Mars' : 'Earth'}
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Live Interactive Physics Controls Bar */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-3 border-t border-[#D5CFC2] text-xs font-mono">
-              {/* Airflow Velocity Slider */}
-              <div className="space-y-1.5 md:col-span-1">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#181615] uppercase text-[11px] flex items-center gap-1">
-                    <Wind className="w-3.5 h-3.5 text-[#1D4ED8]" />
-                    <span>Forced Airflow:</span>
-                  </span>
-                  <span className="font-bold text-[#1D4ED8]">{airflow.toFixed(1)} cm/s</span>
+            {/* 3. Three Interactive Orange-Track Sliders */}
+            <div className="space-y-4 font-mono text-xs">
+              {/* Slider 1: Oxygen Concentration */}
+              <div className="space-y-1">
+                <div className="flex justify-between items-center text-[11px]">
+                  <span className="text-slate-300">Oxygen concentration</span>
+                  <span className="text-[#F97316] font-bold">{o2}%</span>
                 </div>
                 <input
                   type="range"
-                  min="0.0"
-                  max="30.0"
+                  min="15"
+                  max="40"
+                  step="1"
+                  value={o2}
+                  onChange={(e) => setO2(parseFloat(e.target.value))}
+                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
+                />
+              </div>
+
+              {/* Slider 2: Airflow Velocity */}
+              <div className="space-y-1">
+                <div className="flex justify-between items-center text-[11px]">
+                  <span className="text-slate-300">Airflow velocity</span>
+                  <span className="text-[#F97316] font-bold">
+                    {airflow === 0 ? 'Still (0 cm/s)' : `${airflow.toFixed(1)} cm/s`}
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="20"
                   step="0.5"
                   value={airflow}
                   onChange={(e) => setAirflow(parseFloat(e.target.value))}
-                  className="w-full accent-[#1D4ED8] cursor-pointer"
+                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
                 />
-                <div className="flex justify-between text-[10px] text-[#736B5E]">
-                  <span>0 cm/s</span>
-                  <span>10 cm/s (Peak)</span>
-                  <span>30 cm/s</span>
-                </div>
               </div>
 
-              {/* Gravity & Flow Direction Toggles */}
-              <div className="space-y-1.5 md:col-span-1">
-                <span className="font-bold text-[#181615] uppercase text-[11px] block">
-                  Gravity Regime:
-                </span>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => setGravity('0g')}
-                    className={`p-1.5 text-center text-[11px] font-mono border transition-colors ${
-                      gravity === '0g'
-                        ? 'bg-[#181615] text-[#FAF8F3] border-[#181615] font-bold'
-                        : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#5A544A] border-[#D5CFC2]'
-                    }`}
-                  >
-                    0g Microgravity
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGravity('1g')}
-                    className={`p-1.5 text-center text-[11px] font-mono border transition-colors ${
-                      gravity === '1g'
-                        ? 'bg-[#181615] text-[#FAF8F3] border-[#181615] font-bold'
-                        : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#5A544A] border-[#D5CFC2]'
-                    }`}
-                  >
-                    1g Earth Normal
-                  </button>
+              {/* Slider 3: Cabin Pressure */}
+              <div className="space-y-1">
+                <div className="flex justify-between items-center text-[11px]">
+                  <span className="text-slate-300">Cabin pressure</span>
+                  <span className="text-[#F97316] font-bold">
+                    {pressureKPa.toFixed(1)} kPa · {pressurePsi} psi
+                  </span>
                 </div>
+                <input
+                  type="range"
+                  min="25.0"
+                  max="140.0"
+                  step="0.5"
+                  value={pressureKPa}
+                  onChange={(e) => setPressureKPa(parseFloat(e.target.value))}
+                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
+                />
               </div>
+            </div>
 
-              {/* Fuel Geometry & Direction */}
-              <div className="space-y-1.5 md:col-span-1">
-                <span className="font-bold text-[#181615] uppercase text-[11px] block">
-                  Flow Direction &amp; Fuel:
-                </span>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <button
-                    type="button"
-                    onClick={() => setDirection(direction === 'opposed' ? 'concurrent' : 'opposed')}
-                    className="p-1.5 text-center text-[11px] font-mono border bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#181615] border-[#D5CFC2] font-semibold"
-                  >
-                    {direction === 'opposed' ? '← Opposed' : 'Concurrent →'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFuelType(fuelType === 'pmma_slab' ? 'liquid_droplet' : 'pmma_slab')}
-                    className="p-1.5 text-center text-[11px] font-mono border bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#181615] border-[#D5CFC2] font-semibold"
-                  >
-                    {fuelType === 'pmma_slab' ? 'PMMA Slab' : 'Droplet'}
-                  </button>
-                </div>
-              </div>
+            {/* 4. Fuel Selector Dropdown */}
+            <div className="space-y-1.5 font-mono text-xs">
+              <label className="text-[11px] text-slate-400 font-bold block">
+                Fuel Material & Geometry
+              </label>
+              <select
+                value={fuel}
+                onChange={(e) => setFuel(e.target.value as FuelType)}
+                className="w-full bg-[#0B0F17] border border-[#1E293B] text-slate-200 text-xs font-mono p-2.5 rounded focus:outline-none focus:border-sky-500 cursor-pointer"
+              >
+                <option value="pmma_solid">PMMA · solid fuel</option>
+                <option value="nomex_fabric">Nomex · fabric strip</option>
+                <option value="heptane_droplet">Heptane · liquid droplet</option>
+                <option value="methanol_droplet">Methanol · liquid droplet</option>
+              </select>
             </div>
           </div>
-        </div>
 
-        {/* 30% Right Educational Physics Guidance (col-span-12 lg:col-span-4) */}
-        <div className="col-span-12 lg:col-span-4 space-y-4">
-          <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-5 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4 text-xs font-mono">
-            <div className="border-b border-[#D5CFC2] pb-3">
-              <span className="font-bold text-[#181615] uppercase tracking-wider block text-sm">
-                3-Stage Ventilation Regimes
-              </span>
-              <p className="text-[11px] text-[#5A544A] font-sans mt-0.5 leading-relaxed">
-                Click any stage to configure the 3D physics simulator and observe how spacecraft ventilation governs microgravity combustion.
-              </p>
-            </div>
-
-            {/* Stage 1 Card */}
-            <div
-              onClick={() => applyRegime(1)}
-              className={`p-3.5 border cursor-pointer transition-all space-y-1.5 ${
-                selectedRegime === 1 || airflow < 1.0
-                  ? 'bg-[#EAE5DB] border-[#181615] shadow-xs'
-                  : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] border-[#D5CFC2]'
-              }`}
+          {/* 5. Bottom CTA Button */}
+          <div className="pt-4 border-t border-[#1E293B]">
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(!drawerOpen)}
+              className="w-full py-3 px-4 bg-[#F97316] hover:bg-[#EA580C] text-[#0B0F17] font-bold text-xs font-mono transition-all flex items-center justify-between rounded shadow-lg"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-[#181615] text-[11px] uppercase">
-                  Stage 1: 0 – 1 cm/s · Stagnant Air
-                </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-[#FAF8F3] border border-[#D5CFC2] text-[#736B5E]">
-                  Suffocation
-                </span>
-              </div>
-              <p className="text-[11px] text-[#5A544A] font-sans leading-relaxed">
-                Without buoyancy, combustion products (CO₂ and H₂O) accumulate around the flame zone. Lacking airflow to sweep them away, the flame dims into a faint blue sphere, experiences oxygen starvation, and naturally self-extinguishes.
-              </p>
-            </div>
-
-            {/* Stage 2 Card (PEAK HAZARD) */}
-            <div
-              onClick={() => applyRegime(2)}
-              className={`p-3.5 border cursor-pointer transition-all space-y-1.5 ${
-                selectedRegime === 2 || (airflow >= 1.0 && airflow <= 12.0)
-                  ? 'bg-[#FFF7ED] border-[#FDBA74] shadow-xs'
-                  : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] border-[#D5CFC2]'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-[#C2410C] text-[11px] uppercase flex items-center gap-1">
-                  <AlertTriangle className="w-3.5 h-3.5" />
-                  <span>Stage 2: 1 – 10 cm/s · PEAK HAZARD</span>
-                </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-[#FDBA74] text-[#7C2D12] font-bold">
-                  Maximum Spread
-                </span>
-              </div>
-              <p className="text-[11px] text-[#7C2D12] font-sans leading-relaxed font-medium">
-                The most dangerous regime in human spaceflight! Gentle forced ventilation (equivalent to cabin circulation vents) delivers a continuous supply of fresh oxygen to the reaction zone without blowing it out. Solid flame spread rates peak sharply in this velocity range!
-              </p>
-            </div>
-
-            {/* Stage 3 Card */}
-            <div
-              onClick={() => applyRegime(3)}
-              className={`p-3.5 border cursor-pointer transition-all space-y-1.5 ${
-                selectedRegime === 3 || airflow > 12.0
-                  ? 'bg-[#EAE5DB] border-[#181615] shadow-xs'
-                  : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] border-[#D5CFC2]'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-[#181615] text-[11px] uppercase">
-                  Stage 3: 15+ cm/s · Blowoff Limit
-                </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-[#FAF8F3] border border-[#D5CFC2] text-[#1D4ED8]">
-                  Extinction
-                </span>
-              </div>
-              <p className="text-[11px] text-[#5A544A] font-sans leading-relaxed">
-                Forced air sweeps away heat from the fuel pyrolysis boundary faster than exothermic chemical kinetics can produce it. Convective cooling exceeds heat release, causing the flame front to blow off and extinguish.
-              </p>
-            </div>
-
-            {/* Empirical Grounding Note */}
-            <div className="pt-3 border-t border-[#D5CFC2] text-[11px] text-[#5A544A] space-y-1 font-sans">
-              <span className="font-mono font-bold text-[#181615] block uppercase text-[10px]">
-                Spaceflight Flight Record Grounding:
-              </span>
-              <p>
-                Observed aboard the International Space Station during BASS (PSI-102) and BASS-II (PSI-25) PMMA acrylic burns (NASA/TM-20210011385).
-              </p>
-            </div>
+              <span>{drawerOpen ? 'Hide analysis' : 'Interpret scenario'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Expandable Scenario Interpretation Drawer */}
+      {drawerOpen && (
+        <div className="border-t border-[#1E293B] bg-[#0E131F] p-6 space-y-4 animate-in slide-in-from-top duration-200 font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
+            <div className="flex items-center gap-2">
+              <Layers className="w-4 h-4 text-sky-400" />
+              <span className="font-bold text-white uppercase tracking-wider">
+                Grounding Analysis for {o2}% O₂, {pressureKPa.toFixed(1)} kPa ({pressurePsi} psi)
+              </span>
+            </div>
+            <span className="text-[10px] text-slate-400">SPEC Section 8 Tested Bounds</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
+            {/* Nearest Flight Evidence */}
+            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
+              <span className="text-[10px] font-mono text-sky-400 uppercase font-bold block">
+                Closest NASA PSI Investigation
+              </span>
+              <div className="text-white font-bold text-sm">
+                {nearestOutput.closest
+                  ? `${nearestOutput.closest.record.name} (${nearestOutput.closest.record.acronym})`
+                  : 'No Tested Records'}
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">
+                {nearestOutput.message}
+              </p>
+            </div>
+
+            {/* Active Combustion Regime */}
+            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
+              <span className="text-[10px] font-mono text-amber-400 uppercase font-bold block">
+                Active Flow Regime
+              </span>
+              <div className="text-white font-bold text-sm">
+                {gravity !== '0g'
+                  ? `Buoyant Regime (${gravity})`
+                  : airflow === 0
+                  ? 'Zone 1: Purely Diffusive Envelope'
+                  : airflow <= 10
+                  ? 'Zone 2: Low-Velocity Ventilated (Peak Hazard)'
+                  : 'Zone 3: Convective Blowoff Regime'}
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                {gravity !== '0g'
+                  ? 'Convective buoyancy accelerates flame spread on Earth; unmeasured in lunar/martian atmospheres.'
+                  : airflow <= 10
+                  ? 'Low velocity airflow feeds fresh oxygen to microgravity flame without cooling it, creating peak fire risk.'
+                  : 'High airflow cools reaction zone faster than chemistry can sustain, approaching blowoff extinction.'}
+              </p>
+            </div>
+
+            {/* Provenance & DOI */}
+            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
+              <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold block">
+                Provenance Reference
+              </span>
+              <div className="text-white font-bold text-sm">
+                {nearestOutput.closest?.record.doi ? (
+                  <a
+                    href={`https://doi.org/${nearestOutput.closest.record.doi}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-400 underline hover:text-sky-300 font-mono text-xs"
+                  >
+                    DOI: {nearestOutput.closest.record.doi}
+                  </a>
+                ) : (
+                  <span className="text-slate-500">Not reported</span>
+                )}
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                All values carry authentic NASA Physical Sciences Informatics lineage with SHA-256 integrity.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

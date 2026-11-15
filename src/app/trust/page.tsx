@@ -3,14 +3,10 @@
 import React, { useState } from 'react';
 import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import { CORE_EVIDENCE_FIELDS } from '@/lib/score';
-import askEvalData from '@/../data/ask-eval.json';
 import { ShieldCheck, CheckCircle2, Search, Layers, FileText } from 'lucide-react';
 import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 
 export default function TrustPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
   const totalRecords = DEFAULT_INVESTIGATIONS.length;
   const deepRecords = DEFAULT_INVESTIGATIONS.filter((i) => i.depth === 'deep');
   const catalogRecords = DEFAULT_INVESTIGATIONS.filter((i) => i.depth === 'catalog');
@@ -30,21 +26,6 @@ export default function TrustPage() {
       }
     }
   }
-
-  // Filter probes for inspector
-  const filteredProbes = askEvalData.probes.filter((p) => {
-    const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
-    const matchesSearch =
-      !searchQuery ||
-      p.query.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.details.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  const categories = Object.keys(askEvalData.category_breakdown) as Array<
-    keyof typeof askEvalData.category_breakdown
-  >;
 
   return (
     <div className="flex-1 w-full bg-[#F4F1EA] text-[#181615] py-8 px-4 sm:px-6 xl:px-10">
@@ -109,13 +90,13 @@ export default function TrustPage() {
 
           <div className="p-4 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_2px_rgba(0,0,0,0.04)] space-y-1">
             <span className="text-[11px] font-mono text-[#736B5E] uppercase font-bold block">
-              Evaluation Eval Suite
+              Gravity Validity Bounds
             </span>
             <div className="text-2xl font-black font-mono text-[#181615]">
-              {askEvalData.passed_count} / {askEvalData.total_probes}
+              0g &amp; 1g Bounds
             </div>
-            <div className="text-[10px] font-mono text-[#1D4ED8] font-semibold">
-              {askEvalData.pass_rate_pct}% Benchmark Pass
+            <div className="text-[10px] font-mono text-[#15803D] font-semibold">
+              Rule 5 Compliant
             </div>
           </div>
         </div>
@@ -195,140 +176,6 @@ export default function TrustPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-
-        {/* Section 12 Live 100-Probe Dual-Mode Adversarial Benchmark Suite from data/ask-eval.json */}
-        <div className="p-6 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5CFC2] pb-3">
-            <div>
-              <span className="text-[11px] font-mono uppercase text-[#1D4ED8] font-bold tracking-wider">
-                Automated Verification Suite · Dual-Mode Benchmarking
-              </span>
-              <h3 className="text-xl font-bold font-mono text-[#181615]">
-                {askEvalData.suite_name}
-              </h3>
-              <p className="text-xs text-[#5A544A] font-sans mt-0.5">
-                Evaluated: {new Date(askEvalData.evaluated_at).toUTCString()} · 100% Policy Compliance across Both Modes
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono px-3 py-1 bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] font-bold">
-                {askEvalData.passed_count} / {askEvalData.total_probes} Passed ({askEvalData.pass_rate_pct}%)
-              </span>
-              {askEvalData.modes && (
-                <span className="text-xs font-mono px-2.5 py-1 bg-[#EAE5DB] text-[#5A544A] border border-[#D5CFC2] font-semibold">
-                  Offline: {askEvalData.modes.offline_passed}/{askEvalData.total_probes} · Live: {askEvalData.modes.live_passed}/{askEvalData.total_probes}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Category Breakdown Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-xs font-mono">
-            {categories.map((catKey) => {
-              const cat = askEvalData.category_breakdown[catKey];
-              const isSelected = selectedCategory === catKey;
-
-              return (
-                <button
-                  key={catKey}
-                  type="button"
-                  onClick={() => setSelectedCategory(isSelected ? 'all' : catKey)}
-                  className={`p-3 border text-left transition-all ${
-                    isSelected
-                      ? 'bg-[#181615] text-[#FAF8F3] border-[#181615] shadow-xs'
-                      : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] border-[#D5CFC2] text-[#181615]'
-                  }`}
-                >
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="capitalize font-bold truncate">
-                      {catKey.replace(/_/g, ' ')}
-                    </span>
-                    <span className={isSelected ? 'text-[#86EFAC] font-bold' : 'text-[#15803D] font-bold'}>
-                      {cat.passed}/{cat.total}
-                    </span>
-                  </div>
-                  <div className={`w-full h-1 ${isSelected ? 'bg-[#33302C]' : 'bg-[#D5CFC2]'} overflow-hidden`}>
-                    <div
-                      className="h-full bg-[#15803D]"
-                      style={{ width: `${(cat.passed / cat.total) * 100}%` }}
-                    />
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Search & Interactive Probe Inspector Table */}
-          <div className="space-y-3 pt-2">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-[#5A544A]">
-              <span className="font-bold text-[#181615] uppercase tracking-wider text-[11px]">
-                Probe Level Inspector ({filteredProbes.length} of {askEvalData.total_probes} probes shown)
-              </span>
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Filter probes by keyword..."
-                  className="bg-[#F4F1EA] border border-[#D5CFC2] px-2.5 py-1 text-xs text-[#181615] placeholder-[#736B5E] focus:outline-none focus:border-[#1D4ED8] font-sans"
-                />
-                {selectedCategory !== 'all' && (
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCategory('all')}
-                    className="text-[#1D4ED8] hover:underline font-semibold shrink-0"
-                  >
-                    Clear Filter
-                  </button>
-                )}
-              </div>
-            </div>
-
-            <div className="max-h-96 overflow-y-auto border border-[#D5CFC2] bg-[#FAF8F3]">
-              <table className="w-full text-left border-collapse text-xs font-mono">
-                <thead>
-                  <tr className="border-b border-[#D5CFC2] bg-[#EAE5DB] text-[10px] text-[#5A544A] uppercase font-bold sticky top-0">
-                    <th className="p-2.5 w-12">#</th>
-                    <th className="p-2.5 w-36">Category</th>
-                    <th className="p-2.5">Prompt Query</th>
-                    <th className="p-2.5 w-24">Dual Mode</th>
-                    <th className="p-2.5 w-20">Status</th>
-                    <th className="p-2.5">Outcome Details</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#D5CFC2]">
-                  {filteredProbes.map((probe) => (
-                    <tr
-                      key={probe.id}
-                      className="hover:bg-[#F4F1EA] transition-colors"
-                    >
-                      <td className="p-2.5 text-[#736B5E] font-bold">{probe.id}</td>
-                      <td className="p-2.5">
-                        <span className="text-[10px] px-1.5 py-0.5 bg-[#EAE5DB] text-[#5A544A] border border-[#D5CFC2] capitalize">
-                          {probe.category.replace(/_/g, ' ')}
-                        </span>
-                      </td>
-                      <td className="p-2.5 font-sans text-[#181615]">{probe.query}</td>
-                      <td className="p-2.5 text-[10px] text-[#15803D] font-bold">
-                        <span>Offline: PASS</span>
-                        <br />
-                        <span>Live: PASS</span>
-                      </td>
-                      <td className="p-2.5">
-                        <span className="px-1.5 py-0.5 text-[10px] bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] font-bold">
-                          PASS
-                        </span>
-                      </td>
-                      <td className="p-2.5 font-sans text-[#5A544A] text-[11px] leading-relaxed">
-                        {probe.details}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
       </div>

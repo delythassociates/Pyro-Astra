@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '../components/Navigation';
-import { Footer } from '../components/Footer';
 import { DashboardProvider } from '../context/DashboardContext';
 import { UserGuideDrawer } from '../components/UserGuideDrawer';
 
@@ -36,7 +35,6 @@ export default function RootLayout({
         <DashboardProvider>
           <Navigation />
           <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
           <UserGuideDrawer />
         </DashboardProvider>
       </body>

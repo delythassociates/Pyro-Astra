@@ -10,12 +10,12 @@ import { AdvancedParameterWorkbench } from '@/components/AdvancedParameterWorkbe
 import { ArrowRight, Flame, Compass, Cpu, FileSpreadsheet } from 'lucide-react';
 
 export default function ExplorerPage() {
-  const { dashboardMode } = useDashboard();
+  const { dashboardMode, setDashboardMode } = useDashboard();
 
   return (
     <div className="flex-1 w-full bg-[#F4F1EA] text-[#181615] py-8 px-4 sm:px-6 xl:px-10">
       <div className="w-full max-w-[1840px] mx-auto space-y-8">
-        {/* Page Header with HoverTitleExplanation (Zero Static Subtitles) */}
+        {/* Page Header with HoverTitleExplanation & Scoped Beginner/Advanced Mode Toggle */}
         <div className="border-b border-[#D5CFC2] pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-mono text-[#1D4ED8] uppercase tracking-wider font-semibold">
@@ -34,9 +34,39 @@ export default function ExplorerPage() {
             </div>
           </div>
 
-          <div className="text-right text-xs font-mono text-[#5A544A] shrink-0">
-            <span className="block font-bold text-[#181615]">18 Investigations Audited</span>
-            <span className="text-[11px] text-[#736B5E]">Strict Rule 2 Provenance Enforced</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            {/* Segmented Mode Switch Scoped Specifically to the Chart Explorer */}
+            <div className="inline-flex p-1 bg-[#FAF8F3] border border-[#D5CFC2] shadow-2xs font-mono text-xs">
+              <button
+                type="button"
+                onClick={() => setDashboardMode('beginner')}
+                className={`px-3 py-1 text-xs transition-all ${
+                  dashboardMode === 'beginner'
+                    ? 'bg-[#181615] text-[#FAF8F3] font-bold shadow-xs'
+                    : 'bg-[#FAF8F3] text-[#5A544A] hover:text-[#181615] hover:bg-[#D5CFC2]/40 font-medium'
+                }`}
+                aria-pressed={dashboardMode === 'beginner'}
+              >
+                BEGINNER MODE
+              </button>
+              <button
+                type="button"
+                onClick={() => setDashboardMode('advanced')}
+                className={`px-3 py-1 text-xs transition-all ${
+                  dashboardMode === 'advanced'
+                    ? 'bg-[#181615] text-[#FAF8F3] font-bold shadow-xs'
+                    : 'bg-[#FAF8F3] text-[#5A544A] hover:text-[#181615] hover:bg-[#D5CFC2]/40 font-medium'
+                }`}
+                aria-pressed={dashboardMode === 'advanced'}
+              >
+                ADVANCED MODE
+              </button>
+            </div>
+
+            <div className="text-right text-xs font-mono text-[#5A544A] shrink-0 hidden lg:block">
+              <span className="block font-bold text-[#181615]">18 Investigations Audited</span>
+              <span className="text-[11px] text-[#736B5E]">Strict Rule 2 Provenance Enforced</span>
+            </div>
           </div>
         </div>
 

@@ -174,36 +174,6 @@ export function Navigation() {
             </div>
           </div>
 
-          {/* CENTER: Persistent Beginner vs Advanced Mode Toggle (Text-Only, No Emojis) */}
-          <div className="flex items-center">
-            <div className="inline-flex p-1 bg-[#FAF8F3] border border-[#D5CFC2] shadow-2xs font-mono text-xs">
-              <button
-                type="button"
-                onClick={() => setDashboardMode('beginner')}
-                className={`px-3 py-1 text-xs transition-all ${
-                  dashboardMode === 'beginner'
-                    ? 'bg-[#181615] text-[#FAF8F3] font-bold shadow-xs'
-                    : 'bg-[#FAF8F3] text-[#5A544A] hover:text-[#181615] hover:bg-[#D5CFC2]/40 font-medium'
-                }`}
-                aria-pressed={dashboardMode === 'beginner'}
-              >
-                BEGINNER MODE
-              </button>
-              <button
-                type="button"
-                onClick={() => setDashboardMode('advanced')}
-                className={`px-3 py-1 text-xs transition-all ${
-                  dashboardMode === 'advanced'
-                    ? 'bg-[#181615] text-[#FAF8F3] font-bold shadow-xs'
-                    : 'bg-[#FAF8F3] text-[#5A544A] hover:text-[#181615] hover:bg-[#D5CFC2]/40 font-medium'
-                }`}
-                aria-pressed={dashboardMode === 'advanced'}
-              >
-                ADVANCED MODE
-              </button>
-            </div>
-          </div>
-
           {/* RIGHT: Status Badge & User Guide Trigger (Strictly Text-Only) */}
           <div className="flex items-center gap-3 shrink-0">
             <div className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FAF8F3] border border-[#D5CFC2] text-[10px] font-mono text-[#15803D] font-bold shadow-2xs">
