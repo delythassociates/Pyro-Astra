@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/score.test.ts tests/nearest.test.ts tests/validate.test.ts tests/data.test.ts tests/api.test.ts tests/expansion.test.ts tests/release.test.ts tests/model.test.ts",
+    "test": "tsx --test tests/score.test.ts tests/nearest.test.ts tests/validate.test.ts tests/data.test.ts tests/api.test.ts tests/expansion.test.ts tests/release.test.ts tests/model.test.ts tests/experiment_knowledge.test.ts",
     "analyze": "python analysis/verify_quotes.py",
     "routes:test": "python scripts/test_all_routes.py",
     "reproduce": "python scripts/reproduce.py"

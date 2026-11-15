@@ -6,6 +6,12 @@ import { validateAgentAnswer, AgentAnswer, AgentAnswerSentence } from './validat
 import rawInvestigations from '@/data/investigations.json';
 import rawBounds from '@/data/bounds.json';
 import rawDemoAnswers from '@/data/demo-answers.json';
+import {
+  PSI_EXPERIMENT_DETAILS,
+  getCatalogOverviewSentences,
+  getDisciplineSentences,
+  matchExperimentInQuery,
+} from './experiment_knowledge';
 
 const investigations: Investigation[] = rawInvestigations as Investigation[];
 const recordsMap: Map<string, Investigation> = new Map(investigations.map((r) => [r.id, r]));
@@ -785,6 +791,87 @@ export async function askAstra(
         evidence: [{ record_id: 'PSI-69', field: 'objectives' }],
       },
     ];
+  } else if (
+    (qLower.includes('all') && (qLower.includes('experiment') || qLower.includes('investigation') || qLower.includes('combustion') || qLower.includes('science'))) ||
+    qLower.includes('list experiment') ||
+    qLower.includes('what experiment') ||
+    qLower.includes('what are the experiment') ||
+    qLower.includes('combustion science experiment') ||
+    qLower.includes('psi combustion') ||
+    qLower.includes('all psi') ||
+    qLower.includes('18 experiment') ||
+    qLower.includes('overview of experiment') ||
+    qLower.includes('what investigations') ||
+    qLower.includes('list all')
+  ) {
+    logTrace('catalog_overview', { query }, 'Querying full 18-experiment catalog across 4 microgravity combustion disciplines');
+    toolContextForLlm = {
+      catalog_scope: '18 NASA PSI combustion science experiments grouped across 4 flight disciplines',
+      disciplines: {
+        solids: ['BASS (PSI-26)', 'BASS-II (PSI-25)', 'SAFFIRE-I (PSI-98)', 'SAFFIRE-II (PSI-99)', 'SAFFIRE-III (PSI-100)'],
+        droplets: ['FLEX (PSI-69)', 'FLEX-2 (PSI-68)', 'CFI (PSI-39)'],
+        gases: ['Flame Design (PSI-10)', 'ACME-BRE (PSI-20)', 'ACME E-FIELD (PSI-22)', 'ACME S-Flames (PSI-23)', 'ACME-CLD (PSI-21)', 'SPICE (PSI-107)', 'SLICE (PSI-106)', 'CFI-G (PSI-159)'],
+        smoke_detection: ['SAME (PSI-102)', 'SAME-R (PSI-101)'],
+      },
+    };
+    sentences = getCatalogOverviewSentences();
+  } else if (
+    (qLower.includes('solid') || qLower.includes('material flammability') || qLower.includes('solid fuel')) &&
+    (qLower.includes('experiment') || qLower.includes('investigation') || qLower.includes('combustion') || qLower.includes('what') || qLower.includes('list') || qLower.includes('all'))
+  ) {
+    logTrace('discipline_lookup', { query, discipline: 'solids' }, 'Querying 5 solid fuel combustion experiments');
+    toolContextForLlm = {
+      discipline: 'Solid Fuel Flammability & Extinction',
+      experiments: ['BASS-II (PSI-25)', 'BASS (PSI-26)', 'SAFFIRE-I (PSI-98)', 'SAFFIRE-II (PSI-99)', 'SAFFIRE-III (PSI-100)'],
+      fuels: ['PMMA rods/films/slabs', 'SIBAL fabric', 'Nomex', 'Silicone'],
+      facilities: ['MSG Flow Duct', 'Cygnus Saffire Flow Duct'],
+    };
+    sentences = getDisciplineSentences('solids');
+  } else if (
+    (qLower.includes('droplet') || qLower.includes('liquid fuel') || qLower.includes('liquid droplet')) &&
+    (qLower.includes('experiment') || qLower.includes('investigation') || qLower.includes('combustion') || qLower.includes('what') || qLower.includes('list') || qLower.includes('all'))
+  ) {
+    logTrace('discipline_lookup', { query, discipline: 'droplets' }, 'Querying 3 liquid droplet combustion experiments');
+    toolContextForLlm = {
+      discipline: 'Liquid Droplet Combustion & Cool Flames',
+      experiments: ['FLEX (PSI-69)', 'FLEX-2 (PSI-68)', 'CFI (PSI-39)'],
+      fuels: ['n-Heptane', 'Methanol', 'Ethanol', 'Decane', 'Heptane/hexadecane', 'Methanol/water'],
+      hardware: 'Multi-user Droplet Combustion Apparatus (MDCA) in CIR',
+      discovery: 'Low-temperature quasi-steady cool flames',
+    };
+    sentences = getDisciplineSentences('droplets');
+  } else if (
+    (qLower.includes('gaseous') || qLower.includes('gas burner') || qLower.includes('gas flame') || qLower.includes('diffusion flame') || qLower.includes('gas experiment')) &&
+    (qLower.includes('experiment') || qLower.includes('investigation') || qLower.includes('combustion') || qLower.includes('what') || qLower.includes('list') || qLower.includes('all'))
+  ) {
+    logTrace('discipline_lookup', { query, discipline: 'gases' }, 'Querying 8 gaseous diffusion flame experiments');
+    toolContextForLlm = {
+      discipline: 'Gaseous Diffusion Flames & Burners',
+      experiments: ['Flame Design (PSI-10)', 'ACME-BRE (PSI-20)', 'ACME E-FIELD (PSI-22)', 'ACME S-Flames (PSI-23)', 'ACME-CLD (PSI-21)', 'SPICE (PSI-107)', 'SLICE (PSI-106)', 'CFI-G (PSI-159)'],
+      hardware: ['ACME in CIR', 'MSG'],
+      fuels: ['Ethylene', 'Methane', 'Ethane', 'Propane', 'Butane'],
+      rule4_notice: 'Burner oxidizer up to 85% is strictly burner flow, never cabin air',
+      rule5_notice: 'ACME E-FIELD is an electric field terrestrial buoyancy analog, never partial gravity',
+    };
+    sentences = getDisciplineSentences('gases');
+  } else if (
+    (qLower.includes('smoke') || qLower.includes('particulate') || qLower.includes('fire detection') || qLower.includes('smoke detection') || qLower.includes('detector')) &&
+    (qLower.includes('experiment') || qLower.includes('investigation') || qLower.includes('what') || qLower.includes('list') || qLower.includes('aerosol') || qLower.includes('all'))
+  ) {
+    logTrace('discipline_lookup', { query, discipline: 'smoke' }, 'Querying 2 smoke aerosol detection experiments');
+    toolContextForLlm = {
+      discipline: 'Smoke Particulates & Fire Detection',
+      experiments: ['SAME (PSI-102)', 'SAME-R (PSI-101)'],
+      materials: ['Kapton wire', 'Teflon wire', 'Silicone', 'Cellulose', 'Cotton wick', 'Pyrel foam'],
+      hardware: 'Microgravity Science Glovebox (MSG) Smoke Chamber / SAME-R Module',
+      discovery: 'Particulate agglomeration into larger diameters without buoyant settling',
+    };
+    sentences = getDisciplineSentences('smoke');
+  } else if (matchExperimentInQuery(qLower)) {
+    const exp = matchExperimentInQuery(qLower)!;
+    logTrace('experiment_lookup', { query, id: exp.id, acronym: exp.acronym }, `Retrieved grounded factual profile for ${exp.acronym} (${exp.id})`);
+    toolContextForLlm = exp.toolContext;
+    sentences = exp.sentences;
   } else {
     logTrace('search_records', { query }, 'Searching investigation records');
     const matched = AgentTools.search_records(query);
@@ -792,29 +879,38 @@ export async function askAstra(
 
     const topMatches = matched.slice(0, 3);
     const primary = topMatches[0] ?? AgentTools.get_record('PSI-102')!;
-    const o2Range = primary.cabin_o2_pct?.value ? `${primary.cabin_o2_pct.value.min}% to ${primary.cabin_o2_pct.value.max}%` : 'not reported';
-    const pRange = primary.pressure_psi?.value ? `${primary.pressure_psi.value.min} psi to ${primary.pressure_psi.value.max} psi` : 'not reported';
 
-    toolContextForLlm = {
-      investigation_id: primary.id,
-      name: primary.name,
-      hardware: primary.hardware?.value ?? 'not reported',
-      cabin_o2: o2Range,
-      pressure: pRange,
-      n_tests: primary.n_tests?.value ?? 'not reported',
-      fuels: (primary.fuels?.value ?? []).slice(0, 3),
-    };
+    // If top match corresponds to an experiment profile, serve its rich scientific profile
+    if (primary && PSI_EXPERIMENT_DETAILS[primary.id]) {
+      const exp = PSI_EXPERIMENT_DETAILS[primary.id];
+      logTrace('experiment_profile_match', { id: exp.id, acronym: exp.acronym }, `Serving verified scientific profile for ${exp.acronym} (${exp.id})`);
+      toolContextForLlm = exp.toolContext;
+      sentences = exp.sentences;
+    } else {
+      const o2Range = primary.cabin_o2_pct?.value ? `${primary.cabin_o2_pct.value.min}% to ${primary.cabin_o2_pct.value.max}%` : 'not reported';
+      const pRange = primary.pressure_psi?.value ? `${primary.pressure_psi.value.min} psi to ${primary.pressure_psi.value.max} psi` : 'not reported';
 
-    sentences = [
-      {
-        text: `${primary.name} (${primary.id}) tested ${primary.hardware?.value ?? 'hardware'} in microgravity across ${primary.n_tests?.value ?? 0} tests.`,
-        evidence: [{ record_id: primary.id, field: 'hardware' }],
-      },
-      {
-        text: `Tested conditions include cabin oxygen at ${o2Range} and pressure at ${pRange}.`,
-        evidence: [{ record_id: primary.id, field: 'cabin_o2_pct' }],
-      },
-    ];
+      toolContextForLlm = {
+        investigation_id: primary.id,
+        name: primary.name,
+        hardware: primary.hardware?.value ?? 'not reported',
+        cabin_o2: o2Range,
+        pressure: pRange,
+        n_tests: primary.n_tests?.value ?? 'not reported',
+        fuels: (primary.fuels?.value ?? []).slice(0, 3),
+      };
+
+      sentences = [
+        {
+          text: `${primary.name} (${primary.id}) tested ${primary.hardware?.value ?? 'hardware'} in microgravity across ${primary.n_tests?.value ?? 0} tests.`,
+          evidence: [{ record_id: primary.id, field: 'hardware' }],
+        },
+        {
+          text: `Tested conditions include cabin oxygen at ${o2Range} and pressure at ${pRange}.`,
+          evidence: [{ record_id: primary.id, field: 'cabin_o2_pct' }],
+        },
+      ];
+    }
   }
 
   // Step 3b: If in LIVE mode and key is available, invoke Groq to synthesize from tool context
@@ -852,7 +948,7 @@ export async function askAstra(
       // Verify the LLM draft against the deterministic verifier
       const llmValidation = validateAgentAnswer(
         { sentences: groqRes.sentences, refusal: null },
-        { query, records: recordsMap }
+        { query, records: recordsMap, toolResults: toolContextForLlm }
       );
 
       if (llmValidation.valid) {
@@ -890,7 +986,7 @@ export async function askAstra(
   // Step 4: Strict Post-Verification of final output
   const validationRes = validateAgentAnswer(
     { sentences, refusal: null },
-    { query, records: recordsMap }
+    { query, records: recordsMap, toolResults: toolContextForLlm }
   );
 
   if (!validationRes.valid) {
