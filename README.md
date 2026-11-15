@@ -4,7 +4,7 @@
 *NASA Space Apps Challenge 2026 · Challenge: "Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data"*  
 **Global Submission Deadline:** November 15, 2026 at 11:59 PM Local Time  
 
-[![Production Deployment]http://delythassociates.study
+
 [![GitHub Deployment](https://img.shields.io/badge/Vercel-GitHub%20Mirror-0070f3?style=for-the-badge&logo=vercel)](https://pyro-astra-k9hn.vercel.app)
 [![Tests Passing](https://img.shields.io/badge/Unit%20Tests-55%2F55%20Passing-success?style=for-the-badge&logo=vitest)](https://github.com/delythassociates/Pyro-Astra)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.4.6%20Turbopack-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
