@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import matrixData from '@/data/analysis/function_matrix.json';
+import matrixData from '../../../data/analysis/function_matrix.json';
 import { ShieldCheck, Info, CheckCircle2, XCircle, Grid } from 'lucide-react';
 
 interface MatrixCell {

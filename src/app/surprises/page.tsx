@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import surprisesData from '@/../data/surprises.json';
+import surprisesData from '../../../data/surprises.json';
 import { Lightbulb, Info, AlertTriangle, BookOpen } from 'lucide-react';
 
 export default function SurprisesPage() {

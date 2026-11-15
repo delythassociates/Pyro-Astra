@@ -19,13 +19,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/data/*": ["./data/*"],
-      "data/*": ["./data/*"],
+      "@/data/*": ["./src/data/*", "./data/*"],
+      "data/*": ["./src/data/*", "./data/*"],
       "@/models/*": ["./models/*"],
       "models/*": ["./models/*"],
       "@/lib/*": ["./src/lib/*", "./lib/*"],
-      "lib/*": ["./src/lib/*", "./lib/*"]
+      "lib/*": ["./src/lib/*", "./lib/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": [
