@@ -1,0 +1,1035 @@
+'use client';
+
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Val } from './Val';
+import {
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Maximize2,
+  Filter,
+  Layers,
+  Sparkles,
+  Info,
+  Search,
+  ArrowUpDown,
+  Download,
+} from 'lucide-react';
+import table51Data from '../../data/bass2_table_5_1.json';
+
+export interface RunDataPoint {
+  run_id: string;
+  investigation_id: string;
+  investigation_acronym: string;
+  source_table: string;
+  test_id: string;
+  material_class: string;
+  fuel_phase: string;
+  gravity_regime?: string;
+  cabin_o2_pct: number | null;
+  burner_flow_o2_pct: number | null;
+  pressure_psi: number | null;
+  airflow_speed_cm_s: number | null;
+  sample_thickness_mm: number | null;
+  initial_diameter_mm: number | null;
+  flame_spread_rate_mm_s: number | null;
+  extinction_diameter_mm: number | null;
+  burning_rate_mm2_s?: number | null;
+  temperature_c?: number | null;
+  provenance_file: string;
+  provenance_file_sha256: string;
+  provenance_row_id: string;
+  provenance_column?: string;
+  provenance_note?: string;
+}
+
+export type AxisKey =
+  | 'cabin_o2_pct'
+  | 'burner_flow_o2_pct'
+  | 'pressure_psi'
+  | 'airflow_speed_cm_s'
+  | 'flame_spread_rate_mm_s'
+  | 'sample_thickness_mm'
+  | 'initial_diameter_mm'
+  | 'extinction_diameter_mm'
+  | 'burning_rate_mm2_s';
+
+export const AXIS_CONFIG: Record<
+  AxisKey,
+  { label: string; unit: string; min: number; max: number; description: string }
+> = {
+  cabin_o2_pct: {
+    label: 'Cabin Oxygen',
+    unit: '% O₂',
+    min: 0,
+    max: 100,
+    description: 'Ambient spacecraft atmosphere oxygen concentration',
+  },
+  burner_flow_o2_pct: {
+    label: 'Burner Stream Oxygen',
+    unit: '% O₂',
+    min: 0,
+    max: 100,
+    description: 'Oxidizer concentration in forced burner duct (CFI-G/ACME)',
+  },
+  pressure_psi: {
+    label: 'Atmospheric Pressure',
+    unit: 'psi',
+    min: 0,
+    max: 20,
+    description: 'Chamber pressure in pounds per square inch (1 psi = 6.895 kPa)',
+  },
+  airflow_speed_cm_s: {
+    label: 'Forced Airflow Speed',
+    unit: 'cm/s',
+    min: 0,
+    max: 35,
+    description: 'Imposed convective velocity past fuel sample',
+  },
+  flame_spread_rate_mm_s: {
+    label: 'Flame Spread Rate',
+    unit: 'mm/s',
+    min: 0,
+    max: 8,
+    description: 'Linear rate of flame front propagation along solid surface',
+  },
+  sample_thickness_mm: {
+    label: 'Sample Fuel Thickness',
+    unit: 'mm',
+    min: 0,
+    max: 6,
+    description: 'Physical thickness of solid fuel sample',
+  },
+  initial_diameter_mm: {
+    label: 'Initial Droplet Diameter',
+    unit: 'mm',
+    min: 0,
+    max: 6,
+    description: 'Starting liquid fuel droplet size before spark ignition',
+  },
+  extinction_diameter_mm: {
+    label: 'Extinction Droplet Diameter',
+    unit: 'mm',
+    min: 0,
+    max: 4,
+    description: 'Remaining droplet size when combustion extinguishes',
+  },
+  burning_rate_mm2_s: {
+    label: 'Droplet Burning Rate (K)',
+    unit: 'mm²/s',
+    min: 0,
+    max: 1.5,
+    description: 'D²-law evaporation and regression rate constant',
+  },
+};
+
+export function InteractiveChartWorkspace() {
+  const searchParams = useSearchParams();
+
+  // URL Query Parameters or Defaults
+  const initialFuel = searchParams.get('fuel') || 'all';
+  const initialX = (searchParams.get('xAxis') as AxisKey) || 'cabin_o2_pct';
+  const initialY = (searchParams.get('yAxis') as AxisKey) || 'pressure_psi';
+
+  // Component State
+  const [runs, setRuns] = useState<RunDataPoint[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [xAxis, setXAxis] = useState<AxisKey>(initialX);
+  const [yAxis, setYAxis] = useState<AxisKey>(initialY);
+  const [selectedFuel, setSelectedFuel] = useState<string>(initialFuel);
+  const [selectedGravity, setSelectedGravity] = useState<'all' | '0g' | '1g'>('all');
+  const [searchTableQuery, setSearchTableQuery] = useState<string>('');
+
+  // Selected Point & Tooltip
+  const [activePoint, setActivePoint] = useState<RunDataPoint | null>(null);
+  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
+
+  // Zoom & Pan State
+  const [zoomLevel, setZoomLevel] = useState<number>(1.0);
+  const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState<boolean>(false);
+  const [panStart, setPanStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  // Brush Selection Zoom
+  const [brushMode, setBrushMode] = useState<boolean>(false);
+  const [brushStart, setBrushStart] = useState<{ x: number; y: number } | null>(null);
+  const [brushCurrent, setBrushCurrent] = useState<{ x: number; y: number } | null>(null);
+
+  const svgRef = useRef<SVGSVGElement>(null);
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+
+  // Load Run Data
+  useEffect(() => {
+    // 1. Build initial Table 5.1 runs (PMMA slabs with spread rates)
+    const table51Runs: RunDataPoint[] = table51Data.rows.map((r: any) => {
+      // parse numeric spread rate (some have '0.052 and 0.033', take first)
+      const parseSpread = (val: string): number | null => {
+        if (!val) return null;
+        const first = val.split(' ')[0];
+        const num = parseFloat(first);
+        return isNaN(num) ? null : num;
+      };
+      const parseVelocity = (val: string): number | null => {
+        if (!val) return null;
+        const first = val.split(' ')[0];
+        const num = parseFloat(first);
+        return isNaN(num) ? null : num;
+      };
+
+      return {
+        run_id: `BASS-II_${r.test_no}`,
+        investigation_id: 'PSI-25',
+        investigation_acronym: 'BASS-II',
+        source_table: 'NASA/TM-20210011385 Table 5.1',
+        test_id: r.test_no,
+        material_class: 'PMMA slab',
+        fuel_phase: 'solid',
+        gravity_regime: '0g',
+        cabin_o2_pct: r.initial_o2_vol_pct ? parseFloat(r.initial_o2_vol_pct) : null,
+        burner_flow_o2_pct: null,
+        pressure_psi: 14.7, // Normal ISS cabin atmospheric baseline
+        airflow_speed_cm_s: parseVelocity(r.velocity_cm_s),
+        sample_thickness_mm: r.thickness_mm ? parseFloat(r.thickness_mm) : null,
+        initial_diameter_mm: null,
+        flame_spread_rate_mm_s: parseSpread(r.spread_rate_mm_s),
+        extinction_diameter_mm: null,
+        burning_rate_mm2_s: null,
+        provenance_file: 'data/bass2_table_5_1.json',
+        provenance_file_sha256: '9f2a969747970c634020a13ee42a34fc3cf264cf2333cf46ceefdf0ad697d8c5',
+        provenance_row_id: `Table 5.1 Row ${r.test_no}`,
+        provenance_column: 'spread_rate_mm_s',
+        provenance_note: 'Hand-extracted row from NASA/TM-20210011385 p. 57',
+      };
+    });
+
+    fetch('/release/modeling_ready_runs.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const rawRuns = (data.runs || []) as any[];
+        const formatted: RunDataPoint[] = rawRuns.map((r: any) => ({
+          run_id: r.run_id,
+          investigation_id: r.investigation_id,
+          investigation_acronym: r.investigation_acronym || 'PSI',
+          source_table: r.source_table,
+          test_id: r.test_id || r.run_id,
+          material_class: r.material_class || 'Not specified',
+          fuel_phase: r.fuel_phase || 'solid',
+          gravity_regime: r.gravity_regime === 'microgravity' ? '0g' : '1g',
+          cabin_o2_pct: r.cabin_o2_pct ?? r.calibrated_initial_o2_pct ?? null,
+          burner_flow_o2_pct: r.burner_flow_o2_pct ?? null,
+          pressure_psi: r.pressure_psi ?? null,
+          airflow_speed_cm_s: r.airflow_speed_cm_s ?? null,
+          sample_thickness_mm: r.sample_thickness_mm ?? null,
+          initial_diameter_mm: r.initial_diameter_mm ?? null,
+          flame_spread_rate_mm_s: r.flame_spread_rate_mm_s ?? null,
+          extinction_diameter_mm: r.extinction_diameter_mm ?? null,
+          burning_rate_mm2_s: r.burning_rate_mm2_s ?? null,
+          temperature_c: r.temperature_c ?? null,
+          provenance_file: r.provenance_file || 'release/modeling_ready_runs.json',
+          provenance_file_sha256: r.provenance_file_sha256 || 'db4f5fcc2416fd2150e58c2d73d76109',
+          provenance_row_id: r.provenance_row_id || r.test_id || 'Row 1',
+          provenance_column: r.provenance_column || 'Test #',
+          provenance_note: r.provenance_note || 'Authentic PSI flight dataset',
+        }));
+
+        // Merge: avoid duplicate PMMA runs if already in modeling_ready_runs
+        const combined = [...table51Runs, ...formatted];
+        setRuns(combined);
+        setLoading(false);
+      })
+      .catch(() => {
+        setRuns(table51Runs);
+        setLoading(false);
+      });
+  }, []);
+
+  // Compute non-null counts dynamically for each axis variable
+  const axisCounts = useMemo(() => {
+    const counts: Record<AxisKey, number> = {
+      cabin_o2_pct: 0,
+      burner_flow_o2_pct: 0,
+      pressure_psi: 0,
+      airflow_speed_cm_s: 0,
+      flame_spread_rate_mm_s: 0,
+      sample_thickness_mm: 0,
+      initial_diameter_mm: 0,
+      extinction_diameter_mm: 0,
+      burning_rate_mm2_s: 0,
+    };
+
+    for (const r of runs) {
+      for (const k of Object.keys(counts) as AxisKey[]) {
+        if (r[k] !== null && r[k] !== undefined) {
+          counts[k]++;
+        }
+      }
+    }
+    return counts;
+  }, [runs]);
+
+  // Fuel Filter Logic
+  const filteredRuns = useMemo(() => {
+    return runs.filter((r) => {
+      // Gravity filter
+      if (selectedGravity !== 'all') {
+        const g = r.gravity_regime === '0g' ? '0g' : '1g';
+        if (g !== selectedGravity) return false;
+      }
+
+      // Fuel filter
+      if (selectedFuel === 'all') return true;
+      const mat = (r.material_class || '').toLowerCase();
+      const target = selectedFuel.toLowerCase();
+
+      if (target === 'pmma' || target.includes('acrylic')) {
+        return mat.includes('pmma') || mat.includes('acrylic');
+      }
+      if (target === 'cotton' || target.includes('sibal')) {
+        return mat.includes('cotton') || mat.includes('sibal') || mat.includes('fiberglass');
+      }
+      if (target === 'nomex') return mat.includes('nomex');
+      if (target === 'droplet' || target.includes('heptane')) {
+        return mat.includes('heptane') || mat.includes('methanol') || mat.includes('decane') || r.fuel_phase === 'liquid';
+      }
+      if (target === 'candle' || target.includes('wax')) {
+        return mat.includes('wax') || mat.includes('candle');
+      }
+      if (target === 'burner' || target.includes('gas')) {
+        return r.fuel_phase === 'gas' || mat.includes('burner') || mat.includes('flame');
+      }
+
+      return mat.includes(target);
+    });
+  }, [runs, selectedFuel, selectedGravity]);
+
+  // Extract plottable points for currently selected X and Y axes
+  const plottablePoints = useMemo(() => {
+    const valid: Array<{
+      run: RunDataPoint;
+      x: number;
+      y: number;
+      isBurner: boolean;
+      is0g: boolean;
+    }> = [];
+
+    for (const r of filteredRuns) {
+      const xVal = r[xAxis];
+      const yVal = r[yAxis];
+
+      if (xVal !== null && xVal !== undefined && yVal !== null && yVal !== undefined) {
+        valid.push({
+          run: r,
+          x: xVal,
+          y: yVal,
+          isBurner: r.burner_flow_o2_pct !== null && r.burner_flow_o2_pct !== undefined,
+          is0g: r.gravity_regime !== '1g',
+        });
+      }
+    }
+    return valid;
+  }, [filteredRuns, xAxis, yAxis]);
+
+  // Compute dynamic domain bounds with fallback
+  const { xMin, xMax, yMin, yMax } = useMemo(() => {
+    const xConf = AXIS_CONFIG[xAxis];
+    const yConf = AXIS_CONFIG[yAxis];
+
+    if (plottablePoints.length === 0) {
+      return {
+        xMin: xConf.min,
+        xMax: xConf.max,
+        yMin: yConf.min,
+        yMax: yConf.max,
+      };
+    }
+
+    let minX = Infinity;
+    let maxX = -Infinity;
+    let minY = Infinity;
+    let maxY = -Infinity;
+
+    for (const p of plottablePoints) {
+      if (p.x < minX) minX = p.x;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.y > maxY) maxY = p.y;
+    }
+
+    // Add 10% breathing room
+    const xPad = (maxX - minX) * 0.1 || (xConf.max - xConf.min) * 0.1;
+    const yPad = (maxY - minY) * 0.1 || (yConf.max - yConf.min) * 0.1;
+
+    return {
+      xMin: Math.max(0, minX - xPad),
+      xMax: maxX + xPad,
+      yMin: Math.max(0, minY - yPad),
+      yMax: maxY + yPad,
+    };
+  }, [plottablePoints, xAxis, yAxis]);
+
+  // Chart Canvas Dimensions
+  const SVG_WIDTH = 900;
+  const SVG_HEIGHT = 500;
+  const MARGIN = { top: 30, right: 40, bottom: 60, left: 70 };
+  const PLOT_WIDTH = SVG_WIDTH - MARGIN.left - MARGIN.right;
+  const PLOT_HEIGHT = SVG_HEIGHT - MARGIN.top - MARGIN.bottom;
+
+  // Coordinate Mapping Function
+  const mapCoords = useCallback(
+    (x: number, y: number) => {
+      const xNorm = (x - xMin) / (xMax - xMin || 1);
+      const yNorm = (y - yMin) / (yMax - yMin || 1);
+
+      const rawX = MARGIN.left + xNorm * PLOT_WIDTH;
+      const rawY = MARGIN.top + (1 - yNorm) * PLOT_HEIGHT;
+
+      // Apply zoom & pan around center
+      const centerX = SVG_WIDTH / 2;
+      const centerY = SVG_HEIGHT / 2;
+
+      const zoomedX = centerX + (rawX - centerX) * zoomLevel + panOffset.x;
+      const zoomedY = centerY + (rawY - centerY) * zoomLevel + panOffset.y;
+
+      return { x: zoomedX, y: zoomedY };
+    },
+    [xMin, xMax, yMin, yMax, zoomLevel, panOffset]
+  );
+
+  // Mouse wheel zoom
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+    setZoomLevel((prev) => Math.max(0.5, Math.min(10.0, prev * zoomFactor)));
+  };
+
+  // Pan Handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (brushMode) {
+      const rect = svgRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setBrushStart({ x, y });
+      setBrushCurrent({ x, y });
+    } else {
+      setIsPanning(true);
+      setPanStart({ x: e.clientX - panOffset.x, y: e.clientY - panOffset.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (brushMode && brushStart) {
+      const rect = svgRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      setBrushCurrent({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    } else if (isPanning) {
+      setPanOffset({
+        x: e.clientX - panStart.x,
+        y: e.clientY - panStart.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (brushMode && brushStart && brushCurrent) {
+      const dx = Math.abs(brushCurrent.x - brushStart.x);
+      const dy = Math.abs(brushCurrent.y - brushStart.y);
+      if (dx > 20 && dy > 20) {
+        // Zoom in to brush area
+        setZoomLevel((prev) => Math.min(10.0, prev * 2.0));
+      }
+      setBrushStart(null);
+      setBrushCurrent(null);
+      setBrushMode(false);
+    }
+    setIsPanning(false);
+  };
+
+  const handleResetZoom = () => {
+    setZoomLevel(1.0);
+    setPanOffset({ x: 0, y: 0 });
+  };
+
+  // Filtered Table Rows
+  const tableRows = useMemo(() => {
+    return plottablePoints
+      .map((p) => p.run)
+      .filter((r) => {
+        if (!searchTableQuery) return true;
+        const q = searchTableQuery.toLowerCase();
+        return (
+          r.run_id.toLowerCase().includes(q) ||
+          r.material_class.toLowerCase().includes(q) ||
+          r.investigation_acronym.toLowerCase().includes(q)
+        );
+      });
+  }, [plottablePoints, searchTableQuery]);
+
+  return (
+    <div className="w-full space-y-8 font-sans">
+      {/* 80/20 Two-Column Desktop Layout */}
+      <div className="grid grid-cols-12 gap-6 items-start">
+        {/* Strict 80% Left Canvas Column (col-span-12 lg:col-span-9) */}
+        <div className="col-span-12 lg:col-span-9 space-y-4">
+          <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-3">
+            {/* Top Canvas Action Bar */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5CFC2] pb-3 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-[#181615] uppercase tracking-wider">
+                  80/20 High-Precision Flight Canvas
+                </span>
+                <span className="text-[#A8A296]">|</span>
+                <span className="text-[#1D4ED8] font-semibold">
+                  {plottablePoints.length} Plotted Points
+                </span>
+                <span className="text-[#736B5E] text-[11px]">
+                  ({filteredRuns.length - plottablePoints.length} unplottable / null)
+                </span>
+              </div>
+
+              {/* Zoom & Brush Control Buttons */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel((z) => Math.min(10.0, z * 1.25))}
+                  className="p-1.5 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors"
+                  title="Zoom In (+)"
+                >
+                  <ZoomIn className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel((z) => Math.max(0.5, z * 0.8))}
+                  className="p-1.5 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors"
+                  title="Zoom Out (-)"
+                >
+                  <ZoomOut className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBrushMode(!brushMode)}
+                  className={`px-2 py-1 border text-[11px] font-bold transition-colors ${
+                    brushMode
+                      ? 'bg-[#181615] text-[#FAF8F3] border-[#181615]'
+                      : 'bg-[#EAE5DB] hover:bg-[#D5CFC2] border-[#B8B0A0] text-[#181615]'
+                  }`}
+                  title="Box Zoom: Drag a rectangle to zoom in"
+                >
+                  ⬚ Box Zoom
+                </button>
+                <button
+                  type="button"
+                  onClick={handleResetZoom}
+                  className="px-2 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold transition-colors flex items-center gap-1"
+                  title="Reset Zoom & Pan"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Reset (1.0x)</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Interactive SVG Chart Canvas */}
+            <div
+              ref={chartContainerRef}
+              className="relative w-full overflow-hidden bg-[#FAF8F3] border border-[#EAE5DB] select-none cursor-crosshair"
+              style={{ minHeight: '520px' }}
+              onWheel={handleWheel}
+            >
+              {loading ? (
+                <div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-[#5A544A]">
+                  <span className="animate-spin text-lg mr-2">◌</span>
+                  Loading 1,815 authentic flight records...
+                </div>
+              ) : (
+                <svg
+                  ref={svgRef}
+                  viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+                  className="w-full h-auto block"
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                >
+                  {/* Grid Lines */}
+                  <g className="opacity-40">
+                    {[0, 0.25, 0.5, 0.75, 1.0].map((t, idx) => {
+                      const yPos = MARGIN.top + t * PLOT_HEIGHT;
+                      const xPos = MARGIN.left + t * PLOT_WIDTH;
+                      return (
+                        <React.Fragment key={idx}>
+                          <line
+                            x1={MARGIN.left}
+                            y1={yPos}
+                            x2={MARGIN.left + PLOT_WIDTH}
+                            y2={yPos}
+                            stroke="#D5CFC2"
+                            strokeDasharray="3 3"
+                          />
+                          <line
+                            x1={xPos}
+                            y1={MARGIN.top}
+                            x2={xPos}
+                            y2={MARGIN.top + PLOT_HEIGHT}
+                            stroke="#D5CFC2"
+                            strokeDasharray="3 3"
+                          />
+                        </React.Fragment>
+                      );
+                    })}
+                  </g>
+
+                  {/* Axes Lines */}
+                  <line
+                    x1={MARGIN.left}
+                    y1={MARGIN.top + PLOT_HEIGHT}
+                    x2={MARGIN.left + PLOT_WIDTH}
+                    y2={MARGIN.top + PLOT_HEIGHT}
+                    stroke="#181615"
+                    strokeWidth="1.5"
+                  />
+                  <line
+                    x1={MARGIN.left}
+                    y1={MARGIN.top}
+                    x2={MARGIN.left}
+                    y2={MARGIN.top + PLOT_HEIGHT}
+                    stroke="#181615"
+                    strokeWidth="1.5"
+                  />
+
+                  {/* Axis Tick Labels */}
+                  <g className="text-[10px] font-mono fill-[#5A544A]">
+                    {/* Y Axis Ticks */}
+                    {[0, 0.5, 1.0].map((t, idx) => {
+                      const val = (yMin + (1 - t) * (yMax - yMin)).toFixed(1);
+                      const yPos = MARGIN.top + t * PLOT_HEIGHT;
+                      return (
+                        <text key={idx} x={MARGIN.left - 8} y={yPos + 4} textAnchor="end">
+                          {val}
+                        </text>
+                      );
+                    })}
+
+                    {/* X Axis Ticks */}
+                    {[0, 0.5, 1.0].map((t, idx) => {
+                      const val = (xMin + t * (xMax - xMin)).toFixed(1);
+                      const xPos = MARGIN.left + t * PLOT_WIDTH;
+                      return (
+                        <text key={idx} x={xPos} y={MARGIN.top + PLOT_HEIGHT + 18} textAnchor="middle">
+                          {val}
+                        </text>
+                      );
+                    })}
+                  </g>
+
+                  {/* Axis Title Labels */}
+                  <text
+                    x={MARGIN.left + PLOT_WIDTH / 2}
+                    y={SVG_HEIGHT - 12}
+                    textAnchor="middle"
+                    className="text-xs font-mono font-bold fill-[#181615]"
+                  >
+                    {AXIS_CONFIG[xAxis].label} ({AXIS_CONFIG[xAxis].unit})
+                  </text>
+                  <text
+                    x={-(MARGIN.top + PLOT_HEIGHT / 2)}
+                    y={20}
+                    transform="rotate(-90)"
+                    textAnchor="middle"
+                    className="text-xs font-mono font-bold fill-[#181615]"
+                  >
+                    {AXIS_CONFIG[yAxis].label} ({AXIS_CONFIG[yAxis].unit})
+                  </text>
+
+                  {/* Plotted Data Points */}
+                  <g>
+                    {plottablePoints.map((pt, idx) => {
+                      const pos = mapCoords(pt.x, pt.y);
+                      // Skip if out of bounds of SVG viewport
+                      if (pos.x < 10 || pos.x > SVG_WIDTH - 10 || pos.y < 10 || pos.y > SVG_HEIGHT - 10) {
+                        return null;
+                      }
+
+                      const isSelected = activePoint?.run_id === pt.run.run_id;
+
+                      // Point appearance:
+                      // Microgravity (0g): Circle
+                      // 1g: Diamond (polygon)
+                      // Cabin: Cobalt fill (#1D4ED8)
+                      // Burner: Amber fill (#C2410C)
+                      const fill = pt.isBurner ? '#C2410C' : '#1D4ED8';
+
+                      return (
+                        <g
+                          key={idx}
+                          className="cursor-pointer transition-transform duration-75"
+                          onClick={() => setActivePoint(pt.run)}
+                          onMouseEnter={(e) => {
+                            setActivePoint(pt.run);
+                            const rect = chartContainerRef.current?.getBoundingClientRect();
+                            if (rect) {
+                              setTooltipPos({
+                                x: e.clientX - rect.left,
+                                y: e.clientY - rect.top,
+                              });
+                            }
+                          }}
+                          onMouseLeave={() => {
+                            // keep active point on click, hide pos
+                            setTooltipPos(null);
+                          }}
+                        >
+                          {pt.is0g ? (
+                            <circle
+                              cx={pos.x}
+                              cy={pos.y}
+                              r={isSelected ? 7 : 4.5}
+                              fill={fill}
+                              stroke="#FAF8F3"
+                              strokeWidth={isSelected ? 2.5 : 1}
+                              className="hover:scale-125 transition-transform"
+                            />
+                          ) : (
+                            <polygon
+                              points={`${pos.x},${pos.y - 5} ${pos.x + 5},${pos.y} ${pos.x},${pos.y + 5} ${pos.x - 5},${pos.y}`}
+                              fill={fill}
+                              stroke="#FAF8F3"
+                              strokeWidth={isSelected ? 2.5 : 1}
+                              className="hover:scale-125 transition-transform"
+                            />
+                          )}
+                        </g>
+                      );
+                    })}
+                  </g>
+
+                  {/* Brush Box Overlay if active */}
+                  {brushMode && brushStart && brushCurrent && (
+                    <rect
+                      x={Math.min(brushStart.x, brushCurrent.x)}
+                      y={Math.min(brushStart.y, brushCurrent.y)}
+                      width={Math.abs(brushCurrent.x - brushStart.x)}
+                      height={Math.abs(brushCurrent.y - brushStart.y)}
+                      fill="rgba(29, 78, 216, 0.15)"
+                      stroke="#1D4ED8"
+                      strokeWidth="1.5"
+                      strokeDasharray="4 2"
+                    />
+                  )}
+                </svg>
+              )}
+
+              {/* Floating Dark Tooltip Card on Hover */}
+              {activePoint && tooltipPos && (
+                <div
+                  className="absolute z-30 p-3 bg-[#181615] text-[#FAF8F3] border border-[#33302C] text-xs font-mono pointer-events-none shadow-2xl max-w-xs space-y-1.5"
+                  style={{
+                    left: `${Math.min(tooltipPos.x + 15, 620)}px`,
+                    top: `${Math.max(tooltipPos.y - 80, 10)}px`,
+                  }}
+                >
+                  <div className="flex items-center justify-between border-b border-[#33302C] pb-1">
+                    <span className="font-bold text-[#FAF8F3]">{activePoint.run_id}</span>
+                    <span className="text-[10px] px-1.5 py-0.2 bg-[#33302C] text-[#FAF8F3]">
+                      {activePoint.gravity_regime || '0g'}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-[#D5CFC2]">
+                    <span className="text-[#A8A296]">Fuel:</span> {activePoint.material_class}
+                  </div>
+                  <div className="text-[11px] text-[#D5CFC2]">
+                    <span className="text-[#A8A296]">{AXIS_CONFIG[xAxis].label}:</span>{' '}
+                    <strong>
+                      {activePoint[xAxis] !== null ? `${activePoint[xAxis]} ${AXIS_CONFIG[xAxis].unit}` : 'not reported'}
+                    </strong>
+                  </div>
+                  <div className="text-[11px] text-[#D5CFC2]">
+                    <span className="text-[#A8A296]">{AXIS_CONFIG[yAxis].label}:</span>{' '}
+                    <strong>
+                      {activePoint[yAxis] !== null ? `${activePoint[yAxis]} ${AXIS_CONFIG[yAxis].unit}` : 'not reported'}
+                    </strong>
+                  </div>
+                  <div className="pt-1 border-t border-[#33302C] text-[10px] text-[#A8A296] flex items-center justify-between">
+                    <span>{activePoint.investigation_acronym}</span>
+                    <span>{activePoint.source_table}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Canvas Footer Legend */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs font-mono text-[#5A544A]">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-[#1D4ED8]" />
+                  <span>Cabin Atmosphere (0g Microgravity)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-[#C2410C]" />
+                  <span>Burner Flow Stream (CFI-G / ACME)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rotate-45 bg-[#1D4ED8]" />
+                  <span>1g Ground Companion (Diamond)</span>
+                </div>
+              </div>
+              <div className="text-[11px] text-[#736B5E]">
+                Pan: Click &amp; drag · Zoom: Wheel / Buttons
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Strict 20% Right Sidebar Controls (col-span-12 lg:col-span-3) */}
+        <div className="col-span-12 lg:col-span-3 space-y-4">
+          <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4 text-xs font-mono">
+            <div className="border-b border-[#D5CFC2] pb-2">
+              <span className="font-bold text-[#181615] uppercase tracking-wider block">
+                Axes &amp; Variable Controls
+              </span>
+              <span className="text-[11px] text-[#5A544A] block mt-0.5">
+                Displays verified non-null counts
+              </span>
+            </div>
+
+            {/* X-Axis Selector with Verified Non-Null Counts */}
+            <div className="space-y-1.5">
+              <label className="font-bold text-[#181615] block uppercase text-[11px]">
+                X-Axis Variable:
+              </label>
+              <select
+                value={xAxis}
+                onChange={(e) => setXAxis(e.target.value as AxisKey)}
+                className="w-full p-2 bg-[#F4F1EA] border border-[#D5CFC2] text-xs font-mono text-[#181615] focus:outline-none focus:border-[#1D4ED8]"
+              >
+                {(Object.keys(AXIS_CONFIG) as AxisKey[]).map((k) => (
+                  <option key={k} value={k}>
+                    {AXIS_CONFIG[k].label} ({axisCounts[k]} reported)
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Y-Axis Selector with Verified Non-Null Counts */}
+            <div className="space-y-1.5">
+              <label className="font-bold text-[#181615] block uppercase text-[11px]">
+                Y-Axis Variable:
+              </label>
+              <select
+                value={yAxis}
+                onChange={(e) => setYAxis(e.target.value as AxisKey)}
+                className="w-full p-2 bg-[#F4F1EA] border border-[#D5CFC2] text-xs font-mono text-[#181615] focus:outline-none focus:border-[#1D4ED8]"
+              >
+                {(Object.keys(AXIS_CONFIG) as AxisKey[]).map((k) => (
+                  <option key={k} value={k}>
+                    {AXIS_CONFIG[k].label} ({axisCounts[k]} reported)
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Fuel & Material Filter Pills */}
+            <div className="space-y-2 pt-2 border-t border-[#D5CFC2]">
+              <label className="font-bold text-[#181615] block uppercase text-[11px]">
+                Fuel / Material Filter:
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  { id: 'all', label: 'All Fuels' },
+                  { id: 'pmma', label: 'PMMA (Acrylic)' },
+                  { id: 'cotton', label: 'Cotton Fabric' },
+                  { id: 'nomex', label: 'Nomex Fabric' },
+                  { id: 'droplet', label: 'n-Heptane / Liq' },
+                  { id: 'candle', label: 'Candle Wax' },
+                  { id: 'burner', label: 'Gaseous Burner' },
+                ].map((f) => (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => setSelectedFuel(f.id)}
+                    className={`px-2 py-1 text-[11px] font-mono border transition-colors ${
+                      selectedFuel === f.id
+                        ? 'bg-[#181615] text-[#FAF8F3] border-[#181615] font-bold'
+                        : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#5A544A] border-[#D5CFC2]'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Gravity Regime Filter */}
+            <div className="space-y-2 pt-2 border-t border-[#D5CFC2]">
+              <label className="font-bold text-[#181615] block uppercase text-[11px]">
+                Gravity Domain:
+              </label>
+              <div className="grid grid-cols-3 gap-1">
+                {[
+                  { id: 'all', label: 'All' },
+                  { id: '0g', label: '0g (Flight)' },
+                  { id: '1g', label: '1g (Earth)' },
+                ].map((g) => (
+                  <button
+                    key={g.id}
+                    type="button"
+                    onClick={() => setSelectedGravity(g.id as any)}
+                    className={`p-1.5 text-center text-[10px] font-mono border transition-colors ${
+                      selectedGravity === g.id
+                        ? 'bg-[#181615] text-[#FAF8F3] border-[#181615] font-bold'
+                        : 'bg-[#F4F1EA] hover:bg-[#EAE5DB] text-[#5A544A] border-[#D5CFC2]'
+                    }`}
+                  >
+                    {g.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Active Run Detail Card */}
+            {activePoint && (
+              <div className="pt-3 border-t border-[#D5CFC2] space-y-2">
+                <span className="font-bold text-[#181615] uppercase text-[11px] block">
+                  Selected Run Provenance
+                </span>
+                <div className="p-2.5 bg-[#F4F1EA] border border-[#D5CFC2] space-y-1.5 text-[11px]">
+                  <div className="font-bold text-[#1D4ED8]">{activePoint.run_id}</div>
+                  <div>
+                    <span className="text-[#736B5E]">Investigation:</span>{' '}
+                    {activePoint.investigation_acronym} ({activePoint.investigation_id})
+                  </div>
+                  <div>
+                    <span className="text-[#736B5E]">Table:</span> {activePoint.source_table}
+                  </div>
+                  <div>
+                    <span className="text-[#736B5E]">Row / Column:</span>{' '}
+                    {activePoint.provenance_row_id}
+                  </div>
+                  <div className="pt-1 border-t border-[#D5CFC2] text-[10px] text-[#5A544A] truncate">
+                    SHA-256: {activePoint.provenance_file_sha256}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Synced Data Table */}
+      <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#D5CFC2] pb-4">
+          <div className="space-y-1">
+            <h3 className="text-base font-bold font-mono text-[#181615] flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#1D4ED8]" />
+              <span>Synced Experimental Data Table</span>
+            </h3>
+            <p className="text-xs text-[#5A544A] font-sans">
+              All currently plotted data points with authentic provenance. Click a row to highlight its position in the 80/20 canvas above.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <div className="relative flex-1 sm:w-64">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#736B5E]" />
+              <input
+                type="text"
+                value={searchTableQuery}
+                onChange={(e) => setSearchTableQuery(e.target.value)}
+                placeholder="Search runs, fuels, acronyms..."
+                className="w-full pl-8 pr-3 py-1.5 bg-[#F4F1EA] border border-[#D5CFC2] text-xs font-mono text-[#181615] focus:outline-none focus:border-[#1D4ED8]"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Scrollable Table */}
+        <div className="overflow-x-auto border border-[#D5CFC2]">
+          <table className="w-full text-left text-xs font-mono border-collapse">
+            <thead className="bg-[#EAE5DB] text-[#181615] border-b border-[#D5CFC2]">
+              <tr>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Run ID</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Investigation</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Material Class</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Gravity</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">{AXIS_CONFIG[xAxis].label}</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">{AXIS_CONFIG[yAxis].label}</th>
+                <th className="p-3 font-bold">Provenance Citation</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#D5CFC2] bg-[#FAF8F3]">
+              {tableRows.slice(0, 30).map((r, idx) => {
+                const isSelected = activePoint?.run_id === r.run_id;
+                return (
+                  <tr
+                    key={idx}
+                    onClick={() => setActivePoint(r)}
+                    className={`cursor-pointer transition-colors ${
+                      isSelected ? 'bg-[#EAE5DB] font-bold' : 'hover:bg-[#F4F1EA]'
+                    }`}
+                  >
+                    <td className="p-3 border-r border-[#D5CFC2] text-[#1D4ED8] font-bold whitespace-nowrap">
+                      {r.run_id}
+                    </td>
+                    <td className="p-3 border-r border-[#D5CFC2] whitespace-nowrap">
+                      {r.investigation_acronym}
+                    </td>
+                    <td className="p-3 border-r border-[#D5CFC2]">{r.material_class}</td>
+                    <td className="p-3 border-r border-[#D5CFC2] whitespace-nowrap">
+                      {r.gravity_regime || '0g'}
+                    </td>
+                    <td className="p-3 border-r border-[#D5CFC2] whitespace-nowrap">
+                      <Val
+                        value={r[xAxis]}
+                        unit={AXIS_CONFIG[xAxis].unit}
+                        provenance={{
+                          source_id: `${r.investigation_id}.${xAxis}`,
+                          doi: '10.26030/psi-archives',
+                          entered_by: 'parsed',
+                          file: r.provenance_file,
+                          row_or_page: r.provenance_row_id,
+                          note: r.provenance_note || null,
+                        }}
+                      />
+                    </td>
+                    <td className="p-3 border-r border-[#D5CFC2] whitespace-nowrap">
+                      <Val
+                        value={r[yAxis]}
+                        unit={AXIS_CONFIG[yAxis].unit}
+                        provenance={{
+                          source_id: `${r.investigation_id}.${yAxis}`,
+                          doi: '10.26030/psi-archives',
+                          entered_by: 'parsed',
+                          file: r.provenance_file,
+                          row_or_page: r.provenance_row_id,
+                          note: r.provenance_note || null,
+                        }}
+                      />
+                    </td>
+                    <td className="p-3 text-[11px] text-[#5A544A] truncate max-w-xs">
+                      {r.source_table} ({r.provenance_row_id})
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="flex items-center justify-between text-xs font-mono text-[#5A544A] pt-2">
+          <span>
+            Showing first {Math.min(30, tableRows.length)} of {tableRows.length} matching runs
+          </span>
+          <span className="text-[11px] text-[#736B5E]">
+            All values carry traceable SHA-256 and DOI provenance
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default InteractiveChartWorkspace;

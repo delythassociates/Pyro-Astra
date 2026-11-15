@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import proposedData from '@/../data/analysis/proposed_experiments.json';
-import { Sparkles, Info, ShieldAlert, ArrowRight, Layers } from 'lucide-react';
+import { Sparkles, Info, ShieldAlert, ArrowRight, Layers, FileSpreadsheet } from 'lucide-react';
 
 export default function ProposalsPage() {
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null);
@@ -12,33 +12,45 @@ export default function ProposalsPage() {
   const activeRun = runs.find((r) => r.run_id === selectedRunId) || anchorRun || runs[0];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10 space-y-8 max-w-[1840px] mx-auto">
+    <div className="flex-1 w-full bg-[#F4F1EA] text-[#181615] py-8 px-4 sm:px-6 xl:px-10 space-y-8 max-w-[1840px] mx-auto font-sans">
       {/* Header with Mandatory Policy Labels */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-3">
+      <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-300 font-bold">
+          <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 bg-[#FFF7ED] text-[#C2410C] border border-[#FDBA74] font-bold">
             Proposed conditions to document. Not safety advice.
           </span>
-          <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200">
-            Defined by PYRO-ASTRA Team
-          </span>
-          <span className="text-[11px] font-mono text-slate-500">
+          <span className="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 bg-[#EAE5DB] text-[#181615] border border-[#D5CFC2] font-semibold">
             Candidate Test Matrix Design
+          </span>
+          <span className="text-[11px] font-mono text-[#5A544A]">
+            SPEC Section 11
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black font-mono text-slate-900 tracking-tight">
-          Proposed Candidate Flight Experiment Matrix
+        <h1 className="text-2xl sm:text-3xl font-black font-mono text-[#181615] tracking-tight flex items-center gap-2.5">
+          <FileSpreadsheet className="w-6 h-6 text-[#1D4ED8]" />
+          <span>Recommended Next Spaceflight Experiments (12-Test Matrix)</span>
         </h1>
-        <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed max-w-4xl">
+        <p className="text-xs sm:text-sm text-[#5A544A] leading-relaxed max-w-4xl">
           A 12-run candidate test matrix systematically addressing the untested environmental gap between Earth/ISS normal atmosphere and the planned lunar exploration habitat (34% O₂, 8.2 psi from NASA NTRS-20210022143). Airflow bounds are restricted to the documented Table 5.1 range (2.0 to 21.0 cm/s) for flat PMMA. Contains <strong>ZERO predicted outcomes</strong>.
         </p>
 
-        <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 text-xs font-mono space-y-1">
-          <p className="font-semibold text-amber-900">
+        {/* Prominent Plain-English Explanation Strip */}
+        <div className="p-4 bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-xs font-sans space-y-1">
+          <div className="flex items-center gap-2 font-mono font-bold text-xs uppercase text-[#C2410C]">
+            <Info className="w-4 h-4 shrink-0" />
+            <span>Plain-English Summary: Closing the Lunar Atmosphere Fire Safety Gap</span>
+          </div>
+          <p className="text-[12px] leading-relaxed">
+            Rather than using ungrounded guesses or computer models to assume how materials burn in a lunar base atmosphere, space agencies must fly targeted experiments to measure it directly. This 12-test candidate flight matrix specifies the exact airflow speeds (2.0 to 21.0 cm/s), oxygen levels (up to 34%), and sample thicknesses needed to close the documentation gap aboard the ISS or Gateway—with <strong>zero invented predictions</strong>.
+          </p>
+        </div>
+
+        <div className="p-3 bg-[#EAE5DB] border border-[#D5CFC2] text-xs font-mono space-y-1">
+          <p className="font-semibold text-[#181615]">
             Protocol Derivation: Conditions were chosen by the team by hand around the planned lunar habitat (34% O₂, 8.2 psi) and Table 5.1 ranges (2.0 to 21.0 cm/s flow), and no computed gap analysis was performed.
           </p>
-          <p className="text-slate-600 text-[11px]">
+          <p className="text-[#5A544A] text-[11px] font-sans">
             Empirical Baseline: the only solid-fuel O₂ values we could source are BASS-II Table 5.1 (20 flat-PMMA tests, 16.8–22.2% O₂); BASS, SAFFIRE-II and SAME do not report O₂ in public metadata.
           </p>
         </div>
@@ -46,63 +58,63 @@ export default function ProposalsPage() {
 
       {/* Overview Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
-        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <span className="text-[10px] text-slate-500 uppercase">Target Exploration Envelope</span>
-          <div className="text-xl font-bold font-mono text-sky-900">
+        <div className="p-4 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_2px_rgba(0,0,0,0.04)] space-y-1">
+          <span className="text-[10px] text-[#736B5E] uppercase font-bold block">Target Exploration Envelope</span>
+          <div className="text-xl font-bold font-mono text-[#1D4ED8]">
             34% O₂ · 8.2 psi
           </div>
-          <div className="text-[10px] text-slate-400">NASA NTRS-20210022143</div>
+          <div className="text-[10px] text-[#5A544A]">NASA NTRS-20210022143</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <span className="text-[10px] text-slate-500 uppercase">Airflow Restriction</span>
-          <div className="text-xl font-bold font-mono text-emerald-800">
+        <div className="p-4 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_2px_rgba(0,0,0,0.04)] space-y-1">
+          <span className="text-[10px] text-[#736B5E] uppercase font-bold block">Airflow Restriction</span>
+          <div className="text-xl font-bold font-mono text-[#15803D]">
             2.0 – 21.0 cm/s
           </div>
-          <div className="text-[10px] text-slate-400">NASA/TM-20210011385 Tab 5.1</div>
+          <div className="text-[10px] text-[#5A544A]">NASA/TM-20210011385 Tab 5.1</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <span className="text-[10px] text-slate-500 uppercase">Total Proposed Matrix</span>
-          <div className="text-xl font-bold font-mono text-slate-900">
+        <div className="p-4 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_2px_rgba(0,0,0,0.04)] space-y-1">
+          <span className="text-[10px] text-[#736B5E] uppercase font-bold block">Total Proposed Matrix</span>
+          <div className="text-xl font-bold font-mono text-[#181615]">
             {proposedData.total_runs} Runs Max
           </div>
-          <div className="text-[10px] text-amber-800 font-semibold">1 Anchor + 11 Candidate Points</div>
+          <div className="text-[10px] text-[#C2410C] font-semibold">1 Anchor + 11 Candidate Points</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
-          <span className="text-[10px] text-slate-500 uppercase">Predicted Outcomes</span>
-          <div className="text-xl font-bold font-mono text-slate-400">
+        <div className="p-4 bg-[#FAF8F3] border border-[#D5CFC2] shadow-[0_1px_2px_rgba(0,0,0,0.04)] space-y-1">
+          <span className="text-[10px] text-[#736B5E] uppercase font-bold block">Predicted Outcomes</span>
+          <div className="text-xl font-bold font-mono text-[#736B5E]">
             0 (Prohibited)
           </div>
-          <div className="text-[10px] text-slate-400">Pure Sampling Matrix</div>
+          <div className="text-[10px] text-[#5A544A]">Pure Sampling Matrix</div>
         </div>
       </div>
 
       {/* Interactive Run Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <div className="border-b border-slate-100 pb-3">
-          <h3 className="text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
+      <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4">
+        <div className="border-b border-[#D5CFC2] pb-3">
+          <h3 className="text-sm font-bold text-[#181615] font-mono uppercase tracking-wider">
             12-Run Proposed Test Matrix
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-[#5A544A] mt-0.5">
             Select a candidate run to inspect rationale, parameter justification, and hardware feasibility.
           </p>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto border border-[#D5CFC2]">
           <table className="w-full text-left text-xs font-mono border-collapse">
-            <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
-                <th className="p-3 font-semibold">Run ID</th>
-                <th className="p-3 font-semibold">Material</th>
-                <th className="p-3 font-semibold">O₂ (%)</th>
-                <th className="p-3 font-semibold">Pressure (psi)</th>
-                <th className="p-3 font-semibold">Airflow (cm/s)</th>
-                <th className="p-3 font-semibold">Anchor / Type</th>
+            <thead className="bg-[#EAE5DB] text-[#181615] border-b border-[#D5CFC2]">
+              <tr>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Run ID</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Material</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">O₂ (%)</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Pressure (psi)</th>
+                <th className="p-3 font-bold border-r border-[#D5CFC2]">Airflow (cm/s)</th>
+                <th className="p-3 font-bold">Anchor / Type</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-[#D5CFC2] bg-[#FAF8F3]">
               {runs.map((r) => {
                 const isSelected = r.run_id === activeRun.run_id;
                 return (
@@ -111,22 +123,22 @@ export default function ProposalsPage() {
                     onClick={() => setSelectedRunId(r.run_id)}
                     className={`cursor-pointer transition-colors ${
                       isSelected
-                        ? 'bg-sky-50 font-semibold'
-                        : 'hover:bg-slate-50'
+                        ? 'bg-[#EAE5DB] font-bold'
+                        : 'hover:bg-[#F4F1EA]'
                     }`}
                   >
-                    <td className="p-3 font-bold text-sky-900">{r.run_id}</td>
-                    <td className="p-3 text-slate-800">{r.material}</td>
-                    <td className="p-3 text-slate-800">{r.o2_pct}%</td>
-                    <td className="p-3 text-slate-800">{r.pressure_psi !== null ? `${r.pressure_psi} psi` : 'Not Reported'}</td>
-                    <td className="p-3 text-slate-800">{r.airflow_speed_cm_s} cm/s</td>
+                    <td className="p-3 border-r border-[#D5CFC2] font-bold text-[#1D4ED8]">{r.run_id}</td>
+                    <td className="p-3 border-r border-[#D5CFC2] text-[#181615]">{r.material}</td>
+                    <td className="p-3 border-r border-[#D5CFC2] text-[#181615]">{r.o2_pct}%</td>
+                    <td className="p-3 border-r border-[#D5CFC2] text-[#181615]">{r.pressure_psi !== null ? `${r.pressure_psi} psi` : 'Not Reported'}</td>
+                    <td className="p-3 border-r border-[#D5CFC2] text-[#181615]">{r.airflow_speed_cm_s} cm/s</td>
                     <td className="p-3">
                       {r.is_anchor ? (
-                        <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] text-[10px] font-bold">
                           Anchor (Flight-Tested)
                         </span>
                       ) : (
-                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 text-[10px]">
+                        <span className="px-2 py-0.5 bg-[#EAE5DB] text-[#5A544A] border border-[#D5CFC2] text-[10px]">
                           Candidate Gap Run
                         </span>
                       )}
@@ -139,16 +151,16 @@ export default function ProposalsPage() {
         </div>
 
         {/* Selected Run Details */}
-        <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 text-xs font-mono">
-          <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-            <span className="font-bold text-slate-900 text-sm">
+        <div className="p-4 bg-[#F4F1EA] border border-[#D5CFC2] space-y-2 text-xs font-mono">
+          <div className="flex items-center justify-between border-b border-[#D5CFC2] pb-2">
+            <span className="font-bold text-[#181615] text-sm">
               Candidate Test Run: {activeRun.run_id} ({activeRun.material})
             </span>
-            <span className="text-slate-500">
+            <span className="text-[#5A544A]">
               Hardware: {activeRun.nearest_investigation} derivative
             </span>
           </div>
-          <p className="font-sans text-slate-700 leading-relaxed">
+          <p className="font-sans text-[#5A544A] leading-relaxed">
             {activeRun.why_chosen}
           </p>
         </div>

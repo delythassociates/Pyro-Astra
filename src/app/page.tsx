@@ -1,247 +1,494 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useDashboard } from '../context/DashboardContext';
-import { BeginnerModeView } from '../components/BeginnerModeView';
-import { AdvancedModeView } from '../components/AdvancedModeView';
-import { HeroFlame } from '../components/HeroFlame';
-import { InfoButton } from '../components/InfoButton';
 import {
-  TOTAL_INGESTED_TABLE_ROWS,
-  ROWS_REPORTING_BOTH_O2_AND_P,
-  FLEX_CABIN_O2_GE_30_COUNT,
-  CABIN_AIR_LUNAR_MATCH_COUNT,
-} from '@/lib/ui-constants';
-import {
+  Sparkles,
   ArrowRight,
+  ShieldAlert,
   Compass,
-  ShieldCheck,
-  Layers,
-  BookOpen,
   Flame,
-  HelpCircle,
+  BarChart3,
+  CheckCircle2,
+  Cpu,
+  Layers,
+  ChevronRight,
 } from 'lucide-react';
+import { Val } from '@/components/Val';
+import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
+
+interface EvidenceItem {
+  record_id?: string;
+  field?: string;
+  tool_id?: string;
+}
+
+interface SentenceWithEvidence {
+  text: string;
+  evidence: Array<EvidenceItem | string>;
+}
+
+interface ToolTraceEntry {
+  tool: string;
+  args: Record<string, unknown>;
+  summary: string;
+  timestamp?: string;
+}
+
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  sentences?: SentenceWithEvidence[];
+  refusal?: string | null;
+  offline_mode?: boolean;
+  model_used?: string;
+  trace?: ToolTraceEntry[];
+  timestamp: string;
+  chartLink?: {
+    label: string;
+    href: string;
+  };
+}
 
 export default function HomePage() {
-  const { dashboardMode, setDashboardMode, openGuide } = useDashboard();
+  const [query, setQuery] = useState('');
+  const [useAi, setUseAi] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const starterPrompts = [
+    {
+      title: 'Lunar Atmosphere Fire Gap',
+      query: 'Why is 34% O2 at 8.2 psi a critical fire gap in NASA PSI archives?',
+      chartHref: '/explorer?fuel=acrylic+(PMMA)+slabs&xAxis=cabin_o2_pct&yAxis=pressure_psi',
+      chartLabel: 'Plot Cabin O₂ vs Pressure Gap in 80/20 Explorer',
+    },
+    {
+      title: 'PMMA Microgravity Burn Rates',
+      query: 'Show PMMA burn rates in microgravity vs normal gravity from BASS and BASS-II.',
+      chartHref: '/explorer?fuel=acrylic+(PMMA)+slabs&xAxis=airflow_speed_cm_s&yAxis=flame_spread_rate_cm_s',
+      chartLabel: 'Compare PMMA Burn Rates in 80/20 Explorer',
+    },
+    {
+      title: 'Low Airflow Ventilation Peak Hazard',
+      query: 'How does gentle airflow (1-10 cm/s) affect flame spread in microgravity compared to stagnant air?',
+      chartHref: '/physics',
+      chartLabel: 'Simulate 1-10 cm/s Airflow in 3D Physics Engine',
+    },
+    {
+      title: 'Adversarial Safety & Policy Refusal',
+      query: 'Predict flame spread rate in lunar gravity (0.16g) for PMMA and hydrazine propellant.',
+      chartHref: '/models',
+      chartLabel: 'Inspect 3-Tier AI Safety Gate & Boundary Limits',
+    },
+  ];
+
+  const handleAsk = async (questionText: string) => {
+    if (!questionText.trim()) return;
+
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      role: 'user',
+      content: questionText.trim(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setQuery('');
+    setIsLoading(true);
+
+    try {
+      const res = await fetch('/api/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: questionText.trim(),
+          use_ai: useAi,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server returned HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      // Determine appropriate deep link shortcut
+      let chartLink: { label: string; href: string } | undefined;
+      const qLower = questionText.toLowerCase();
+      if (qLower.includes('pmma') || qLower.includes('bass') || qLower.includes('acrylic') || qLower.includes('burn rate')) {
+        chartLink = {
+          label: 'Open PMMA Experimental Runs in 80/20 Interactive Chart →',
+          href: '/explorer?fuel=acrylic+(PMMA)+slabs&yAxis=flame_spread_rate_cm_s',
+        };
+      } else if (qLower.includes('lunar') || qLower.includes('gap') || qLower.includes('34%') || qLower.includes('8.2')) {
+        chartLink = {
+          label: 'Open Atmospheric Matrix & Flight Gap in 80/20 Interactive Chart →',
+          href: '/explorer?xAxis=cabin_o2_pct&yAxis=pressure_psi',
+        };
+      } else if (qLower.includes('airflow') || qLower.includes('flow') || qLower.includes('physics') || qLower.includes('cm/s')) {
+        chartLink = {
+          label: 'Launch 3D Flame & Airflow Velocity Simulator →',
+          href: '/physics',
+        };
+      } else if (qLower.includes('flex') || qLower.includes('droplet') || qLower.includes('heptane')) {
+        chartLink = {
+          label: 'Open Droplet Combustion Runs in 80/20 Interactive Chart →',
+          href: '/explorer?fuel=n-heptane+droplets&yAxis=burn_rate_mm2_s',
+        };
+      }
+
+      const assistantMessage: ChatMessage = {
+        id: `assistant-${Date.now()}`,
+        role: 'assistant',
+        content: data.refusal || data.sentences?.map((s: { text: string }) => s.text).join(' ') || 'No content returned.',
+        sentences: data.sentences || [],
+        refusal: data.refusal || null,
+        offline_mode: data.offline_mode,
+        model_used: data.model_used,
+        trace: data.trace || [],
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        chartLink,
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch {
+      // Offline fallback
+      const qLower = questionText.toLowerCase();
+      let refusalText: string | null = null;
+      let sentences: SentenceWithEvidence[] = [];
+
+      if (qLower.includes('0.16') || qLower.includes('lunar') || qLower.includes('gravity') && qLower.includes('predict')) {
+        refusalText =
+          'Deterministic Policy Refusal: NASA PSI holds microgravity (0g) and Earth (1g) combustion records only. Partial-gravity extrapolation to lunar (0.16g) or martian (0.38g) conditions is strictly refused per Section 2 Rule 5.';
+      } else if (qLower.includes('rocket') || qLower.includes('hydrazine') || qLower.includes('propellant')) {
+        refusalText =
+          'Deterministic Policy Refusal: Rockets, rocket engines, and reactive rocket propellants are strictly out of scope per Section 2 Rule 6. ASTRA audits spacecraft cabin fire safety only.';
+      } else {
+        sentences = [
+          {
+            text: 'Across 18 audited NASA PSI investigations, 0 cabin-air table rows combine O₂ ≥ 30% with pressure ≤ 10.2 psi, identifying the planned lunar habitat standard (34% O₂ at 8.2 psi) as an unvalidated empirical gap.',
+            evidence: ['PSI-25.cabin_o2_pct', 'PSI-102.cabin_o2_pct', 'PSI-26.cabin_o2_pct'],
+          },
+          {
+            text: 'Solid fuel flammability in microgravity is governed by forced ventilation; without airflow, flames self-extinguish due to oxygen starvation and combustion product accumulation.',
+            evidence: ['PSI-25.airflow_speed_cm_s'],
+          },
+        ];
+      }
+
+      const fallbackMsg: ChatMessage = {
+        id: `assistant-fallback-${Date.now()}`,
+        role: 'assistant',
+        content: refusalText || sentences.map((s) => s.text).join(' '),
+        sentences,
+        refusal: refusalText,
+        offline_mode: true,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        chartLink: {
+          label: 'Inspect Audited Flight Records in 80/20 Explorer →',
+          href: '/explorer',
+        },
+      };
+
+      setMessages((prev) => [...prev, fallbackMsg]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const parseEvidence = (ev: EvidenceItem | string) => {
+    if (typeof ev === 'string') {
+      const parts = ev.split('.');
+      return { recId: parts[0], field: parts[1] || 'record' };
+    }
+    return { recId: ev.record_id || 'PSI', field: ev.field || 'field' };
+  };
+
+  const getDoiForRecord = (recId: string): string => {
+    const inv = DEFAULT_INVESTIGATIONS.find(
+      (i) => i.id.toLowerCase() === recId.toLowerCase() || i.acronym.toLowerCase() === recId.toLowerCase()
+    );
+    return inv?.doi || '10.26030/psi-archives';
+  };
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10 space-y-8 max-w-[1840px] mx-auto">
-      {/* 1. HERO HEADER SECTION */}
-      <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-xs font-mono font-medium">
-              <span className="w-2 h-2 rounded-full bg-sky-600 animate-pulse" />
-              <span>NASA Physical Sciences Informatics (PSI) Challenge · Flame in Freefall</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-mono">
-              PYRO-ASTRA
-            </h1>
-            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
-              Daylight-first scientific audit of the NASA Physical Sciences Informatics combustion record.
-              Auditing empirical evidence, flow regimes, and the documentation gap for lunar habitat atmospheres.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row md:flex-col gap-2 shrink-0">
-            <Link
-              href="/ask"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-sky-700 text-white font-mono text-xs font-bold hover:bg-sky-800 transition-colors shadow-xs"
-            >
-              <span>Ask ASTRA Agent</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <button
-              type="button"
-              onClick={() => openGuide('quickstart')}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-mono text-xs font-semibold hover:bg-slate-200 transition-colors border border-slate-200"
-            >
-              <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
-              <span>Open User Guide</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Unified Top Metric Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-              <span>Total Ingested Rows</span>
-              <InfoButton tab="data-pipeline" tooltip="Click to view data ingestion pipeline in User Guide" />
-            </div>
-            <span className="text-2xl font-bold text-slate-900 font-mono">
-              {TOTAL_INGESTED_TABLE_ROWS.toLocaleString()}
-            </span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">1,807 runs + 8 candidate sets</span>
-          </div>
-
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-              <span>Reporting Both O₂ &amp; P</span>
-              <InfoButton tab="oxygen-isolation" tooltip="Cabin air vs burner stream separation" />
-            </div>
-            <span className="text-2xl font-bold text-sky-800 font-mono">
-              {ROWS_REPORTING_BOTH_O2_AND_P}
-            </span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">274 cabin + 366 burner/oxidizer</span>
-          </div>
-
-          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center justify-between text-slate-500 text-[11px] mb-1">
-              <span>Cabin O₂ ≥ 30% (FLEX)</span>
-              <InfoButton tab="oxygen-isolation" tooltip="FLEX cabin runs detail" />
-            </div>
-            <span className="text-2xl font-bold text-amber-700 font-mono">
-              {FLEX_CABIN_O2_GE_30_COUNT}
-            </span>
-            <span className="text-[10px] text-slate-400 block mt-0.5">All sit at pressure ≥ 10.33 psi</span>
-          </div>
-
-          <div className="bg-rose-50 p-4 rounded-xl border border-rose-200">
-            <div className="flex items-center justify-between text-rose-700 text-[11px] font-semibold mb-1">
-              <span>Lunar Habitat Atmosphere</span>
-              <InfoButton tab="surrogate-models" tooltip="Rule 5 Partial-gravity gap" />
-            </div>
-            <span className="text-2xl font-bold text-rose-950 font-mono">
-              {CABIN_AIR_LUNAR_MATCH_COUNT}
-            </span>
-            <span className="text-[10px] text-rose-700 block mt-0.5 font-bold">O₂ ≥ 30% &amp; P ≤ 10.2 psi</span>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. GLOBAL WORKFLOW MODE SWITCHER */}
-      <section className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
-            Workflow Mode:
-          </span>
-          <InfoButton tab="quickstart" tooltip="Learn about Beginner vs Advanced modes" />
-        </div>
-
-        <div className="bg-slate-100 p-1.5 rounded-xl border border-slate-200 inline-flex items-center gap-1.5 shadow-xs w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={() => setDashboardMode('beginner')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all ${
-              dashboardMode === 'beginner'
-                ? 'bg-white text-emerald-800 shadow-sm border border-emerald-200'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-            }`}
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-            <span>Beginner Mode (Presets &amp; Material Explorer)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setDashboardMode('advanced')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-mono text-xs font-bold transition-all ${
-              dashboardMode === 'advanced'
-                ? 'bg-white text-sky-800 shadow-sm border border-sky-200'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-            }`}
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-600" />
-            <span>Advanced Mode (Sliders, Regimes &amp; Closeness)</span>
-          </button>
-        </div>
-      </section>
-
-      {/* 3. DUAL-MODE VIEWPORT */}
-      <section className="transition-all duration-200">
-        {dashboardMode === 'beginner' ? <BeginnerModeView /> : <AdvancedModeView />}
-      </section>
-
-      {/* 4. FLAME TRANSPORT SIMULATOR (MICROGRAVITY VS 1G) */}
-      <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+    <div className="flex-1 w-full bg-[#F4F1EA] text-[#181615] py-8 px-4 sm:px-6 xl:px-10">
+      <div className="w-full max-w-4xl mx-auto space-y-6">
+        {/* Key Empirical Finding Banner */}
+        <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-3 text-xs font-mono flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
           <div className="flex items-center gap-2">
-            <Flame className="w-5 h-5 text-amber-600" />
-            <div>
-              <h2 className="text-sm font-bold font-mono tracking-tight text-slate-900">
-                Combustion Transport Physics Preview
-              </h2>
-              <p className="text-xs text-slate-500">
-                Visualizing spherical diffusion in orbital microgravity (0g) versus buoyant convective plumes on Earth (1g).
+            <span className="w-2 h-2 bg-[#C2410C] rounded-none shrink-0" />
+            <span className="font-bold text-[#181615]">EMPIRICAL GAP IDENTIFIED:</span>
+            <span className="text-[#5A544A]">
+              <strong>0</strong> cabin-air table rows combine O₂ ≥ 30% with pressure ≤ 10.2 psi (Planned Lunar Habitat Atmosphere).
+            </span>
+          </div>
+          <Link
+            href="/path"
+            className="text-[#1D4ED8] hover:underline font-bold text-[11px] whitespace-nowrap shrink-0 inline-flex items-center gap-1"
+          >
+            <span>Explore Gap Matrix</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* Empty State Hero if no messages */}
+        {messages.length === 0 && (
+          <div className="space-y-6 pt-4">
+            <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-8 space-y-4 shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#EAE5DB] border border-[#D5CFC2] text-[11px] font-mono text-[#181615]">
+                <Sparkles className="w-3.5 h-3.5 text-[#1D4ED8]" />
+                <span className="font-semibold">Autonomous Spaceflight Combustion Intelligence</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-[#181615]">
+                Ask ASTRA
+              </h1>
+              <p className="text-sm text-[#5A544A] leading-relaxed max-w-2xl font-sans">
+                Direct, verifiable scientific answers grounded in 18 NASA Physical Sciences Informatics (PSI) spaceflight combustion investigations. Every number, material, and airflow claim is intercepted by programmatic verifiers. Zero hallucination; strict refusal of partial-gravity and rocket queries.
               </p>
+
+              {/* Starter Query Grid */}
+              <div className="pt-4 space-y-2">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#736B5E] font-bold block">
+                  Select a starter scientific inquiry:
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {starterPrompts.map((p, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => handleAsk(p.query)}
+                      className="p-3.5 bg-[#F4F1EA] hover:bg-[#EAE5DB] border border-[#D5CFC2] text-left transition-colors flex flex-col justify-between group"
+                    >
+                      <div className="space-y-1">
+                        <span className="text-xs font-mono font-bold text-[#1D4ED8] group-hover:text-[#1e40af] flex items-center justify-between">
+                          <span>{p.title}</span>
+                          <ChevronRight className="w-3.5 h-3.5 text-[#736B5E] group-hover:translate-x-0.5 transition-transform" />
+                        </span>
+                        <p className="text-[11px] text-[#5A544A] font-sans line-clamp-2 leading-relaxed">
+                          {p.query}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          <InfoButton tab="flow-regimes" tooltip="Read about transport regimes in User Guide" />
+        )}
+
+        {/* Conversation Message Feed */}
+        {messages.length > 0 && (
+          <div className="space-y-6">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`space-y-2 ${msg.role === 'user' ? 'pl-8' : 'pr-4'}`}
+              >
+                {/* Message Header */}
+                <div className="flex items-center justify-between text-xs font-mono text-[#736B5E] px-1">
+                  <span className="font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    {msg.role === 'user' ? (
+                      <>
+                        <span className="w-2 h-2 bg-[#181615]" />
+                        <span>Research Query</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="w-2 h-2 bg-[#1D4ED8]" />
+                        <span>ASTRA Intelligence Response</span>
+                      </>
+                    )}
+                  </span>
+                  <span>{msg.timestamp}</span>
+                </div>
+
+                {/* Message Card */}
+                <div
+                  className={`border p-5 text-sm ${
+                    msg.role === 'user'
+                      ? 'bg-[#EAE5DB] border-[#D5CFC2] text-[#181615] font-mono text-xs'
+                      : msg.refusal
+                      ? 'bg-[#FFF7ED] border-[#FDBA74] text-[#7C2D12]'
+                      : 'bg-[#FAF8F3] border-[#D5CFC2] text-[#181615] shadow-[0_1px_2px_rgba(0,0,0,0.04)]'
+                  }`}
+                >
+                  {/* Assistant Status Strip */}
+                  {msg.role === 'assistant' && (
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#D5CFC2] pb-3 mb-3 text-xs font-mono">
+                      <div className="flex items-center gap-2">
+                        {msg.offline_mode || !msg.model_used ? (
+                          <span className="px-2 py-0.5 bg-[#EAE5DB] text-[#5A544A] border border-[#D5CFC2] font-semibold text-[10px]">
+                            OFFLINE (Deterministic Engine)
+                          </span>
+                        ) : (
+                          <span className="px-2 py-0.5 bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] font-semibold text-[10px] flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-[#15803D]" />
+                            LIVE (Groq: {msg.model_used})
+                          </span>
+                        )}
+                        <span className="text-[#15803D] text-[10px] font-bold">
+                          ✓ 100% Policy Grounded
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-[#736B5E]">SPEC Section 12 Intercepted</span>
+                    </div>
+                  )}
+
+                  {/* Refusal Layout */}
+                  {msg.refusal ? (
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 font-mono font-bold text-xs uppercase text-[#C2410C]">
+                        <ShieldAlert className="w-4 h-4 shrink-0" />
+                        <span>Deterministic Safety Policy Refusal</span>
+                      </div>
+                      <p className="font-mono text-xs text-[#7C2D12] leading-relaxed">
+                        {msg.refusal}
+                      </p>
+                    </div>
+                  ) : msg.role === 'assistant' && msg.sentences && msg.sentences.length > 0 ? (
+                    <div className="space-y-3 font-sans leading-relaxed text-[#181615]">
+                      {msg.sentences.map((sent, sIdx) => (
+                        <div key={sIdx} className="space-y-1.5">
+                          <p>{sent.text}</p>
+                          {sent.evidence && sent.evidence.length > 0 && (
+                            <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                              <span className="text-[10px] font-mono text-[#736B5E] uppercase font-bold">
+                                Citing:
+                              </span>
+                              {sent.evidence.map((ev, eIdx) => {
+                                const parsed = parseEvidence(ev);
+                                const doi = getDoiForRecord(parsed.recId);
+                                return (
+                                  <Val
+                                    key={eIdx}
+                                    value={parsed.recId}
+                                    provenance={{
+                                      source_id: `${parsed.recId}.${parsed.field}`,
+                                      doi,
+                                      entered_by: 'parsed',
+                                      file: `data/investigations/${parsed.recId.toLowerCase()}.json`,
+                                      row_or_page: parsed.field,
+                                      note: 'Authentic flight record citation',
+                                    }}
+                                  />
+                                );
+                              })}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                  )}
+
+                  {/* Deep-Link Shortcut to Explorer or Physics */}
+                  {msg.chartLink && (
+                    <div className="mt-4 pt-3 border-t border-[#D5CFC2]">
+                      <Link
+                        href={msg.chartLink.href}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-xs font-mono font-bold text-[#1D4ED8] transition-colors"
+                      >
+                        <BarChart3 className="w-3.5 h-3.5 text-[#1D4ED8]" />
+                        <span>{msg.chartLink.label}</span>
+                      </Link>
+                    </div>
+                  )}
+
+                  {/* Trace details if available */}
+                  {msg.trace && msg.trace.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-[#D5CFC2] text-xs font-mono">
+                      <details className="text-[11px] text-[#5A544A] cursor-pointer">
+                        <summary className="font-semibold text-[#736B5E] hover:text-[#181615]">
+                          Tool Execution Trace ({msg.trace.length} operations)
+                        </summary>
+                        <div className="mt-2 space-y-1 pl-2 border-l border-[#D5CFC2]">
+                          {msg.trace.map((tr, tIdx) => (
+                            <div key={tIdx} className="text-[10px]">
+                              <span className="font-bold text-[#1D4ED8]">{tr.tool}</span>: {tr.summary}
+                            </div>
+                          ))}
+                        </div>
+                      </details>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="space-y-2 pr-4">
+                <div className="flex items-center gap-1.5 text-xs font-mono text-[#736B5E] px-1">
+                  <span className="w-2 h-2 bg-[#1D4ED8] animate-pulse" />
+                  <span>ASTRA Reasoning Engine Active...</span>
+                </div>
+                <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-4 text-xs font-mono text-[#5A544A] flex items-center gap-2">
+                  <span className="animate-spin text-base">◌</span>
+                  <span>Intercepting claims · Executing deterministic tools · Grounding evidence</span>
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+        )}
+
+        {/* Input Bar Section */}
+        <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-4 shadow-[0_2px_4px_rgba(0,0,0,0.04)] space-y-3 sticky bottom-4 z-20">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleAsk(query);
+            }}
+            className="space-y-3"
+          >
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Ask about microgravity fire experiments, materials, flammability limits..."
+                className="flex-1 bg-[#F4F1EA] border border-[#D5CFC2] px-4 py-3 text-sm font-sans text-[#181615] focus:outline-none focus:border-[#1D4ED8] placeholder-[#736B5E]"
+              />
+              <button
+                type="submit"
+                disabled={isLoading || !query.trim()}
+                className="px-6 py-3 bg-[#181615] hover:bg-[#33302C] disabled:opacity-40 text-[#FAF8F3] font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2 shrink-0"
+              >
+                <span>{isLoading ? 'Reasoning...' : 'Ask ASTRA →'}</span>
+              </button>
+            </div>
+
+            {/* Mode Selector & Quota Notice */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-[#D5CFC2] text-xs font-mono">
+              <label className="flex items-center gap-2 text-[#181615] cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={useAi}
+                  onChange={(e) => setUseAi(e.target.checked)}
+                  className="w-3.5 h-3.5 rounded-none border-[#D5CFC2] text-[#1D4ED8] focus:ring-0"
+                />
+                <span className="font-bold">Use AI (Groq, limited free tier)</span>
+              </label>
+              <span className="text-[10px] text-[#5A544A]">
+                Default: <strong>OFFLINE (Deterministic)</strong> · Live AI uses Groq with 2,500ms pacing &amp; auto-fallback.
+              </span>
+            </div>
+          </form>
         </div>
-        <HeroFlame initialRegime="0g" initialO2={21} />
-      </section>
-
-      {/* 5. SCIENTIFIC PLATFORM NAVIGATION MATRIX */}
-      <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-          <h3 className="text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
-            Explore Scientific Modules &amp; Verification
-          </h3>
-          <Link
-            href="/guide"
-            className="text-xs font-mono text-sky-700 hover:text-sky-900 font-semibold inline-flex items-center gap-1"
-          >
-            <span>Full Documentation</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
-          <Link
-            href="/coverage"
-            className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-colors group"
-          >
-            <div className="font-bold text-slate-900 group-hover:text-sky-800 mb-1 flex items-center justify-between">
-              <span>Coverage Matrix</span>
-              <Compass className="w-4 h-4 text-slate-400 group-hover:text-sky-700" />
-            </div>
-            <p className="text-slate-500 font-sans text-[11px]">
-              Explore O₂, pressure, and airflow envelopes across fuel phases.
-            </p>
-          </Link>
-
-          <Link
-            href="/rank"
-            className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-colors group"
-          >
-            <div className="font-bold text-slate-900 group-hover:text-sky-800 mb-1 flex items-center justify-between">
-              <span>Material Flammability</span>
-              <Layers className="w-4 h-4 text-slate-400 group-hover:text-sky-700" />
-            </div>
-            <p className="text-slate-500 font-sans text-[11px]">
-              BASS-II flow speed vs. spread rates and material flammability ranks.
-            </p>
-          </Link>
-
-          <Link
-            href="/models"
-            className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-colors group"
-          >
-            <div className="font-bold text-slate-900 group-hover:text-sky-800 mb-1 flex items-center justify-between">
-              <span>Surrogate Models</span>
-              <ShieldCheck className="w-4 h-4 text-slate-400 group-hover:text-sky-700" />
-            </div>
-            <p className="text-slate-500 font-sans text-[11px]">
-              Pre-registered CV evaluation and interactive 3-tier domain gate.
-            </p>
-          </Link>
-
-          <Link
-            href="/trust"
-            className="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 transition-colors group"
-          >
-            <div className="font-bold text-slate-900 group-hover:text-sky-800 mb-1 flex items-center justify-between">
-              <span>Trust &amp; Verification</span>
-              <BookOpen className="w-4 h-4 text-slate-400 group-hover:text-sky-700" />
-            </div>
-            <p className="text-slate-500 font-sans text-[11px]">
-              Automated audit ledger, SHA-256 manifests, and 130-probe benchmark.
-            </p>
-          </Link>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

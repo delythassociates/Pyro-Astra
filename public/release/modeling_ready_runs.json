@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.0.0",
   "_description": "PYRO-ASTRA Modeling-Ready Microgravity Combustion Test Runs Dataset",
-  "_release_date": "2026-11-15T05:23:06.112994+00:00",
+  "_release_date": "2026-11-15T12:10:55.956654+00:00",
   "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
   "_rules_enforced": {
     "G1_strict_nulls": "All unmeasured or unstated fields are strictly null. No interpolation, extrapolation or estimation.",
