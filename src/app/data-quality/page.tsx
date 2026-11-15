@@ -163,8 +163,8 @@ export default function DataQualityPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10">
+      <div className="w-full max-w-[1840px] mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-200 pb-4">
           <div className="flex items-center gap-2 text-xs font-mono text-sky-700 uppercase tracking-wider">

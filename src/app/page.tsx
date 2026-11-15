@@ -27,7 +27,7 @@ export default function HomePage() {
   const { dashboardMode, setDashboardMode, openGuide } = useDashboard();
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8 space-y-8 max-w-7xl mx-auto">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10 space-y-8 max-w-[1840px] mx-auto">
       {/* 1. HERO HEADER SECTION */}
       <section className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-6">

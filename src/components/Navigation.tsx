@@ -72,7 +72,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-sm" ref={navRef}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1840px] mx-auto px-4 sm:px-6 xl:px-10">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo & Scientific Platform Title */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">

@@ -45,7 +45,7 @@ export default function PathPage() {
   const currentY = padTop + plotHeight - (currentStep.evidence_distance / maxDist) * plotHeight;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8 space-y-10 max-w-7xl mx-auto">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10 space-y-10 max-w-[1840px] mx-auto">
       {/* Header */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-3">
         <div className="flex flex-wrap items-center gap-2">

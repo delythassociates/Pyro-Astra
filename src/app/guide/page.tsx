@@ -17,7 +17,7 @@ export default function GuidePage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 xl:px-10 max-w-[1840px] mx-auto space-y-8">
       {/* Header */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
         <div className="flex items-center justify-between">

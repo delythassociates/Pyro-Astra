@@ -3,7 +3,7 @@ import React from 'react';
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-slate-200 bg-white py-8 text-slate-600 text-xs font-mono">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div className="w-full max-w-[1840px] mx-auto px-4 sm:px-6 xl:px-10 space-y-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div className="flex items-center gap-2">
             <span className="font-bold text-slate-900 tracking-wider">PYRO-ASTRA</span>
