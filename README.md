@@ -4,7 +4,7 @@
 *NASA Space Apps Challenge 2026 · Challenge: "Flame in Freefall: SI-Powered Fire Safety Insights from Microgravity Combustion Data"*  
 **Global Submission Deadline:** November 15, 2026 at 11:59 PM Local Time  
 
-[![Production Deployment](https://img.shields.io/badge/Vercel-Live%20Production-10b981?style=for-the-badge&logo=vercel)](https://nasaspaceappschallenge2026-nine.vercel.app)
+[![Production Deployment]http://delythassociates.study
 [![GitHub Deployment](https://img.shields.io/badge/Vercel-GitHub%20Mirror-0070f3?style=for-the-badge&logo=vercel)](https://pyro-astra-k9hn.vercel.app)
 [![Tests Passing](https://img.shields.io/badge/Unit%20Tests-55%2F55%20Passing-success?style=for-the-badge&logo=vitest)](https://github.com/delythassociates/Pyro-Astra)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.4.6%20Turbopack-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
@@ -29,9 +29,9 @@ Designed for life-support systems (ECLSS) engineers, mission planners, and space
 
 ### The Core Finding: The Exploration Atmosphere Blindspot
 Future NASA exploration architectures (including Artemis lunar surface habitats and Mars transit vehicles) plan to operate at reduced cabin pressure and elevated oxygen concentrations—specifically **$34\%\text{ O}_2$ at $56.5\text{ kPa}$ ($8.2\text{ psi}$)**, as specified in NASA/TP-2015-218570 (BVAD). 
-
+[
 By conducting an exhaustive audit across **1,815 authentic flight test runs**, PYRO-ASTRA uncovers a critical gap in human spaceflight data:
-> **Zero ambient cabin-air combustion runs in the entire 40-year NASA PSI archive have ever been conducted at $O_2 \ge 30\%$ with pressure $\le 70.3\text{ kPa}$ ($10.2\text{ psi}$).**
+> **Zero ambient cabin-air combustion runs in the entire 40-year NASA PSI archive](http://delythassociates.study/) have ever been conducted at $O_2 \ge 30\%$ with pressure $\le 70.3\text{ kPa}$ ($10.2\text{ psi}$).**
 
 The closest ambient flight record is FLEX Test 24 at $30.0\%\text{ O}_2$ and $71.2\text{ kPa}$ ($10.33\text{ psi}$). Rather than hiding this deficiency behind synthetic interpolations or ungrounded machine-learning predictions, PYRO-ASTRA exposes this boundary as a **first-class engineering constraint**.
 
