@@ -3,6 +3,7 @@
 import React from 'react';
 import { Combustion3DSimulator } from '@/components/Combustion3DSimulator';
 import { Flame, Wind } from 'lucide-react';
+import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 
 export default function PhysicsPage() {
   return (
@@ -15,12 +16,11 @@ export default function PhysicsPage() {
               <Flame className="w-4 h-4 text-[#C2410C]" />
               <span>Three.js WebGL Simulation · Microgravity Combustion Physics</span>
             </div>
-            <h1 className="text-3xl font-black font-mono tracking-tight text-[#181615]">
-              3D Flame &amp; Airflow Physics Engine
-            </h1>
-            <p className="text-sm text-[#5A544A] max-w-3xl leading-relaxed font-sans">
-              Interact with real-time 3D combustion models. Explore the physics of buoyant convection on Earth (1g) versus pure diffusion in microgravity (0g), and test how cabin airflow speeds govern flame spread and blowoff extinction.
-            </p>
+            <HoverTitleExplanation
+              title="3D Flame & Airflow Physics Engine"
+              summary="Interact with real-time 3D combustion models. Explore the physics of buoyant convection on Earth (1g) versus pure diffusion in microgravity (0g), and test how cabin airflow speeds govern flame spread and blowoff extinction."
+              badge="Three.js WebGL"
+            />
           </div>
 
           <div className="text-right text-xs font-mono text-[#5A544A] shrink-0">

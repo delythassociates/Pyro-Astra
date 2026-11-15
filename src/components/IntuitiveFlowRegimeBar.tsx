@@ -58,7 +58,7 @@ export function IntuitiveFlowRegimeBar({
             <span className="text-slate-500 uppercase font-semibold">Active Combustion Regime:</span>
             {activeZone === 'partial_g' ? (
               <span className="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-300 font-bold">
-                ⚠️ Buoyancy-Coupled Partial Gravity ({gravityRegime}) — Unmeasured in PSI
+                Buoyancy-Coupled Partial Gravity ({gravityRegime}) — Unmeasured in PSI
               </span>
             ) : activeZone === 'diffusive' ? (
               <span className="px-2.5 py-0.5 rounded bg-sky-100 text-sky-800 border border-sky-300 font-bold">
@@ -201,10 +201,10 @@ export function IntuitiveFlowRegimeBar({
                     <polygon points="65,42 72,45 65,48" fill="#e11d48" />
                   </g>
                   <text x="45" y="38" fill="#be123c" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                    Spread ➔
+                    Spread -&gt;
                   </text>
                   <text x="145" y="18" fill="#0369a1" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                    Flow ⬅
+                    &lt;- Flow
                   </text>
                 </g>
               ) : (
@@ -222,10 +222,10 @@ export function IntuitiveFlowRegimeBar({
                   <path d="M 72 55 Q 92 30 115 42 Q 100 52 105 55 Z" fill="#ef4444" opacity="0.9" />
                   {/* Concurrent Spread text */}
                   <text x="45" y="18" fill="#0369a1" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                    Flow ➔
+                    Flow -&gt;
                   </text>
                   <text x="135" y="28" fill="#be123c" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                    Accelerating ➔
+                    Accelerating -&gt;
                   </text>
                 </g>
               )}

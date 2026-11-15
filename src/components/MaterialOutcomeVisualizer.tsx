@@ -665,12 +665,12 @@ export function MaterialOutcomeVisualizer({
                     <div className="flex items-center gap-2 text-[11px] text-slate-500">
                       {r.airflow_speed_cm_s !== null && (
                         <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
-                          💨 {r.airflow_speed_cm_s} cm/s
+                          Flow: {r.airflow_speed_cm_s} cm/s
                         </span>
                       )}
                       {r.sample_thickness_mm !== null && (
                         <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
-                          📏 {r.sample_thickness_mm} mm
+                          Thick: {r.sample_thickness_mm} mm
                         </span>
                       )}
                     </div>

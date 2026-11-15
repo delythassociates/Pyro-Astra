@@ -7,14 +7,8 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  Maximize2,
-  Filter,
-  Layers,
-  Sparkles,
-  Info,
   Search,
-  ArrowUpDown,
-  Download,
+  Layers,
 } from 'lucide-react';
 import table51Data from '../../data/bass2_table_5_1.json';
 
@@ -124,6 +118,44 @@ export const AXIS_CONFIG: Record<
   },
 };
 
+// Shape & Color Mapper for Multi-Shape/Color Data Points
+export function getPointShapeAndColor(run: RunDataPoint, isBurner: boolean, is0g: boolean) {
+  const mat = (run.material_class || '').toLowerCase();
+
+  if (isBurner) {
+    return { shape: 'square', color: '#C2410C', label: 'Burner Oxidizer Flow (ACME/CFI)' };
+  }
+  if (mat.includes('pmma') || mat.includes('acrylic')) {
+    return {
+      shape: is0g ? 'circle' : 'square',
+      color: '#1D4ED8',
+      label: is0g ? 'PMMA Solid (0g Microgravity)' : 'PMMA Solid (1g Earth Normal)',
+    };
+  }
+  if (mat.includes('cotton') || mat.includes('sibal') || mat.includes('fiberglass')) {
+    return { shape: 'triangle', color: '#15803D', label: 'Cotton / SIBAL Fabric' };
+  }
+  if (mat.includes('nomex')) {
+    return { shape: 'diamond', color: '#7C3AED', label: 'Nomex Fabric' };
+  }
+  if (
+    mat.includes('heptane') ||
+    mat.includes('methanol') ||
+    mat.includes('decane') ||
+    run.fuel_phase === 'liquid'
+  ) {
+    return { shape: 'circle', color: '#D97706', label: 'Liquid Droplet (FLEX)' };
+  }
+  if (mat.includes('wax') || mat.includes('candle')) {
+    return { shape: 'star', color: '#CA8A04', label: 'Candle Wax' };
+  }
+  return {
+    shape: is0g ? 'circle' : 'diamond',
+    color: '#4B5563',
+    label: is0g ? 'Other Record (0g)' : 'Other Record (1g)',
+  };
+}
+
 export function InteractiveChartWorkspace() {
   const searchParams = useSearchParams();
 
@@ -157,13 +189,11 @@ export function InteractiveChartWorkspace() {
   const [brushCurrent, setBrushCurrent] = useState<{ x: number; y: number } | null>(null);
 
   const svgRef = useRef<SVGSVGElement>(null);
-  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const plotAreaRef = useRef<HTMLDivElement>(null);
 
   // Load Run Data
   useEffect(() => {
-    // 1. Build initial Table 5.1 runs (PMMA slabs with spread rates)
     const table51Runs: RunDataPoint[] = table51Data.rows.map((r: any) => {
-      // parse numeric spread rate (some have '0.052 and 0.033', take first)
       const parseSpread = (val: string): number | null => {
         if (!val) return null;
         const first = val.split(' ')[0];
@@ -188,7 +218,7 @@ export function InteractiveChartWorkspace() {
         gravity_regime: '0g',
         cabin_o2_pct: r.initial_o2_vol_pct ? parseFloat(r.initial_o2_vol_pct) : null,
         burner_flow_o2_pct: null,
-        pressure_psi: 14.7, // Normal ISS cabin atmospheric baseline
+        pressure_psi: 14.7,
         airflow_speed_cm_s: parseVelocity(r.velocity_cm_s),
         sample_thickness_mm: r.thickness_mm ? parseFloat(r.thickness_mm) : null,
         initial_diameter_mm: null,
@@ -236,7 +266,6 @@ export function InteractiveChartWorkspace() {
           provenance_note: r.provenance_note || 'Authentic PSI flight dataset',
         }));
 
-        // Merge: avoid duplicate PMMA runs if already in modeling_ready_runs
         const combined = [...table51Runs, ...formatted];
         setRuns(combined);
         setLoading(false);
@@ -274,13 +303,11 @@ export function InteractiveChartWorkspace() {
   // Fuel Filter Logic
   const filteredRuns = useMemo(() => {
     return runs.filter((r) => {
-      // Gravity filter
       if (selectedGravity !== 'all') {
         const g = r.gravity_regime === '0g' ? '0g' : '1g';
         if (g !== selectedGravity) return false;
       }
 
-      // Fuel filter
       if (selectedFuel === 'all') return true;
       const mat = (r.material_class || '').toLowerCase();
       const target = selectedFuel.toLowerCase();
@@ -293,7 +320,12 @@ export function InteractiveChartWorkspace() {
       }
       if (target === 'nomex') return mat.includes('nomex');
       if (target === 'droplet' || target.includes('heptane')) {
-        return mat.includes('heptane') || mat.includes('methanol') || mat.includes('decane') || r.fuel_phase === 'liquid';
+        return (
+          mat.includes('heptane') ||
+          mat.includes('methanol') ||
+          mat.includes('decane') ||
+          r.fuel_phase === 'liquid'
+        );
       }
       if (target === 'candle' || target.includes('wax')) {
         return mat.includes('wax') || mat.includes('candle');
@@ -359,7 +391,6 @@ export function InteractiveChartWorkspace() {
       if (p.y > maxY) maxY = p.y;
     }
 
-    // Add 10% breathing room
     const xPad = (maxX - minX) * 0.1 || (xConf.max - xConf.min) * 0.1;
     const yPad = (maxY - minY) * 0.1 || (yConf.max - yConf.min) * 0.1;
 
@@ -387,7 +418,6 @@ export function InteractiveChartWorkspace() {
       const rawX = MARGIN.left + xNorm * PLOT_WIDTH;
       const rawY = MARGIN.top + (1 - yNorm) * PLOT_HEIGHT;
 
-      // Apply zoom & pan around center
       const centerX = SVG_WIDTH / 2;
       const centerY = SVG_HEIGHT / 2;
 
@@ -399,12 +429,50 @@ export function InteractiveChartWorkspace() {
     [xMin, xMax, yMin, yMax, zoomLevel, panOffset]
   );
 
-  // Mouse wheel zoom
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
-    setZoomLevel((prev) => Math.max(0.5, Math.min(10.0, prev * zoomFactor)));
-  };
+  // Exact Track 4 Zoom Handler logic
+  const zoomAroundPoint = useCallback((factor: number, relX: number, relY: number) => {
+    setZoomLevel((prevZoom) => {
+      const nextZoom = Math.max(0.5, Math.min(10.0, factor < 1 ? prevZoom * 1.25 : prevZoom * 0.8));
+      return nextZoom;
+    });
+  }, []);
+
+  // Track 4 Native Wheel Listener attached strictly to plotAreaRef
+  useEffect(() => {
+    const el = plotAreaRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // 1. If mouse is NOT strictly inside the plot canvas bounding rect, do nothing
+      const rect = el.getBoundingClientRect();
+      const isInside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+      if (!isInside) return;
+
+      // 2. If user holds CTRL/META, block browser page zoom and do NOTHING
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      // 3. Normal scroll inside chart plot area: prevent page scroll & zoom chart smoothly
+      e.preventDefault();
+      e.stopPropagation();
+
+      const zoomFactor = e.deltaY < 0 ? 0.85 : 1.18; // Scroll up = zoom in, Scroll down = zoom out
+      const relX = (e.clientX - rect.left) / rect.width;
+      const relY = 1 - (e.clientY - rect.top) / rect.height;
+
+      zoomAroundPoint(zoomFactor, relX, relY);
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [zoomAroundPoint]);
 
   // Pan Handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -439,7 +507,6 @@ export function InteractiveChartWorkspace() {
       const dx = Math.abs(brushCurrent.x - brushStart.x);
       const dy = Math.abs(brushCurrent.y - brushStart.y);
       if (dx > 20 && dy > 20) {
-        // Zoom in to brush area
         setZoomLevel((prev) => Math.min(10.0, prev * 2.0));
       }
       setBrushStart(null);
@@ -491,54 +558,55 @@ export function InteractiveChartWorkspace() {
                 </span>
               </div>
 
-              {/* Zoom & Brush Control Buttons */}
+              {/* Zoom & Brush Control Buttons (Text-Only, No Emojis) */}
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={() => setZoomLevel((z) => Math.min(10.0, z * 1.25))}
-                  className="p-1.5 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors"
+                  className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors flex items-center gap-1 font-bold text-[11px]"
                   title="Zoom In (+)"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
+                  <span>ZOOM IN</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setZoomLevel((z) => Math.max(0.5, z * 0.8))}
-                  className="p-1.5 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors"
+                  className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] transition-colors flex items-center gap-1 font-bold text-[11px]"
                   title="Zoom Out (-)"
                 >
                   <ZoomOut className="w-3.5 h-3.5" />
+                  <span>ZOOM OUT</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setBrushMode(!brushMode)}
-                  className={`px-2 py-1 border text-[11px] font-bold transition-colors ${
+                  className={`px-2.5 py-1 border text-[11px] font-bold transition-colors ${
                     brushMode
                       ? 'bg-[#181615] text-[#FAF8F3] border-[#181615]'
                       : 'bg-[#EAE5DB] hover:bg-[#D5CFC2] border-[#B8B0A0] text-[#181615]'
                   }`}
                   title="Box Zoom: Drag a rectangle to zoom in"
                 >
-                  ⬚ Box Zoom
+                  [BOX ZOOM]
                 </button>
                 <button
                   type="button"
                   onClick={handleResetZoom}
-                  className="px-2 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold transition-colors flex items-center gap-1"
+                  className="px-2.5 py-1 bg-[#EAE5DB] hover:bg-[#D5CFC2] border border-[#B8B0A0] text-[#181615] text-[11px] font-bold transition-colors flex items-center gap-1"
                   title="Reset Zoom & Pan"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset (1.0x)</span>
+                  <span>RESET (1.0x)</span>
                 </button>
               </div>
             </div>
 
-            {/* Interactive SVG Chart Canvas */}
+            {/* Interactive SVG Chart Canvas (Target of Strict Non-Passive Wheel Listener) */}
             <div
-              ref={chartContainerRef}
+              ref={plotAreaRef}
               className="relative w-full overflow-hidden bg-[#FAF8F3] border border-[#EAE5DB] select-none cursor-crosshair"
               style={{ minHeight: '520px' }}
-              onWheel={handleWheel}
             >
               {loading ? (
                 <div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-[#5A544A]">
@@ -603,7 +671,6 @@ export function InteractiveChartWorkspace() {
 
                   {/* Axis Tick Labels */}
                   <g className="text-[10px] font-mono fill-[#5A544A]">
-                    {/* Y Axis Ticks */}
                     {[0, 0.5, 1.0].map((t, idx) => {
                       const val = (yMin + (1 - t) * (yMax - yMin)).toFixed(1);
                       const yPos = MARGIN.top + t * PLOT_HEIGHT;
@@ -614,7 +681,6 @@ export function InteractiveChartWorkspace() {
                       );
                     })}
 
-                    {/* X Axis Ticks */}
                     {[0, 0.5, 1.0].map((t, idx) => {
                       const val = (xMin + t * (xMax - xMin)).toFixed(1);
                       const xPos = MARGIN.left + t * PLOT_WIDTH;
@@ -645,23 +711,21 @@ export function InteractiveChartWorkspace() {
                     {AXIS_CONFIG[yAxis].label} ({AXIS_CONFIG[yAxis].unit})
                   </text>
 
-                  {/* Plotted Data Points */}
+                  {/* Multi-Shape & Multi-Color Plotted Data Points */}
                   <g>
                     {plottablePoints.map((pt, idx) => {
                       const pos = mapCoords(pt.x, pt.y);
-                      // Skip if out of bounds of SVG viewport
-                      if (pos.x < 10 || pos.x > SVG_WIDTH - 10 || pos.y < 10 || pos.y > SVG_HEIGHT - 10) {
+                      if (
+                        pos.x < 10 ||
+                        pos.x > SVG_WIDTH - 10 ||
+                        pos.y < 10 ||
+                        pos.y > SVG_HEIGHT - 10
+                      ) {
                         return null;
                       }
 
                       const isSelected = activePoint?.run_id === pt.run.run_id;
-
-                      // Point appearance:
-                      // Microgravity (0g): Circle
-                      // 1g: Diamond (polygon)
-                      // Cabin: Cobalt fill (#1D4ED8)
-                      // Burner: Amber fill (#C2410C)
-                      const fill = pt.isBurner ? '#C2410C' : '#1D4ED8';
+                      const style = getPointShapeAndColor(pt.run, pt.isBurner, pt.is0g);
 
                       return (
                         <g
@@ -670,7 +734,7 @@ export function InteractiveChartWorkspace() {
                           onClick={() => setActivePoint(pt.run)}
                           onMouseEnter={(e) => {
                             setActivePoint(pt.run);
-                            const rect = chartContainerRef.current?.getBoundingClientRect();
+                            const rect = plotAreaRef.current?.getBoundingClientRect();
                             if (rect) {
                               setTooltipPos({
                                 x: e.clientX - rect.left,
@@ -678,27 +742,69 @@ export function InteractiveChartWorkspace() {
                               });
                             }
                           }}
-                          onMouseLeave={() => {
-                            // keep active point on click, hide pos
-                            setTooltipPos(null);
-                          }}
+                          onMouseLeave={() => setTooltipPos(null)}
                         >
-                          {pt.is0g ? (
+                          {style.shape === 'circle' && (
                             <circle
                               cx={pos.x}
                               cy={pos.y}
                               r={isSelected ? 7 : 4.5}
-                              fill={fill}
+                              fill={style.color}
                               stroke="#FAF8F3"
                               strokeWidth={isSelected ? 2.5 : 1}
                               className="hover:scale-125 transition-transform"
                             />
-                          ) : (
-                            <polygon
-                              points={`${pos.x},${pos.y - 5} ${pos.x + 5},${pos.y} ${pos.x},${pos.y + 5} ${pos.x - 5},${pos.y}`}
-                              fill={fill}
+                          )}
+
+                          {style.shape === 'square' && (
+                            <rect
+                              x={pos.x - 4}
+                              y={pos.y - 4}
+                              width={8}
+                              height={8}
+                              fill={style.color}
                               stroke="#FAF8F3"
                               strokeWidth={isSelected ? 2.5 : 1}
+                              className="hover:scale-125 transition-transform"
+                            />
+                          )}
+
+                          {style.shape === 'diamond' && (
+                            <polygon
+                              points={`${pos.x},${pos.y - 5} ${pos.x + 5},${pos.y} ${pos.x},${
+                                pos.y + 5
+                              } ${pos.x - 5},${pos.y}`}
+                              fill={style.color}
+                              stroke="#FAF8F3"
+                              strokeWidth={isSelected ? 2.5 : 1}
+                              className="hover:scale-125 transition-transform"
+                            />
+                          )}
+
+                          {style.shape === 'triangle' && (
+                            <polygon
+                              points={`${pos.x},${pos.y - 5} ${pos.x + 5},${pos.y + 4} ${
+                                pos.x - 5
+                              },${pos.y + 4}`}
+                              fill={style.color}
+                              stroke="#FAF8F3"
+                              strokeWidth={isSelected ? 2.5 : 1}
+                              className="hover:scale-125 transition-transform"
+                            />
+                          )}
+
+                          {style.shape === 'star' && (
+                            <polygon
+                              points={`${pos.x},${pos.y - 6} ${pos.x + 2},${pos.y - 2} ${
+                                pos.x + 6
+                              },${pos.y - 2} ${pos.x + 3},${pos.y + 1} ${pos.x + 4},${pos.y + 5} ${
+                                pos.x
+                              },${pos.y + 3} ${pos.x - 4},${pos.y + 5} ${pos.x - 3},${pos.y + 1} ${
+                                pos.x - 6
+                              },${pos.y - 2} ${pos.x - 2},${pos.y - 2}`}
+                              fill={style.color}
+                              stroke="#FAF8F3"
+                              strokeWidth={isSelected ? 2 : 1}
                               className="hover:scale-125 transition-transform"
                             />
                           )}
@@ -744,13 +850,17 @@ export function InteractiveChartWorkspace() {
                   <div className="text-[11px] text-[#D5CFC2]">
                     <span className="text-[#A8A296]">{AXIS_CONFIG[xAxis].label}:</span>{' '}
                     <strong>
-                      {activePoint[xAxis] !== null ? `${activePoint[xAxis]} ${AXIS_CONFIG[xAxis].unit}` : 'not reported'}
+                      {activePoint[xAxis] !== null
+                        ? `${activePoint[xAxis]} ${AXIS_CONFIG[xAxis].unit}`
+                        : 'not reported'}
                     </strong>
                   </div>
                   <div className="text-[11px] text-[#D5CFC2]">
                     <span className="text-[#A8A296]">{AXIS_CONFIG[yAxis].label}:</span>{' '}
                     <strong>
-                      {activePoint[yAxis] !== null ? `${activePoint[yAxis]} ${AXIS_CONFIG[yAxis].unit}` : 'not reported'}
+                      {activePoint[yAxis] !== null
+                        ? `${activePoint[yAxis]} ${AXIS_CONFIG[yAxis].unit}`
+                        : 'not reported'}
                     </strong>
                   </div>
                   <div className="pt-1 border-t border-[#33302C] text-[10px] text-[#A8A296] flex items-center justify-between">
@@ -761,24 +871,36 @@ export function InteractiveChartWorkspace() {
               )}
             </div>
 
-            {/* Canvas Footer Legend */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs font-mono text-[#5A544A]">
+            {/* Canvas Multi-Shape & Multi-Color Legend (Strictly Text-Only) */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 text-xs font-mono text-[#5A544A] border-t border-[#D5CFC2]">
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center gap-1.5">
                   <span className="w-3 h-3 rounded-full bg-[#1D4ED8]" />
-                  <span>Cabin Atmosphere (0g Microgravity)</span>
+                  <span>PMMA 0g (Blue Circle)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-[#C2410C]" />
-                  <span>Burner Flow Stream (CFI-G / ACME)</span>
+                  <span className="w-3 h-3 bg-[#1D4ED8]" />
+                  <span>PMMA 1g (Blue Square)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rotate-45 bg-[#1D4ED8]" />
-                  <span>1g Ground Companion (Diamond)</span>
+                  <span className="w-3 h-3 bg-[#C2410C]" />
+                  <span>Burner Stream (Vermilion Square)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-[#D97706]" />
+                  <span>Liquid Droplet (Amber Circle)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rotate-45 bg-[#7C3AED]" />
+                  <span>Nomex (Purple Diamond)</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-0 h-0 border-x-4 border-x-transparent border-b-[8px] border-b-[#15803D]" />
+                  <span>Cotton / SIBAL (Green Triangle)</span>
                 </div>
               </div>
               <div className="text-[11px] text-[#736B5E]">
-                Pan: Click &amp; drag · Zoom: Wheel / Buttons
+                Scroll: Zoom In/Out · Drag: Pan · Ctrl+Scroll: Page Scroll
               </div>
             </div>
           </div>

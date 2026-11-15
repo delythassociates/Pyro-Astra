@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import proposedData from '@/../data/analysis/proposed_experiments.json';
 import { Sparkles, Info, ShieldAlert, ArrowRight, Layers, FileSpreadsheet } from 'lucide-react';
+import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 
 export default function ProposalsPage() {
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null);
@@ -27,24 +28,11 @@ export default function ProposalsPage() {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black font-mono text-[#181615] tracking-tight flex items-center gap-2.5">
-          <FileSpreadsheet className="w-6 h-6 text-[#1D4ED8]" />
-          <span>Recommended Next Spaceflight Experiments (12-Test Matrix)</span>
-        </h1>
-        <p className="text-xs sm:text-sm text-[#5A544A] leading-relaxed max-w-4xl">
-          A 12-run candidate test matrix systematically addressing the untested environmental gap between Earth/ISS normal atmosphere and the planned lunar exploration habitat (34% O₂, 8.2 psi from NASA NTRS-20210022143). Airflow bounds are restricted to the documented Table 5.1 range (2.0 to 21.0 cm/s) for flat PMMA. Contains <strong>ZERO predicted outcomes</strong>.
-        </p>
-
-        {/* Prominent Plain-English Explanation Strip */}
-        <div className="p-4 bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-xs font-sans space-y-1">
-          <div className="flex items-center gap-2 font-mono font-bold text-xs uppercase text-[#C2410C]">
-            <Info className="w-4 h-4 shrink-0" />
-            <span>Plain-English Summary: Closing the Lunar Atmosphere Fire Safety Gap</span>
-          </div>
-          <p className="text-[12px] leading-relaxed">
-            Rather than using ungrounded guesses or computer models to assume how materials burn in a lunar base atmosphere, space agencies must fly targeted experiments to measure it directly. This 12-test candidate flight matrix specifies the exact airflow speeds (2.0 to 21.0 cm/s), oxygen levels (up to 34%), and sample thicknesses needed to close the documentation gap aboard the ISS or Gateway—with <strong>zero invented predictions</strong>.
-          </p>
-        </div>
+        <HoverTitleExplanation
+          title="Recommended Next Spaceflight Experiments (12-Test Matrix)"
+          summary="Rather than using ungrounded guesses or computer models to assume how materials burn in a lunar base atmosphere, space agencies must fly targeted experiments to measure it directly. This 12-test candidate flight matrix specifies the exact airflow speeds (2.0 to 21.0 cm/s), oxygen levels (up to 34%), and sample thicknesses needed to close the documentation gap aboard the ISS or Gateway—with zero invented predictions."
+          badge="Candidate Test Matrix"
+        />
 
         <div className="p-3 bg-[#EAE5DB] border border-[#D5CFC2] text-xs font-mono space-y-1">
           <p className="font-semibold text-[#181615]">

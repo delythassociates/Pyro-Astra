@@ -1,29 +1,29 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Val } from './Val';
 import { InfoButton } from './InfoButton';
 import type { RunDataPoint } from './CustomizableXYChart';
 import type { Provenance } from '@/data/schema';
 
-interface AdvancedParameterWorkbenchProps {
-  runs: RunDataPoint[];
-  o2: number;
-  setO2: (val: number) => void;
-  pressure: number;
-  setPressure: (val: number) => void;
-  gravity: '0g' | '0.16g' | '0.38g';
-  setGravity: (g: '0g' | '0.16g' | '0.38g') => void;
-  airflow: number;
-  setAirflow: (v: number) => void;
-  direction: 'opposed' | 'concurrent' | 'quiescent';
-  setDirection: (d: 'opposed' | 'concurrent' | 'quiescent') => void;
-  includeBurner: boolean;
-  setIncludeBurner: (b: boolean) => void;
-  o2Timing: 'initial' | 'final';
-  setO2Timing: (t: 'initial' | 'final') => void;
-  includeDialUnits: boolean;
-  setIncludeDialUnits: (d: boolean) => void;
+export interface AdvancedParameterWorkbenchProps {
+  runs?: RunDataPoint[];
+  o2?: number;
+  setO2?: (val: number) => void;
+  pressure?: number;
+  setPressure?: (val: number) => void;
+  gravity?: '0g' | '0.16g' | '0.38g';
+  setGravity?: (g: '0g' | '0.16g' | '0.38g') => void;
+  airflow?: number;
+  setAirflow?: (v: number) => void;
+  direction?: 'opposed' | 'concurrent' | 'quiescent';
+  setDirection?: (d: 'opposed' | 'concurrent' | 'quiescent') => void;
+  includeBurner?: boolean;
+  setIncludeBurner?: (b: boolean) => void;
+  o2Timing?: 'initial' | 'final';
+  setO2Timing?: (t: 'initial' | 'final') => void;
+  includeDialUnits?: boolean;
+  setIncludeDialUnits?: (d: boolean) => void;
 }
 
 export function AdvancedParameterWorkbench({
@@ -44,7 +44,54 @@ export function AdvancedParameterWorkbench({
   setO2Timing,
   includeDialUnits,
   setIncludeDialUnits,
-}: AdvancedParameterWorkbenchProps) {
+}: AdvancedParameterWorkbenchProps = {}) {
+  // Internal fallback states when props are not provided
+  const [internalRuns, setInternalRuns] = useState<RunDataPoint[]>([]);
+  useEffect(() => {
+    if (!runs || runs.length === 0) {
+      fetch('/release/modeling_ready_runs.json')
+        .then((r) => r.json())
+        .then((d) => {
+          if (d && Array.isArray(d.runs)) setInternalRuns(d.runs);
+        })
+        .catch(() => {});
+    }
+  }, [runs]);
+
+  const activeRuns = runs && runs.length > 0 ? runs : internalRuns;
+
+  const [localO2, setLocalO2] = useState<number>(21.0);
+  const actualO2 = o2 !== undefined ? o2 : localO2;
+  const updateO2 = setO2 || setLocalO2;
+
+  const [localPressure, setLocalPressure] = useState<number>(14.7);
+  const actualPressure = pressure !== undefined ? pressure : localPressure;
+  const updatePressure = setPressure || setLocalPressure;
+
+  const [localGravity, setLocalGravity] = useState<'0g' | '0.16g' | '0.38g'>('0g');
+  const actualGravity = gravity !== undefined ? gravity : localGravity;
+  const updateGravity = setGravity || setLocalGravity;
+
+  const [localAirflow, setLocalAirflow] = useState<number>(0.0);
+  const actualAirflow = airflow !== undefined ? airflow : localAirflow;
+  const updateAirflow = setAirflow || setLocalAirflow;
+
+  const [localDirection, setLocalDirection] = useState<'opposed' | 'concurrent' | 'quiescent'>('opposed');
+  const actualDirection = direction !== undefined ? direction : localDirection;
+  const updateDirection = setDirection || setLocalDirection;
+
+  const [localIncludeBurner, setLocalIncludeBurner] = useState<boolean>(false);
+  const actualIncludeBurner = includeBurner !== undefined ? includeBurner : localIncludeBurner;
+  const updateIncludeBurner = setIncludeBurner || setLocalIncludeBurner;
+
+  const [localO2Timing, setLocalO2Timing] = useState<'initial' | 'final'>('initial');
+  const actualO2Timing = o2Timing !== undefined ? o2Timing : localO2Timing;
+  const updateO2Timing = setO2Timing || setLocalO2Timing;
+
+  const [localIncludeDialUnits, setLocalIncludeDialUnits] = useState<boolean>(true);
+  const actualIncludeDialUnits = includeDialUnits !== undefined ? includeDialUnits : localIncludeDialUnits;
+  const updateIncludeDialUnits = setIncludeDialUnits || setLocalIncludeDialUnits;
+
   // Closeness Specification State
   const [closenessMode, setClosenessMode] = useState<'euclidean' | 'window'>('euclidean');
   const [distanceThreshold, setDistanceThreshold] = useState<number>(0.25);
@@ -52,8 +99,8 @@ export function AdvancedParameterWorkbench({
   const [windowPsi, setWindowPsi] = useState<number>(1.5); // +/- psi
 
   // Unit conversions (Rule 3: exact formulas: 1 psi = 6.894757 kPa, 1 psi = 0.06894757 bar)
-  const pressureKPa = (pressure * 6.894757).toFixed(1);
-  const pressureBar = (pressure * 0.06894757).toFixed(3);
+  const pressureKPa = (actualPressure * 6.894757).toFixed(1);
+  const pressureBar = (actualPressure * 0.06894757).toFixed(3);
 
   // Compute nearest evidence rows based on current O2 & Pressure sliders
   const closestRows = useMemo(() => {
@@ -67,16 +114,16 @@ export function AdvancedParameterWorkbench({
       isInside: boolean;
     }[] = [];
 
-    for (const r of runs) {
+    for (const r of activeRuns) {
       let runO2Val = r.cabin_o2_pct;
-      if (includeBurner && runO2Val === null && r.burner_flow_o2_pct !== null) {
+      if (actualIncludeBurner && runO2Val === null && r.burner_flow_o2_pct !== null) {
         runO2Val = r.burner_flow_o2_pct;
       }
       const runPsiVal = r.pressure_psi;
 
       if (runO2Val !== null && runPsiVal !== null && !isNaN(runO2Val) && !isNaN(runPsiVal)) {
-        const deltaO2 = runO2Val - o2;
-        const deltaPsi = runPsiVal - pressure;
+        const deltaO2 = runO2Val - actualO2;
+        const deltaPsi = runPsiVal - actualPressure;
         // Standardized Euclidean distance on (O2/100, psi/14.7) from nearest.ts
         const normO2 = Math.abs(deltaO2) / 100.0;
         const normPsi = Math.abs(deltaPsi) / 14.7;
@@ -105,7 +152,7 @@ export function AdvancedParameterWorkbench({
     candidates.sort((a, b) => a.distance - b.distance);
 
     return candidates.slice(0, 5);
-  }, [runs, o2, pressure, includeBurner, closenessMode, distanceThreshold, windowO2, windowPsi]);
+  }, [activeRuns, actualO2, actualPressure, actualIncludeBurner, closenessMode, distanceThreshold, windowO2, windowPsi]);
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
@@ -134,8 +181,8 @@ export function AdvancedParameterWorkbench({
                   min="0"
                   max="100"
                   step="0.5"
-                  value={o2}
-                  onChange={(e) => setO2(Math.max(0, Math.min(100, parseFloat(e.target.value) || 0)))}
+                  value={actualO2}
+                  onChange={(e) => updateO2(Math.max(0, Math.min(100, parseFloat(e.target.value) || 0)))}
                   className="w-16 px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-900 font-bold text-right"
                 />
                 <span className="text-slate-500">% O₂</span>
@@ -147,8 +194,8 @@ export function AdvancedParameterWorkbench({
               min="0"
               max="100"
               step="0.5"
-              value={o2}
-              onChange={(e) => setO2(parseFloat(e.target.value))}
+              value={actualO2}
+              onChange={(e) => updateO2(parseFloat(e.target.value))}
               className="w-full accent-sky-700 cursor-pointer"
             />
 
@@ -156,8 +203,8 @@ export function AdvancedParameterWorkbench({
               <label className="flex items-center gap-1.5 cursor-pointer text-slate-600">
                 <input
                   type="checkbox"
-                  checked={includeBurner}
-                  onChange={(e) => setIncludeBurner(e.target.checked)}
+                  checked={actualIncludeBurner}
+                  onChange={(e) => updateIncludeBurner(e.target.checked)}
                   className="rounded border-slate-300 text-sky-700"
                 />
                 <span>Include Burner Co-flow Streams (Rule 4)</span>
@@ -167,18 +214,18 @@ export function AdvancedParameterWorkbench({
                 <span className="text-[10px] text-slate-400">Timing:</span>
                 <button
                   type="button"
-                  onClick={() => setO2Timing('initial')}
+                  onClick={() => updateO2Timing('initial')}
                   className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-                    o2Timing === 'initial' ? 'bg-sky-100 text-sky-800' : 'text-slate-500'
+                    actualO2Timing === 'initial' ? 'bg-sky-100 text-sky-800' : 'text-slate-500'
                   }`}
                 >
                   Initial O₂
                 </button>
                 <button
                   type="button"
-                  onClick={() => setO2Timing('final')}
+                  onClick={() => updateO2Timing('final')}
                   className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-                    o2Timing === 'final' ? 'bg-sky-100 text-sky-800' : 'text-slate-500'
+                    actualO2Timing === 'final' ? 'bg-sky-100 text-sky-800' : 'text-slate-500'
                   }`}
                 >
                   Final O₂
@@ -197,8 +244,8 @@ export function AdvancedParameterWorkbench({
                   min="0"
                   max="20"
                   step="0.1"
-                  value={pressure}
-                  onChange={(e) => setPressure(Math.max(0, Math.min(20, parseFloat(e.target.value) || 0)))}
+                  value={actualPressure}
+                  onChange={(e) => updatePressure(Math.max(0, Math.min(20, parseFloat(e.target.value) || 0)))}
                   className="w-16 px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-900 font-bold text-right"
                 />
                 <span className="text-slate-500">psi</span>
@@ -210,8 +257,8 @@ export function AdvancedParameterWorkbench({
               min="0"
               max="20"
               step="0.1"
-              value={pressure}
-              onChange={(e) => setPressure(parseFloat(e.target.value))}
+              value={actualPressure}
+              onChange={(e) => updatePressure(parseFloat(e.target.value))}
               className="w-full accent-sky-700 cursor-pointer"
             />
 
@@ -219,7 +266,7 @@ export function AdvancedParameterWorkbench({
             <div className="p-2 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-600 flex items-center justify-between">
               <span>Normalized Readout:</span>
               <span className="font-semibold text-slate-800">
-                {pressure.toFixed(1)} psi = {pressureKPa} kPa = {pressureBar} bar
+                {actualPressure.toFixed(1)} psi = {pressureKPa} kPa = {pressureBar} bar
               </span>
             </div>
           </div>
@@ -234,22 +281,22 @@ export function AdvancedParameterWorkbench({
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => setGravity('0g')}
+                onClick={() => updateGravity('0g')}
                 className={`py-2 px-2.5 rounded-lg border text-center font-bold text-xs transition-all ${
-                  gravity === '0g'
+                  actualGravity === '0g'
                     ? 'bg-sky-100 text-sky-900 border-sky-300 shadow-xs'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
               >
-                <div>Orbital μg</div>
+                <div>Orbital ug</div>
                 <div className="text-[10px] text-emerald-700 font-normal">Active (100% rows)</div>
               </button>
 
               <button
                 type="button"
-                onClick={() => setGravity('0.16g')}
+                onClick={() => updateGravity('0.16g')}
                 className={`py-2 px-2.5 rounded-lg border text-center font-bold text-xs transition-all ${
-                  gravity === '0.16g'
+                  actualGravity === '0.16g'
                     ? 'bg-rose-100 text-rose-900 border-rose-300 shadow-xs'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
@@ -260,9 +307,9 @@ export function AdvancedParameterWorkbench({
 
               <button
                 type="button"
-                onClick={() => setGravity('0.38g')}
+                onClick={() => updateGravity('0.38g')}
                 className={`py-2 px-2.5 rounded-lg border text-center font-bold text-xs transition-all ${
-                  gravity === '0.38g'
+                  actualGravity === '0.38g'
                     ? 'bg-rose-100 text-rose-900 border-rose-300 shadow-xs'
                     : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
                 }`}
@@ -273,9 +320,9 @@ export function AdvancedParameterWorkbench({
             </div>
 
             {/* Instant Refusal Alert on Partial-G */}
-            {gravity !== '0g' && (
+            {actualGravity !== '0g' && (
               <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-900 text-[11px] leading-relaxed">
-                <strong>SPEC Rule 5 Refusal:</strong> NASA PSI holds 0 partial-gravity datasets. Predictions for {gravity} are prohibited; 0g and 1g serve strictly as bounds.
+                <strong>SPEC Rule 5 Refusal:</strong> NASA PSI holds 0 partial-gravity datasets. Predictions for {actualGravity} are prohibited; 0g and 1g serve strictly as bounds.
               </div>
             )}
           </div>
@@ -293,8 +340,8 @@ export function AdvancedParameterWorkbench({
                   min="0"
                   max="50"
                   step="0.5"
-                  value={airflow}
-                  onChange={(e) => setAirflow(Math.max(0, Math.min(50, parseFloat(e.target.value) || 0)))}
+                  value={actualAirflow}
+                  onChange={(e) => updateAirflow(Math.max(0, Math.min(50, parseFloat(e.target.value) || 0)))}
                   className="w-16 px-2 py-0.5 rounded bg-white border border-slate-300 text-slate-900 font-bold text-right"
                 />
                 <span className="text-slate-500">cm/s</span>
@@ -306,8 +353,8 @@ export function AdvancedParameterWorkbench({
               min="0"
               max="50"
               step="0.5"
-              value={airflow}
-              onChange={(e) => setAirflow(parseFloat(e.target.value))}
+              value={actualAirflow}
+              onChange={(e) => updateAirflow(parseFloat(e.target.value))}
               className="w-full accent-sky-700 cursor-pointer"
             />
 
@@ -317,36 +364,36 @@ export function AdvancedParameterWorkbench({
               <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
-                  onClick={() => setDirection('opposed')}
+                  onClick={() => updateDirection('opposed')}
                   className={`py-1.5 px-2 rounded-lg border text-center text-[11px] font-bold transition-all ${
-                    direction === 'opposed'
+                    actualDirection === 'opposed'
                       ? 'bg-sky-100 text-sky-800 border-sky-300'
                       : 'bg-white text-slate-700 border-slate-200'
                   }`}
                 >
-                  Opposed ⇄
+                  Opposed
                 </button>
                 <button
                   type="button"
-                  onClick={() => setDirection('concurrent')}
+                  onClick={() => updateDirection('concurrent')}
                   className={`py-1.5 px-2 rounded-lg border text-center text-[11px] font-bold transition-all ${
-                    direction === 'concurrent'
+                    actualDirection === 'concurrent'
                       ? 'bg-sky-100 text-sky-800 border-sky-300'
                       : 'bg-white text-slate-700 border-slate-200'
                   }`}
                 >
-                  Concurrent ⇉
+                  Concurrent
                 </button>
                 <button
                   type="button"
-                  onClick={() => setDirection('quiescent')}
+                  onClick={() => updateDirection('quiescent')}
                   className={`py-1.5 px-2 rounded-lg border text-center text-[11px] font-bold transition-all ${
-                    direction === 'quiescent'
+                    actualDirection === 'quiescent'
                       ? 'bg-sky-100 text-sky-800 border-sky-300'
                       : 'bg-white text-slate-700 border-slate-200'
                   }`}
                 >
-                  Quiescent ◎
+                  Quiescent
                 </button>
               </div>
             </div>
@@ -432,7 +479,7 @@ export function AdvancedParameterWorkbench({
             {/* Live Closeness Readout Table */}
             <div className="pt-1">
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">
-                Top Measured Runs Closest to Target ({o2}% O₂, {pressure} psi):
+                Top Measured Runs Closest to Target ({actualO2}% O₂, {actualPressure} psi):
               </span>
 
               <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
@@ -461,7 +508,7 @@ export function AdvancedParameterWorkbench({
                         <td className="p-1.5 text-center whitespace-nowrap">
                           {c.isInside ? (
                             <span className="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">
-                              ✓ Inside (D={c.distance.toFixed(2)})
+                              Inside (D={c.distance.toFixed(2)})
                             </span>
                           ) : (
                             <span className="px-1.5 py-0.2 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px]">

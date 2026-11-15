@@ -164,7 +164,7 @@ function CoverageContent() {
                   <td className="p-3">
                     {inv.cabin_o2_pct?.value != null && inv.pressure_psi?.value != null ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 text-[10px] font-bold">
-                        ✓ Both O₂ & P Reported
+                        Both O₂ & P Reported
                       </span>
                     ) : inv.id === 'PSI-159' ? (
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-bold">

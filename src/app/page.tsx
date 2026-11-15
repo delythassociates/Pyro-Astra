@@ -339,7 +339,7 @@ export default function HomePage() {
                           </span>
                         )}
                         <span className="text-[#15803D] text-[10px] font-bold">
-                          ✓ 100% Policy Grounded
+                          100% Policy Grounded
                         </span>
                       </div>
                       <span className="text-[10px] text-[#736B5E]">SPEC Section 12 Intercepted</span>

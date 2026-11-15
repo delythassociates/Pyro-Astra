@@ -186,7 +186,7 @@ export default function ComparePage() {
               {/* Provenance DOI */}
               <div className="pt-3 border-t border-slate-200 text-[10px] text-slate-500 flex items-center justify-between">
                 <span>DOI: {inv.doi ?? 'Not available'}</span>
-                <span className="text-emerald-700 font-bold">✓ Audit Verified</span>
+                <span className="text-emerald-700 font-bold">Audit Verified</span>
               </div>
             </div>
           ))}

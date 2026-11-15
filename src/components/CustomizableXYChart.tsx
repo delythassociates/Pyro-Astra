@@ -432,7 +432,7 @@ export function CustomizableXYChart({
               onClick={() => setActivePoint(null)}
               className="text-slate-400 hover:text-slate-700 text-xs font-bold"
             >
-              ✕ Close
+              Close [X]
             </button>
           </div>
 

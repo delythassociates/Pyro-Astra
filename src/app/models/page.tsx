@@ -6,6 +6,7 @@ import { AtmosphereFlowController } from '@/components/AtmosphereFlowController'
 import surrogateData from '@/data/analysis/surrogate_evaluation.json';
 import nullResultData from '@/data/analysis/null_result_report.json';
 import { Cpu, ShieldAlert, CheckCircle2, Layers, AlertTriangle } from 'lucide-react';
+import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 
 export default function ModelsPage() {
   return (
@@ -21,24 +22,11 @@ export default function ModelsPage() {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black font-mono text-[#181615] tracking-tight flex items-center gap-2.5">
-          <Cpu className="w-6 h-6 text-[#1D4ED8]" />
-          <span>AI Prediction Limits &amp; 3-Tier Safety Gate (Droplet Extinction)</span>
-        </h1>
-        <p className="text-xs sm:text-sm text-[#5A544A] leading-relaxed max-w-4xl">
-          Pre-registered cross-validation benchmark on extinguished liquid droplets (FLEX PSI-69, n = 189). Demonstrates how machine learning models fail catastrophically upon extrapolation outside measured microgravity boundaries.
-        </p>
-
-        {/* Prominent Plain-English Explanation Strip */}
-        <div className="p-4 bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-xs font-sans space-y-1">
-          <div className="flex items-center gap-2 font-mono font-bold text-xs uppercase text-[#C2410C]">
-            <AlertTriangle className="w-4 h-4 shrink-0" />
-            <span>Plain-English Summary: Why AI Models Must Be Hard-Gated in Spaceflight</span>
-          </div>
-          <p className="text-[12px] leading-relaxed">
-            Machine learning models are notorious for producing dangerously confident hallucinations when asked to predict conditions outside their training data. In spacecraft fire safety, relying on an ungrounded model could prove fatal. PYRO-ASTRA implements a strict, deterministic 3-tier safety gate: if a requested atmospheric condition lies outside the empirically tested convex hull of NASA PSI flight experiments, the system strictly refuses to predict a number and instead returns nearest grounded flight test bounds.
-          </p>
-        </div>
+        <HoverTitleExplanation
+          title="AI Prediction Limits & 3-Tier Safety Gate (Droplet Extinction)"
+          summary="Machine learning models are notorious for producing dangerously confident hallucinations when asked to predict conditions outside their training data. In spacecraft fire safety, relying on an ungrounded model could prove fatal. PYRO-ASTRA implements a strict, deterministic 3-tier safety gate: if a requested atmospheric condition lies outside the empirically tested convex hull of NASA PSI flight experiments, the system strictly refuses to predict a number and instead returns nearest grounded flight test bounds."
+          badge="SPEC Section 19 & 20"
+        />
       </div>
 
       {/* Atmospheric Controller */}

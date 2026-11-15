@@ -84,7 +84,7 @@ export default function GuidePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-5 rounded-xl bg-emerald-50/50 border border-emerald-200 space-y-3">
                 <span className="font-mono font-bold text-emerald-900 text-sm block">
-                  🟢 Beginner Mode (Strictly 2 Inputs → 3 Outputs)
+                  [Beginner Mode] Strictly 2 Inputs &rarr; 3 Outputs
                 </span>
                 <p>
                   Optimized for new users and rapid exploration. Hides all complex dials, secondary sub-charts, and polynomial fitting:
@@ -100,7 +100,7 @@ export default function GuidePage() {
 
               <div className="p-5 rounded-xl bg-sky-50/50 border border-sky-200 space-y-3">
                 <span className="font-mono font-bold text-sky-900 text-sm block">
-                  🔵 Advanced Mode (Full Parametric Workbench)
+                  [Advanced Mode] Full Parametric Workbench
                 </span>
                 <p>
                   Built for aerospace engineers, safety officers, and combustion researchers who require full parametric control:

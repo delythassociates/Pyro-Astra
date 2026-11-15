@@ -5,6 +5,7 @@ import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import { CORE_EVIDENCE_FIELDS } from '@/lib/score';
 import askEvalData from '@/../data/ask-eval.json';
 import { ShieldCheck, CheckCircle2, Search, Layers, FileText } from 'lucide-react';
+import HoverTitleExplanation from '@/components/HoverTitleExplanation';
 
 export default function TrustPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -55,12 +56,11 @@ export default function TrustPage() {
               <ShieldCheck className="w-4 h-4 text-[#15803D]" />
               <span>Evidence Verification Ledger · SPEC Section 13</span>
             </div>
-            <h1 className="text-3xl font-black font-mono tracking-tight text-[#181615]">
-              Trust &amp; Provenance Ledger
-            </h1>
-            <p className="text-sm text-[#5A544A] max-w-3xl leading-relaxed font-sans">
-              Auditing data readiness, non-negotiable scientific constraints, and empirical evaluation metrics. Refusing ungrounded claims, ensuring every number carries authentic NASA DOI provenance.
-            </p>
+            <HoverTitleExplanation
+              title="Trust & Provenance Ledger"
+              summary="Auditing data readiness, non-negotiable scientific constraints, and empirical evaluation metrics. Refusing ungrounded claims, ensuring every number carries authentic NASA DOI provenance."
+              badge="SPEC Section 13"
+            />
           </div>
 
           <div className="text-right text-xs font-mono text-[#5A544A] shrink-0">
@@ -185,7 +185,7 @@ export default function TrustPage() {
                     </td>
                     <td className="p-3 border-r border-[#D5CFC2] whitespace-nowrap">
                       <span className="px-2 py-0.5 bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] text-[10px] font-bold">
-                        ✓ VERIFIED
+                        VERIFIED
                       </span>
                     </td>
                     <td className="p-3 text-[11px] text-[#5A544A] font-sans">
@@ -214,7 +214,7 @@ export default function TrustPage() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-mono px-3 py-1 bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] font-bold">
-                ✓ {askEvalData.passed_count} / {askEvalData.total_probes} Passed ({askEvalData.pass_rate_pct}%)
+                {askEvalData.passed_count} / {askEvalData.total_probes} Passed ({askEvalData.pass_rate_pct}%)
               </span>
               {askEvalData.modes && (
                 <span className="text-xs font-mono px-2.5 py-1 bg-[#EAE5DB] text-[#5A544A] border border-[#D5CFC2] font-semibold">
@@ -312,13 +312,13 @@ export default function TrustPage() {
                       </td>
                       <td className="p-2.5 font-sans text-[#181615]">{probe.query}</td>
                       <td className="p-2.5 text-[10px] text-[#15803D] font-bold">
-                        <span>Offline: ✓</span>
+                        <span>Offline: PASS</span>
                         <br />
-                        <span>Live: ✓</span>
+                        <span>Live: PASS</span>
                       </td>
                       <td className="p-2.5">
                         <span className="px-1.5 py-0.5 text-[10px] bg-[#F0FDF4] text-[#15803D] border border-[#86EFAC] font-bold">
-                          ✓ PASS
+                          PASS
                         </span>
                       </td>
                       <td className="p-2.5 font-sans text-[#5A544A] text-[11px] leading-relaxed">

@@ -115,7 +115,7 @@ export function LunarGapChart() {
                 : 'bg-slate-50 text-slate-400 border-slate-200'
             }`}
           >
-            {showBurnerStreams ? '✓ Burner Streams Visible' : '+ Show Burner Streams'}
+            {showBurnerStreams ? '[ON] Burner Streams Visible' : '+ Show Burner Streams'}
           </button>
         </div>
       </div>

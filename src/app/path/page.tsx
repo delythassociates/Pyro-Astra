@@ -12,6 +12,7 @@ import {
 import pathData from '../../../data/analysis/path.json';
 import { NearestPathBridge } from '@/components/NearestPathBridge';
 import { AtmosphereFlowController } from '@/components/AtmosphereFlowController';
+import { HoverTitleExplanation } from '@/components/HoverTitleExplanation';
 
 export default function PathPage() {
   const [currentStepIdx, setCurrentStepIdx] = useState<number>(30); // Default transit step
@@ -47,7 +48,7 @@ export default function PathPage() {
 
   return (
     <div className="flex-1 w-full bg-[#F4F1EA] text-[#181615] py-8 px-4 sm:px-6 xl:px-10 space-y-8 max-w-[1840px] mx-auto font-sans">
-      {/* Header */}
+      {/* Header with HoverTitleExplanation (Zero Static Subtitles) */}
       <div className="bg-[#FAF8F3] border border-[#D5CFC2] p-6 shadow-[0_1px_3px_rgba(0,0,0,0.05)] space-y-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="px-2.5 py-0.5 text-xs font-mono font-bold bg-[#EAE5DB] text-[#181615] border border-[#D5CFC2]">
@@ -61,35 +62,12 @@ export default function PathPage() {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-black font-mono text-[#181615] tracking-tight flex items-center gap-2.5">
-          <Compass className="w-6 h-6 text-[#1D4ED8]" />
-          <span>Mission Atmosphere Gap Finder (Exploration Transit Path)</span>
-        </h1>
-        <p className="text-xs sm:text-sm text-[#5A544A] leading-relaxed max-w-4xl">
-          Tracing normalized documentation distance from existing NASA PSI test records along an exploration transit:
-          <strong> ISS Cabin (21% O₂ / 14.7 psi) → Lunar Habitat (34% O₂ / 8.2 psi) → Spacesuit EVA (100% O₂ / 4.3 psi)</strong>.
-        </p>
-
-        {/* Prominent Plain-English Explanation Strip */}
-        <div className="p-4 bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-xs font-sans space-y-1">
-          <div className="flex items-center gap-2 font-mono font-bold text-xs uppercase text-[#C2410C]">
-            <AlertTriangle className="w-4 h-4 shrink-0" />
-            <span>Plain-English Summary: Why Does the Lunar Atmosphere Gap Exist?</span>
-          </div>
-          <p className="text-[12px] leading-relaxed">
-            Future NASA Artemis lunar habitats are engineered to operate at <strong>34% oxygen and 8.2 psi</strong> (lower total atmospheric pressure speeds up preparation for astronaut spacewalks, while higher oxygen ensures adequate blood oxygenation). However, across NASA’s public flight combustion archives, <strong>exactly zero spaceflight tests combine O₂ ≥ 30% with pressure ≤ 10.2 psi</strong>. This documentation distance highlights an empirical gap where empirical flight data has never been collected.
-          </p>
-        </div>
-
-        {/* Scientific Disclaimer */}
-        <div className="p-3 bg-[#EAE5DB] border border-[#D5CFC2] text-xs font-mono space-y-1">
-          <div className="flex items-center gap-2 font-bold text-[#181615]">
-            <Info className="w-4 h-4 text-[#1D4ED8] shrink-0" />
-            <span>Scientific Note: Distance measures documentation coverage, not physical flammability hazard.</span>
-          </div>
-          <p className="text-[11px] text-[#5A544A] font-sans leading-relaxed">
-            A high documentation distance means flight-tested microgravity combustion data is lacking for that specific atmosphere; it is never a prediction of fire risk. Distances are normalized across axes (O₂ / 100, pressure / 14.7 psi) per SPEC Section 8.
-          </p>
+        <div>
+          <HoverTitleExplanation
+            title="Mission Atmosphere Gap Finder (Exploration Transit Path)"
+            summary="Future NASA Artemis lunar habitats are engineered to operate at 34% oxygen and 8.2 psi (lower total atmospheric pressure speeds up preparation for astronaut spacewalks, while higher oxygen ensures adequate blood oxygenation). However, across NASA's public flight combustion archives, exactly zero spaceflight tests combine O₂ ≥ 30% with pressure ≤ 10.2 psi. This documentation distance highlights an empirical gap where microgravity flight data has never been collected."
+            badge="Artemis Lunar Gap"
+          />
         </div>
       </div>
 

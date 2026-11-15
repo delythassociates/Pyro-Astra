@@ -170,7 +170,7 @@ export default function FunctionsPage() {
                   onClick={() => setSelectedCell(null)}
                   className="text-slate-400 hover:text-slate-700"
                 >
-                  ✕ Close
+                  Close [X]
                 </button>
               </div>
               <p className="font-sans italic text-slate-800 bg-white p-3 rounded border border-slate-200">

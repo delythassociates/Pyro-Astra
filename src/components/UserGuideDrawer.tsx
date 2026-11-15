@@ -33,8 +33,8 @@ export function UserGuideDrawer() {
           {/* Header */}
           <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-sky-100 border border-sky-300 text-sky-800 flex items-center justify-center font-bold">
-                📖
+              <div className="w-8 h-8 rounded-lg bg-sky-100 border border-sky-300 text-sky-800 flex items-center justify-center font-bold text-xs font-mono">
+                DOC
               </div>
               <div>
                 <h2 className="text-base font-bold font-mono text-slate-900">
@@ -108,7 +108,7 @@ export function UserGuideDrawer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-xl bg-emerald-50/50 border border-emerald-200 space-y-2">
                     <span className="font-mono font-bold text-emerald-900 text-xs block">
-                      🟢 Beginner Mode (Strictly 2 Inputs → 3 Outputs)
+                      [Beginner Mode] Strictly 2 Inputs &rarr; 3 Outputs
                     </span>
                     <p className="text-slate-700">
                       Designed for rapid exploration. You only select:
@@ -124,7 +124,7 @@ export function UserGuideDrawer() {
 
                   <div className="p-4 rounded-xl bg-sky-50/50 border border-sky-200 space-y-2">
                     <span className="font-mono font-bold text-sky-900 text-xs block">
-                      🔵 Advanced Mode (Full Parametric Workbench)
+                      [Advanced Mode] Full Parametric Workbench
                     </span>
                     <p className="text-slate-700">
                       Designed for combustion engineers and flight safety specialists:

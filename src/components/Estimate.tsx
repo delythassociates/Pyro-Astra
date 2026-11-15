@@ -43,7 +43,7 @@ export function Estimate({
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-2 mb-3">
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold tracking-wider uppercase bg-amber-100 text-amber-900 border border-amber-300">
-            ⚠ Model Estimate
+            Model Estimate
           </span>
           <span className="text-xs font-mono text-slate-500">
             ID: <span className="text-slate-800 font-semibold">{modelId}</span>

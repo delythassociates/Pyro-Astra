@@ -225,25 +225,25 @@ export default function ReadinessPage() {
                     <div className="p-2 bg-white rounded border border-slate-200">
                       <span className="text-slate-400 block text-[10px]">Material Match</span>
                       <strong className={q.material_matched ? 'text-emerald-700' : 'text-slate-500'}>
-                        {q.material_matched ? '✓ Matched' : '✗ Not Matched'}
+                        {q.material_matched ? 'Matched' : 'Not Matched'}
                       </strong>
                     </div>
                     <div className="p-2 bg-white rounded border border-slate-200">
                       <span className="text-slate-400 block text-[10px]">O₂ Covered</span>
                       <strong className={q.o2_covered ? 'text-emerald-700' : 'text-slate-500'}>
-                        {q.o2_covered ? '✓ Covered' : '✗ Uncovered'}
+                        {q.o2_covered ? 'Covered' : 'Uncovered'}
                       </strong>
                     </div>
                     <div className="p-2 bg-white rounded border border-slate-200">
                       <span className="text-slate-400 block text-[10px]">Pressure Covered</span>
                       <strong className={q.pressure_covered ? 'text-emerald-700' : 'text-slate-500'}>
-                        {q.pressure_covered ? '✓ Covered' : '✗ Uncovered'}
+                        {q.pressure_covered ? 'Covered' : 'Uncovered'}
                       </strong>
                     </div>
                     <div className="p-2 bg-white rounded border border-slate-200">
                       <span className="text-slate-400 block text-[10px]">Airflow Covered</span>
                       <strong className={q.airflow_covered ? 'text-emerald-700' : 'text-slate-500'}>
-                        {q.airflow_covered ? '✓ Covered' : '✗ Uncovered'}
+                        {q.airflow_covered ? 'Covered' : 'Uncovered'}
                       </strong>
                     </div>
                   </div>
