@@ -15,7 +15,7 @@
 
 ## Live Deployments & Exploration Links
 
-- **Official Live Production URL:** [https://nasaspaceappschallenge2026-nine.vercel.app](https://nasaspaceappschallenge2026-nine.vercel.app)
+- **Official Live Production URL:** http://delythassociates.study/
 - **Secondary GitHub Production URL:** [https://pyro-astra-k9hn.vercel.app](https://pyro-astra-k9hn.vercel.app)
 - **GitHub Source Repository:** [https://github.com/delythassociates/Pyro-Astra](https://github.com/delythassociates/Pyro-Astra)
 
