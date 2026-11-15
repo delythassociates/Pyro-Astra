@@ -3,6 +3,7 @@
 import React from 'react';
 import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import { CORE_EVIDENCE_FIELDS } from '@/lib/score';
+import { EvidenceFunnelChart } from '@/components/EvidenceFunnelChart';
 
 export default function DataQualityPage() {
   const deepInvestigations = DEFAULT_INVESTIGATIONS.filter((i) => i.depth === 'deep');
@@ -162,78 +163,83 @@ export default function DataQualityPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="border-b border-cyan-900/40 pb-4">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
+        <div className="border-b border-slate-200 pb-4">
+          <div className="flex items-center gap-2 text-xs font-mono text-sky-700 uppercase tracking-wider">
             <span>Data Engineering & Integrity Audit</span>
             <span>·</span>
             <span>SPEC Section 22</span>
           </div>
-          <h1 className="text-3xl font-black font-mono text-white mt-1">
+          <h1 className="text-3xl font-black font-mono text-slate-900 mt-1">
             Data Quality, Missingness & Unit Conversion Audit
           </h1>
-          <p className="text-sm text-zinc-400 font-sans mt-1">
+          <p className="text-sm text-slate-600 font-sans mt-1">
             Systematic audit of missingness across core evidence schemas, exact mathematical unit conversions, and row-level data reconciliation.
           </p>
         </div>
 
+        {/* Evidence Funnel Visualization */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <EvidenceFunnelChart />
+        </div>
+
         {/* 1. Missingness Heatmap */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-200 pb-3 gap-2">
             <div>
-              <h2 className="text-lg font-bold font-mono text-white">
+              <h2 className="text-lg font-bold font-mono text-slate-900">
                 Missingness Heatmap Matrix
               </h2>
-              <p className="text-xs text-zinc-400 font-sans">
-                Green = Populated with Provenance | Dark Red = Null / Not Reported in NASA PSI
+              <p className="text-xs text-slate-500 font-sans">
+                Emerald = Populated with Provenance | Muted Rose = Null / Not Reported in NASA PSI
               </p>
             </div>
             <div className="flex items-center gap-3 text-xs font-mono">
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded bg-emerald-500" />
-                <span>Reported</span>
+                <span className="w-3.5 h-3.5 rounded bg-emerald-500" />
+                <span className="text-slate-700 font-medium">Reported</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded bg-red-950/70 border border-red-800" />
-                <span>Not Reported (null)</span>
+                <span className="w-3.5 h-3.5 rounded bg-rose-100 border border-rose-300" />
+                <span className="text-slate-700 font-medium">Not Reported (null)</span>
               </span>
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-zinc-800 bg-slate-900/40 backdrop-blur-sm p-4">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-zinc-800 font-mono text-[10px] text-zinc-400 uppercase">
-                  <th className="p-2 min-w-[90px]">Record</th>
+                <tr className="border-b border-slate-200 bg-slate-100 font-mono text-[10px] text-slate-600 uppercase font-semibold">
+                  <th className="p-2.5 min-w-[100px]">Record</th>
                   {CORE_EVIDENCE_FIELDS.map((f) => (
-                    <th key={f} className="p-2 text-center truncate max-w-[85px]" title={f}>
+                    <th key={f} className="p-2.5 text-center truncate max-w-[95px]" title={f}>
                       {f.replace('_', ' ')}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100">
                 {deepInvestigations.map((inv) => (
-                  <tr key={inv.id} className="border-b border-zinc-800/50 hover:bg-slate-900/60">
-                    <td className="p-2 font-mono font-bold text-white whitespace-nowrap">
-                      <span className="text-cyan-400">{inv.acronym}</span>
-                      <span className="text-[10px] text-zinc-500 ml-1">({inv.id})</span>
+                  <tr key={inv.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="p-2.5 font-mono font-bold text-slate-900 whitespace-nowrap">
+                      <span className="text-sky-700">{inv.acronym}</span>
+                      <span className="text-[10px] text-slate-400 ml-1">({inv.id})</span>
                     </td>
                     {CORE_EVIDENCE_FIELDS.map((f) => {
                       const hasValue = inv[f] !== null && inv[f] !== undefined;
 
                       return (
-                        <td key={f} className="p-2 text-center">
+                        <td key={f} className="p-2.5 text-center">
                           {hasValue ? (
                             <span
-                              className="inline-block w-4 h-4 rounded bg-emerald-500/90 shadow-sm shadow-emerald-500/30"
+                              className="inline-block w-4 h-4 rounded bg-emerald-500 shadow-sm"
                               title={`${inv.acronym}.${f}: populated with provenance`}
                             />
                           ) : (
                             <span
-                              className="inline-block w-4 h-4 rounded bg-red-950/60 border border-red-800/80"
+                              className="inline-block w-4 h-4 rounded bg-rose-100 border border-rose-300"
                               title={`${inv.acronym}.${f}: not reported in PSI`}
                             />
                           )}
@@ -248,20 +254,20 @@ export default function DataQualityPage() {
         </div>
 
         {/* 2. Unit Conversion Audit */}
-        <div className="space-y-4">
-          <div className="border-b border-zinc-800 pb-2">
-            <h2 className="text-lg font-bold font-mono text-white">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="border-b border-slate-200 pb-3">
+            <h2 className="text-lg font-bold font-mono text-slate-900">
               Unit Conversion Audit (SPEC Section 2 Rule 3)
             </h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <p className="text-xs text-slate-500 font-sans mt-0.5">
               Unit conversions are allowed only with an exact formula recorded in the provenance note.
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-zinc-800 bg-slate-900/40 backdrop-blur-sm">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
             <table className="w-full text-left border-collapse text-xs font-mono">
               <thead>
-                <tr className="border-b border-zinc-800 bg-slate-950 text-[11px] text-zinc-400 uppercase">
+                <tr className="border-b border-slate-200 bg-slate-100 text-[11px] text-slate-600 uppercase font-semibold">
                   <th className="p-3">Field</th>
                   <th className="p-3">Normalized Unit</th>
                   <th className="p-3">Raw Unit</th>
@@ -270,19 +276,19 @@ export default function DataQualityPage() {
                   <th className="p-3">Verification Note</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100">
                 {unitAuditRecords.map((rec) => (
-                  <tr key={rec.field} className="border-b border-zinc-800/60 hover:bg-slate-900/50">
-                    <td className="p-3 font-bold text-white text-cyan-300">{rec.field}</td>
-                    <td className="p-3 text-emerald-400">{rec.unitUsed}</td>
-                    <td className="p-3 text-zinc-400">{rec.rawUnit}</td>
-                    <td className="p-3 text-zinc-200 bg-black/30 rounded">{rec.conversionFormula}</td>
+                  <tr key={rec.field} className="hover:bg-slate-50 transition-colors">
+                    <td className="p-3 font-bold text-sky-700">{rec.field}</td>
+                    <td className="p-3 text-emerald-700 font-semibold">{rec.unitUsed}</td>
+                    <td className="p-3 text-slate-500">{rec.rawUnit}</td>
+                    <td className="p-3 text-slate-800 bg-slate-50 rounded font-medium">{rec.conversionFormula}</td>
                     <td className="p-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/50 font-bold">
+                      <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold">
                         {rec.status}
                       </span>
                     </td>
-                    <td className="p-3 font-sans text-zinc-400 text-[11px]">{rec.note}</td>
+                    <td className="p-3 font-sans text-slate-600 text-[11px] leading-relaxed">{rec.note}</td>
                   </tr>
                 ))}
               </tbody>
@@ -291,20 +297,20 @@ export default function DataQualityPage() {
         </div>
 
         {/* 3. Row-Count Reconciliation */}
-        <div className="space-y-4">
-          <div className="border-b border-zinc-800 pb-2">
-            <h2 className="text-lg font-bold font-mono text-white">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="border-b border-slate-200 pb-3">
+            <h2 className="text-lg font-bold font-mono text-slate-900">
               Row-Count & Source File Reconciliation (SPEC Section 22)
             </h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <p className="text-xs text-slate-500 font-sans mt-0.5">
               Cross-verifying all 8 experimental tables against authentic primary CSV test logs in raw_real/ with exact row reconciliation, null audits, and anomaly flags.
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-zinc-800 bg-slate-900/40 backdrop-blur-sm">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
             <table className="w-full text-left border-collapse text-xs font-mono">
               <thead>
-                <tr className="border-b border-zinc-800 bg-slate-950 text-[11px] text-zinc-400 uppercase">
+                <tr className="border-b border-slate-200 bg-slate-100 text-[11px] text-slate-600 uppercase font-semibold">
                   <th className="p-3">ID & Acronym</th>
                   <th className="p-3">Primary Raw File</th>
                   <th className="p-3">Raw Rows / Tests</th>
@@ -313,22 +319,22 @@ export default function DataQualityPage() {
                   <th className="p-3">Reconciliation Notes</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-slate-100">
                 {rowReconciliation.map((row) => (
-                  <tr key={row.id} className="border-b border-zinc-800/60 hover:bg-slate-900/50">
-                    <td className="p-3 font-bold text-white whitespace-nowrap">
-                      <span className="text-cyan-300">{row.id}</span> ({row.name})
+                  <tr key={row.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="p-3 font-bold text-slate-900 whitespace-nowrap">
+                      <span className="text-sky-700">{row.id}</span> ({row.name})
                       {row.id === 'PSI-25' && (
-                        <span className="ml-2 px-1.5 py-0.5 rounded text-[9px] bg-amber-950 text-amber-300 border border-amber-700/50">
+                        <span className="ml-2 px-1.5 py-0.5 rounded text-[9px] bg-amber-50 text-amber-800 border border-amber-300 font-bold">
                           2 SUSPECT FLAGGED
                         </span>
                       )}
                     </td>
-                    <td className="p-3 text-zinc-400 font-mono text-[11px] max-w-xs break-all">{row.rawFile}</td>
-                    <td className="p-3 text-emerald-400 font-bold whitespace-nowrap">{row.rawRowCount}</td>
-                    <td className="p-3 text-amber-300 font-mono text-[11px]">{row.nullCounts}</td>
-                    <td className="p-3 text-zinc-200">{row.extractedStatus}</td>
-                    <td className="p-3 font-sans text-zinc-400 text-[11px]">{row.discrepancy}</td>
+                    <td className="p-3 text-slate-500 font-mono text-[11px] max-w-xs break-all">{row.rawFile}</td>
+                    <td className="p-3 text-emerald-700 font-bold whitespace-nowrap">{row.rawRowCount}</td>
+                    <td className="p-3 text-amber-800 font-medium text-[11px]">{row.nullCounts}</td>
+                    <td className="p-3 text-slate-700">{row.extractedStatus}</td>
+                    <td className="p-3 font-sans text-slate-600 text-[11px] leading-relaxed">{row.discrepancy}</td>
                   </tr>
                 ))}
               </tbody>
@@ -336,25 +342,25 @@ export default function DataQualityPage() {
           </div>
 
           {/* 4. Flagged Suspect Rows Sub-Panel */}
-          <div className="mt-8 space-y-4">
-            <div className="border-b border-amber-800/40 pb-2">
+          <div className="mt-8 space-y-4 pt-4 border-t border-slate-200">
+            <div className="border-b border-amber-200 pb-2">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-700/50 uppercase">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-100 text-amber-800 border border-amber-300 uppercase">
                   Data Integrity
                 </span>
-                <h3 className="text-base font-bold font-mono text-white">
+                <h3 className="text-base font-bold font-mono text-slate-900">
                   Flagged Suspect Rows in Experimental Tables
                 </h3>
               </div>
-              <p className="text-xs text-zinc-400 font-sans mt-1">
+              <p className="text-xs text-slate-600 font-sans mt-1">
                 Adherence to SPEC Section 2 Rule 1: Tests with physical anomalies are kept visible in raw audit logs with explicit suspect flags and excluded from physical bounding envelopes.
               </p>
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-amber-900/40 bg-slate-900/40 backdrop-blur-sm">
+            <div className="overflow-x-auto rounded-xl border border-amber-200 bg-amber-50/30">
               <table className="w-full text-left border-collapse text-xs font-mono">
                 <thead>
-                  <tr className="border-b border-amber-900/40 bg-slate-950 text-[11px] text-amber-300/80 uppercase">
+                  <tr className="border-b border-amber-200 bg-amber-100/60 text-[11px] text-amber-900 uppercase font-semibold">
                     <th className="p-3">Table & ID</th>
                     <th className="p-3">Test #</th>
                     <th className="p-3">Sample Material & PI</th>
@@ -364,25 +370,25 @@ export default function DataQualityPage() {
                     <th className="p-3">Handling Policy</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-amber-100">
                   {suspectRows.map((s) => (
-                    <tr key={`${s.tableId}-${s.testId}`} className="border-b border-zinc-800/60 hover:bg-slate-900/50">
-                      <td className="p-3 font-bold text-white whitespace-nowrap">
-                        <span className="text-cyan-300">{s.tableId}</span> ({s.tableName})
+                    <tr key={`${s.tableId}-${s.testId}`} className="hover:bg-amber-50/80 transition-colors">
+                      <td className="p-3 font-bold text-slate-900 whitespace-nowrap">
+                        <span className="text-sky-700">{s.tableId}</span> ({s.tableName})
                       </td>
-                      <td className="p-3 font-bold text-amber-400 whitespace-nowrap">
-                        <span className="px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-700/60">
+                      <td className="p-3 font-bold text-amber-800 whitespace-nowrap">
+                        <span className="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
                           {s.testId}
                         </span>
                       </td>
-                      <td className="p-3 text-zinc-200">
-                        <div>{s.sample}</div>
-                        <div className="text-[10px] text-zinc-500">PI: {s.pi}</div>
+                      <td className="p-3 text-slate-800">
+                        <div className="font-semibold">{s.sample}</div>
+                        <div className="text-[10px] text-slate-500">PI: {s.pi}</div>
                       </td>
-                      <td className="p-3 text-emerald-400 font-bold whitespace-nowrap">{s.initialO2}</td>
-                      <td className="p-3 text-rose-400 font-bold whitespace-nowrap">{s.finalO2}</td>
-                      <td className="p-3 font-sans text-amber-200/90 text-[11px]">{s.anomaly}</td>
-                      <td className="p-3 font-sans text-zinc-400 text-[11px]">{s.handling}</td>
+                      <td className="p-3 text-emerald-700 font-bold whitespace-nowrap">{s.initialO2}</td>
+                      <td className="p-3 text-rose-700 font-bold whitespace-nowrap">{s.finalO2}</td>
+                      <td className="p-3 font-sans text-amber-900 text-[11px] leading-relaxed">{s.anomaly}</td>
+                      <td className="p-3 font-sans text-slate-600 text-[11px] leading-relaxed">{s.handling}</td>
                     </tr>
                   ))}
                 </tbody>

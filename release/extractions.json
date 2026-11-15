@@ -1,7 +1,7 @@
 {
   "_schema_version": "1.0.0",
   "_description": "PYRO-ASTRA Grounded Extractions with Verbatim Quotes, Key Paths, and Strict Provenance",
-  "_generated_at": "2026-11-14T22:57:54.911937+00:00",
+  "_generated_at": "2026-11-15T04:17:51.530696+00:00",
   "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
   "_rules_enforcement": {
     "rule_1_never_invent": "All values not explicitly stated in NASA sources are null / not reported.",

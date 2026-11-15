@@ -49,73 +49,78 @@ export default function TrustPage() {
   >;
 
   return (
-    <div className="flex-1 w-full bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
-        <div className="border-b border-cyan-900/40 pb-4">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
+        <div className="border-b border-slate-200 pb-4">
+          <div className="flex items-center gap-2 text-xs font-mono text-sky-700 uppercase tracking-wider">
             <span>Evidence Verification Ledger</span>
             <span>·</span>
             <span>SPEC Section 13</span>
           </div>
-          <h1 className="text-3xl font-black font-mono text-white mt-1">
+          <h1 className="text-3xl font-black font-mono text-slate-900 mt-1">
             Trust & Provenance Ledger
           </h1>
-          <p className="text-sm text-zinc-400 font-sans mt-1">
+          <p className="text-sm text-slate-600 font-sans mt-1">
             Auditing data readiness, provenance integrity, non-negotiable scientific constraints, and AI evaluation metrics.
           </p>
         </div>
 
         {/* High-level Trust Metrics Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-cyan-900/40 space-y-1">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase">Traced Record Values</span>
-            <div className="text-2xl font-black font-mono text-cyan-300">
+          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[11px] font-mono text-slate-500 uppercase font-semibold">Traced Record Values</span>
+            <div className="text-2xl font-black font-mono text-sky-700">
               {totalTrackedValues} / {totalTrackedValues}
             </div>
-            <div className="text-[10px] font-mono text-emerald-400">100% Provenance Coverage</div>
+            <div className="text-[10px] font-mono text-emerald-700 font-medium">100% Provenance Coverage</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-cyan-900/40 space-y-1">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase">Investigations Status</span>
-            <div className="text-2xl font-black font-mono text-white">
-              {deepRecords.length} Metadata Mined
+          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[11px] font-mono text-slate-500 uppercase font-semibold">Investigations Status</span>
+            <div className="text-2xl font-black font-mono text-slate-900">
+              {deepRecords.length} Full Metadata
             </div>
-            <div className="text-[10px] font-mono text-cyan-400">{catalogRecords.length} Experimental Table Ingested</div>
+            <div className="text-[10px] font-mono text-sky-700 font-medium">{catalogRecords.length} Experimental Table Ingested</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-cyan-900/40 space-y-1">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase">NASA DOI Verification</span>
-            <div className="text-2xl font-black font-mono text-emerald-300">
+          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[11px] font-mono text-slate-500 uppercase font-semibold">NASA DOI Verification</span>
+            <div className="text-2xl font-black font-mono text-emerald-700">
               {verifiedRecords.length} / {totalRecords}
             </div>
-            <div className="text-[10px] font-mono text-emerald-400">100% DOI Verified</div>
+            <div className="text-[10px] font-mono text-emerald-700 font-medium">100% DOI Verified</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-cyan-900/40 space-y-1">
-            <span className="text-[11px] font-mono text-zinc-400 uppercase">Evaluation Eval Suite</span>
-            <div className="text-2xl font-black font-mono text-indigo-300">
+          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[11px] font-mono text-slate-500 uppercase font-semibold">Evaluation Eval Suite</span>
+            <div className="text-2xl font-black font-mono text-indigo-700">
               {askEvalData.passed_count} / {askEvalData.total_probes}
             </div>
-            <div className="text-[10px] font-mono text-indigo-400">{askEvalData.pass_rate_pct}% Benchmark Pass</div>
+            <div className="text-[10px] font-mono text-indigo-700 font-medium">{askEvalData.pass_rate_pct}% Benchmark Pass</div>
           </div>
         </div>
 
         {/* Data Readiness & Null Count per Record */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-            <h2 className="text-lg font-bold font-mono text-white">
-              Data Readiness & Provenance Reconciliation
-            </h2>
-            <span className="text-xs font-mono text-zinc-400">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-200 pb-3 gap-2">
+            <div>
+              <h2 className="text-lg font-bold font-mono text-slate-900">
+                Data Readiness & Provenance Reconciliation
+              </h2>
+              <p className="text-xs text-slate-500 font-sans mt-0.5">
+                Every record carries provenance. Unstated fields are stored strictly as null.
+              </p>
+            </div>
+            <span className="text-xs font-mono px-2.5 py-1 rounded bg-slate-100 text-slate-700 border border-slate-200 font-medium">
               Null fields are stored as null and explicitly counted
             </span>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-zinc-800 bg-slate-900/40 backdrop-blur-sm">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="border-b border-zinc-800 bg-slate-950 font-mono text-[11px] text-zinc-400 uppercase">
+                <tr className="border-b border-slate-200 bg-slate-100 font-mono text-[11px] text-slate-600 uppercase font-semibold">
                   <th className="p-3">ID & Acronym</th>
                   <th className="p-3">Name</th>
                   <th className="p-3">DOI (Source)</th>
@@ -125,7 +130,7 @@ export default function TrustPage() {
                   <th className="p-3">Completeness</th>
                 </tr>
               </thead>
-              <tbody className="font-mono">
+              <tbody className="font-mono divide-y divide-slate-100">
                 {DEFAULT_INVESTIGATIONS.map((inv) => {
                   const populatedCount = CORE_EVIDENCE_FIELDS.filter(
                     (f) => inv[f] !== null && inv[f] !== undefined
@@ -138,12 +143,12 @@ export default function TrustPage() {
                   return (
                     <tr
                       key={inv.id}
-                      className="border-b border-zinc-800/60 hover:bg-slate-900/50 transition-colors"
+                      className="hover:bg-slate-50 transition-colors"
                     >
-                      <td className="p-3 font-bold text-white">
-                        <span className="text-cyan-300">{inv.id}</span> ({inv.acronym})
+                      <td className="p-3 font-bold text-slate-900">
+                        <span className="text-sky-700">{inv.id}</span> ({inv.acronym})
                       </td>
-                      <td className="p-3 font-sans text-zinc-300 max-w-xs truncate">
+                      <td className="p-3 font-sans text-slate-700 max-w-xs truncate">
                         {inv.name}
                       </td>
                       <td className="p-3">
@@ -151,7 +156,7 @@ export default function TrustPage() {
                           href={`https://doi.org/${inv.doi}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-cyan-400 underline hover:text-cyan-300"
+                          className="text-sky-700 underline hover:text-sky-800"
                         >
                           {inv.doi}
                         </a>
@@ -160,36 +165,36 @@ export default function TrustPage() {
                         <span
                           className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${
                             inv.depth === 'deep'
-                              ? 'bg-cyan-950 text-cyan-300 border border-cyan-800/40'
-                              : 'bg-indigo-950 text-indigo-300 border border-indigo-800/40'
+                              ? 'bg-sky-50 text-sky-800 border border-sky-300'
+                              : 'bg-indigo-50 text-indigo-800 border border-indigo-300'
                           }`}
                         >
-                          {inv.depth === 'deep' ? 'metadata mined' : 'table ingested'}
+                          {inv.depth === 'deep' ? 'full metadata ingested' : 'table ingested'}
                         </span>
                       </td>
                       <td className="p-3">
                         <span
                           className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${
                             isHand
-                              ? 'bg-amber-950/70 text-amber-300 border border-amber-800/40'
-                              : 'bg-slate-800 text-zinc-300'
+                              ? 'bg-amber-50 text-amber-800 border border-amber-300'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200'
                           }`}
                         >
                           {isHand ? 'hand (table 5.1)' : 'parsed'}
                         </span>
                       </td>
-                      <td className="p-3 text-amber-400">
+                      <td className="p-3 text-amber-800 font-semibold">
                         {inv.not_reported.length} fields
                       </td>
                       <td className="p-3">
                         <div className="flex items-center gap-2">
-                          <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                          <div className="w-16 h-1.5 bg-slate-200 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-cyan-400 rounded-full"
+                              className="h-full bg-sky-600 rounded-full"
                               style={{ width: `${completenessPct}%` }}
                             />
                           </div>
-                          <span>{completenessPct}%</span>
+                          <span className="text-slate-800 font-medium">{completenessPct}%</span>
                         </div>
                       </td>
                     </tr>
@@ -201,49 +206,49 @@ export default function TrustPage() {
         </div>
 
         {/* Section 2 Non-Negotiable Rules Audit */}
-        <div className="space-y-4">
-          <div className="border-b border-zinc-800 pb-2">
-            <h2 className="text-lg font-bold font-mono text-white">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="border-b border-slate-200 pb-3">
+            <h2 className="text-lg font-bold font-mono text-slate-900">
               Non-Negotiable System Invariants (SPEC Section 2)
             </h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <p className="text-xs text-slate-500 font-sans mt-0.5">
               Rules strictly enforced in TypeScript, schema validation, and UI components.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans">
-            <div className="p-4 rounded-xl bg-slate-900/50 border border-zinc-800 space-y-1.5">
-              <div className="font-mono font-bold text-cyan-300">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div className="font-mono font-bold text-sky-800 text-[11px]">
                 Rule 1 & 2: Zero Fabrication & Mandatory Provenance
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                Never invent, estimate, round up, or interpolate values. If unstated, store null and display 'not reported'. Every displayed number renders through <code className="text-cyan-400 font-mono">&lt;Val&gt;</code> which throws if provenance is absent.
+              <p className="text-slate-600 leading-relaxed">
+                Never invent, estimate, round up, or interpolate values. If unstated, store null and display &apos;not reported&apos;. Every displayed number renders through <code className="text-sky-700 font-mono font-bold">&lt;Val&gt;</code> which throws if provenance is absent.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/50 border border-zinc-800 space-y-1.5">
-              <div className="font-mono font-bold text-cyan-300">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div className="font-mono font-bold text-sky-800 text-[11px]">
                 Rule 4: Burner Flow O₂ Isolation
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                Oxygen injected directly into burner flows (e.g. CFI-G up to 85% O₂) is strictly partitioned as <code className="text-amber-400 font-mono">burner_flow_o2_pct</code> and never counts toward cabin atmosphere overlap.
+              <p className="text-slate-600 leading-relaxed">
+                Oxygen injected directly into burner flows (e.g. CFI-G up to 85% O₂) is strictly partitioned as <code className="text-amber-800 font-mono font-bold">burner_flow_o2_pct</code> and never counts toward cabin atmosphere overlap.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/50 border border-zinc-800 space-y-1.5">
-              <div className="font-mono font-bold text-cyan-300">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div className="font-mono font-bold text-sky-800 text-[11px]">
                 Rule 5: Refusal of Partial-Gravity Predictions
               </div>
-              <p className="text-zinc-300 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed">
                 PSI has no partial-gravity combustion data. The system shows only 0g and 1g results as bounding regimes. ACME E-FIELD Flames is treated strictly as an electric field analog.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/50 border border-zinc-800 space-y-1.5">
-              <div className="font-mono font-bold text-cyan-300">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+              <div className="font-mono font-bold text-sky-800 text-[11px]">
                 Rule 6 & 8: Rockets Refusal & NASA Logo Ban
               </div>
-              <p className="text-zinc-300 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed">
                 Rocket propellants and rocketry are out of scope. Ask ASTRA refuses rocket prompts. No NASA logos or insignia appear anywhere in the interface; NASA PSI is credited strictly in plain text.
               </p>
             </div>
@@ -251,58 +256,58 @@ export default function TrustPage() {
         </div>
 
         {/* Empirical Grounding & Synthetic Data Purge Audit */}
-        <div className="p-6 rounded-2xl bg-slate-900/40 border border-amber-900/40 space-y-4">
-          <div className="flex items-center justify-between border-b border-amber-800/40 pb-2">
+        <div className="p-6 rounded-2xl bg-white border border-amber-200 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-amber-200 pb-3">
             <div>
-              <span className="text-[11px] font-mono uppercase text-amber-400 tracking-wider">
+              <span className="text-[11px] font-mono uppercase text-amber-800 font-semibold tracking-wider">
                 Scientific Grounding Ledger
               </span>
-              <h2 className="text-lg font-bold font-mono text-white">
+              <h2 className="text-lg font-bold font-mono text-slate-900">
                 Authentic Sources & Discarded Synthetic Artifacts
               </h2>
             </div>
-            <span className="text-xs font-mono px-2.5 py-1 rounded bg-amber-950 text-amber-300 border border-amber-800/50 font-bold">
+            <span className="text-xs font-mono px-2.5 py-1 rounded bg-amber-50 text-amber-800 border border-amber-300 font-bold">
               Pure Empirical Grounding
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-sans">
             <div className="space-y-2">
-              <div className="font-mono font-bold text-emerald-400 uppercase tracking-wider text-[11px]">
+              <div className="font-mono font-bold text-emerald-700 uppercase tracking-wider text-[11px]">
                 ✓ Authentic Sources Used
               </div>
-              <ul className="space-y-1.5 text-zinc-300 list-disc list-inside">
+              <ul className="space-y-1.5 text-slate-600 list-disc list-inside leading-relaxed">
                 <li>
-                  <strong className="text-white">NASA PSI Metadata JSONs:</strong> Extracted directly from official NASA GEODE API endpoints (<code className="text-cyan-400 font-mono">raw_real/PSI-xx/investigation_metadata.json</code>) with verified DOIs, objectives, hardware, and fuels.
+                  <strong className="text-slate-900">NASA PSI Metadata JSONs:</strong> Extracted directly from official NASA GEODE API endpoints (<code className="text-sky-700 font-mono">raw_real/PSI-xx/investigation_metadata.json</code>) with verified DOIs, objectives, hardware, and fuels.
                 </li>
                 <li>
-                  <strong className="text-white">NASA/TM-20210011385:</strong> 20 flat-PMMA tests reported in Table 5.1 extracted row-by-row (Tests M1–M20) from Page 57 with airflow velocities (2.0–21.0 cm/s) and oxygen concentrations (16.8–22.2 vol%).
+                  <strong className="text-slate-900">NASA/TM-20210011385:</strong> 20 flat-PMMA tests reported in Table 5.1 extracted row-by-row (Tests M1–M20) from Page 57 with airflow velocities (2.0–21.0 cm/s) and oxygen concentrations (16.8–22.2 vol%).
                 </li>
                 <li>
-                  <strong className="text-white">NASA/TP-2015-218570:</strong> Life Support Baseline Values and Assumptions Document (BVAD) environmental envelopes.
+                  <strong className="text-slate-900">NASA/TP-2015-218570:</strong> Life Support Baseline Values and Assumptions Document (BVAD) environmental envelopes.
                 </li>
                 <li>
-                  <strong className="text-white">AWS S3 Acquisition Audit:</strong> Unsigned bucket reconnaissance logged in <code className="text-cyan-400 font-mono">data/acquisition_log.csv</code>.
+                  <strong className="text-slate-900">AWS S3 Acquisition Audit:</strong> Unsigned bucket reconnaissance logged in <code className="text-sky-700 font-mono">data/acquisition_log.csv</code>.
                 </li>
               </ul>
             </div>
 
             <div className="space-y-2">
-              <div className="font-mono font-bold text-red-400 uppercase tracking-wider text-[11px]">
+              <div className="font-mono font-bold text-rose-700 uppercase tracking-wider text-[11px]">
                 ✕ Purged Synthetic Artifacts & Arbitrary Extrapolations
               </div>
-              <ul className="space-y-1.5 text-zinc-300 list-disc list-inside">
+              <ul className="space-y-1.5 text-slate-600 list-disc list-inside leading-relaxed">
                 <li>
-                  <strong className="text-white">Discarded Synthetic Data:</strong> An earlier AI-generated synthetic raw dataset (<code className="text-red-400 font-mono">scripts/populate_raw_datasets.py</code>, <code className="text-red-400 font-mono">/raw</code>) was completely deleted.
+                  <strong className="text-slate-900">Discarded Synthetic Data:</strong> An earlier AI-generated synthetic raw dataset (<code className="text-rose-700 font-mono">scripts/populate_raw_datasets.py</code>, <code className="text-rose-700 font-mono">/raw</code>) was completely deleted.
                 </li>
                 <li>
-                  <strong className="text-white">Purged Arbitrary Extrapolations:</strong> Replaced ungrounded polynomial regression and arbitrary predictors with PREREGISTERED Rev 5 surrogate modeling governed by strict 3-tier domain-gate refusal protocol.
+                  <strong className="text-slate-900">Purged Arbitrary Extrapolations:</strong> Replaced ungrounded polynomial regression and arbitrary predictors with PREREGISTERED Rev 5 surrogate modeling governed by strict 3-tier domain-gate refusal protocol.
                 </li>
                 <li>
-                  <strong className="text-white">Purged Metric Claims:</strong> Model-card claims and ungrounded predictive intervals without cross-validation provenance were purged from the UI and evaluation suite.
+                  <strong className="text-slate-900">Purged Metric Claims:</strong> Model-card claims and ungrounded predictive intervals without cross-validation provenance were purged from the UI and evaluation suite.
                 </li>
                 <li>
-                  <strong className="text-white">Strict Nulling:</strong> Any value not attested in authentic NASA documentation is stored as <code className="text-amber-400 font-mono">null</code> (&apos;not reported&apos;).
+                  <strong className="text-slate-900">Strict Nulling:</strong> Any value not attested in authentic NASA documentation is stored as <code className="text-amber-800 font-mono">null</code> (&apos;not reported&apos;).
                 </li>
               </ul>
             </div>
@@ -310,24 +315,24 @@ export default function TrustPage() {
         </div>
 
         {/* AI Transparency & Ask ASTRA Hybrid Architecture Panel (SPEC Section 12) */}
-        <div className="p-6 rounded-2xl bg-slate-900/60 border border-cyan-800/50 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-800/40 pb-3">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
             <div>
-              <span className="text-[11px] font-mono uppercase text-cyan-400 tracking-wider">
+              <span className="text-[11px] font-mono uppercase text-sky-700 font-semibold tracking-wider">
                 AI Transparency & Safety Governance · SPEC Section 12
               </span>
-              <h2 className="text-xl font-bold font-mono text-white">
+              <h2 className="text-xl font-bold font-mono text-slate-900">
                 Ask ASTRA Hybrid Architecture & 100% Verifier Interception
               </h2>
-              <p className="text-xs text-zinc-400 font-sans mt-0.5">
+              <p className="text-xs text-slate-500 font-sans mt-0.5">
                 Deterministic offline intelligence combined with key-guarded live LLM tool execution, intercepted by programmatic verifiers.
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-700/50 text-xs font-mono font-bold">
+              <span className="px-2.5 py-1 rounded bg-sky-50 text-sky-800 border border-sky-200 text-xs font-mono font-bold">
                 Hybrid Architecture
               </span>
-              <span className="px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 text-xs font-mono font-bold">
+              <span className="px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold">
                 100% Verifier Intercepted
               </span>
             </div>
@@ -335,93 +340,93 @@ export default function TrustPage() {
 
           {/* Dual-Mode Architecture Breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans">
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/60 space-y-2">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono font-bold text-cyan-300 uppercase tracking-wider text-[11px]">
+                <span className="font-mono font-bold text-sky-800 uppercase tracking-wider text-[11px]">
                   Mode A: OFFLINE Mode (Deterministic Engine)
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/40">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-sky-800 border border-slate-200 font-semibold">
                   Always Operational
                 </span>
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                Operates with zero external network connectivity and zero API key requirement. Uses 8 deterministic algorithmic tools (<code className="text-cyan-400 font-mono">search_records</code>, <code className="text-cyan-400 font-mono">get_record</code>, <code className="text-cyan-400 font-mono">rank</code>, <code className="text-cyan-400 font-mono">nearest</code>, <code className="text-cyan-400 font-mono">coverage</code>, <code className="text-cyan-400 font-mono">compare</code>, <code className="text-cyan-400 font-mono">bounds</code>, <code className="text-cyan-400 font-mono">predict</code>) to compute grounded evidence directly from authentic flight tables.
+              <p className="text-slate-600 leading-relaxed">
+                Operates with zero external network connectivity and zero API key requirement. Uses 8 deterministic algorithmic tools (<code className="text-sky-700 font-mono">search_records</code>, <code className="text-sky-700 font-mono">get_record</code>, <code className="text-sky-700 font-mono">rank</code>, <code className="text-sky-700 font-mono">nearest</code>, <code className="text-sky-700 font-mono">coverage</code>, <code className="text-sky-700 font-mono">compare</code>, <code className="text-sky-700 font-mono">bounds</code>, <code className="text-sky-700 font-mono">predict</code>) to compute grounded evidence directly from authentic flight tables.
               </p>
-              <div className="text-[11px] font-mono text-zinc-400 pt-1">
+              <div className="text-[11px] font-mono text-emerald-700 pt-1 font-semibold">
                 ✓ Guaranteed availability in air-gapped or disconnected environments.
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-indigo-900/60 space-y-2">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-mono font-bold text-indigo-300 uppercase tracking-wider text-[11px]">
+                <span className="font-mono font-bold text-indigo-800 uppercase tracking-wider text-[11px]">
                   Mode B: LIVE Mode (Tool-Use Only LLM)
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-950 text-indigo-400 border border-indigo-800/40">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-indigo-800 border border-slate-200 font-semibold">
                   Env Key Guarded
                 </span>
               </div>
-              <p className="text-zinc-300 leading-relaxed">
-                Enabled strictly via server-side environment variable (<code className="text-indigo-400 font-mono">GROQ_API_KEY</code>). Constrained strictly to tool-use only: the model acts as an agent planner that must invoke deterministic tools. Direct text generation without tool grounding is strictly rejected, and times out automatically to verified offline mode.
+              <p className="text-slate-600 leading-relaxed">
+                Enabled strictly via server-side environment variable (<code className="text-indigo-700 font-mono font-bold">GROQ_API_KEY</code>). Constrained strictly to tool-use only: the model acts as an agent planner that must invoke deterministic tools. Direct text generation without tool grounding is strictly rejected, and times out automatically to verified offline mode.
               </p>
-              <div className="text-[11px] font-mono text-zinc-400 pt-1">
+              <div className="text-[11px] font-mono text-indigo-700 pt-1 font-semibold">
                 ✓ Zero ungrounded arithmetic · All numbers derived from executed tools.
               </div>
             </div>
           </div>
 
           {/* 100% Verifier Interception Ledger */}
-          <div className="space-y-3 pt-2 border-t border-cyan-900/30">
-            <span className="text-[11px] font-mono uppercase text-zinc-400 tracking-wider font-bold">
-              Programmatic Verifier Interception Targets (<code className="text-cyan-400">validate.ts</code>)
+          <div className="space-y-3 pt-2 border-t border-slate-200">
+            <span className="text-[11px] font-mono uppercase text-slate-500 tracking-wider font-bold">
+              Programmatic Verifier Interception Targets (<code className="text-sky-700">validate.ts</code>)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-sans">
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-zinc-800 space-y-1">
-                <div className="font-mono font-bold text-emerald-400 text-[11px] flex items-center gap-1.5">
-                  <span>1. Number Interception</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <div className="font-mono font-bold text-emerald-700 text-[11px]">
+                  1. Number Interception
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   Every numeric value in the output text is intercepted and checked against cited NASA PSI records and tool results. Hallucinated numbers trigger instant rejection.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-zinc-800 space-y-1">
-                <div className="font-mono font-bold text-cyan-400 text-[11px] flex items-center gap-1.5">
-                  <span>2. Unit Interception</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <div className="font-mono font-bold text-sky-700 text-[11px]">
+                  2. Unit Interception
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   Physical dimensions are verified (pressure in psi/kPa, airflow in cm/s, O₂ in %). Exact unit conversions required (1 psi = 6.894757 kPa). Bogus units (e.g. lightyears) are intercepted.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-zinc-800 space-y-1">
-                <div className="font-mono font-bold text-amber-400 text-[11px] flex items-center gap-1.5">
-                  <span>3. Fuel Interception</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <div className="font-mono font-bold text-amber-800 text-[11px]">
+                  3. Fuel Interception
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   Combustible fuel and material claims are cross-checked against the cited investigation&apos;s authenticated fuels list. Unstated materials (e.g. hydrazine in SAME) are intercepted.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/60 border border-zinc-800 space-y-1">
-                <div className="font-mono font-bold text-indigo-400 text-[11px] flex items-center gap-1.5">
-                  <span>4. ID Interception</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                <div className="font-mono font-bold text-indigo-700 text-[11px]">
+                  4. ID Interception
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
-                  Every cited or referenced investigation ID (<code className="font-mono text-cyan-300">PSI-xxx</code>) is checked against the catalog registry. Fabricated IDs (e.g. PSI-999) are intercepted.
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Every cited or referenced investigation ID (<code className="font-mono text-sky-700">PSI-xxx</code>) is checked against the catalog registry. Fabricated IDs (e.g. PSI-999) are intercepted.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Live Mode Operational Evidence & Redacted Audit Trace (SPEC Section 12 & Human Gate 2 Directive 5) */}
-          <div className="space-y-4 pt-4 border-t border-cyan-900/30">
+          <div className="space-y-4 pt-4 border-t border-slate-200">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <span className="text-[11px] font-mono uppercase text-indigo-400 tracking-wider font-bold">
+                <span className="text-[11px] font-mono uppercase text-indigo-800 tracking-wider font-bold">
                   Live Mode Operational Evidence & Trace Ledger (Human Gate 2 Directive 5)
                 </span>
-                <p className="text-xs text-zinc-400 font-sans mt-0.5">
+                <p className="text-xs text-slate-500 font-sans mt-0.5">
                   Auditing provider parameters, env-key security boundaries, graceful fallback triggers, and rate-limiting quotas.
                 </p>
               </div>
@@ -429,7 +434,7 @@ export default function TrustPage() {
                 href="https://github.com/Nevan/pyro-astra/blob/main/docs/LIVE_MODE.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-mono text-cyan-400 hover:underline flex items-center gap-1"
+                className="text-xs font-mono text-sky-700 hover:text-sky-800 font-semibold flex items-center gap-1"
               >
                 <span>Read LIVE_MODE.md</span>
                 <span>↗</span>
@@ -438,61 +443,61 @@ export default function TrustPage() {
 
             {/* 4 Cards: Provider/Model, Env Key Only, Graceful Fallback, Rate Limit */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-sans">
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-zinc-800 space-y-1.5">
-                <div className="font-mono font-bold text-cyan-300 text-[11px] flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                <div className="font-mono font-bold text-sky-800 text-[11px] flex items-center justify-between">
                   <span>Provider & Exact Model</span>
-                  <span className="text-[10px] text-cyan-500 font-normal">Active Live Mode</span>
+                  <span className="text-[10px] text-sky-600 font-normal">Active Live Mode</span>
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
-                  Single Model: <strong className="text-white">Groq</strong> (<code className="text-cyan-400 font-mono">qwen/qwen3.8-27b</code>). Tested live across 130 adversarial and benchmark probes: 38 real Groq API calls made (35 compliant, 3 verifier rewrites), 92 answered/refused pre-LLM offline. On the free tier, most queries run OFFLINE via the deterministic engine; live AI is strictly opt-in. Invoked with <code className="text-amber-400 font-mono">response_format: &#123; type: "json_object" &#125;</code> and temperature 0.0.
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Single Model: <strong className="text-slate-900">Groq</strong> (<code className="text-sky-700 font-mono">qwen/qwen3.8-27b</code>). Tested live across 130 adversarial and benchmark probes: 38 real Groq API calls made (35 compliant, 3 verifier rewrites), 92 answered/refused pre-LLM offline. On the free tier, most queries run OFFLINE via the deterministic engine; live AI is strictly opt-in. Invoked with <code className="text-amber-800 font-mono font-semibold">response_format: &#123; type: "json_object" &#125;</code> and temperature 0.0.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-zinc-800 space-y-1.5">
-                <div className="font-mono font-bold text-emerald-300 text-[11px] flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                <div className="font-mono font-bold text-emerald-800 text-[11px] flex items-center justify-between">
                   <span>Env Key Only Guardrail</span>
-                  <span className="text-[10px] text-emerald-500 font-normal">Zero Leakage</span>
+                  <span className="text-[10px] text-emerald-600 font-normal">Zero Leakage</span>
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
-                  Keys are read exclusively via server-side Node.js environment variables (<code className="text-emerald-400 font-mono">process.env.GROQ_API_KEY</code>). Never exposed to client bundles (<code className="text-red-400 font-mono">NEXT_PUBLIC_*</code>), never committed to git, and never required for reproduction (<code className="text-cyan-400 font-mono">npm run reproduce</code> works 100% offline).
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Keys are read exclusively via server-side Node.js environment variables (<code className="text-emerald-700 font-mono font-semibold">process.env.GROQ_API_KEY</code>). Never exposed to client bundles (<code className="text-rose-700 font-mono">NEXT_PUBLIC_*</code>), never committed to git, and never required for reproduction (<code className="text-sky-700 font-mono font-semibold">npm run reproduce</code> works 100% offline).
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-zinc-800 space-y-1.5">
-                <div className="font-mono font-bold text-amber-300 text-[11px] flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                <div className="font-mono font-bold text-amber-800 text-[11px] flex items-center justify-between">
                   <span>Graceful Fallback & Circuit Breaker</span>
-                  <span className="text-[10px] text-amber-500 font-normal">Zero Crashes</span>
+                  <span className="text-[10px] text-amber-600 font-normal">Zero Crashes</span>
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   LIVE capacity is limited (free-tier quotas: 30 RPM, 1,000 RPD, 8,000 TPM) and the application falls back offline seamlessly. If the key is unset, network drops, or on 12-second timeout, HTTP 429 quota exhaustion, or 5xx server errors, Ask ASTRA automatically falls back to the deterministic offline engine. Tested via unit tests with simulated 429 responses.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-zinc-800 space-y-1.5">
-                <div className="font-mono font-bold text-indigo-300 text-[11px] flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                <div className="font-mono font-bold text-indigo-800 text-[11px] flex items-center justify-between">
                   <span>Rate Limiting & Serverless Note</span>
-                  <span className="text-[10px] text-indigo-500 font-normal">Paced Rate Limiter</span>
+                  <span className="text-[10px] text-indigo-600 font-normal">Paced Rate Limiter</span>
                 </div>
-                <p className="text-zinc-300 text-[11px] leading-relaxed">
+                <p className="text-slate-600 text-[11px] leading-relaxed">
                   Throttling is enforced with a 2,500ms minimum inter-request interval (safely below Groq free-tier 30 RPM and 8,000 TPM limit). Note that the in-memory pacing limiter does not coordinate across independent serverless instances; when multiple serverless instances trigger HTTP 429, the app instantly falls back to deterministic offline execution.
                 </p>
               </div>
             </div>
 
             {/* Redacted Trace Log Viewer */}
-            <div className="p-4 rounded-xl bg-black/60 border border-zinc-800 space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-2">
-                <span className="text-[11px] font-mono text-zinc-300 font-bold uppercase tracking-wider">
+            <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-3 shadow-inner">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2">
+                <span className="text-[11px] font-mono text-slate-300 font-bold uppercase tracking-wider">
                   Verbatim Redacted Request/Response Trace Viewer
                 </span>
                 <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono">
                   <button
                     type="button"
                     onClick={() => setActiveTraceStep('request')}
-                    className={`px-2 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors ${
                       activeTraceStep === 'request'
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                        : 'bg-zinc-900 text-zinc-400 hover:text-white'
+                        ? 'bg-sky-900 text-sky-200 border border-sky-600 font-bold'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
                     }`}
                   >
                     1. Client Request
@@ -500,10 +505,10 @@ export default function TrustPage() {
                   <button
                     type="button"
                     onClick={() => setActiveTraceStep('dispatch')}
-                    className={`px-2 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors ${
                       activeTraceStep === 'dispatch'
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                        : 'bg-zinc-900 text-zinc-400 hover:text-white'
+                        ? 'bg-sky-900 text-sky-200 border border-sky-600 font-bold'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
                     }`}
                   >
                     2. Provider Dispatch
@@ -511,10 +516,10 @@ export default function TrustPage() {
                   <button
                     type="button"
                     onClick={() => setActiveTraceStep('tool')}
-                    className={`px-2 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors ${
                       activeTraceStep === 'tool'
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                        : 'bg-zinc-900 text-zinc-400 hover:text-white'
+                        ? 'bg-sky-900 text-sky-200 border border-sky-600 font-bold'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
                     }`}
                   >
                     3. Tool Execution
@@ -522,10 +527,10 @@ export default function TrustPage() {
                   <button
                     type="button"
                     onClick={() => setActiveTraceStep('verifier')}
-                    className={`px-2 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors ${
                       activeTraceStep === 'verifier'
-                        ? 'bg-emerald-950 text-emerald-300 border border-emerald-700/60 font-bold'
-                        : 'bg-zinc-900 text-zinc-400 hover:text-white'
+                        ? 'bg-emerald-900 text-emerald-200 border border-emerald-600 font-bold'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
                     }`}
                   >
                     4. Verifier Interception
@@ -533,10 +538,10 @@ export default function TrustPage() {
                   <button
                     type="button"
                     onClick={() => setActiveTraceStep('response')}
-                    className={`px-2 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors ${
                       activeTraceStep === 'response'
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                        : 'bg-zinc-900 text-zinc-400 hover:text-white'
+                        ? 'bg-sky-900 text-sky-200 border border-sky-600 font-bold'
+                        : 'bg-slate-800 text-slate-400 hover:text-white'
                     }`}
                   >
                     5. Verified Response
@@ -545,7 +550,7 @@ export default function TrustPage() {
               </div>
 
               {/* Step Code Block Display */}
-              <div className="overflow-x-auto text-[11px] font-mono p-3 rounded-lg bg-slate-950 border border-zinc-800/80 text-zinc-300 leading-relaxed">
+              <div className="overflow-x-auto text-[11px] font-mono p-3 rounded-lg bg-slate-950 border border-slate-800 text-slate-200 leading-relaxed">
                 {activeTraceStep === 'request' && (
                   <pre>{`// 1. Client Ingestion Payload (POST /api/ask)
 {
@@ -555,17 +560,21 @@ export default function TrustPage() {
 }`}</pre>
                 )}
                 {activeTraceStep === 'dispatch' && (
-                  <pre>{`// 2. Server-Side Provider Dispatch (process.env.GEMINI_API_KEY)
-POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent
+                  <pre>{`// 2. Server-Side Provider Dispatch (process.env.GROQ_API_KEY)
+POST https://api.groq.com/openai/v1/chat/completions
 Headers: {
   "Content-Type": "application/json",
-  "x-goog-api-key": "[REDACTED_SERVER_ENV_SECRET_process.env.GEMINI_API_KEY]"
+  "Authorization": "Bearer [REDACTED_SERVER_ENV_SECRET_process.env.GROQ_API_KEY]"
 }
 Payload: {
-  "contents": [{"role": "user", "parts": [{"text": "What fuels and airflows were evaluated in the BASS-II flight investigation?"}]}],
-  "systemInstruction": {"parts": [{"text": "You are Ask ASTRA. ONLY answer using provided tools. Every sentence must cite evidence. Never invent numbers, units, or fuels. If not reported, state 'not reported'."}]},
-  "tools": [{"functionDeclarations": [{"name": "search_records"}, {"name": "get_record"}, {"name": "rank"}, {"name": "nearest"}, {"name": "coverage"}, {"name": "compare"}, {"name": "bounds"}, {"name": "predict"}]}],
-  "generationConfig": {"temperature": 0.0, "topP": 0.1, "maxOutputTokens": 1024}
+  "model": "qwen/qwen3.8-27b",
+  "messages": [
+    {"role": "system", "content": "You are Ask ASTRA. ONLY answer using provided tools. Every sentence must cite evidence. Never invent numbers, units, or fuels. If not reported, state 'not reported'."},
+    {"role": "user", "content": "What fuels and airflows were evaluated in the BASS-II flight investigation?"}
+  ],
+  "tools": [{"type": "function", "function": {"name": "get_record", "parameters": {...}}}],
+  "response_format": {"type": "json_object"},
+  "temperature": 0.0
 }`}</pre>
                 )}
                 {activeTraceStep === 'tool' && (
@@ -621,25 +630,25 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
         </div>
 
         {/* Section 12 Live 100-Probe Dual-Mode Adversarial Benchmark Suite from data/ask-eval.json */}
-        <div className="p-6 rounded-2xl bg-slate-900/60 border border-indigo-900/50 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-indigo-800/40 pb-3">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
             <div>
-              <span className="text-[11px] font-mono uppercase text-indigo-400 tracking-wider">
+              <span className="text-[11px] font-mono uppercase text-indigo-700 font-semibold tracking-wider">
                 Automated Verification Suite · Dual-Mode Benchmarking
               </span>
-              <h3 className="text-xl font-bold font-mono text-white">
+              <h3 className="text-xl font-bold font-mono text-slate-900">
                 {askEvalData.suite_name}
               </h3>
-              <p className="text-xs text-zinc-400 font-sans mt-0.5">
+              <p className="text-xs text-slate-500 font-sans mt-0.5">
                 Evaluated: {new Date(askEvalData.evaluated_at).toUTCString()} · 100% Policy Compliance across Both Modes
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono px-3 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 font-bold">
+              <span className="text-xs font-mono px-3 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold">
                 ✓ {askEvalData.passed_count} / {askEvalData.total_probes} Passed ({askEvalData.pass_rate_pct}%)
               </span>
               {askEvalData.modes && (
-                <span className="text-xs font-mono px-2.5 py-1 rounded bg-indigo-950 text-indigo-300 border border-indigo-700/50">
+                <span className="text-xs font-mono px-2.5 py-1 rounded bg-indigo-50 text-indigo-800 border border-indigo-200 font-medium">
                   Offline: {askEvalData.modes.offline_passed}/{askEvalData.total_probes} · Live: {askEvalData.modes.live_passed}/{askEvalData.total_probes}
                 </span>
               )}
@@ -659,21 +668,21 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
                   onClick={() => setSelectedCategory(isSelected ? 'all' : catKey)}
                   className={`p-3 rounded-xl border text-left transition-all ${
                     isSelected
-                      ? 'bg-indigo-950 border-indigo-400 shadow ring-1 ring-indigo-400'
-                      : 'bg-black/30 border-zinc-800 hover:border-zinc-700'
+                      ? 'bg-indigo-50 border-indigo-400 shadow-sm ring-1 ring-indigo-400'
+                      : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <div className="flex justify-between items-center mb-1">
-                    <span className="capitalize font-bold text-zinc-200 truncate">
+                    <span className="capitalize font-bold text-slate-800 truncate">
                       {catKey.replace(/_/g, ' ')}
                     </span>
-                    <span className="text-emerald-400 font-bold">
+                    <span className="text-emerald-700 font-bold">
                       {cat.passed}/{cat.total}
                     </span>
                   </div>
-                  <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+                  <div className="w-full h-1 bg-slate-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-emerald-400 rounded-full"
+                      className="h-full bg-emerald-500 rounded-full"
                       style={{ width: `${(cat.passed / cat.total) * 100}%` }}
                     />
                   </div>
@@ -684,8 +693,8 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
 
           {/* Search & Interactive Probe Inspector Table */}
           <div className="space-y-3 pt-2">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-zinc-400">
-              <span className="font-bold text-white uppercase tracking-wider text-[11px]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-600">
+              <span className="font-bold text-slate-900 uppercase tracking-wider text-[11px]">
                 Probe Level Inspector ({filteredProbes.length} of {askEvalData.total_probes} probes shown)
               </span>
               <div className="flex items-center gap-2">
@@ -694,13 +703,13 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Filter probes by keyword..."
-                  className="bg-black/60 border border-zinc-800 rounded-lg px-2.5 py-1 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500 font-sans"
+                  className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-indigo-500 font-sans"
                 />
                 {selectedCategory !== 'all' && (
                   <button
                     type="button"
                     onClick={() => setSelectedCategory('all')}
-                    className="text-cyan-400 hover:underline shrink-0"
+                    className="text-sky-700 hover:text-sky-800 font-semibold shrink-0"
                   >
                     Clear Filter
                   </button>
@@ -708,10 +717,10 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
               </div>
             </div>
 
-            <div className="max-h-96 overflow-y-auto rounded-xl border border-zinc-800 bg-black/40">
+            <div className="max-h-96 overflow-y-auto rounded-xl border border-slate-200 bg-white">
               <table className="w-full text-left border-collapse text-xs font-mono">
                 <thead>
-                  <tr className="border-b border-zinc-800 bg-slate-950 text-[10px] text-zinc-400 uppercase sticky top-0">
+                  <tr className="border-b border-slate-200 bg-slate-100 text-[10px] text-slate-600 uppercase font-semibold sticky top-0">
                     <th className="p-2.5 w-12">#</th>
                     <th className="p-2.5 w-36">Category</th>
                     <th className="p-2.5">Prompt Query</th>
@@ -720,30 +729,30 @@ Status: 100% VERIFIED PASS -> Action: PERMIT RENDER`}</pre>
                     <th className="p-2.5">Outcome Details</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-slate-100">
                   {filteredProbes.map((probe) => (
                     <tr
                       key={probe.id}
-                      className="border-b border-zinc-800/50 hover:bg-slate-900/60 transition-colors"
+                      className="hover:bg-slate-50 transition-colors"
                     >
-                      <td className="p-2.5 text-zinc-500 font-bold">{probe.id}</td>
+                      <td className="p-2.5 text-slate-400 font-bold">{probe.id}</td>
                       <td className="p-2.5">
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 capitalize">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 capitalize">
                           {probe.category.replace(/_/g, ' ')}
                         </span>
                       </td>
-                      <td className="p-2.5 font-sans text-zinc-200">{probe.query}</td>
-                      <td className="p-2.5 text-[10px] text-emerald-400">
+                      <td className="p-2.5 font-sans text-slate-800">{probe.query}</td>
+                      <td className="p-2.5 text-[10px] text-emerald-700 font-semibold">
                         <span>Offline: ✓</span>
                         <br />
                         <span>Live: ✓</span>
                       </td>
                       <td className="p-2.5">
-                        <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800/40 font-bold">
+                        <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold">
                           ✓ PASS
                         </span>
                       </td>
-                      <td className="p-2.5 font-sans text-zinc-400 text-[11px]">
+                      <td className="p-2.5 font-sans text-slate-600 text-[11px] leading-relaxed">
                         {probe.details}
                       </td>
                     </tr>

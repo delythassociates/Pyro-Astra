@@ -1,6 +1,6 @@
 {
   "_release_name": "PYRO-ASTRA NASA PSI Microgravity Fire Safety Data Release v1.0",
-  "_release_date": "2026-11-14T22:57:55.551121+00:00",
+  "_release_date": "2026-11-15T04:17:53.060453+00:00",
   "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
   "artifacts": [
     {
@@ -15,7 +15,7 @@
       "file_name": "extractions.json",
       "format": "JSON",
       "byte_size": 19224,
-      "sha256": "79116b631f73aaa7a26562379454473d323ba520c8d19bde863375a1d39d0d4c",
+      "sha256": "f905c21ac5e80058fde5c4e1a09353657f8a631169cb4c0d7071e65f7dbe103b",
       "description": "Grounded physical condition extractions with verbatim quotes, source files, and JSON key paths",
       "download_url": "/release/extractions.json"
     },
@@ -47,7 +47,7 @@
       "file_name": "modeling_ready_runs.json",
       "format": "JSON",
       "byte_size": 3229220,
-      "sha256": "41b5e565ca5284850f9bf1cd085c3b7df160755ee341e3418f893a8b29dc984b",
+      "sha256": "f94b5b5002b018251c1bd67d17b832ece568d8ce383d53d3d5a11ba9fb131025",
       "description": "Machine-readable array of 1,843 experimental test runs with schema definitions and Rule G1 enforcement metadata",
       "download_url": "/release/modeling_ready_runs.json"
     },
@@ -55,7 +55,7 @@
       "file_name": "availability.json",
       "format": "JSON",
       "byte_size": 23362,
-      "sha256": "d7d572544a6f74e53bb4a49ed809ca3bf0e6c8d3bcb37f00208f8016d5d90b3c",
+      "sha256": "9fbdf5a560b0423eed82f474ceb6ed1b3bf22dc223a96adf9aa87e09213caeef",
       "description": "Comprehensive availability catalog, S3 endpoints, GEODE status, and DOI verification for all 18 investigations",
       "download_url": "/release/availability.json"
     },
@@ -63,7 +63,7 @@
       "file_name": "field_dictionary.json",
       "format": "JSON",
       "byte_size": 44467,
-      "sha256": "13c7e0901b82316582502d5dfdbf495c910c4cdf2768a88643ccdab955d4f3b4",
+      "sha256": "0fdcbaf9c7801dec6c2e852765be8677a3dac3bb5bc3b5afaa865c206d2db5a1",
       "description": "Complete field definitions, physical units, data types, and provenance constraints",
       "download_url": "/release/field_dictionary.json"
     },

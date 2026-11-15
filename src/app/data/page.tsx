@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import manifestData from '../../../release/manifest.json';
 import extractionsData from '../../../release/extractions.json';
@@ -37,25 +36,25 @@ export default function DataDownloadCenter() {
   const deepInvIds = Object.keys(extractionsData.investigations);
 
   return (
-    <div className="flex-1 w-full bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-10">
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header Banner */}
-        <div className="border-b border-cyan-900/40 pb-6">
-          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider mb-2">
+        <div className="border-b border-slate-200 pb-6">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-sky-700 uppercase tracking-wider mb-2">
             <span>NASA Physical Sciences Informatics (PSI)</span>
             <span>·</span>
-            <span>Workstream N Release Package</span>
+            <span>Release Package v1.0.0</span>
             <span>·</span>
-            <span className="px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/40 text-[10px]">
+            <span className="px-2 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 text-[10px] font-semibold">
               defined by the PYRO-ASTRA team
             </span>
             <span>·</span>
             <span>Challenge: Flame in Freefall</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black font-mono text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-black font-mono text-slate-900 tracking-tight">
             Data Release & Download Center
           </h1>
-          <p className="text-base text-zinc-300 font-sans mt-2 max-w-4xl">
+          <p className="text-base text-slate-600 font-sans mt-2 max-w-4xl leading-relaxed">
             Official scientific data distribution package for microgravity combustion investigations.
             Every record carries verifiable provenance to authentic NASA PSI records and official technical memoranda.
             Zero synthetic, interpolated, or ungrounded values.
@@ -63,44 +62,43 @@ export default function DataDownloadCenter() {
 
           {/* Key Stat Badges */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
-            <div className="p-3 rounded-lg bg-slate-900/80 border border-cyan-800/40">
-              <span className="text-xs font-mono text-cyan-400 uppercase block">Total Packaged</span>
-              <span className="text-2xl font-mono font-bold text-white">18 Investigations</span>
-              <span className="text-[11px] text-zinc-400 block mt-0.5">8 Deep · 10 Catalog</span>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span className="text-xs font-mono text-slate-500 uppercase block font-semibold">Total Packaged</span>
+              <span className="text-2xl font-mono font-bold text-slate-900">18 Investigations</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">8 Deep · 10 Catalog</span>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/80 border border-cyan-800/40">
-              <span className="text-xs font-mono text-cyan-400 uppercase block">Table 5.1 Burn Runs</span>
-              <span className="text-2xl font-mono font-bold text-emerald-400">20 Flight Tests</span>
-              <span className="text-[11px] text-zinc-400 block mt-0.5">BASS-II Flight Matrix</span>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span className="text-xs font-mono text-slate-500 uppercase block font-semibold">Table 5.1 Burn Runs</span>
+              <span className="text-2xl font-mono font-bold text-emerald-600">20 Flight Tests</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">BASS-II Flight Matrix</span>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/80 border border-cyan-800/40">
-              <span className="text-xs font-mono text-cyan-400 uppercase block">Scientific Provenance</span>
-              <span className="text-2xl font-mono font-bold text-cyan-300">100.0% Grounded</span>
-              <span className="text-[11px] text-zinc-400 block mt-0.5">0 Ungrounded Numbers</span>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span className="text-xs font-mono text-slate-500 uppercase block font-semibold">Scientific Provenance</span>
+              <span className="text-2xl font-mono font-bold text-sky-700">100.0% Grounded</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">0 Ungrounded Numbers</span>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/80 border border-cyan-800/40">
-              <span className="text-xs font-mono text-cyan-400 uppercase block">Integrity Verification</span>
-              <span className="text-2xl font-mono font-bold text-indigo-300">SHA-256</span>
-              <span className="text-[11px] text-zinc-400 block mt-0.5">Signed Release Manifest</span>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <span className="text-xs font-mono text-slate-500 uppercase block font-semibold">Integrity Verification</span>
+              <span className="text-2xl font-mono font-bold text-indigo-700">SHA-256</span>
+              <span className="text-[11px] text-slate-500 block mt-0.5">Signed Release Manifest</span>
             </div>
           </div>
         </div>
 
         {/* Registry of Open Data on AWS License Banner (CRITICAL REQUIREMENT) */}
-        <div className="p-6 rounded-xl bg-gradient-to-r from-cyan-950/60 via-slate-900/90 to-blue-950/60 border border-cyan-500/40 shadow-lg relative overflow-hidden">
-          <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-sky-50 via-white to-blue-50 border border-sky-200 shadow-sm relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                <span className="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-sky-100 text-sky-800 border border-sky-300">
                   OPEN DATA STATEMENT
                 </span>
-                <span className="text-xs font-mono text-zinc-400">Registry of Open Data on AWS</span>
+                <span className="text-xs font-mono text-slate-500 font-medium">Registry of Open Data on AWS</span>
               </div>
-              <blockquote className="text-lg sm:text-xl font-mono font-bold text-cyan-100 border-l-2 border-cyan-400 pl-3 italic">
+              <blockquote className="text-lg sm:text-xl font-mono font-bold text-slate-900 border-l-4 border-sky-500 pl-3 italic">
                 &ldquo;There are no restrictions on the use of this data.&rdquo;
               </blockquote>
-              <p className="text-xs sm:text-sm text-zinc-300 font-sans max-w-3xl">
+              <p className="text-xs sm:text-sm text-slate-600 font-sans max-w-3xl leading-relaxed">
                 NASA Physical Sciences Informatics combustion research is dedicated to open science.
                 Underlying data is public domain (Creative Commons CC0-1.0 Universal).
                 Platform transformation code and models are published under the MIT License.
@@ -111,7 +109,7 @@ export default function DataDownloadCenter() {
                 href="https://registry.opendata.aws/nasa-psi/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2 text-center"
+                className="px-4 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white font-mono text-xs font-bold transition-colors flex items-center justify-center gap-2 text-center shadow-sm"
               >
                 <span>AWS Open Data Registry</span>
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +120,7 @@ export default function DataDownloadCenter() {
                 href="https://psi.nasa.gov/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-zinc-200 border border-slate-700 font-mono text-xs font-semibold transition-colors flex items-center justify-center gap-2 text-center"
+                className="px-4 py-2.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-mono text-xs font-semibold transition-colors flex items-center justify-center gap-2 text-center shadow-sm"
               >
                 <span>NASA PSI Portal</span>
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,13 +135,13 @@ export default function DataDownloadCenter() {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <div>
-              <h2 className="text-xl font-mono font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-mono font-bold text-slate-900 flex items-center gap-2">
                 <span>Release Artifacts</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+                <span className="text-xs px-2 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 font-semibold">
                   v1.0.0
                 </span>
               </h2>
-              <p className="text-xs text-zinc-400 font-sans mt-0.5">
+              <p className="text-xs text-slate-500 font-sans mt-0.5">
                 Downloadable package containing tabular matrices, grounded extractions with quotes, schema definitions, and checksum manifests.
               </p>
             </div>
@@ -161,9 +159,9 @@ export default function DataDownloadCenter() {
                   }, i * 300);
                 });
               }}
-              className="px-3.5 py-1.5 rounded-lg bg-cyan-950 hover:bg-cyan-900 border border-cyan-700/60 text-cyan-300 font-mono text-xs font-semibold transition-colors flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-lg bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-800 font-mono text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
               <span>Download All Artifacts</span>
@@ -173,60 +171,60 @@ export default function DataDownloadCenter() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {manifestData.artifacts.map((art) => {
               const formatColors: Record<string, string> = {
-                CSV: 'bg-emerald-950/80 text-emerald-300 border-emerald-700/50',
-                JSON: 'bg-amber-950/80 text-amber-300 border-amber-700/50',
-                MD: 'bg-indigo-950/80 text-indigo-300 border-indigo-700/50',
-                TXT: 'bg-zinc-800 text-zinc-300 border-zinc-700',
+                CSV: 'bg-emerald-50 text-emerald-800 border-emerald-300',
+                JSON: 'bg-amber-50 text-amber-800 border-amber-300',
+                MD: 'bg-indigo-50 text-indigo-800 border-indigo-300',
+                TXT: 'bg-slate-100 text-slate-700 border-slate-300',
               };
-              const colorClass = formatColors[art.format] || 'bg-slate-800 text-slate-300 border-slate-700';
+              const colorClass = formatColors[art.format] || 'bg-slate-100 text-slate-700 border-slate-300';
               const kbSize = (art.byte_size / 1024).toFixed(1);
 
               return (
                 <div
                   key={art.file_name}
-                  className="p-5 rounded-xl bg-slate-900/70 border border-slate-800 hover:border-cyan-800/60 transition-all flex flex-col justify-between group"
+                  className="p-5 rounded-xl bg-white border border-slate-200 hover:border-sky-300 shadow-sm transition-all flex flex-col justify-between group"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-2">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${colorClass}`}>
                         {art.format}
                       </span>
-                      <span className="text-xs font-mono text-zinc-400">{kbSize} KB</span>
+                      <span className="text-xs font-mono text-slate-500 font-medium">{kbSize} KB</span>
                     </div>
 
                     <div>
-                      <h3 className="font-mono text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      <h3 className="font-mono text-base font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
                         {art.file_name}
                       </h3>
-                      <p className="text-xs text-zinc-400 font-sans mt-1 line-clamp-2">
+                      <p className="text-xs text-slate-600 font-sans mt-1 line-clamp-2 leading-relaxed">
                         {art.description}
                       </p>
                     </div>
 
                     {/* SHA256 snippet */}
-                    <div className="p-2 rounded bg-slate-950 border border-slate-800/80 space-y-1">
-                      <div className="flex items-center justify-between text-[10px] font-mono text-zinc-500">
-                        <span>SHA-256</span>
+                    <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 space-y-1">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
+                        <span className="font-semibold">SHA-256</span>
                         <button
                           onClick={() => handleCopy(art.sha256, art.file_name)}
-                          className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                          className="text-sky-700 hover:text-sky-800 font-bold transition-colors"
                         >
                           {copiedKey === art.file_name ? 'Copied!' : 'Copy Hash'}
                         </button>
                       </div>
-                      <div className="font-mono text-[10px] text-zinc-400 truncate">
+                      <div className="font-mono text-[10px] text-slate-600 truncate">
                         {art.sha256}
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-slate-800/60 flex items-center justify-between gap-2">
+                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-2">
                     <a
                       href={art.download_url}
                       download={art.file_name}
-                      className="flex-1 py-2 px-3 rounded-lg bg-cyan-900/40 hover:bg-cyan-800/60 border border-cyan-700/50 text-cyan-200 font-mono text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                      className="flex-1 py-2 px-3 rounded-lg bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-800 font-mono text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
                     >
-                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-3.5 h-3.5 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
                       <span>Download</span>
@@ -234,7 +232,7 @@ export default function DataDownloadCenter() {
                     {art.file_name.endsWith('.csv') && (
                       <button
                         onClick={() => setActiveTab(art.file_name.includes('table_5_1') ? 'table51' : 'investigations')}
-                        className="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-zinc-300 font-mono text-xs transition-colors"
+                        className="py-2 px-3 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-mono text-xs font-medium transition-colors"
                       >
                         Preview
                       </button>
@@ -242,7 +240,7 @@ export default function DataDownloadCenter() {
                     {art.file_name === 'extractions.json' && (
                       <button
                         onClick={() => setActiveTab('extractions')}
-                        className="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-zinc-300 font-mono text-xs transition-colors"
+                        className="py-2 px-3 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-mono text-xs font-medium transition-colors"
                       >
                         Quotes
                       </button>
@@ -250,7 +248,7 @@ export default function DataDownloadCenter() {
                     {art.file_name === 'field_dictionary.json' && (
                       <button
                         onClick={() => setActiveTab('dictionary')}
-                        className="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-zinc-300 font-mono text-xs transition-colors"
+                        className="py-2 px-3 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-mono text-xs font-medium transition-colors"
                       >
                         Schema
                       </button>
@@ -263,63 +261,63 @@ export default function DataDownloadCenter() {
         </div>
 
         {/* Interactive In-Browser Data Previewer */}
-        <div className="space-y-4 pt-4 border-t border-slate-800">
+        <div className="space-y-4 pt-4 border-t border-slate-200">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl font-mono font-bold text-white">Live Data Previewer</h2>
-              <p className="text-xs text-zinc-400 font-sans">
+              <h2 className="text-xl font-mono font-bold text-slate-900">Live Data Previewer</h2>
+              <p className="text-xs text-slate-500 font-sans">
                 Inspect authentic tables, quotes, and schemas directly in your browser.
               </p>
             </div>
 
             {/* Tab Buttons */}
-            <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-lg bg-slate-900 border border-slate-800">
+            <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-slate-100 border border-slate-200">
               <button
                 onClick={() => setActiveTab('investigations')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                   activeTab === 'investigations'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-sky-800 shadow-sm border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Investigations ({DEFAULT_INVESTIGATIONS.length})
               </button>
               <button
                 onClick={() => setActiveTab('table51')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                   activeTab === 'table51'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-sky-800 shadow-sm border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Table 5.1 BASS-II ({table51Data.row_count} Tests)
               </button>
               <button
                 onClick={() => setActiveTab('extractions')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                   activeTab === 'extractions'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-sky-800 shadow-sm border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Grounded Quotes ({deepInvIds.length} Deep)
               </button>
               <button
                 onClick={() => setActiveTab('dictionary')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                   activeTab === 'dictionary'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-sky-800 shadow-sm border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Field Dictionary ({fieldDictionaryData.fields.length} Fields)
               </button>
               <button
                 onClick={() => setActiveTab('manifest')}
-                className={`px-3 py-1.5 rounded text-xs font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                   activeTab === 'manifest'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60 font-bold'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-sky-800 shadow-sm border border-slate-200 font-bold'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 Manifest Hashes
@@ -330,17 +328,17 @@ export default function DataDownloadCenter() {
           {/* TAB 1: Investigations Table */}
           {activeTab === 'investigations' && (
             <div className="space-y-4">
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
                 <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <span className="text-xs font-mono text-zinc-400">Filter Depth:</span>
+                  <span className="text-xs font-mono text-slate-500 font-semibold">Filter Depth:</span>
                   {(['all', 'deep', 'catalog'] as const).map((d) => (
                     <button
                       key={d}
                       onClick={() => setFilterDepth(d)}
                       className={`px-2.5 py-1 rounded text-xs font-mono uppercase transition-colors ${
                         filterDepth === d
-                          ? 'bg-cyan-900/60 text-cyan-300 border border-cyan-600/60 font-semibold'
-                          : 'text-zinc-400 hover:text-white'
+                          ? 'bg-sky-100 text-sky-800 border border-sky-300 font-bold'
+                          : 'text-slate-600 hover:text-slate-900 bg-slate-50 border border-slate-200'
                       }`}
                     >
                       {d}
@@ -353,15 +351,15 @@ export default function DataDownloadCenter() {
                     placeholder="Search acronym, name, area..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-3 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500 font-mono"
+                    className="w-full px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 font-mono"
                   />
                 </div>
               </div>
 
-              <div className="rounded-xl border border-slate-800 overflow-hidden bg-slate-900/50">
+              <div className="rounded-xl border border-slate-200 overflow-hidden bg-white shadow-sm">
                 <div className="overflow-x-auto max-h-[500px]">
                   <table className="w-full text-left text-xs font-mono">
-                    <thead className="bg-slate-950/90 sticky top-0 border-b border-slate-800 text-zinc-400">
+                    <thead className="bg-slate-100 sticky top-0 border-b border-slate-200 text-slate-600 font-semibold">
                       <tr>
                         <th className="py-2.5 px-3">ID</th>
                         <th className="py-2.5 px-3">Acronym</th>
@@ -374,76 +372,76 @@ export default function DataDownloadCenter() {
                         <th className="py-2.5 px-3">Depth</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800/60">
+                    <tbody className="divide-y divide-slate-100">
                       {filteredInvs.map((inv) => (
-                        <tr key={inv.id} className="hover:bg-slate-800/40 transition-colors">
-                          <td className="py-2.5 px-3 font-bold text-cyan-400">{inv.id}</td>
-                          <td className="py-2.5 px-3 font-semibold text-white">{inv.acronym}</td>
+                        <tr key={inv.id} className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2.5 px-3 font-bold text-sky-700">{inv.id}</td>
+                          <td className="py-2.5 px-3 font-semibold text-slate-900">{inv.acronym}</td>
                           <td className="py-2.5 px-3 max-w-xs">
-                            <div className="truncate text-zinc-200" title={inv.name}>
+                            <div className="truncate text-slate-800" title={inv.name}>
                               {inv.name}
                             </div>
                             <div className="flex gap-1 mt-0.5">
                               {inv.safety_areas.map((sa) => (
-                                <span key={sa} className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300">
+                                <span key={sa} className="text-[10px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 border border-slate-200">
                                   {sa}
                                 </span>
                               ))}
                             </div>
                           </td>
-                          <td className="py-2.5 px-3 text-zinc-400">
+                          <td className="py-2.5 px-3 text-slate-500">
                             <a
                               href={`https://doi.org/${inv.doi}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:text-cyan-300 underline"
+                              className="hover:text-sky-700 underline"
                             >
                               {inv.doi}
                             </a>
                           </td>
                           <td className="py-2.5 px-3">
                             {inv.cabin_o2_pct ? (
-                              <span className="text-emerald-400 font-semibold">
+                              <span className="text-emerald-700 font-semibold">
                                 {inv.cabin_o2_pct.value.min !== null ? `${inv.cabin_o2_pct.value.min}-` : ''}
                                 {inv.cabin_o2_pct.value.max}%
                               </span>
                             ) : (
-                              <span className="text-zinc-600 italic">not reported</span>
+                              <span className="text-slate-400 italic">not reported</span>
                             )}
                           </td>
                           <td className="py-2.5 px-3">
                             {inv.pressure_psi ? (
-                              <span className="text-zinc-200">
+                              <span className="text-slate-800 font-medium">
                                 {inv.pressure_psi.value.min !== null ? `${inv.pressure_psi.value.min}-` : ''}
                                 {inv.pressure_psi.value.max} psi
                               </span>
                             ) : (
-                              <span className="text-zinc-600 italic">not reported</span>
+                              <span className="text-slate-400 italic">not reported</span>
                             )}
                           </td>
                           <td className="py-2.5 px-3">
                             {inv.airflow_speed_cm_s ? (
-                              <span className="text-zinc-200">
+                              <span className="text-slate-800 font-medium">
                                 {inv.airflow_speed_cm_s.value.min !== null ? `${inv.airflow_speed_cm_s.value.min}-` : ''}
                                 {inv.airflow_speed_cm_s.value.max} cm/s
                               </span>
                             ) : (
-                              <span className="text-zinc-600 italic">not reported</span>
+                              <span className="text-slate-400 italic">not reported</span>
                             )}
                           </td>
                           <td className="py-2.5 px-3">
                             {inv.n_tests ? (
-                              <span className="text-cyan-300 font-bold">{inv.n_tests.value}</span>
+                              <span className="text-sky-700 font-bold">{inv.n_tests.value}</span>
                             ) : (
-                              <span className="text-zinc-600 italic">not reported</span>
+                              <span className="text-slate-400 italic">not reported</span>
                             )}
                           </td>
                           <td className="py-2.5 px-3">
                             <span
                               className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold ${
                                 inv.depth === 'deep'
-                                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-700/60'
-                                  : 'bg-zinc-800 text-zinc-400'
+                                  ? 'bg-sky-50 text-sky-800 border border-sky-300'
+                                  : 'bg-slate-100 text-slate-600 border border-slate-200'
                               }`}
                             >
                               {inv.depth}
@@ -461,28 +459,28 @@ export default function DataDownloadCenter() {
           {/* TAB 2: Table 5.1 BASS-II Burn Matrix */}
           {activeTab === 'table51' && (
             <div className="space-y-3">
-              <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="text-sm font-mono font-bold text-white">
+                  <h3 className="text-sm font-mono font-bold text-slate-900">
                     {table51Data.table}
                   </h3>
-                  <p className="text-xs text-zinc-400 font-sans">
-                    Hand-entered directly from official technical report: <span className="text-cyan-300">{table51Data.source}</span>, {table51Data.page}.
+                  <p className="text-xs text-slate-600 font-sans mt-0.5">
+                    Extracted from official technical report: <span className="text-sky-700 font-medium">{table51Data.source}</span>, {table51Data.page}.
                   </p>
                 </div>
                 <a
                   href="/release/table_5_1_bass2.csv"
                   download="table_5_1_bass2.csv"
-                  className="px-3 py-1.5 rounded bg-cyan-950 hover:bg-cyan-900 border border-cyan-700 text-cyan-300 font-mono text-xs font-semibold"
+                  className="px-3.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-800 font-mono text-xs font-semibold shadow-sm transition-colors"
                 >
                   Download CSV
                 </a>
               </div>
 
-              <div className="rounded-xl border border-slate-800 overflow-hidden bg-slate-900/50">
+              <div className="rounded-xl border border-slate-200 overflow-hidden bg-white shadow-sm">
                 <div className="overflow-x-auto max-h-[500px]">
                   <table className="w-full text-left text-xs font-mono">
-                    <thead className="bg-slate-950 sticky top-0 border-b border-slate-800 text-zinc-400">
+                    <thead className="bg-slate-100 sticky top-0 border-b border-slate-200 text-slate-600 font-semibold">
                       <tr>
                         <th className="py-2.5 px-3">Test No</th>
                         <th className="py-2.5 px-3">Thickness (mm)</th>
@@ -495,18 +493,18 @@ export default function DataDownloadCenter() {
                         <th className="py-2.5 px-3">Final O₂ %</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800/60">
+                    <tbody className="divide-y divide-slate-100">
                       {table51Data.rows.map((r) => (
-                        <tr key={r.test_no} className="hover:bg-slate-800/40 transition-colors">
-                          <td className="py-2 px-3 font-bold text-cyan-400">{r.test_no}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.thickness_mm}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.width_cm}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.sides_burning}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.velocity_cm_s}</td>
-                          <td className="py-2 px-3 text-emerald-400 font-semibold">{r.spread_rate_mm_s}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.burn_time_min}</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.initial_o2_vol_pct}%</td>
-                          <td className="py-2 px-3 text-zinc-200">{r.final_o2_vol_pct}%</td>
+                        <tr key={r.test_no} className="hover:bg-slate-50 transition-colors">
+                          <td className="py-2 px-3 font-bold text-sky-700">{r.test_no}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.thickness_mm}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.width_cm}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.sides_burning}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.velocity_cm_s}</td>
+                          <td className="py-2 px-3 text-emerald-700 font-semibold">{r.spread_rate_mm_s}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.burn_time_min}</td>
+                          <td className="py-2 px-3 text-slate-800">{r.initial_o2_vol_pct}%</td>
+                          <td className="py-2 px-3 text-slate-800">{r.final_o2_vol_pct}%</td>
                         </tr>
                       ))}
                     </tbody>
@@ -519,8 +517,8 @@ export default function DataDownloadCenter() {
           {/* TAB 3: Grounded Extractions with Quotes & Key Paths */}
           {activeTab === 'extractions' && (
             <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2 p-3 rounded-lg bg-slate-900 border border-slate-800">
-                <span className="text-xs font-mono text-zinc-400">Select Investigation:</span>
+              <div className="flex flex-wrap items-center gap-2 p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <span className="text-xs font-mono text-slate-500 font-semibold">Select Investigation:</span>
                 {deepInvIds.map((id) => {
                   const invMeta = extractionsData.investigations[id as keyof typeof extractionsData.investigations];
                   const isSelected = selectedExtractionsId === id;
@@ -528,10 +526,10 @@ export default function DataDownloadCenter() {
                     <button
                       key={id}
                       onClick={() => setSelectedExtractionsId(id)}
-                      className={`px-3 py-1.5 rounded text-xs font-mono transition-colors ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-colors ${
                         isSelected
-                          ? 'bg-cyan-950 text-cyan-300 border border-cyan-600/70 font-bold'
-                          : 'text-zinc-400 hover:text-white bg-slate-950/60 border border-slate-800'
+                          ? 'bg-sky-100 text-sky-800 border border-sky-300 font-bold shadow-sm'
+                          : 'text-slate-600 hover:text-slate-900 bg-slate-50 border border-slate-200'
                       }`}
                     >
                       {id} ({invMeta.acronym})
@@ -546,47 +544,47 @@ export default function DataDownloadCenter() {
 
                 return (
                   <div className="space-y-4">
-                    <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-3">
+                    <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3 mb-4">
                         <div>
-                          <h3 className="text-base font-mono font-bold text-white">
+                          <h3 className="text-base font-mono font-bold text-slate-900">
                             {currentInv.acronym} · {currentInv.name}
                           </h3>
-                          <span className="text-xs font-mono text-cyan-400">DOI: {currentInv.doi}</span>
+                          <span className="text-xs font-mono text-sky-700">DOI: {currentInv.doi}</span>
                         </div>
-                        <span className="text-xs px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+                        <span className="text-xs px-2.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-300 font-semibold">
                           {currentInv.fields.length} Grounded Extractions
                         </span>
                       </div>
 
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {currentInv.fields.map((f: any, idx: number) => (
                           <div
                             key={idx}
-                            className="p-3.5 rounded-lg bg-slate-950 border border-slate-800 space-y-2 hover:border-cyan-800/60 transition-colors"
+                            className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 hover:border-sky-300 transition-colors"
                           >
                             <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                              <span className="font-bold text-cyan-300 uppercase tracking-wider">
+                              <span className="font-bold text-sky-800 uppercase tracking-wider">
                                 {f.field}
                               </span>
-                              <div className="flex items-center gap-2 text-zinc-400">
-                                <span className="text-[11px] px-2 py-0.5 rounded bg-slate-900 border border-slate-700">
+                              <div className="flex items-center gap-2 text-slate-500">
+                                <span className="text-[11px] px-2 py-0.5 rounded bg-white border border-slate-200">
                                   Path: {f.key_path}
                                 </span>
-                                <span className="text-[11px] text-zinc-500">{f.source_file}</span>
+                                <span className="text-[11px] text-slate-500 font-medium">{f.source_file}</span>
                               </div>
                             </div>
 
                             {/* Exact Verbatim Quote */}
-                            <div className="p-2.5 rounded bg-slate-900/90 border-l-2 border-cyan-500 font-sans text-xs text-zinc-200 italic">
+                            <div className="p-3 rounded-lg bg-white border-l-4 border-sky-500 font-sans text-xs text-slate-800 italic shadow-sm">
                               &ldquo;{f.exact_quote}&rdquo;
                             </div>
 
                             {/* Parsed / Hand Extracted Value */}
                             <div className="flex flex-wrap items-center justify-between text-xs font-mono pt-1">
                               <div className="flex items-center gap-2">
-                                <span className="text-zinc-500">Value:</span>
-                                <span className="text-emerald-400 font-semibold">
+                                <span className="text-slate-500">Value:</span>
+                                <span className="text-emerald-700 font-bold">
                                   {typeof f.value === 'object' && f.value !== null
                                     ? JSON.stringify(f.value)
                                     : String(f.value)}
@@ -594,7 +592,7 @@ export default function DataDownloadCenter() {
                                 </span>
                               </div>
                               {f.note && (
-                                <span className="text-[11px] text-zinc-400 font-sans italic">
+                                <span className="text-[11px] text-slate-500 font-sans italic">
                                   Note: {f.note}
                                 </span>
                               )}
@@ -611,10 +609,10 @@ export default function DataDownloadCenter() {
 
           {/* TAB 4: Field Dictionary */}
           {activeTab === 'dictionary' && (
-            <div className="rounded-xl border border-slate-800 overflow-hidden bg-slate-900/50">
+            <div className="rounded-xl border border-slate-200 overflow-hidden bg-white shadow-sm">
               <div className="overflow-x-auto max-h-[500px]">
                 <table className="w-full text-left text-xs font-mono">
-                  <thead className="bg-slate-950 sticky top-0 border-b border-slate-800 text-zinc-400">
+                  <thead className="bg-slate-100 sticky top-0 border-b border-slate-200 text-slate-600 font-semibold">
                     <tr>
                       <th className="py-2.5 px-3">Field Name</th>
                       <th className="py-2.5 px-3">Data Type</th>
@@ -623,14 +621,14 @@ export default function DataDownloadCenter() {
                       <th className="py-2.5 px-3">Example</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60">
+                  <tbody className="divide-y divide-slate-100">
                     {fieldDictionaryData.fields.map((fld: any) => (
-                      <tr key={fld.name} className="hover:bg-slate-800/40 transition-colors">
-                        <td className="py-2.5 px-3 font-bold text-cyan-400">{fld.name}</td>
-                        <td className="py-2.5 px-3 text-amber-300">{fld.type}</td>
-                        <td className="py-2.5 px-3 text-emerald-400">{fld.unit || '—'}</td>
-                        <td className="py-2.5 px-3 font-sans text-zinc-300 max-w-sm">{fld.description}</td>
-                        <td className="py-2.5 px-3 text-zinc-400 truncate max-w-xs">
+                      <tr key={fld.name} className="hover:bg-slate-50 transition-colors">
+                        <td className="py-2.5 px-3 font-bold text-sky-700">{fld.name}</td>
+                        <td className="py-2.5 px-3 text-amber-800 font-semibold">{fld.type}</td>
+                        <td className="py-2.5 px-3 text-emerald-700 font-medium">{fld.unit || '—'}</td>
+                        <td className="py-2.5 px-3 font-sans text-slate-700 max-w-sm leading-relaxed">{fld.description}</td>
+                        <td className="py-2.5 px-3 text-slate-500 truncate max-w-xs">
                           {typeof fld.example === 'object' ? JSON.stringify(fld.example) : String(fld.example)}
                         </td>
                       </tr>
@@ -643,22 +641,22 @@ export default function DataDownloadCenter() {
 
           {/* TAB 5: SHA-256 Manifest */}
           {activeTab === 'manifest' && (
-            <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between text-zinc-400 border-b border-slate-800 pb-2">
-                <span>Release SHA-256 Manifest Ledger (GNU / BSD Format)</span>
+            <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3 font-mono text-xs">
+              <div className="flex items-center justify-between text-slate-600 border-b border-slate-200 pb-2.5">
+                <span className="font-semibold text-slate-900">Release SHA-256 Manifest Ledger (GNU / BSD Format)</span>
                 <a
                   href="/release/manifest.sha256"
                   download="manifest.sha256"
-                  className="text-cyan-400 hover:text-cyan-300 underline"
+                  className="text-sky-700 hover:text-sky-800 font-semibold underline"
                 >
                   Download manifest.sha256
                 </a>
               </div>
-              <div className="p-3 rounded bg-slate-950 border border-slate-800/80 space-y-1.5 font-mono text-[11px] text-zinc-300 overflow-x-auto">
+              <div className="p-3.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1.5 font-mono text-[11px] text-slate-200 overflow-x-auto shadow-inner">
                 {manifestData.artifacts.map((a) => (
                   <div key={a.file_name} className="flex gap-4">
-                    <span className="text-cyan-300 font-bold">{a.sha256}</span>
-                    <span className="text-zinc-400">{a.file_name}</span>
+                    <span className="text-emerald-400 font-bold">{a.sha256}</span>
+                    <span className="text-slate-300">{a.file_name}</span>
                   </div>
                 ))}
               </div>
@@ -667,15 +665,15 @@ export default function DataDownloadCenter() {
         </div>
 
         {/* Developer & Researcher Ingestion Snippets */}
-        <div className="space-y-4 pt-4 border-t border-slate-800">
+        <div className="space-y-4 pt-4 border-t border-slate-200">
           <div>
-            <h2 className="text-xl font-mono font-bold text-white">Researcher Ingestion Quickstart</h2>
-            <p className="text-xs text-zinc-400 font-sans">
+            <h2 className="text-xl font-mono font-bold text-slate-900">Researcher Ingestion Quickstart</h2>
+            <p className="text-xs text-slate-500 font-sans">
               Load clean tabular data, extract quotes, or verify hashes directly in your script.
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+          <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 {(['python', 'curl', 'ts'] as const).map((lang) => (
@@ -684,8 +682,8 @@ export default function DataDownloadCenter() {
                     onClick={() => setCodeTab(lang)}
                     className={`px-3 py-1 rounded text-xs font-mono uppercase transition-colors ${
                       codeTab === lang
-                        ? 'bg-cyan-950 text-cyan-300 border border-cyan-600 font-bold'
-                        : 'text-zinc-400 hover:text-white'
+                        ? 'bg-sky-100 text-sky-800 border border-sky-300 font-bold shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 bg-slate-50 border border-slate-200'
                     }`}
                   >
                     {lang === 'python' ? 'Python (Pandas)' : lang === 'curl' ? 'cURL / Shell' : 'TypeScript / JS'}
@@ -701,13 +699,13 @@ export default function DataDownloadCenter() {
                   };
                   handleCopy(snippets[codeTab], 'code-snippet');
                 }}
-                className="text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors"
+                className="text-xs font-mono text-sky-700 hover:text-sky-800 font-bold transition-colors"
               >
                 {copiedKey === 'code-snippet' ? 'Copied to Clipboard!' : 'Copy Snippet'}
               </button>
             </div>
 
-            <pre className="p-3.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed">
+            <pre className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed shadow-inner">
               {codeTab === 'python' && (
                 <code>
 {`import pandas as pd
@@ -754,35 +752,35 @@ async function loadPyroAstraData() {
         </div>
 
         {/* Non-Negotiable Physical Grounding Notice */}
-        <div className="p-5 rounded-xl bg-slate-900/60 border border-cyan-900/40 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
-            <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-sky-800 uppercase tracking-wider">
+            <svg className="w-4 h-4 text-sky-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <span>Scientific Grounding & Physical Constraints (SPEC Section 2)</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-sans text-zinc-300">
-            <div className="p-3 rounded bg-slate-950/60 border border-slate-800 space-y-1">
-              <span className="font-mono font-bold text-white block">Rule 1 & 2: Zero Fabrication</span>
-              <p className="text-zinc-400">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-sans text-slate-700">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span className="font-mono font-bold text-slate-900 block">Rule 1 & 2: Zero Fabrication</span>
+              <p className="text-slate-600 leading-relaxed">
                 Values not stated by NASA are stored as null (&apos;not reported&apos;). Every displayed number carries full provenance (source_id, doi, file/page, entered_by, note).
               </p>
             </div>
-            <div className="p-3 rounded bg-slate-950/60 border border-slate-800 space-y-1">
-              <span className="font-mono font-bold text-white block">Rule 4: Oxygen Isolation</span>
-              <p className="text-zinc-400">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span className="font-mono font-bold text-slate-900 block">Rule 4: Oxygen Isolation</span>
+              <p className="text-slate-600 leading-relaxed">
                 Burner flow oxygen (e.g. CFI-G up to 85% O₂) is strictly partitioned into burner_flow_o2_pct and never mixed with crew cabin oxygen.
               </p>
             </div>
-            <div className="p-3 rounded bg-slate-950/60 border border-slate-800 space-y-1">
-              <span className="font-mono font-bold text-white block">Rule 5: Zero Partial-Gravity Extrapolation</span>
-              <p className="text-zinc-400">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span className="font-mono font-bold text-slate-900 block">Rule 5: Zero Partial-Gravity Extrapolation</span>
+              <p className="text-slate-600 leading-relaxed">
                 NASA PSI has no partial-gravity combustion data. Predictions for Moon (0.16g) or Mars (0.38g) are prohibited. 0g and 1g are shown as bounds.
               </p>
             </div>
-            <div className="p-3 rounded bg-slate-950/60 border border-slate-800 space-y-1">
-              <span className="font-mono font-bold text-white block">Rule 6: Rockets & Propellants Excluded</span>
-              <p className="text-zinc-400">
+            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+              <span className="font-mono font-bold text-slate-900 block">Rule 6: Rockets & Propellants Excluded</span>
+              <p className="text-slate-600 leading-relaxed">
                 Dataset focuses strictly on human crew spacecraft and habitat fire safety. Rocket propulsion is out of scope.
               </p>
             </div>

@@ -29,11 +29,11 @@ export function Val<T = number | string | Range | string[]>({
   const effectiveUnit = val !== undefined ? val?.unit : propUnit;
   const effectiveProvenance = val !== undefined ? val?.provenance : propProvenance;
 
-  // Rule 1: If PSI does not state it, store null and show 'not reported'
+  // Rule 1: If PSI does not state it, store null and show 'not reported' badge
   if (effectiveValue === null || effectiveValue === undefined) {
     return (
       <span
-        className={`text-zinc-500 dark:text-zinc-400 italic text-sm ${className}`}
+        className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-mono font-medium bg-slate-100 text-slate-500 border border-slate-200 ${className}`}
         data-not-reported="true"
       >
         {fallbackText}
@@ -70,68 +70,73 @@ export function Val<T = number | string | Range | string[]>({
 
   return (
     <span
-      className={`inline-flex items-center gap-1 font-mono group relative ${className}`}
+      className={`inline-flex items-center gap-1.5 font-mono group relative ${className}`}
       data-source={prov.source_id}
       data-doi={prov.doi ?? undefined}
       data-entered-by={prov.entered_by}
       data-val-rendered="true"
     >
-      <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+      <span className="font-semibold text-slate-900 tracking-tight">
         {displayText}
-        {effectiveUnit ? <span className="ml-1 text-xs font-normal text-zinc-500 dark:text-zinc-400">{effectiveUnit}</span> : null}
+        {effectiveUnit ? (
+          <span className="ml-1 text-xs font-normal text-slate-500">{effectiveUnit}</span>
+        ) : null}
       </span>
 
-      {/* Interactive Provenance Trigger */}
+      {/* Interactive Provenance Trigger Pill */}
       <button
         type="button"
         onClick={() => setShowTooltip(!showTooltip)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="inline-flex items-center justify-center text-[10px] uppercase tracking-wider px-1 py-0.5 rounded bg-cyan-950/20 text-cyan-700 dark:bg-cyan-950/60 dark:text-cyan-300 border border-cyan-700/30 hover:border-cyan-500 transition-colors focus:outline-none"
+        className="inline-flex items-center justify-center text-[10px] font-mono font-medium uppercase tracking-wider px-1.5 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 hover:bg-sky-100 hover:border-sky-300 transition-colors focus:outline-none focus:ring-1 focus:ring-sky-400"
         title={`Provenance: ${prov.source_id} (${prov.entered_by})`}
         aria-label={`Provenance for ${displayText}`}
       >
         {prov.source_id}
       </button>
 
-      {/* Provenance Card Popover */}
+      {/* Provenance Card Popover (Clean Bright Daylight Card) */}
       {showTooltip && (
         <span
           role="tooltip"
-          className="absolute z-50 bottom-full left-0 mb-2 w-72 p-3 text-xs bg-slate-900/95 text-slate-100 rounded-lg shadow-xl border border-cyan-800/50 backdrop-blur-md pointer-events-auto text-left leading-relaxed font-sans normal-case"
+          className="absolute z-50 bottom-full left-0 mb-2 w-80 p-3.5 text-xs bg-white text-slate-800 rounded-lg shadow-xl border border-slate-200 pointer-events-auto text-left leading-relaxed font-sans normal-case animate-in fade-in zoom-in-95 duration-100"
         >
-          <span className="flex items-center justify-between border-b border-cyan-800/40 pb-1.5 mb-2 font-mono">
-            <span className="font-bold text-cyan-400">{prov.source_id}</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300 border border-cyan-700/40">
+          <span className="flex items-center justify-between border-b border-slate-100 pb-2 mb-2 font-mono">
+            <span className="font-bold text-sky-800 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              {prov.source_id}
+            </span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
               {prov.entered_by}
             </span>
           </span>
-          <span className="block space-y-1 text-zinc-300 text-[11px]">
+          <span className="block space-y-1.5 text-slate-600 text-[11px]">
             {prov.doi && (
               <span className="block">
-                <span className="text-zinc-400 font-semibold">DOI:</span>{' '}
+                <span className="text-slate-400 font-medium">DOI:</span>{' '}
                 <a
                   href={`https://doi.org/${prov.doi}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-cyan-300 underline hover:text-cyan-200"
+                  className="text-sky-700 font-mono underline hover:text-sky-900"
                 >
                   {prov.doi}
                 </a>
               </span>
             )}
             {prov.file && (
-              <span className="block truncate">
-                <span className="text-zinc-400 font-semibold">File:</span> {prov.file}
+              <span className="block truncate font-mono">
+                <span className="text-slate-400 font-sans font-medium">File:</span> {prov.file}
               </span>
             )}
             {prov.row_or_page && (
-              <span className="block">
-                <span className="text-zinc-400 font-semibold">Row/Page:</span> {prov.row_or_page}
+              <span className="block font-mono">
+                <span className="text-slate-400 font-sans font-medium">Row/Page:</span> {prov.row_or_page}
               </span>
             )}
             {prov.note && (
-              <span className="block pt-1 border-t border-slate-800 text-amber-300/90 italic">
+              <span className="block pt-1.5 border-t border-slate-100 text-amber-800 bg-amber-50/50 p-1.5 rounded text-[11px] italic">
                 Note: {prov.note}
               </span>
             )}

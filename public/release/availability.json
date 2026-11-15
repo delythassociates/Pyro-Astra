@@ -1,7 +1,7 @@
 {
   "_catalog_version": "1.0.0",
   "_description": "PYRO-ASTRA NASA PSI Investigation Availability, Endpoint Catalog, and Provenance Ledger",
-  "_updated_at": "2026-11-14T22:57:54.913726+00:00",
+  "_updated_at": "2026-11-15T04:17:51.532725+00:00",
   "_license_statement": "There are no restrictions on the use of this data. (Registry of Open Data on AWS, https://registry.opendata.aws/nasa-psi/)",
   "summary": {
     "total_investigations": 18,

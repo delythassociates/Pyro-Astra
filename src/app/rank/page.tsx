@@ -7,10 +7,12 @@ import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
 import {
   rankInvestigations,
   HABITAT_PRESETS,
-  HabitatPreset,
   ScoreWeights,
 } from '@/lib/score';
 import type { SafetyArea } from '@/data/schema';
+import { AtmosphereFlowController } from '@/components/AtmosphereFlowController';
+import { Bass2SpreadRateChart } from '@/components/Bass2SpreadRateChart';
+import { BarChart3, Sliders, ShieldCheck } from 'lucide-react';
 
 function RankContent() {
   const searchParams = useSearchParams();
@@ -83,373 +85,212 @@ function RankContent() {
   ]);
 
   return (
-    <div className="flex-1 w-full bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="border-b border-cyan-900/40 pb-4">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
-            <span>Deterministic Scoring Algorithm</span>
-            <span>·</span>
-            <span>SPEC Section 7</span>
-          </div>
-          <h1 className="text-3xl font-black font-mono text-white mt-1">
-            Dynamic Investigation Ranking
-          </h1>
-          <p className="text-sm text-zinc-400 font-sans mt-1">
-            Match spacecraft and habitat operational atmospheres to NASA PSI combustion records. Ties break strictly by evidence completeness, then by ID.
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8 space-y-10 max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-2">
+        <div className="flex items-center gap-2 text-xs font-mono text-sky-800 uppercase tracking-wider font-semibold">
+          <BarChart3 className="w-4 h-4 text-sky-700" />
+          <span>Deterministic Scoring & Ranking Engine · SPEC Section 7</span>
+        </div>
+        <h1 className="text-2xl sm:text-3xl font-black font-mono text-slate-900 tracking-tight">
+          Operational Atmosphere & Flammability Ranking
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+          Rank NASA PSI investigations by environmental overlap, safety area coverage, and evidence completeness. Ties break strictly by verified completeness, then by investigation ID.
+        </p>
+      </div>
+
+      {/* TRACK 1: Atmospheric Parameter & Flow Regime Controller */}
+      <section className="space-y-2">
+        <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-600">
+          Flow Regime & Mission Atmosphere Simulator
+        </h2>
+        <AtmosphereFlowController />
+      </section>
+
+      {/* GRAPH 4: Flow Velocity vs Spread Rate */}
+      <section className="space-y-4">
+        <div className="border-b border-slate-200 pb-2">
+          <h2 className="text-base font-bold font-mono text-slate-900">
+            Flow Velocity Effects on Solid Flame Spread (BASS-II Table 5.1)
+          </h2>
+          <p className="text-xs text-slate-500">
+            Flame spread rate as a function of calibrated airflow speed (1.0–20.0 cm/s) for flat-PMMA slabs M1–M20.
           </p>
         </div>
+        <Bass2SpreadRateChart />
+      </section>
 
-        {/* Controls Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Column: Sliders & Controls */}
-          <div className="lg:col-span-4 space-y-6 bg-slate-900/60 p-5 rounded-2xl border border-cyan-900/40 backdrop-blur-sm">
-            {/* Habitat Presets */}
-            <div>
-              <label className="block text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider mb-2">
-                Habitat Preset
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {(Object.keys(HABITAT_PRESETS) as Array<keyof typeof HABITAT_PRESETS>).map((key) => {
-                  const p = HABITAT_PRESETS[key];
-                  const isSelected = presetKey === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => handleSelectPreset(key)}
-                      className={`p-2 rounded-lg text-xs font-mono text-left transition-all ${
-                        isSelected
-                          ? 'bg-cyan-600 text-white font-bold shadow'
-                          : 'bg-slate-950 text-zinc-400 hover:text-white border border-zinc-800'
-                      }`}
-                    >
-                      <div>{p.name}</div>
-                      <div className="text-[10px] opacity-75 font-normal">
-                        {p.o2.min === p.o2.max ? `${p.o2.min}%` : `${p.o2.min}-${p.o2.max}%`} O₂
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-              <p className="mt-2 text-[11px] text-zinc-400 italic">
-                {activePreset.description}
-              </p>
-            </div>
-
-            {/* Atmosphere Sliders */}
-            <div className="space-y-4 pt-3 border-t border-zinc-800">
-              <div>
-                <div className="flex justify-between text-xs font-mono text-zinc-300 mb-1">
-                  <span>Target Cabin O₂ Range</span>
-                  <span className="text-cyan-400 font-bold">{o2Min}% – {o2Max}%</span>
-                </div>
-                <div className="flex gap-2">
-                  <input
-                    type="range"
-                    min="10"
-                    max="100"
-                    value={o2Min}
-                    onChange={(e) => setO2Min(Math.min(Number(e.target.value), o2Max))}
-                    className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                  />
-                  <input
-                    type="range"
-                    min="10"
-                    max="100"
-                    value={o2Max}
-                    onChange={(e) => setO2Max(Math.max(Number(e.target.value), o2Min))}
-                    className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-xs font-mono text-zinc-300 mb-1">
-                  <span>Target Cabin Pressure Range</span>
-                  <span className="text-emerald-400 font-bold">{pressureMin.toFixed(1)} – {pressureMax.toFixed(1)} psi</span>
-                </div>
-                <div className="flex gap-2">
-                  <input
-                    type="range"
-                    min="0"
-                    max="16"
-                    step="0.1"
-                    value={pressureMin}
-                    onChange={(e) => setPressureMin(Math.min(Number(e.target.value), pressureMax))}
-                    className="w-full h-1.5 bg-slate-800 rounded accent-emerald-400"
-                  />
-                  <input
-                    type="range"
-                    min="0"
-                    max="16"
-                    step="0.1"
-                    value={pressureMax}
-                    onChange={(e) => setPressureMax(Math.max(Number(e.target.value), pressureMin))}
-                    className="w-full h-1.5 bg-slate-800 rounded accent-emerald-400"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Safety Area Filter */}
-            <div className="pt-3 border-t border-zinc-800">
-              <label className="block text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider mb-2">
-                Safety Area Filter
-              </label>
-              <select
-                value={selectedSafetyArea}
-                onChange={(e) => setSelectedSafetyArea(e.target.value as SafetyArea | 'any')}
-                className="w-full p-2 bg-slate-950 border border-zinc-800 rounded-lg text-xs font-mono text-zinc-200 focus:border-cyan-500 focus:outline-none"
-              >
-                <option value="any">Any Safety Area</option>
-                <option value="prevention">Prevention (BASS, Saffire)</option>
-                <option value="detection">Detection (SAME, SAME-R)</option>
-                <option value="suppression">Suppression (FLEX, FLEX-2)</option>
-                <option value="other">Other / Fundamental (CFI-G, E-FIELD)</option>
-              </select>
-            </div>
-
-            {/* Airflow Toggle & Sliders */}
-            <div className="pt-3 border-t border-zinc-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-zinc-300">Airflow Overlap</span>
-                <button
-                  type="button"
-                  onClick={() => setUseAirflow(!useAirflow)}
-                  className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                    useAirflow ? 'bg-cyan-600 text-white' : 'bg-zinc-800 text-zinc-400'
-                  }`}
-                >
-                  {useAirflow ? 'Active (0.10)' : 'Unset (Renormalized)'}
-                </button>
-              </div>
-
-              {useAirflow && (
-                <div className="space-y-1 pt-1">
-                  <div className="flex justify-between text-[11px] font-mono text-zinc-400">
-                    <span>Flow Speed:</span>
-                    <span>{airflowMin} – {airflowMax} cm/s</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <input
-                      type="range"
-                      min="0"
-                      max="60"
-                      value={airflowMin}
-                      onChange={(e) => setAirflowMin(Math.min(Number(e.target.value), airflowMax))}
-                      className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                    />
-                    <input
-                      type="range"
-                      min="0"
-                      max="60"
-                      value={airflowMax}
-                      onChange={(e) => setAirflowMax(Math.max(Number(e.target.value), airflowMin))}
-                      className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Weights Sliders */}
-            <div className="pt-3 border-t border-zinc-800 space-y-3">
-              <span className="block text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider">
-                Score Component Weights
-              </span>
-
-              <div>
-                <div className="flex justify-between text-[11px] font-mono text-zinc-400 mb-1">
-                  <span>Safety Area Match</span>
-                  <span>{(weights.safety_area! * 100).toFixed(0)}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={weights.safety_area}
-                  onChange={(e) =>
-                    setWeights({ ...weights, safety_area: Number(e.target.value) })
-                  }
-                  className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between text-[11px] font-mono text-zinc-400 mb-1">
-                  <span>Environment Overlap (O₂ + Press)</span>
-                  <span>{(weights.environment_overlap! * 100).toFixed(0)}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={weights.environment_overlap}
-                  onChange={(e) =>
-                    setWeights({ ...weights, environment_overlap: Number(e.target.value) })
-                  }
-                  className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                />
-              </div>
-
-              <div>
-                <div className="flex justify-between text-[11px] font-mono text-zinc-400 mb-1">
-                  <span>Evidence Completeness</span>
-                  <span>{(weights.evidence_completeness! * 100).toFixed(0)}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.05"
-                  value={weights.evidence_completeness}
-                  onChange={(e) =>
-                    setWeights({ ...weights, evidence_completeness: Number(e.target.value) })
-                  }
-                  className="w-full h-1.5 bg-slate-800 rounded accent-cyan-400"
-                />
-              </div>
-            </div>
+      {/* Filter and Weights Config Card */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-sky-700" />
+            <h3 className="text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
+              Scoring Weights & Environmental Criteria
+            </h3>
           </div>
 
-          {/* Right Column: Ranked Results */}
-          <div className="lg:col-span-8 space-y-4">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400 pb-2 border-b border-zinc-800">
-              <span>{ranked.length} Investigations Ranked</span>
-              <span>Sorted by Score ↓ then Completeness ↓ then ID ↑</span>
-            </div>
-
-            {ranked.map(({ investigation: inv, score }, idx) => {
-              const pctScore = Math.round(score.total * 100);
-
+          {/* Habitat Presets */}
+          <div className="flex flex-wrap gap-1.5">
+            {Object.keys(HABITAT_PRESETS).map((k) => {
+              const key = k as keyof typeof HABITAT_PRESETS;
+              const isSelected = key === presetKey;
               return (
-                <div
-                  key={inv.id}
-                  className="p-5 rounded-2xl bg-slate-900/40 border border-zinc-800 hover:border-cyan-800/60 transition-all space-y-4"
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => handleSelectPreset(key)}
+                  className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-colors border ${
+                    isSelected
+                      ? 'bg-sky-50 text-sky-900 border-sky-300 font-bold shadow-xs'
+                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                  }`}
                 >
-                  {/* Card Header */}
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center font-mono text-xs font-bold text-zinc-300">
-                          #{idx + 1}
-                        </span>
-                        <h2 className="text-lg font-bold font-mono text-white">
-                          {inv.acronym}
-                        </h2>
-                        <span className="text-xs font-mono text-zinc-400">
-                          ({inv.id})
-                        </span>
-                        <span
-                          className={`text-[10px] font-mono px-2 py-0.5 rounded uppercase font-bold ${
-                            inv.safety_areas.includes('prevention')
-                              ? 'bg-amber-950/60 text-amber-300 border border-amber-700/50'
-                              : inv.safety_areas.includes('detection')
-                              ? 'bg-cyan-950/60 text-cyan-300 border border-cyan-700/50'
-                              : inv.safety_areas.includes('suppression')
-                              ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-700/50'
-                              : 'bg-zinc-800 text-zinc-300'
-                          }`}
-                        >
-                          {inv.safety_areas.join(', ')}
-                        </span>
-                      </div>
-                      <div className="text-xs text-zinc-300 font-sans">
-                        {inv.name}
-                      </div>
-                    </div>
-
-                    {/* Total Score Badge */}
-                    <div className="flex flex-col items-end">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-black font-mono text-cyan-300">
-                          {(score.total * 100).toFixed(1)}
-                        </span>
-                        <span className="text-xs font-mono text-zinc-500">/ 100</span>
-                      </div>
-                      <span className="text-[10px] font-mono text-zinc-500">
-                        Total Match Score
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Core Experimental Values rendered strictly via <Val> */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-950/70 p-3 rounded-xl border border-zinc-800/80 text-xs font-mono">
-                    <div>
-                      <span className="text-zinc-500 block text-[10px]">Cabin O₂:</span>
-                      <Val val={inv.cabin_o2_pct} />
-                    </div>
-                    <div>
-                      <span className="text-zinc-500 block text-[10px]">Burner Flow O₂:</span>
-                      <Val val={inv.burner_flow_o2_pct} fallbackText="none (not burner)" />
-                    </div>
-                    <div>
-                      <span className="text-zinc-500 block text-[10px]">Pressure:</span>
-                      <Val val={inv.pressure_psi} />
-                    </div>
-                    <div>
-                      <span className="text-zinc-500 block text-[10px]">Airflow:</span>
-                      <Val val={inv.airflow_speed_cm_s} />
-                    </div>
-                  </div>
-
-                  {/* Score Component Breakdown and Explanations */}
-                  <div className="space-y-1.5 pt-2 border-t border-zinc-800">
-                    <span className="text-[10px] font-mono uppercase text-zinc-400 tracking-wider">
-                      Score Breakdown & Transparent Reasons:
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
-                      {score.components.map((comp) => (
-                        <div
-                          key={comp.name}
-                          className="p-2 rounded-lg bg-black/30 border border-zinc-800/60 space-y-0.5"
-                        >
-                          <div className="flex justify-between text-[11px]">
-                            <span className="capitalize text-zinc-300">
-                              {comp.name.replace('_', ' ')}:
-                            </span>
-                            <span className="text-cyan-400 font-bold">
-                              {(comp.value * 100).toFixed(0)}% (wt {(comp.weight * 100).toFixed(0)}%)
-                            </span>
-                          </div>
-                          <p className="text-[10px] text-zinc-400 font-sans leading-tight">
-                            {comp.reason}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Solid-Material Flammability Metric Notice (SPEC Section 7) */}
-                  <div className="text-[10px] text-zinc-500 font-mono flex items-center justify-between pt-1">
-                    <span>
-                      Solid-material flammability ranking:{' '}
-                      <em className="text-zinc-400">not comparable in PSI (varying flow & geometry)</em>
-                    </span>
-                    <span>DOI: {inv.doi}</span>
-                  </div>
-                </div>
+                  {HABITAT_PRESETS[key].name}
+                </button>
               );
             })}
           </div>
         </div>
+
+        {/* Sliders Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-xs font-mono">
+          <div>
+            <div className="flex justify-between mb-1 text-slate-700">
+              <span>Safety Area ({((weights.safety_area ?? 0.35) * 100).toFixed(0)}%)</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={weights.safety_area ?? 0.35}
+              onChange={(e) => setWeights({ ...weights, safety_area: parseFloat(e.target.value) })}
+              className="w-full accent-sky-700"
+            />
+          </div>
+
+          <div>
+            <div className="flex justify-between mb-1 text-slate-700">
+              <span>Environment Overlap ({((weights.environment_overlap ?? 0.35) * 100).toFixed(0)}%)</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={weights.environment_overlap ?? 0.35}
+              onChange={(e) => setWeights({ ...weights, environment_overlap: parseFloat(e.target.value) })}
+              className="w-full accent-sky-700"
+            />
+          </div>
+
+          <div>
+            <div className="flex justify-between mb-1 text-slate-700">
+              <span>Airflow Match ({((weights.airflow_overlap ?? 0.10) * 100).toFixed(0)}%)</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={weights.airflow_overlap ?? 0.10}
+              onChange={(e) => setWeights({ ...weights, airflow_overlap: parseFloat(e.target.value) })}
+              className="w-full accent-sky-700"
+            />
+          </div>
+
+          <div>
+            <div className="flex justify-between mb-1 text-slate-700">
+              <span>Completeness ({((weights.evidence_completeness ?? 0.20) * 100).toFixed(0)}%)</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={weights.evidence_completeness ?? 0.20}
+              onChange={(e) => setWeights({ ...weights, evidence_completeness: parseFloat(e.target.value) })}
+              className="w-full accent-sky-700"
+            />
+          </div>
+        </div>
       </div>
+
+      {/* Ranked Results List */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+          <h2 className="text-base font-bold font-mono text-slate-900">
+            Ranked Investigation Results ({ranked.length} total)
+          </h2>
+          <span className="text-xs font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">
+            Deterministic Ties Broken by Completeness
+          </span>
+        </div>
+
+        <div className="space-y-3">
+          {ranked.map((item, index) => {
+            const inv = item.investigation;
+            const envComp = item.score.components.find((c) => c.name === 'environment_overlap')?.value ?? 0;
+            const safeComp = item.score.components.find((c) => c.name === 'safety_area')?.value ?? 0;
+            const compComp = item.score.components.find((c) => c.name === 'evidence_completeness')?.value ?? 0;
+
+            return (
+              <div
+                key={inv.id}
+                className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm hover:border-slate-300 transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+              >
+                <div className="flex items-start gap-3.5">
+                  <span className="w-8 h-8 rounded-lg bg-sky-50 border border-sky-200 text-sky-800 font-mono font-bold text-sm flex items-center justify-center shrink-0">
+                    #{index + 1}
+                  </span>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-sm text-slate-900 font-mono">{inv.acronym}</span>
+                      <span className="text-xs font-mono text-slate-500">({inv.id})</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
+                        {inv.fuel_phase?.value ?? 'Phase null'}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-600 line-clamp-1 font-sans">{inv.name}</p>
+                    <div className="text-[11px] font-mono text-slate-500 flex flex-wrap items-center gap-3 pt-1">
+                      <span>Cabin O₂: <Val val={inv.cabin_o2_pct} fallbackText="not reported" /></span>
+                      <span>·</span>
+                      <span>Pressure: <Val val={inv.pressure_psi} fallbackText="not reported" /></span>
+                      <span>·</span>
+                      <span>Airflow: <Val val={inv.airflow_speed_cm_s} fallbackText="not reported" /></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 shrink-0 font-mono text-right self-end md:self-center">
+                  <div>
+                    <span className="text-[10px] text-slate-400 block uppercase tracking-wider">
+                      Match Score
+                    </span>
+                    <span className="text-xl font-bold text-sky-900">
+                      {(item.score.total * 100).toFixed(1)}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 border-l border-slate-200 pl-3 text-left space-y-0.5">
+                    <div>Env: {(envComp * 100).toFixed(0)}%</div>
+                    <div>Safe: {(safeComp * 100).toFixed(0)}%</div>
+                    <div>Comp: {(compComp * 100).toFixed(0)}%</div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
 
 export default function RankPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex-1 w-full bg-slate-950 p-12 text-center font-mono text-xs text-zinc-400">
-          Loading ranking criteria...
-        </div>
-      }
-    >
+    <Suspense fallback={<div className="p-8 text-center font-mono text-xs text-slate-500">Loading Ranking Algorithm...</div>}>
       <RankContent />
     </Suspense>
   );

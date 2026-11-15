@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
+import { Sparkles, ShieldCheck, CheckCircle2, ArrowRight, AlertTriangle, Cpu } from 'lucide-react';
 
 interface EvidenceItem {
   record_id?: string;
@@ -32,6 +32,46 @@ interface AgentAnswer {
   model_used?: string;
   api_status?: number;
   api_latency_ms?: number;
+}
+
+export function GuardrailPipelineStepper({ isRefusal }: { isRefusal: boolean }) {
+  return (
+    <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs font-mono space-y-2">
+      <div className="flex items-center justify-between text-slate-500 font-bold uppercase tracking-wider text-[10px]">
+        <span>ASTRA Verification & Grounding Pipeline</span>
+        <span className="text-emerald-700">✓ Deterministic Gate Active</span>
+      </div>
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-1 text-[11px]">
+        {/* Step 1 */}
+        <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-md border border-slate-200 shadow-2xs">
+          <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-[10px]">
+            1
+          </span>
+          <span className="text-slate-800 font-medium">Pre-LLM 0-Token Policy Check</span>
+        </div>
+
+        <ArrowRight className="hidden sm:block w-3.5 h-3.5 text-slate-400 shrink-0" />
+
+        {/* Step 2 */}
+        <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-md border border-slate-200 shadow-2xs">
+          <span className="w-4 h-4 rounded-full bg-sky-100 text-sky-800 flex items-center justify-center font-bold text-[10px]">
+            2
+          </span>
+          <span className="text-slate-800 font-medium">Deterministic Tool Routing</span>
+        </div>
+
+        <ArrowRight className="hidden sm:block w-3.5 h-3.5 text-slate-400 shrink-0" />
+
+        {/* Step 3 */}
+        <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-md border border-slate-200 shadow-2xs">
+          <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-[10px]">
+            3
+          </span>
+          <span className="text-slate-800 font-medium">Deterministic Claim Verifier</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function AskPage() {
@@ -102,8 +142,7 @@ export default function AskPage() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Unknown communication error';
       setErrorMessage(`Failed to connect to /api/ask: ${msg}. Showing offline verified fallback.`);
-      
-      // Fallback: local refusal or safe answer
+
       const qLower = userQuery.toLowerCase();
       if (qLower.includes('0.16') || qLower.includes('partial') || qLower.includes('lunar')) {
         setCurrentAnswer({
@@ -142,257 +181,186 @@ export default function AskPage() {
   };
 
   return (
-    <div className="flex-1 w-full bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="border-b border-cyan-900/40 pb-4">
-          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-wider">
-            <span>Verified AI Spaceflight Agent</span>
-            <span>·</span>
-            <span>SPEC Section 12 (/api/ask)</span>
-          </div>
-          <h1 className="text-3xl font-black font-mono text-white mt-1">
-            Ask ASTRA: Scientific Intelligence Agent
-          </h1>
-          <p className="text-sm text-zinc-400 font-sans mt-1">
-            Deterministic tool-using agent backed by programmatically checked claims. Every number is grounded in NASA PSI records. Never invents facts; strictly refuses rockets and partial-gravity extrapolations.
-          </p>
+    <div className="flex-1 w-full bg-slate-50 text-slate-900 py-8 px-4 sm:px-6 lg:px-8 space-y-8 max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-2">
+        <div className="flex items-center gap-2 text-xs font-mono text-sky-800 uppercase tracking-wider font-semibold">
+          <Sparkles className="w-4 h-4 text-sky-700" />
+          <span>Verified AI Spaceflight Agent · SPEC Section 12</span>
         </div>
+        <h1 className="text-2xl sm:text-3xl font-black font-mono text-slate-900 tracking-tight">
+          Ask ASTRA: Scientific Intelligence Agent
+        </h1>
+        <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+          Deterministic tool-using agent backed by programmatically verified citations. Every number is grounded in NASA PSI records. Never invents facts; strictly refuses rockets and partial-gravity extrapolations.
+        </p>
+      </div>
 
-        {/* Query Input Section */}
-        <div className="bg-slate-900/60 p-6 rounded-2xl border border-cyan-900/40 backdrop-blur-sm space-y-4">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleAsk(query);
-            }}
-            className="flex flex-col sm:flex-row gap-3"
-          >
-            <div className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Ask about microgravity fire experiments, materials, flammability limits..."
-                className="flex-1 bg-slate-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm font-sans text-white focus:outline-none focus:border-cyan-500 placeholder-zinc-500"
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !query.trim()}
-                className="px-6 py-3 bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-white font-mono text-xs font-bold rounded-xl transition-all shadow-lg shadow-cyan-950/50"
-              >
-                {isLoading ? 'ASTRA Reasoning...' : 'Ask ASTRA →'}
-              </button>
-            </div>
-
-            {/* Live Mode Opt-in Toggle */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-cyan-950/40">
-              <label className="flex items-center gap-2 text-xs font-mono text-zinc-300 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={useAi}
-                  onChange={(e) => setUseAi(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-700 bg-slate-950 text-cyan-500 focus:ring-cyan-500/20"
-                />
-                <span className="font-semibold text-white">Use AI (Groq, limited)</span>
-              </label>
-              <span className="text-[11px] font-mono text-zinc-500">
-                Default: OFFLINE (deterministic). Free-tier AI mode is strictly rate-limited (&lt;30 RPM, 8,000 TPM); falls back automatically on rate limit or quota exhaustion.
-              </span>
-            </div>
-          </form>
-
-          {/* Sample Prompts */}
-          <div>
-            <span className="block text-[11px] font-mono text-zinc-500 uppercase tracking-wider mb-2">
-              Verified Audit Probes & Benchmark Queries:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {samplePrompts.map((p) => (
-                <button
-                  key={p.label}
-                  type="button"
-                  onClick={() => {
-                    setQuery(p.text);
-                    handleAsk(p.text);
-                  }}
-                  className="px-2.5 py-1.5 rounded-lg bg-black/40 hover:bg-slate-800 border border-zinc-800 text-[11px] font-mono text-zinc-300 transition-colors text-left"
-                >
-                  <span className="text-cyan-400 font-bold block">{p.label}</span>
-                  <span className="text-zinc-500 truncate block max-w-xs">{p.text}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {errorMessage && (
-          <div className="p-3 bg-red-950/30 border border-red-800 text-red-300 text-xs font-mono rounded-lg">
-            {errorMessage}
-          </div>
-        )}
-
-        {/* Answer Output & Tool Trace */}
-        {currentAnswer && (
-          <div className="space-y-6">
-            {/* Primary Agent Response Card */}
-            <div
-              className={`p-6 rounded-2xl border ${
-                currentAnswer.refusal
-                  ? 'bg-amber-950/20 border-amber-600/50'
-                  : 'bg-slate-900/60 border-cyan-800/40'
-              } space-y-4 backdrop-blur-sm`}
+      {/* Query Input Section */}
+      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAsk(query);
+          }}
+          className="space-y-4"
+        >
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Ask about microgravity fire experiments, materials, flammability limits..."
+              className="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm font-sans text-slate-900 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder-slate-400"
+            />
+            <button
+              type="submit"
+              disabled={isLoading || !query.trim()}
+              className="px-6 py-3 bg-sky-700 hover:bg-sky-800 disabled:opacity-50 text-white font-mono text-xs font-bold rounded-xl transition-all shadow-xs"
             >
-              {/* Header with AI-Generated Label (SPEC Section 2 Rule 9) */}
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-800 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
-                  <span className="font-mono text-xs font-bold text-white">ASTRA Agent Output</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold bg-cyan-950 text-cyan-300 border border-cyan-800/50">
-                    AI-Drafted, Code-Verified
-                  </span>
-                  {currentAnswer.offline_mode ? (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold bg-zinc-800 text-zinc-300 border border-zinc-700">
-                      OFFLINE (deterministic)
-                    </span>
-                  ) : (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold bg-emerald-950 text-emerald-300 border border-emerald-800/60">
-                      LIVE (Groq)
-                    </span>
-                  )}
-                </div>
+              {isLoading ? 'ASTRA Reasoning...' : 'Ask ASTRA →'}
+            </button>
+          </div>
 
-                <div className="text-xs font-mono">
-                  {currentAnswer.validated && !currentAnswer.refusal && (
-                    <span className="text-emerald-400 flex items-center gap-1 font-bold">
-                      ✓ Grounded in Cited Records (Validator Passed)
-                    </span>
-                  )}
-                  {currentAnswer.refusal && (
-                    <span className="text-amber-400 font-bold">
-                      ⚠ Mandatory Rule Refusal Enforced
-                    </span>
-                  )}
-                </div>
+          {/* Mode Selector & Quota Notice */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 text-xs font-mono">
+            <label className="flex items-center gap-2 text-slate-700 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={useAi}
+                onChange={(e) => setUseAi(e.target.checked)}
+                className="w-4 h-4 rounded border-slate-300 text-sky-700 focus:ring-sky-500"
+              />
+              <span className="font-semibold text-slate-900">Use AI (Groq, limited free tier)</span>
+            </label>
+            <span className="text-[11px] text-slate-500">
+              Default: <strong>OFFLINE (deterministic)</strong>. Live AI mode uses <em>qwen/qwen3.8-27b</em> with 2,500ms pacing; falls back offline automatically on rate limits.
+            </span>
+          </div>
+        </form>
+
+        {/* Sample Prompt Chips */}
+        <div className="pt-2 border-t border-slate-100">
+          <span className="block text-[11px] font-mono text-slate-500 uppercase tracking-wider mb-2 font-semibold">
+            Verified Audit Probes & Benchmark Queries:
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+            {samplePrompts.map((p) => (
+              <button
+                key={p.label}
+                type="button"
+                onClick={() => {
+                  setQuery(p.text);
+                  handleAsk(p.text);
+                }}
+                className="p-2.5 rounded-lg bg-slate-50 hover:bg-sky-50/60 border border-slate-200 hover:border-sky-300 text-[11px] font-mono text-slate-700 transition-colors text-left space-y-0.5"
+              >
+                <span className="text-sky-800 font-bold block">{p.label}</span>
+                <span className="text-slate-500 truncate block text-[10px]">{p.text}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {errorMessage && (
+        <div className="p-4 bg-amber-50 border border-amber-300 text-amber-900 text-xs font-mono rounded-xl">
+          {errorMessage}
+        </div>
+      )}
+
+      {/* Answer Output & Tool Trace */}
+      {currentAnswer && (
+        <div className="space-y-6">
+          {/* Primary Agent Response Card */}
+          <div
+            className={`p-6 rounded-2xl border bg-white shadow-sm space-y-5 ${
+              currentAnswer.refusal ? 'border-amber-300 bg-amber-50/20' : 'border-slate-200'
+            }`}
+          >
+            {/* Header with Mode Badges */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-sky-600 animate-pulse" />
+                <span className="font-mono text-xs font-bold text-slate-900">ASTRA Response</span>
               </div>
 
-              {/* Quota Exhausted / Offline Fallback Notice */}
-              {useAi && currentAnswer.offline_mode && (
-                <div className="p-3 bg-amber-950/40 border border-amber-600/50 rounded-xl text-xs font-mono text-amber-300 flex items-center gap-2">
-                  <span className="text-base">⚠️</span>
-                  <span>
-                    {currentAnswer.api_status === 429
-                      ? 'Groq free-tier rate limit reached (HTTP 429 quota exhausted).'
-                      : 'Live AI unavailable or unconfigured.'}{' '}
-                    Answer served safely via deterministic offline engine.
+              {/* Mode Badge */}
+              <div className="flex items-center gap-2 text-xs font-mono">
+                {currentAnswer.offline_mode || !currentAnswer.model_used ? (
+                  <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 font-semibold">
+                    OFFLINE (Deterministic Engine)
                   </span>
+                ) : (
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 font-semibold flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    LIVE (Groq: {currentAnswer.model_used})
+                  </span>
+                )}
+                {currentAnswer.validated && (
+                  <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">
+                    ✓ Verifier Passed
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Live Guardrail Pipeline Stepper */}
+            <GuardrailPipelineStepper isRefusal={Boolean(currentAnswer.refusal)} />
+
+            {/* Refusal Output or Verified Answer */}
+            {currentAnswer.refusal ? (
+              <div className="p-4 bg-amber-50 border border-amber-300 rounded-xl space-y-2 text-xs text-amber-950 font-mono">
+                <div className="flex items-center gap-2 font-bold text-amber-900 uppercase">
+                  <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span>Deterministic Policy Refusal</span>
                 </div>
-              )}
-
-              {/* Refusal Text (if triggered) */}
-              {currentAnswer.refusal && (
-                <div className="p-4 rounded-xl bg-red-950/30 border border-red-500/50 text-red-200 text-xs font-mono leading-relaxed space-y-2">
-                  <div className="font-bold uppercase tracking-wider text-red-300">
-                    Policy Refusal Notice
-                  </div>
-                  <p>{currentAnswer.refusal}</p>
-                </div>
-              )}
-
-              {/* Verified Sentence-by-Sentence Output with Citation Chips */}
-              {currentAnswer.sentences.length > 0 && (
-                <div className="space-y-3 font-sans text-sm text-zinc-100 leading-relaxed">
-                  {currentAnswer.sentences.map((s, idx) => (
-                    <div key={idx} className="flex flex-col sm:flex-row items-baseline gap-2">
-                      <p className="flex-1">{s.text}</p>
-                      {/* Citation Chips */}
-                      <div className="flex flex-wrap gap-1.5 shrink-0 mt-1 sm:mt-0">
-                        {s.evidence.map((ev, evIdx) => {
-                          const { recId, field } = normalizeEvidence(ev);
-                          const record = DEFAULT_INVESTIGATIONS.find(
-                            (r) => r.id.toLowerCase() === recId.toLowerCase()
-                          );
-
+                <p className="leading-relaxed">{currentAnswer.refusal}</p>
+              </div>
+            ) : (
+              <div className="space-y-4 text-sm text-slate-800 font-sans leading-relaxed">
+                {currentAnswer.sentences.map((sent, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <p>{sent.text}</p>
+                    {sent.evidence && sent.evidence.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                        <span className="text-[10px] font-mono text-slate-400 uppercase">Evidence:</span>
+                        {sent.evidence.map((ev, evIdx) => {
+                          const norm = normalizeEvidence(ev);
                           return (
                             <span
                               key={evIdx}
-                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 text-[11px] font-mono"
-                              title={`Verified by ${recId} (${record?.name || ''})${field ? ` - Field: ${field}` : ''}`}
+                              className="px-2 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 font-mono text-[10px] font-medium"
                             >
-                              <span>{recId}</span>
-                              {field && <span className="text-cyan-500">.{field}</span>}
-                              {record?.doi && (
-                                <a
-                                  href={`https://doi.org/${record.doi}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-cyan-400 hover:underline ml-0.5"
-                                  title={`Open DOI: ${record.doi}`}
-                                >
-                                  ↗
-                                </a>
-                              )}
+                              {norm.recId}{norm.field ? ` · ${norm.field}` : ''}
                             </span>
                           );
                         })}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <div className="text-[10px] font-mono text-zinc-500 pt-2 border-t border-zinc-800 flex justify-between">
-                <span>Ref: Section 12 Grounded Output Contract</span>
-                <span>Arithmetic by code only · Zero ungrounded numbers</span>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
+            )}
 
-            {/* Deterministic Tool Execution Trace */}
+            {/* Trace Accordion */}
             {currentAnswer.trace && currentAnswer.trace.length > 0 && (
-              <div className="p-5 rounded-2xl bg-black/50 border border-zinc-800 space-y-3 font-mono text-xs">
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-                  <span className="text-zinc-400 uppercase tracking-wider text-[11px] font-bold">
-                    Agent Deterministic Tool Trace
-                  </span>
-                  <span className="text-cyan-400 text-[11px]">
-                    {currentAnswer.trace.length} Execution Steps
-                  </span>
-                </div>
-
-                <div className="space-y-2">
-                  {currentAnswer.trace.map((t, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-lg bg-slate-950/80 border border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
-                    >
-                      <div className="space-y-0.5">
-                        <div className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold">call_0{idx + 1}:</span>
-                          <span className="text-white font-bold">{t.tool}</span>
-                        </div>
-                        <div className="text-[11px] text-zinc-400 font-sans">
-                          {t.summary}
-                        </div>
-                        {t.args && (
-                          <div className="text-[10px] text-zinc-500">
-                            Args: {JSON.stringify(t.args)}
-                          </div>
-                        )}
-                      </div>
-
-                      {t.timestamp && (
-                        <div className="text-right text-[10px] text-zinc-500 font-mono">
-                          {t.timestamp}
-                        </div>
-                      )}
+              <div className="pt-4 border-t border-slate-100 text-xs font-mono space-y-2">
+                <span className="font-bold text-slate-600 uppercase tracking-wider text-[10px] block">
+                  Deterministic Tool Execution Trace:
+                </span>
+                <div className="space-y-1.5">
+                  {currentAnswer.trace.map((tr, tIdx) => (
+                    <div key={tIdx} className="p-2.5 rounded bg-slate-50 border border-slate-200 text-slate-700 text-[11px]">
+                      <strong className="text-sky-800">{tr.tool}</strong>: {tr.summary}
                     </div>
                   ))}
                 </div>
               </div>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

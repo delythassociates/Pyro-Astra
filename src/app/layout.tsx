@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PYRO-ASTRA | NASA PSI Microgravity Fire Safety Dashboard',
+  title: 'PYRO-ASTRA | NASA PSI Spacecraft Combustion Evidence & Gap Audit',
   description:
-    'Evidence you can trace, estimates you can test, gaps you can see. Spacecraft and habitat fire safety analysis from NASA Physical Sciences Informatics combustion research.',
+    'Daylight-first scientific audit of the NASA Physical Sciences Informatics (PSI) combustion record. Visualizing flight evidence, flow regimes, and the lunar habitat atmosphere gap.',
 };
 
 export default function RootLayout({
@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-sky-100 selection:text-sky-900">
         <Navigation />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
