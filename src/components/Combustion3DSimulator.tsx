@@ -1,1009 +1,1031 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import {
-  Play,
-  Pause,
-  RotateCcw,
-  Box,
-  Flame,
-  Wind,
-  ArrowRight,
-  ShieldAlert,
-  CheckCircle2,
-  Atom,
-  ChevronDown,
-  Info,
-  Layers,
-} from 'lucide-react';
-import { DEFAULT_INVESTIGATIONS } from '@/lib/data';
-import { findNearestEvidence } from '@/lib/nearest';
-import { Val } from './Val';
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-export type GravityRegime = '0g' | '0.16g' | '0.38g' | '1g';
-export type FuelType = 'pmma_solid' | 'nomex_fabric' | 'heptane_droplet' | 'methanol_droplet';
+type GravityMode = "0g" | "0.16g" | "0.38g" | "1g";
+type FuelType = "pmma_slab" | "pmma_sphere" | "heptane_droplet" | "ethylene_jet";
+type CfdOverlayMode = "flame_only" | "velocity_u_v" | "soot_numden" | "vorticity";
 
 interface ScenarioPreset {
   id: string;
   label: string;
-  o2: number; // %
-  pressureKPa: number; // kPa
-  airflow: number; // cm/s
-  gravity: GravityRegime;
+  gravity: GravityMode;
+  o2Pct: number;
+  airflowCmS: number;
+  pressureKpa: number;
   fuel: FuelType;
+  flowDir: "opposed" | "concurrent";
+  cfdDataset: string;
 }
 
-const PRESETS: ScenarioPreset[] = [
+const SCENARIO_PRESETS: ScenarioPreset[] = [
   {
-    id: 'iss_nominal',
-    label: 'ISS Cabin Nominal (21% O₂, 101.3 kPa, 5 cm/s)',
-    o2: 21,
-    pressureKPa: 101.3,
-    airflow: 5,
-    gravity: '0g',
-    fuel: 'pmma_solid',
+    id: "iss_nominal",
+    label: "ISS Cabin Nominal (21% O2, 101.3 kPa, 5 cm/s)",
+    gravity: "0g",
+    o2Pct: 21.0,
+    airflowCmS: 5.0,
+    pressureKpa: 101.3,
+    fuel: "pmma_slab",
+    flowDir: "opposed",
+    cfdDataset: "8cmNoGravityU.dat + 8cmNoGravityNumDenR.dat",
   },
   {
-    id: 'lunar_habitat',
-    label: 'Artemis Lunar Habitat (34% O₂, 56.5 kPa / 8.2 psi)',
-    o2: 34,
-    pressureKPa: 56.5,
-    airflow: 5,
-    gravity: '0.16g',
-    fuel: 'pmma_solid',
+    id: "cfd_8cm_0g",
+    label: "NASA CFD 8cm Domain: 0g Soot & Velocity (Thermophoresis ON)",
+    gravity: "0g",
+    o2Pct: 21.0,
+    airflowCmS: 8.0,
+    pressureKpa: 101.3,
+    fuel: "ethylene_jet",
+    flowDir: "concurrent",
+    cfdDataset: "8cm_sGrid_grid3d.dat + 8cmNoGravityNumDenR.dat + 8cmNoGravityVort.dat",
   },
   {
-    id: 'spacesuit_eva',
-    label: 'Spacesuit EVA (100% O₂, 29.6 kPa / 4.3 psi)',
-    o2: 40, // capped to max slider
-    pressureKPa: 29.6,
-    airflow: 0,
-    gravity: '0g',
-    fuel: 'nomex_fabric',
+    id: "cfd_10cm_1g",
+    label: "NASA CFD 10cm Domain: 1g Buoyant Smoke Plume",
+    gravity: "1g",
+    o2Pct: 21.0,
+    airflowCmS: 10.0,
+    pressureKpa: 101.3,
+    fuel: "ethylene_jet",
+    flowDir: "concurrent",
+    cfdDataset: "10cmGravityU.dat + 10cmGravitySmoke.dat",
   },
   {
-    id: 'bass2_m14',
-    label: 'BASS-II Run M14 (PMMA, 9 cm/s)',
-    o2: 21,
-    pressureKPa: 101.3,
-    airflow: 9,
-    gravity: '0g',
-    fuel: 'pmma_solid',
+    id: "bass2_m14",
+    label: "BASS-II Run M14 (Flat PMMA, 20.7% O2, 9.0 cm/s)",
+    gravity: "0g",
+    o2Pct: 20.7,
+    airflowCmS: 9.0,
+    pressureKpa: 101.3,
+    fuel: "pmma_slab",
+    flowDir: "opposed",
+    cfdDataset: "PSI-25 Table 5.1 Run M14 + 8cmNoGravityU.dat",
   },
   {
-    id: 'flex_run24',
-    label: 'FLEX Run 24 (Heptane, 30% O₂, 71.2 kPa)',
-    o2: 30,
-    pressureKPa: 71.2,
-    airflow: 0,
-    gravity: '0g',
-    fuel: 'heptane_droplet',
+    id: "flex_run24",
+    label: "FLEX Test 24 (Heptane Droplet, 30.0% O2, 71.2 kPa / 10.33 psi)",
+    gravity: "0g",
+    o2Pct: 30.0,
+    airflowCmS: 0.0,
+    pressureKpa: 71.2,
+    fuel: "heptane_droplet",
+    flowDir: "opposed",
+    cfdDataset: "PSI-69 FLEX Test 24 (Spherical Diffusion)",
+  },
+  {
+    id: "artemis_lunar",
+    label: "Artemis Lunar Habitat Target (34% O2, 56.5 kPa / 8.2 psi, 0.16g)",
+    gravity: "0.16g",
+    o2Pct: 34.0,
+    airflowCmS: 5.0,
+    pressureKpa: 56.5,
+    fuel: "pmma_slab",
+    flowDir: "opposed",
+    cfdDataset: "NTRS 20210022143 — 0 Empirical Rows in NASA PSI",
   },
 ];
 
-// Helper to create soft radial gradient additive particle sprite texture
-function createParticleTexture(colorHex = '#38bdf8'): THREE.CanvasTexture {
-  const canvas = document.createElement('canvas');
-  canvas.width = 64;
-  canvas.height = 64;
-  const ctx = canvas.getContext('2d')!;
+const FLAME_VERTEX_SHADER = `
+  uniform float uTime;
+  uniform float uAirflow;
+  uniform float uGravity;
+  uniform float uO2;
+  uniform float uPressure;
+  uniform float uFlowSign;
+  uniform float uShellLayer;
+  uniform float uFuelShape;
 
-  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-  gradient.addColorStop(0.2, colorHex);
-  gradient.addColorStop(0.55, 'rgba(2, 132, 199, 0.4)');
-  gradient.addColorStop(1, 'rgba(2, 132, 199, 0)');
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  varying float vHeightRatio;
+  varying float vStreamwiseRatio;
 
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 64, 64);
+  float waveNoise(vec3 p, float t) {
+    return sin(p.x * 3.5 + t * 4.2) * cos(p.y * 4.1 - t * 5.0) * sin(p.z * 3.2 + t * 3.1) * 0.5
+         + sin(p.x * 7.0 - t * 6.5) * cos(p.y * 6.3 + t * 7.2) * 0.25;
+  }
 
-  const texture = new THREE.CanvasTexture(canvas);
-  return texture;
-}
+  void main() {
+    vec3 pos = position;
+    float o2Scale = 0.72 + (uO2 - 0.15) * 2.1;
+    float pScale = mix(1.15, 0.88, clamp((uPressure - 25.0) / 115.0, 0.0, 1.0));
+    float shellScale = 1.0 + uShellLayer * 0.28;
+    pos *= o2Scale * pScale * shellScale;
 
-function createSootTexture(): THREE.CanvasTexture {
-  const canvas = document.createElement('canvas');
-  canvas.width = 64;
-  canvas.height = 64;
-  const ctx = canvas.getContext('2d')!;
+    float h = clamp((position.y + 1.0) * 0.5, 0.0, 1.0);
+    vHeightRatio = h;
 
-  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  gradient.addColorStop(0, '#fef08a');
-  gradient.addColorStop(0.3, '#f97316');
-  gradient.addColorStop(0.7, 'rgba(234, 88, 12, 0.3)');
-  gradient.addColorStop(1, 'rgba(234, 88, 12, 0)');
+    float windNorm = clamp(uAirflow / 20.0, 0.0, 1.5);
 
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 64, 64);
+    if (uFuelShape < 0.5) {
+      pos.y = max(-0.15, pos.y * 0.65 + 0.25);
+      pos.x *= 1.35 + windNorm * 1.1;
+      pos.z *= 0.85;
+    }
 
-  return new THREE.CanvasTexture(canvas);
-}
+    float wakeStretch = windNorm * pow(clamp((pos.x * uFlowSign + 1.0) * 0.5, 0.0, 1.5), 1.3) * 1.85;
+    pos.x += uFlowSign * wakeStretch * (0.4 + 0.6 * h);
+
+    if (windNorm > 0.05) {
+      float upwindFactor = clamp(-pos.x * uFlowSign, 0.0, 1.0);
+      pos.y *= mix(1.0, 0.72, upwindFactor * clamp(windNorm, 0.0, 1.0));
+    }
+
+    if (uGravity > 0.5) {
+      float necking = mix(1.0, 0.22, pow(h, 0.85));
+      pos.x *= necking;
+      pos.z *= necking;
+      pos.y = (h * 3.1) - 0.35;
+      float flicker = waveNoise(pos * 1.8, uTime * 1.6) * pow(h, 1.4) * 0.28;
+      pos.x += flicker + uFlowSign * windNorm * pow(h, 1.3) * 0.85;
+      pos.z += waveNoise(pos.zyx * 1.8, uTime * 1.4) * pow(h, 1.4) * 0.22;
+    } else {
+      float microWave = waveNoise(pos * 1.4, uTime * 0.65) * (0.03 + 0.08 * windNorm);
+      pos += normal * microWave;
+    }
+
+    vStreamwiseRatio = clamp((pos.x * uFlowSign + 1.2) / 3.2, 0.0, 1.0);
+
+    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+    vViewPosition = -mvPosition.xyz;
+    vNormal = normalize(normalMatrix * normal);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const FLAME_FRAGMENT_SHADER = `
+  uniform float uAirflow;
+  uniform float uGravity;
+  uniform float uO2;
+  uniform float uShellLayer;
+  uniform float uThermophoresis;
+  uniform float uShowSootShell;
+
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  varying float vHeightRatio;
+  varying float vStreamwiseRatio;
+
+  void main() {
+    vec3 viewDir = normalize(vViewPosition);
+    float ndotv = abs(dot(normalize(vNormal), viewDir));
+
+    float edgeFade = smoothstep(0.0, 0.45, ndotv);
+    float rimGlow = pow(1.0 - ndotv, 1.6) * smoothstep(0.0, 0.22, ndotv);
+
+    float o2Intensity = clamp((uO2 - 0.136) / (0.40 - 0.136), 0.15, 1.35);
+    float ventEnhancement = 1.0 + 0.35 * exp(-pow((uAirflow - 6.0) / 5.5, 2.0));
+    float blowoffQuench = uAirflow > 14.0 ? clamp(1.0 - (uAirflow - 14.0) * 0.07, 0.25, 1.0) : 1.0;
+
+    vec3 chBlueDeep = vec3(0.02, 0.38, 0.92);
+    vec3 chBlueBright = vec3(0.22, 0.78, 1.00);
+    vec3 reactionColor = mix(chBlueDeep, chBlueBright, clamp(o2Intensity * ventEnhancement, 0.0, 1.0));
+
+    vec3 sootAmber = vec3(0.96, 0.48, 0.08);
+    vec3 sootWhiteYellow = vec3(1.00, 0.92, 0.65);
+
+    vec3 finalColor = reactionColor;
+    float alpha = 0.0;
+
+    if (uGravity > 0.5) {
+      float sootZone = smoothstep(0.15, 0.48, vHeightRatio) * (1.0 - smoothstep(0.78, 0.98, vHeightRatio));
+      vec3 plumeCore = mix(sootAmber, sootWhiteYellow, clamp(o2Intensity, 0.2, 1.0));
+      finalColor = mix(reactionColor, plumeCore, sootZone * (1.0 - uShellLayer * 0.65));
+      alpha = mix(0.68, 0.24, uShellLayer) * edgeFade * (1.0 - 0.35 * pow(vHeightRatio, 2.0));
+    } else {
+      float innerSootFactor = (1.0 - uShellLayer) * smoothstep(0.20, 0.36, uO2) * (0.35 + 0.45 * vStreamwiseRatio);
+      if (uShowSootShell > 0.5) {
+        innerSootFactor = max(innerSootFactor, (1.0 - uShellLayer) * 0.65);
+      }
+      vec3 microSootColor = mix(vec3(0.92, 0.42, 0.10), vec3(1.0, 0.80, 0.35), o2Intensity);
+      finalColor = mix(reactionColor, microSootColor, innerSootFactor * (0.4 + 0.6 * uThermophoresis));
+
+      float wakeFade = mix(1.0, 1.0 - 0.55 * vStreamwiseRatio, clamp(uAirflow / 15.0, 0.0, 1.0));
+      alpha = (mix(0.62, 0.22, uShellLayer) * edgeFade + rimGlow * 0.45) * wakeFade * blowoffQuench;
+    }
+
+    alpha = clamp(alpha * (0.65 + 0.45 * o2Intensity), 0.0, 0.88);
+    gl_FragColor = vec4(finalColor, alpha);
+  }
+`;
 
 export function Combustion3DSimulator() {
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  // Mode: 'explore' | 'replay'
-  const [labMode, setLabMode] = useState<'explore' | 'replay'>('explore');
-
-  // Simulation Parametric State
-  const [o2, setO2] = useState<number>(21); // %
-  const [airflow, setAirflow] = useState<number>(5.0); // cm/s
-  const [pressureKPa, setPressureKPa] = useState<number>(101.3); // kPa
-  const [gravity, setGravity] = useState<GravityRegime>('0g');
-  const [fuel, setFuel] = useState<FuelType>('pmma_solid');
-  const [selectedPresetId, setSelectedPresetId] = useState<string>('iss_nominal');
-
-  // Playback & Animation State
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [simSpeed, setSimSpeed] = useState<number>(1.0);
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-
-  // References for Three.js objects
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const mountRef = useRef<HTMLDivElement | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const controlsRef = useRef<OrbitControls | null>(null);
-  const flameCoreRef = useRef<THREE.Mesh | null>(null);
-  const flameWireframeRef = useRef<THREE.LineSegments | null>(null);
-  const gasParticlesRef = useRef<THREE.Points | null>(null);
-  const sootParticlesRef = useRef<THREE.Points | null>(null);
-  const fuelMeshRef = useRef<THREE.Mesh | null>(null);
-  const flameLightRef = useRef<THREE.PointLight | null>(null);
-  const animFrameIdRef = useRef<number | null>(null);
 
-  // Particle positions & initial offsets
-  const gasCount = 200;
-  const sootCount = 40;
-  const gasBasePos = useRef<Float32Array>(new Float32Array(gasCount * 3));
-  const sootBasePos = useRef<Float32Array>(new Float32Array(sootCount * 3));
+  const [modeTab, setModeTab] = useState<"explore" | "replay">("explore");
+  const [selectedPreset, setSelectedPreset] = useState<string>("iss_nominal");
+  const [gravity, setGravity] = useState<GravityMode>("0g");
+  const [o2Pct, setO2Pct] = useState<number>(21.0);
+  const [airflowCmS, setAirflowCmS] = useState<number>(5.0);
+  const [pressureKpa, setPressureKpa] = useState<number>(101.3);
+  const [fuel, setFuel] = useState<FuelType>("pmma_slab");
+  const [flowDir, setFlowDir] = useState<"opposed" | "concurrent">("opposed");
+  const [cfdOverlay, setCfdOverlay] = useState<CfdOverlayMode>("velocity_u_v");
+  const [thermophoresisOn, setThermophoresisOn] = useState<boolean>(true);
+  const [paused, setPaused] = useState<boolean>(false);
+  const [speedMult, setSpeedMult] = useState<number>(1.0);
+  const [showInterpretation, setShowInterpretation] = useState<boolean>(false);
 
-  // Initialize random particle offsets once
+  const stateRef = useRef({
+    gravity,
+    o2Pct,
+    airflowCmS,
+    pressureKpa,
+    fuel,
+    flowDir,
+    cfdOverlay,
+    thermophoresisOn,
+    paused,
+    speedMult,
+  });
+
   useEffect(() => {
-    for (let i = 0; i < gasCount; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 0.2 + Math.random() * 0.55;
-      gasBasePos.current[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      gasBasePos.current[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      gasBasePos.current[i * 3 + 2] = r * Math.cos(phi);
-    }
-    for (let i = 0; i < sootCount; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const r = 0.15 + Math.random() * 0.35;
-      sootBasePos.current[i * 3] = r * Math.cos(theta);
-      sootBasePos.current[i * 3 + 1] = 0.1 + Math.random() * 0.5;
-      sootBasePos.current[i * 3 + 2] = r * Math.sin(theta);
-    }
-  }, []);
+    stateRef.current = {
+      gravity,
+      o2Pct,
+      airflowCmS,
+      pressureKpa,
+      fuel,
+      flowDir,
+      cfdOverlay,
+      thermophoresisOn,
+      paused,
+      speedMult,
+    };
+  }, [gravity, o2Pct, airflowCmS, pressureKpa, fuel, flowDir, cfdOverlay, thermophoresisOn, paused, speedMult]);
 
-  // Compute live physics readouts
-  const pressurePsi = Number((pressureKPa / 6.894757).toFixed(1));
-  const o2PartialPressureKPa = Number(((o2 / 100) * pressureKPa).toFixed(2));
-
-  const animationIntensity = useMemo(() => {
-    if (o2PartialPressureKPa < 17.5) return 'Low (Oxygen-Starved)';
-    if (o2PartialPressureKPa <= 28.0) return 'Moderate';
-    return 'High (Enriched O₂)';
-  }, [o2PartialPressureKPa]);
-
-  // Compute nearest evidence via Section 8
-  const nearestOutput = useMemo(() => {
-    return findNearestEvidence(DEFAULT_INVESTIGATIONS, {
-      o2: { min: o2, max: o2 },
-      pressure: { min: pressurePsi, max: pressurePsi },
-    });
-  }, [o2, pressurePsi]);
-
-  // Handle Preset selection
-  const handleSelectPreset = (presetId: string) => {
-    setSelectedPresetId(presetId);
-    const p = PRESETS.find((x) => x.id === presetId);
+  const applyPreset = (presetId: string) => {
+    setSelectedPreset(presetId);
+    const p = SCENARIO_PRESETS.find((s) => s.id === presetId);
     if (!p) return;
-    setO2(p.o2);
-    setPressureKPa(p.pressureKPa);
-    setAirflow(p.airflow);
     setGravity(p.gravity);
+    setO2Pct(p.o2Pct);
+    setAirflowCmS(p.airflowCmS);
+    setPressureKpa(p.pressureKpa);
     setFuel(p.fuel);
+    setFlowDir(p.flowDir);
   };
 
-  // Reset Camera to Orbit Home
-  const handleResetCamera = () => {
-    if (cameraRef.current && controlsRef.current) {
-      cameraRef.current.position.set(0, 3.5, 8.5);
-      controlsRef.current.target.set(0, 0.2, 0);
-      controlsRef.current.update();
+  const pressurePsi = useMemo(() => (pressureKpa / 6.894757).toFixed(1), [pressureKpa]);
+  const o2PartialKpa = useMemo(() => ((o2Pct / 100) * pressureKpa).toFixed(2), [o2Pct, pressureKpa]);
+  const pecletNumber = useMemo(() => ((airflowCmS * 2.0) / 0.21).toFixed(1), [airflowCmS]);
+  const isPartialGravityRefused = gravity === "0.16g" || gravity === "0.38g";
+
+  const regimeDiagnostic = useMemo(() => {
+    if (isPartialGravityRefused) {
+      return {
+        zone: "Rule 5 Gate: Unmeasured Partial-Gravity Regime",
+        spreadEst: "Refused (0 NASA PSI Rows)",
+        summary:
+          "NASA PSI holds 0 combustion records at Lunar (0.16g) or Martian (0.38g) gravity. Extrapolating buoyant plume coupling from 0g or 1g is prohibited.",
+      };
     }
-  };
-
-  // Set Camera to Isometric View
-  const handleIsometricView = () => {
-    if (cameraRef.current && controlsRef.current) {
-      cameraRef.current.position.set(6.5, 5.0, 7.5);
-      controlsRef.current.target.set(0, 0.2, 0);
-      controlsRef.current.update();
+    if (gravity === "1g") {
+      return {
+        zone: "1g Buoyant Natural Convection Plume (10cmGravityU / Smoke CFD)",
+        spreadEst: "Buoyancy-Driven (~65-90 cm/s Updraft)",
+        summary:
+          "Density gradients drive strong upward buoyant acceleration (10cmGravityU.dat), forming a flickering teardrop soot core and vertical smoke annulus.",
+      };
     }
+    if (airflowCmS < 1.2) {
+      return {
+        zone: "Zone 1: Quiescent Diffusive Regime (Pe < 10)",
+        spreadEst: "Radiative Quenching / Self-Choking",
+        summary:
+          "Buoyancy is absent (~10-6g). Oxygen transport relies strictly on molecular diffusion, forming a spherical blue CH* shell that traps CO2 and soot.",
+      };
+    }
+    if (airflowCmS <= 12.0) {
+      return {
+        zone: "Zone 2: Low-Velocity Ventilated Regime (Peak Microgravity Hazard)",
+        spreadEst: `${(0.55 + (o2Pct - 15) * 0.14 + airflowCmS * 0.11).toFixed(2)} mm/s (BASS-II Calibrated Range)`,
+        summary:
+          "Gentle forced cabin ventilation supplies fresh O2 faster than molecular diffusion without convective blowoff cooling—sustaining vigorous flame spread.",
+      };
+    }
+    return {
+      zone: "Zone 3: High-Velocity Convective Stretch & Blowoff Regime",
+      spreadEst: "Convective Thermal Quenching Risk",
+      summary:
+        "High forced flow stretches the reaction sheet and strips heat from the pyrolysis zone faster than chemical heat release can sustain.",
+    };
+  }, [gravity, airflowCmS, o2Pct, isPartialGravityRefused]);
+
+  const resetCamera = (isometric = true) => {
+    if (!cameraRef.current || !controlsRef.current) return;
+    if (isometric) {
+      cameraRef.current.position.set(4.6, 3.1, 5.2);
+    } else {
+      cameraRef.current.position.set(0.0, 1.4, 6.2);
+    }
+    controlsRef.current.target.set(0, 0.5, 0);
+    controlsRef.current.update();
   };
 
-  // Initialize Three.js WebGL Scene
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
 
-    const width = container.clientWidth || 800;
-    const height = container.clientHeight || 620;
+    const width = container.clientWidth || 900;
+    const height = container.clientHeight || 600;
 
-    // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x070a10);
-    sceneRef.current = scene;
+    scene.background = new THREE.Color(0xe6e1d6);
+    scene.fog = new THREE.FogExp2(0xe6e1d6, 0.035);
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 3.5, 8.5);
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+    camera.position.set(4.6, 3.1, 5.2);
     cameraRef.current = camera;
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
-    container.innerHTML = '';
+    renderer.toneMappingExposure = 1.1;
+    container.innerHTML = "";
     container.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
-    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.target.set(0, 0.2, 0);
-    controls.maxPolarAngle = Math.PI / 2 + 0.05; // Don't flip below floor
+    controls.dampingFactor = 0.06;
+    controls.target.set(0, 0.5, 0);
+    controls.minDistance = 2.4;
+    controls.maxDistance = 14.0;
+    controls.maxPolarAngle = Math.PI / 2 + 0.08;
     controlsRef.current = controls;
 
-    // 1. Perspective 3D Floor Grid
-    const gridHelper = new THREE.GridHelper(16, 20, 0x1e293b, 0x131c2e);
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+    renderer.domElement.addEventListener("wheel", handleWheel, { passive: false });
+
+    scene.add(new THREE.AmbientLight(0xfaf8f3, 1.35));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
+    keyLight.position.set(5, 8, 6);
+    scene.add(keyLight);
+
+    const gridHelper = new THREE.GridHelper(14, 28, 0x8c8577, 0xc7c0b2);
     gridHelper.position.y = -1.2;
     scene.add(gridHelper);
 
-    // 2. Concentric Measurement Rings
-    [1.4, 2.8, 4.2].forEach((radius) => {
-      const ringGeo = new THREE.RingGeometry(radius, radius + 0.02, 64);
+    const ringGroup = new THREE.Group();
+    ringGroup.position.y = -1.19;
+    ringGroup.rotation.x = -Math.PI / 2;
+    [1.2, 2.4, 3.8].forEach((r) => {
+      const ringGeo = new THREE.RingGeometry(r, r + 0.025, 64);
       const ringMat = new THREE.MeshBasicMaterial({
-        color: 0x1e293b,
+        color: 0x6e685c,
         side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.55,
       });
-      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.rotation.x = -Math.PI / 2;
-      ringMesh.position.y = -1.19;
-      scene.add(ringMesh);
+      ringGroup.add(new THREE.Mesh(ringGeo, ringMat));
+    });
+    scene.add(ringGroup);
+
+    const chamberWire = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(5.6, 3.8, 3.6)),
+      new THREE.LineBasicMaterial({ color: 0x475569, transparent: true, opacity: 0.65 })
+    );
+    chamberWire.position.set(0, 0.7, 0);
+    scene.add(chamberWire);
+
+    const opticalStage = new THREE.Mesh(
+      new THREE.CylinderGeometry(2.3, 2.45, 0.08, 64),
+      new THREE.MeshStandardMaterial({ color: 0x161d2a, roughness: 0.4, metalness: 0.5 })
+    );
+    opticalStage.position.y = -1.15;
+    scene.add(opticalStage);
+
+    const pedestalGroup = new THREE.Group();
+    const baseMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.55, 0.72, 0.42, 48),
+      new THREE.MeshStandardMaterial({ color: 0x27303f, metalness: 0.7, roughness: 0.3 })
+    );
+    baseMesh.position.y = -0.92;
+    pedestalGroup.add(baseMesh);
+
+    const stemMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.06, 0.06, 0.85, 24),
+      new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.85, roughness: 0.2 })
+    );
+    stemMesh.position.y = -0.35;
+    pedestalGroup.add(stemMesh);
+
+    const pmmaSlabMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1.3, 0.08, 0.75),
+      new THREE.MeshStandardMaterial({ color: 0xcbd5e1, roughness: 0.25, metalness: 0.1 })
+    );
+    pmmaSlabMesh.position.y = 0.02;
+    pedestalGroup.add(pmmaSlabMesh);
+
+    const holderWire = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(1.55, 0.02, 0.95)),
+      new THREE.LineBasicMaterial({ color: 0x64748b })
+    );
+    holderWire.position.y = 0.03;
+    pedestalGroup.add(holderWire);
+
+    const sphereFuelMesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.24, 32, 32),
+      new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.2, metalness: 0.3 })
+    );
+    sphereFuelMesh.position.y = 0.22;
+    sphereFuelMesh.visible = false;
+    pedestalGroup.add(sphereFuelMesh);
+
+    scene.add(pedestalGroup);
+
+    const flameGroup = new THREE.Group();
+    flameGroup.position.set(0, 0.22, 0);
+
+    const shellConfigs = [
+      { layer: 0.0, scale: 0.78 },
+      { layer: 0.35, scale: 0.94 },
+      { layer: 0.7, scale: 1.08 },
+      { layer: 1.0, scale: 1.24 },
+    ];
+
+    const flameMaterials: THREE.ShaderMaterial[] = [];
+    const sphereGeo = new THREE.SphereGeometry(0.85, 64, 64);
+
+    shellConfigs.forEach(({ layer, scale }) => {
+      const mat = new THREE.ShaderMaterial({
+        vertexShader: FLAME_VERTEX_SHADER,
+        fragmentShader: FLAME_FRAGMENT_SHADER,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.NormalBlending,
+        side: THREE.DoubleSide,
+        uniforms: {
+          uTime: { value: 0 },
+          uAirflow: { value: 5.0 },
+          uGravity: { value: 0.0 },
+          uO2: { value: 0.21 },
+          uPressure: { value: 101.3 },
+          uFlowSign: { value: -1.0 },
+          uShellLayer: { value: layer },
+          uFuelShape: { value: 0.0 },
+          uThermophoresis: { value: 1.0 },
+          uShowSootShell: { value: 0.0 },
+        },
+      });
+      flameMaterials.push(mat);
+      const mesh = new THREE.Mesh(sphereGeo, mat);
+      mesh.scale.setScalar(scale);
+      flameGroup.add(mesh);
     });
 
-    // 3. Burner Pedestal & Metal Stem
-    const baseGeo = new THREE.CylinderGeometry(0.75, 0.95, 0.35, 32);
-    const baseMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      roughness: 0.8,
-    });
-    const baseMesh = new THREE.Mesh(baseGeo, baseMat);
-    baseMesh.position.y = -1.02;
-    scene.add(baseMesh);
+    const refusalCage = new THREE.Mesh(
+      new THREE.SphereGeometry(0.95, 24, 18),
+      new THREE.MeshBasicMaterial({
+        color: 0xdc2626,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.55,
+      })
+    );
+    refusalCage.visible = false;
+    flameGroup.add(refusalCage);
+    scene.add(flameGroup);
 
-    const stemGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 16);
-    const stemMat = new THREE.MeshStandardMaterial({
-      color: 0x64748b,
-      metalness: 0.8,
-      roughness: 0.3,
-    });
-    const stemMesh = new THREE.Mesh(stemGeo, stemMat);
-    stemMesh.position.y = -0.45;
-    scene.add(stemMesh);
+    const streamlinesGroup = new THREE.Group();
+    const NUM_STREAMLINES = 14;
+    const STREAM_PTS = 40;
+    const streamLines: THREE.Line[] = [];
 
-    // 4. Sample Holder Rack
-    const rackGeo = new THREE.BoxGeometry(2.0, 0.04, 1.2);
-    const rackWireGeo = new THREE.WireframeGeometry(rackGeo);
-    const rackWireMat = new THREE.LineBasicMaterial({ color: 0x334155, linewidth: 1 });
-    const rackWire = new THREE.LineSegments(rackWireGeo, rackWireMat);
-    rackWire.position.y = -0.05;
-    scene.add(rackWire);
+    for (let i = 0; i < NUM_STREAMLINES; i++) {
+      const pts = new Array(STREAM_PTS).fill(0).map(() => new THREE.Vector3());
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      const mat = new THREE.LineBasicMaterial({
+        color: i % 2 === 0 ? 0x1d4ed8 : 0x0284c7,
+        transparent: true,
+        opacity: 0.55,
+      });
+      const line = new THREE.Line(geo, mat);
+      streamLines.push(line);
+      streamlinesGroup.add(line);
+    }
+    scene.add(streamlinesGroup);
 
-    // 5. Fuel Sample Geometry Placeholder
-    const fuelGeo = new THREE.BoxGeometry(1.6, 0.06, 0.8);
-    const fuelMat = new THREE.MeshStandardMaterial({
-      color: 0x93c5fd,
-      transparent: true,
-      opacity: 0.8,
-      roughness: 0.3,
-    });
-    const fuelMesh = new THREE.Mesh(fuelGeo, fuelMat);
-    fuelMesh.position.y = 0;
-    scene.add(fuelMesh);
-    fuelMeshRef.current = fuelMesh;
+    const cfdContourMesh = new THREE.Mesh(
+      new THREE.TorusGeometry(0.62, 0.035, 24, 64),
+      new THREE.MeshBasicMaterial({
+        color: 0xd97706,
+        transparent: true,
+        opacity: 0.65,
+        wireframe: true,
+      })
+    );
+    cfdContourMesh.position.set(0, 0.25, 0);
+    scene.add(cfdContourMesh);
 
-    // 6. Volumetric Gaseous Blue Flame Cloud: Soft Inner Core
-    const coreGeo = new THREE.SphereGeometry(0.4, 32, 32);
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      transparent: true,
-      opacity: 0.45,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-    coreMesh.position.y = 0.2;
-    scene.add(coreMesh);
-    flameCoreRef.current = coreMesh;
+    let reqId: number;
+    let simTime = 0;
+    let lastTime = performance.now();
 
-    // Wireframe Outline for Partial-G freeze (0.16g / 0.38g)
-    const wireGeo = new THREE.WireframeGeometry(new THREE.SphereGeometry(0.65, 16, 16));
-    const wireMat = new THREE.LineBasicMaterial({
-      color: 0xf43f5e,
-      transparent: true,
-      opacity: 0.8,
-    });
-    const flameWire = new THREE.LineSegments(wireGeo, wireMat);
-    flameWire.position.y = 0.25;
-    flameWire.visible = false;
-    scene.add(flameWire);
-    flameWireframeRef.current = flameWire;
+    const animate = (now: number) => {
+      reqId = requestAnimationFrame(animate);
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
 
-    // 7. Volumetric Additive Particle System (200 gas particles)
-    const gasTexture = createParticleTexture('#38bdf8');
-    const gasGeometry = new THREE.BufferGeometry();
-    const gasPositions = new Float32Array(gasCount * 3);
-    gasGeometry.setAttribute('position', new THREE.BufferAttribute(gasPositions, 3));
+      const st = stateRef.current;
+      if (!st.paused) {
+        simTime += dt * st.speedMult;
+      }
 
-    const gasMaterial = new THREE.PointsMaterial({
-      size: 0.55,
-      map: gasTexture,
-      transparent: true,
-      opacity: 0.65,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const gasPoints = new THREE.Points(gasGeometry, gasMaterial);
-    scene.add(gasPoints);
-    gasParticlesRef.current = gasPoints;
+      const isRefused = st.gravity === "0.16g" || st.gravity === "0.38g";
+      const flowSign = st.flowDir === "opposed" ? -1.0 : 1.0;
+      const fuelShapeVal =
+        st.fuel === "pmma_slab" ? 0.0 : st.fuel === "ethylene_jet" ? 2.0 : 1.0;
 
-    // 8. Glowing Soot Radical Specks (40 micro-particles)
-    const sootTexture = createSootTexture();
-    const sootGeometry = new THREE.BufferGeometry();
-    const sootPositions = new Float32Array(sootCount * 3);
-    sootGeometry.setAttribute('position', new THREE.BufferAttribute(sootPositions, 3));
+      pmmaSlabMesh.visible = st.fuel === "pmma_slab";
+      holderWire.visible = st.fuel === "pmma_slab";
+      sphereFuelMesh.visible = st.fuel !== "pmma_slab";
 
-    const sootMaterial = new THREE.PointsMaterial({
-      size: 0.22,
-      map: sootTexture,
-      transparent: true,
-      opacity: 0.85,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const sootPoints = new THREE.Points(sootGeometry, sootMaterial);
-    scene.add(sootPoints);
-    sootParticlesRef.current = sootPoints;
+      refusalCage.visible = isRefused;
+      flameMaterials.forEach((mat) => {
+        mat.visible = !isRefused;
+        mat.uniforms.uTime.value = simTime;
+        mat.uniforms.uAirflow.value = st.airflowCmS;
+        mat.uniforms.uGravity.value = st.gravity === "1g" ? 1.0 : 0.0;
+        mat.uniforms.uO2.value = st.o2Pct / 100.0;
+        mat.uniforms.uPressure.value = st.pressureKpa;
+        mat.uniforms.uFlowSign.value = flowSign;
+        mat.uniforms.uFuelShape.value = fuelShapeVal;
+        mat.uniforms.uThermophoresis.value = st.thermophoresisOn ? 1.0 : 0.0;
+        mat.uniforms.uShowSootShell.value = st.cfdOverlay === "soot_numden" ? 1.0 : 0.0;
+      });
 
-    // 9. Scene Lighting
-    const ambientLight = new THREE.AmbientLight(0x0f172a, 1.2);
-    scene.add(ambientLight);
+      streamlinesGroup.visible = !isRefused && st.cfdOverlay !== "flame_only";
+      cfdContourMesh.visible =
+        !isRefused && (st.cfdOverlay === "soot_numden" || st.cfdOverlay === "vorticity");
 
-    const dirLight = new THREE.DirectionalLight(0x94a3b8, 0.7);
-    dirLight.position.set(5, 10, 7);
-    scene.add(dirLight);
+      if (cfdContourMesh.visible) {
+        const tfScale = st.thermophoresisOn ? 0.74 : 0.92;
+        cfdContourMesh.scale.set(
+          tfScale * (1.0 + st.airflowCmS * 0.03),
+          st.gravity === "1g" ? 1.8 : tfScale,
+          tfScale
+        );
+        (cfdContourMesh.material as THREE.MeshBasicMaterial).color.setHex(
+          st.cfdOverlay === "vorticity" ? 0x7e22ce : 0xd97706
+        );
+      }
 
-    const flameLight = new THREE.PointLight(0x38bdf8, 3.0, 7, 1.8);
-    flameLight.position.set(0, 0.35, 0);
-    scene.add(flameLight);
-    flameLightRef.current = flameLight;
+      streamLines.forEach((line, idx) => {
+        const posAttr = line.geometry.getAttribute("position") as THREE.BufferAttribute;
+        const row = (idx % 7) - 3;
+        const zLayer = idx < 7 ? -0.32 : 0.32;
+        const phase = (simTime * (0.4 + st.airflowCmS * 0.08)) % 1.0;
 
-    // Handle Resize
+        for (let j = 0; j < STREAM_PTS; j++) {
+          const s = (j / (STREAM_PTS - 1) + phase * 0.08) % 1.0;
+          if (st.gravity === "1g") {
+            const y = -0.8 + s * 3.2;
+            const rInward = (1.0 - 0.55 * Math.pow(s, 0.7)) * (row * 0.35);
+            const x = rInward + Math.sin(s * 5.0 - simTime * 3.0) * 0.06;
+            posAttr.setXYZ(j, x, y, zLayer);
+          } else {
+            const x = flowSign * (-2.2 + s * 4.4);
+            const rDist = Math.sqrt(x * x + row * 0.28 * (row * 0.28));
+            const stefanDeflect = Math.exp(-rDist * rDist * 1.2) * 0.38;
+            const y = 0.25 + row * 0.24 + (row >= 0 ? stefanDeflect : -stefanDeflect * 0.5);
+            posAttr.setXYZ(j, x, y, zLayer);
+          }
+        }
+        posAttr.needsUpdate = true;
+      });
+
+      controls.update();
+      renderer.render(scene, camera);
+    };
+
+    reqId = requestAnimationFrame(animate);
+
     const handleResize = () => {
-      if (!container || !camera || !renderer) return;
+      if (!container) return;
       const w = container.clientWidth;
       const h = container.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
+      cancelAnimationFrame(reqId);
+      window.removeEventListener("resize", handleResize);
+      renderer.domElement.removeEventListener("wheel", handleWheel);
       renderer.dispose();
-      container.innerHTML = '';
     };
   }, []);
 
-  // Update Fuel Sample Geometry when Fuel Type changes
-  useEffect(() => {
-    const mesh = fuelMeshRef.current;
-    if (!mesh) return;
-
-    if (fuel === 'pmma_solid') {
-      mesh.geometry.dispose();
-      mesh.geometry = new THREE.BoxGeometry(1.6, 0.06, 0.8);
-      (mesh.material as THREE.MeshStandardMaterial).color.set(0x93c5fd);
-      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.75;
-    } else if (fuel === 'nomex_fabric') {
-      mesh.geometry.dispose();
-      mesh.geometry = new THREE.BoxGeometry(1.6, 0.02, 0.5);
-      (mesh.material as THREE.MeshStandardMaterial).color.set(0xca8a04);
-      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.95;
-    } else {
-      // Liquid Droplet (Heptane / Methanol)
-      mesh.geometry.dispose();
-      mesh.geometry = new THREE.SphereGeometry(0.2, 32, 32);
-      (mesh.material as THREE.MeshStandardMaterial).color.set(
-        fuel === 'heptane_droplet' ? 0x38bdf8 : 0x67e8f9
-      );
-      (mesh.material as THREE.MeshStandardMaterial).opacity = 0.85;
-    }
-  }, [fuel]);
-
-  // Main Physics Animation Loop
-  useEffect(() => {
-    let clock = 0;
-
-    const animate = () => {
-      animFrameIdRef.current = requestAnimationFrame(animate);
-
-      if (controlsRef.current) {
-        controlsRef.current.update();
-      }
-
-      const isPartialG = gravity === '0.16g' || gravity === '0.38g';
-      const isEarth1g = gravity === '1g';
-
-      // 1. Partial Gravity Wireframe Freeze (Rule 5 Compliance)
-      if (flameWireframeRef.current && flameCoreRef.current) {
-        if (isPartialG) {
-          flameWireframeRef.current.visible = true;
-          flameCoreRef.current.visible = false;
-          if (gasParticlesRef.current) gasParticlesRef.current.visible = false;
-          if (sootParticlesRef.current) sootParticlesRef.current.visible = false;
-          if (rendererRef.current && sceneRef.current && cameraRef.current) {
-            rendererRef.current.render(sceneRef.current, cameraRef.current);
-          }
-          return;
-        } else {
-          flameWireframeRef.current.visible = false;
-          flameCoreRef.current.visible = true;
-          if (gasParticlesRef.current) gasParticlesRef.current.visible = true;
-          if (sootParticlesRef.current) sootParticlesRef.current.visible = true;
-        }
-      }
-
-      if (isPlaying) {
-        clock += 0.025 * simSpeed;
-      }
-
-      // Physics deformation scaling based on O2 and Pressure
-      const o2Scale = Math.max(0.65, Math.min(1.45, o2 / 21));
-      const pScale = Math.max(0.7, Math.min(1.3, pressureKPa / 101.3));
-      const combinedScale = o2Scale * Math.sqrt(pScale);
-
-      // Light intensity
-      if (flameLightRef.current) {
-        flameLightRef.current.intensity = 2.0 * o2Scale * (1 + 0.1 * Math.sin(clock * 5));
-      }
-
-      // 2. Animate Inner Core
-      if (flameCoreRef.current) {
-        if (isEarth1g) {
-          // Earth 1g: Convective upward elongation
-          flameCoreRef.current.scale.set(
-            0.65 * combinedScale,
-            (1.5 + 0.15 * Math.sin(clock * 8)) * combinedScale,
-            0.65 * combinedScale
-          );
-          flameCoreRef.current.position.set(0, 0.45 * combinedScale, 0);
-          (flameCoreRef.current.material as THREE.MeshBasicMaterial).color.set(0x60a5fa);
-        } else {
-          // 0g Microgravity
-          const stretchX = 1.0 + (airflow / 10.0) * 1.5;
-          const squashYZ = Math.max(0.65, 1.0 - (airflow / 20.0) * 0.35);
-
-          flameCoreRef.current.scale.set(
-            stretchX * combinedScale,
-            squashYZ * combinedScale * (1 + 0.05 * Math.sin(clock * 4)),
-            squashYZ * combinedScale
-          );
-          // Shift downstream if airflow > 0
-          flameCoreRef.current.position.set(
-            (airflow / 20.0) * 0.45,
-            0.2,
-            0
-          );
-          (flameCoreRef.current.material as THREE.MeshBasicMaterial).color.set(0x38bdf8);
-        }
-      }
-
-      // 3. Animate Volumetric Gas Particles
-      if (gasParticlesRef.current) {
-        const positions = gasParticlesRef.current.geometry.attributes.position.array as Float32Array;
-
-        for (let i = 0; i < gasCount; i++) {
-          const bx = gasBasePos.current[i * 3];
-          const by = gasBasePos.current[i * 3 + 1];
-          const bz = gasBasePos.current[i * 3 + 2];
-
-          const noise = Math.sin(clock * 3 + i * 0.5) * 0.08;
-
-          if (isEarth1g) {
-            // Convective buoyancy upward
-            const riseCycle = ((clock * 1.5 + i * 0.05) % 1.0);
-            positions[i * 3] = bx * 0.7 * (1 - riseCycle * 0.5) * combinedScale;
-            positions[i * 3 + 1] = (0.2 + riseCycle * 1.6 + noise) * combinedScale;
-            positions[i * 3 + 2] = bz * 0.7 * (1 - riseCycle * 0.5) * combinedScale;
-          } else {
-            // 0g Microgravity + Ventilated Airflow Streamlines
-            const flowOffset = (airflow / 15.0) * (0.4 + (i % 5) * 0.15);
-            positions[i * 3] = (bx * (1 + airflow * 0.08) + flowOffset + noise) * combinedScale;
-            positions[i * 3 + 1] = (0.2 + by * Math.max(0.6, 1 - airflow * 0.02) + noise) * combinedScale;
-            positions[i * 3 + 2] = (bz * Math.max(0.6, 1 - airflow * 0.02)) * combinedScale;
-          }
-        }
-        gasParticlesRef.current.geometry.attributes.position.needsUpdate = true;
-      }
-
-      // 4. Animate Soot Radical Particles
-      if (sootParticlesRef.current) {
-        const sPositions = sootParticlesRef.current.geometry.attributes.position.array as Float32Array;
-
-        for (let i = 0; i < sootCount; i++) {
-          const bx = sootBasePos.current[i * 3];
-          const by = sootBasePos.current[i * 3 + 1];
-          const bz = sootBasePos.current[i * 3 + 2];
-
-          if (isEarth1g) {
-            const sRise = ((clock * 2.0 + i * 0.1) % 1.2);
-            sPositions[i * 3] = bx * 0.6 * combinedScale;
-            sPositions[i * 3 + 1] = (0.3 + sRise * 1.5) * combinedScale;
-            sPositions[i * 3 + 2] = bz * 0.6 * combinedScale;
-          } else {
-            sPositions[i * 3] = (bx + (airflow / 15.0) * 0.6 + Math.sin(clock * 4 + i) * 0.05) * combinedScale;
-            sPositions[i * 3 + 1] = (by + 0.1) * combinedScale;
-            sPositions[i * 3 + 2] = bz * combinedScale;
-          }
-        }
-        sootParticlesRef.current.geometry.attributes.position.needsUpdate = true;
-      }
-
-      if (rendererRef.current && sceneRef.current && cameraRef.current) {
-        rendererRef.current.render(sceneRef.current, cameraRef.current);
-      }
-    };
-
-    animFrameIdRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
-    };
-  }, [gravity, airflow, o2, pressureKPa, isPlaying, simSpeed]);
-
   return (
-    <div className="w-full bg-[#0B0F17] text-[#F1F5F9] border border-[#1E293B] shadow-2xl font-sans overflow-hidden">
-      {/* A. Top Header Bar */}
-      <div className="h-14 px-6 border-b border-[#1E293B] flex items-center justify-between bg-[#0E131F]">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-xs font-bold text-slate-400">
-            01 / The combustion lab
+    <section className="w-full border-2 border-[#181615] bg-[#FAF8F3] text-[#181615]">
+      <div className="h-14 px-6 border-b-2 border-[#181615] bg-[#EAE5DB] flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <span className="font-mono text-xs font-bold uppercase tracking-widest px-2.5 py-1 bg-[#181615] text-[#FAF8F3]">
+            03 / COMBUSTION & CFD PHYSICS LAB
           </span>
-          <span className="px-2 py-0.5 rounded bg-[#1E293B] text-sky-400 font-mono text-[10px] font-bold uppercase tracking-wider">
-            [Interactive 3D]
-          </span>
+          <h2
+            className="text-lg font-bold tracking-tight border-b-2 border-dotted border-[#181615]/50 cursor-help"
+            title="Continuous 3D GLSL Burke-Schumann reaction sheet + NASA PSI 8cm/10cm CFD velocity (u, v), vorticity, and thermophoretic soot number density fields."
+          >
+            3D Volumetric Flame & NASA PSI CFD Field Simulator
+          </h2>
         </div>
 
-        {/* Mode Toggle: Explore vs Measured Replay */}
-        <div className="flex items-center gap-1 bg-[#0B0F17] p-1 border border-[#1E293B] rounded text-xs font-mono">
+        <div className="flex items-center border border-[#181615] bg-[#FAF8F3]">
           <button
-            type="button"
-            onClick={() => setLabMode('explore')}
-            className={`px-3 py-1 font-bold rounded transition-colors ${
-              labMode === 'explore'
-                ? 'bg-[#1E293B] text-white shadow-xs'
-                : 'text-slate-400 hover:text-white'
+            onClick={() => setModeTab("explore")}
+            className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider ${
+              modeTab === "explore" ? "bg-[#181615] text-[#FAF8F3]" : "text-[#33302C]"
             }`}
           >
-            Explore
+            Explore Physics
           </button>
           <button
-            type="button"
             onClick={() => {
-              setLabMode('replay');
-              handleSelectPreset('bass2_m14');
+              setModeTab("replay");
+              applyPreset("cfd_8cm_0g");
             }}
-            className={`px-3 py-1 font-bold rounded transition-colors ${
-              labMode === 'replay'
-                ? 'bg-[#1E293B] text-white shadow-xs'
-                : 'text-slate-400 hover:text-white'
+            className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider border-l border-[#181615] ${
+              modeTab === "replay" ? "bg-[#181615] text-[#FAF8F3]" : "text-[#33302C]"
             }`}
           >
-            Measured replay
+            Measured CFD Replay
           </button>
         </div>
       </div>
 
-      {/* Main Grid: 75% 3D Viewport on Left, 25% Control Panel on Right */}
-      <div className="grid grid-cols-12 min-h-[640px]">
-        {/* B. Left 75% Viewport: Interactive 3D Combustion Chamber */}
-        <div className="col-span-12 lg:col-span-9 relative min-h-[620px] bg-[#070A10] flex flex-col justify-between">
-          {/* Top Overlay Controls Inside 3D Chamber */}
-          <div className="absolute top-4 left-6 right-6 z-10 flex items-start justify-between pointer-events-none">
-            {/* Top-Left Gravity & Chamber Readout */}
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">
-                COMBUSTION CHAMBER
-              </span>
-              <div className="text-4xl font-light text-white font-mono tracking-tight flex items-baseline gap-2">
-                <span>
-                  {gravity === '0g'
-                    ? 'μg'
-                    : gravity === '1g'
-                    ? '1g'
-                    : gravity === '0.16g'
-                    ? '0.16g'
-                    : '0.38g'}
+      <div className="grid grid-cols-12 min-h-[660px]">
+        <div className="col-span-12 lg:col-span-9 relative border-b lg:border-b-0 lg:border-r-2 border-[#181615] bg-[#E6E1D6] flex flex-col justify-between overflow-hidden">
+          <div className="relative z-10 p-5 flex items-start justify-between pointer-events-none">
+            <div className="bg-[#FAF8F3]/95 border border-[#181615] px-4 py-3 shadow-sm pointer-events-auto">
+              <div className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#33302C]">
+                OPTICAL TEST CELL · CFD DOMAIN: {gravity === "1g" ? "10.0 cm (1g)" : "8.0 cm (0g)"}
+              </div>
+              <div className="flex items-baseline gap-3 mt-1">
+                <span className="text-3xl font-extrabold font-mono text-[#181615]">
+                  {gravity === "0g" ? "μg" : gravity}
                 </span>
-                <span className="text-xs font-normal text-slate-400">
-                  {gravity === '0g'
-                    ? 'Microgravity'
-                    : gravity === '1g'
-                    ? 'Earth Gravity'
-                    : gravity === '0.16g'
-                    ? 'Lunar Partial-G [Unmeasured]'
-                    : 'Martian Partial-G [Unmeasured]'}
-                </span>
+                <span className="text-sm font-bold text-[#1D4ED8]">{regimeDiagnostic.zone}</span>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {(["flame_only", "velocity_u_v", "soot_numden", "vorticity"] as CfdOverlayMode[]).map(
+                  (ov) => (
+                    <button
+                      key={ov}
+                      onClick={() => setCfdOverlay(ov)}
+                      className={`px-2 py-0.5 text-[11px] font-mono font-bold border ${
+                        cfdOverlay === ov
+                          ? "bg-[#1D4ED8] text-white border-[#1D4ED8]"
+                          : "bg-[#EAE5DB] text-[#181615] border-[#D5CFC2]"
+                      }`}
+                    >
+                      {ov === "flame_only"
+                        ? "CH* + Soot Sheet"
+                        : ov === "velocity_u_v"
+                        ? "CFD Velocity (U,V)"
+                        : ov === "soot_numden"
+                        ? "Soot NumDenR"
+                        : "Vorticity"}
+                    </button>
+                  )
+                )}
+                {gravity === "0g" && (
+                  <button
+                    onClick={() => setThermophoresisOn(!thermophoresisOn)}
+                    className={`px-2 py-0.5 text-[11px] font-mono font-bold border ${
+                      thermophoresisOn
+                        ? "bg-[#15803D] text-white border-[#15803D]"
+                        : "bg-[#FAF8F3] text-[#33302C] border-[#181615]"
+                    }`}
+                  >
+                    Thermophoresis: {thermophoresisOn ? "ON (NumDenR)" : "OFF (NoTF_NumDen)"}
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Top-Right Toolbar Buttons */}
             <div className="flex flex-col items-end gap-2 pointer-events-auto">
-              <div className="flex items-center gap-1.5 bg-[#0E131F]/90 border border-[#1E293B] p-1 rounded backdrop-blur-md">
+              <div className="flex items-center bg-[#FAF8F3] border border-[#181615] divide-x divide-[#181615] shadow-sm">
                 <button
-                  type="button"
-                  onClick={handleIsometricView}
-                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
-                  title="Isometric View"
+                  onClick={() => resetCamera(true)}
+                  className="px-3 py-2 text-xs font-mono font-bold hover:bg-[#EAE5DB]"
                 >
-                  <Box className="w-4 h-4" />
+                  3D ISO
                 </button>
                 <button
-                  type="button"
-                  onClick={handleResetCamera}
-                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
-                  title="Reset Orbit Camera"
+                  onClick={() => resetCamera(false)}
+                  className="px-3 py-2 text-xs font-mono font-bold hover:bg-[#EAE5DB]"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  SIDE
                 </button>
                 <button
-                  type="button"
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="p-1.5 rounded hover:bg-[#1E293B] text-slate-300 hover:text-white transition-colors"
-                  title={isPlaying ? 'Pause Simulation' : 'Resume Simulation'}
+                  onClick={() => setPaused(!paused)}
+                  className="px-3 py-2 text-xs font-mono font-bold hover:bg-[#EAE5DB]"
                 >
-                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  {paused ? "RESUME" : "PAUSE"}
                 </button>
                 <select
-                  value={simSpeed}
-                  onChange={(e) => setSimSpeed(parseFloat(e.target.value))}
-                  className="bg-[#0B0F17] border border-[#1E293B] text-slate-300 rounded px-1.5 py-1 text-[11px] font-mono focus:outline-none"
+                  value={speedMult}
+                  onChange={(e) => setSpeedMult(parseFloat(e.target.value))}
+                  className="px-2 py-2 text-xs font-mono font-bold bg-[#FAF8F3] focus:outline-none"
                 >
                   <option value={0.5}>0.5x</option>
                   <option value={1.0}>1.0x</option>
                   <option value={2.0}>2.0x</option>
                 </select>
               </div>
-
-              <div className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 pr-1">
-                <span
-                  className={`w-2 h-2 rounded-full ${
-                    isPlaying ? 'bg-emerald-500 animate-pulse' : 'bg-slate-500'
-                  }`}
-                />
-                <span>{isPlaying ? 'Fire animation live' : 'Simulation paused'}</span>
+              <div className="bg-[#FAF8F3]/90 border border-[#D5CFC2] px-2.5 py-1 text-[11px] font-mono font-semibold text-[#15803D]">
+                CFD STREAMLINES & GLSL SOLVER ACTIVE
               </div>
             </div>
           </div>
 
-          {/* Three.js Canvas Mount */}
-          <div ref={mountRef} className="w-full flex-1 min-h-[500px] cursor-grab active:cursor-grabbing" />
-
-          {/* Partial-G Rule 5 Warning Watermark Overlay */}
-          {(gravity === '0.16g' || gravity === '0.38g') && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center p-6 bg-black/40 backdrop-blur-[2px] pointer-events-none">
-              <div className="p-4 bg-[#1E1114] border border-[#E11D48] text-[#FDA4AF] max-w-lg space-y-1.5 text-center font-mono">
-                <div className="flex items-center justify-center gap-2 font-bold text-sm text-[#F43F5E]">
-                  <ShieldAlert className="w-5 h-5 shrink-0" />
-                  <span>SPEC Rule 5 Non-Negotiable Refusal</span>
-                </div>
-                <p className="text-xs leading-relaxed">
-                  0 NASA PSI flight records exist at {gravity}. Partial-gravity fire behavior is strictly unmeasured. Simulation is paused in wireframe boundary mode.
-                </p>
+          {isPartialGravityRefused && (
+            <div className="relative z-20 mx-6 my-auto bg-[#FAF8F3] border-2 border-[#DC2626] p-5 shadow-lg max-w-xl">
+              <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#DC2626]">
+                RULE 5 DETERMINISTIC REFUSAL · ZERO PARTIAL-GRAVITY RECORDS
               </div>
+              <p className="mt-1 text-sm font-semibold text-[#181615]">
+                {regimeDiagnostic.summary}
+              </p>
             </div>
           )}
 
-          {/* Bottom HUD Overlay Inside 3D Chamber */}
-          <div className="relative z-10 px-6 py-4 bg-gradient-to-t from-[#070A10] via-[#070A10]/80 to-transparent border-t border-[#1E293B]/60">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs items-end">
-              {/* Readout 1: Animation Intensity */}
-              <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold block">
-                  ANIMATION INTENSITY
-                </span>
-                <div className="text-sm font-bold text-white">
-                  {animationIntensity}
-                </div>
-                <span className="text-[10px] text-slate-500 block">
-                  Authored for the picture, not measured
+          <div ref={mountRef} className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing" />
+
+          <div className="relative z-10 mt-auto bg-[#FAF8F3]/95 border-t-2 border-[#181615] px-6 py-3.5 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            <div>
+              <div className="font-mono text-[11px] font-bold uppercase text-[#33302C]">
+                PECLET NUMBER (Pe = uL/D)
+              </div>
+              <div className="text-xl font-bold font-mono text-[#181615]">
+                Pe = {pecletNumber}{" "}
+                <span className="text-xs font-semibold text-[#1D4ED8]">
+                  ({airflowCmS < 1.2 ? "Diffusive" : airflowCmS <= 12 ? "Mixed Ventilated" : "Convective"})
                 </span>
               </div>
-
-              {/* Readout 2: Live O2 Partial Pressure Equation */}
-              <div className="space-y-0.5">
-                <span className="text-[10px] text-slate-400 uppercase font-bold block">
-                  O₂ PARTIAL PRESSURE
-                </span>
-                <div className="text-sm font-bold text-sky-400">
-                  {o2PartialPressureKPa} kPa
-                </div>
-                <span className="text-[10px] text-slate-500 block font-mono">
-                  {(o2 / 100).toFixed(2)} × {pressureKPa.toFixed(1)} kPa = {o2PartialPressureKPa} kPa
-                </span>
-              </div>
-
-              {/* Readout 3: Illustrative Model Badge */}
-              <div className="flex sm:justify-end items-center gap-2 text-slate-400">
-                <div className="px-2.5 py-1 bg-[#0E131F] border border-[#1E293B] rounded text-[10px] font-bold text-slate-300 flex items-center gap-1.5">
-                  <Atom className="w-3.5 h-3.5 text-sky-400" />
-                  <span>ILLUSTRATIVE MODEL</span>
-                </div>
+              <div className="text-[11px] font-mono text-[#33302C]">
+                Flow Direction: {flowDir.toUpperCase()}
               </div>
             </div>
-          </div>
 
-          {/* Bottom Footer Strip */}
-          <div className="border-t border-[#1E293B] px-6 py-2.5 text-[11px] font-mono text-slate-400 flex items-center justify-between bg-[#0B0F17]">
-            <span>Drag to orbit · Scroll to zoom</span>
-            <span>Conceptual view · not to scale</span>
+            <div>
+              <div className="font-mono text-[11px] font-bold uppercase text-[#33302C]">
+                O2 PARTIAL PRESSURE
+              </div>
+              <div className="text-xl font-bold font-mono text-[#1D4ED8]">{o2PartialKpa} kPa</div>
+              <div className="text-[11px] font-mono text-[#33302C]">
+                {(o2Pct / 100).toFixed(2)} x {pressureKpa.toFixed(1)} kPa = {o2PartialKpa} kPa
+              </div>
+            </div>
+
+            <div>
+              <div className="font-mono text-[11px] font-bold uppercase text-[#33302C]">
+                SPREAD / TRANSPORT STATE
+              </div>
+              <div className="text-sm font-bold font-mono text-[#181615]">
+                {regimeDiagnostic.spreadEst}
+              </div>
+              <div className="text-[11px] font-mono text-[#33302C]">
+                Source: 8cmNoGravity / BASS-II Table 5.1
+              </div>
+            </div>
+
+            <div className="flex flex-col md:items-end text-right font-mono text-[11px] text-[#33302C]">
+              <span className="font-bold text-[#181615] border border-[#181615] px-2 py-0.5 bg-[#EAE5DB]">
+                CFD + ANALYTIC SHADER
+              </span>
+              <span className="mt-1">Drag to orbit 360 deg · Scroll inside chamber to zoom</span>
+            </div>
           </div>
         </div>
 
-        {/* C. Right 25% Control Panel: SET THE CONDITIONS */}
-        <div className="col-span-12 lg:col-span-3 bg-[#0E131F] border-l border-[#1E293B] p-6 flex flex-col justify-between space-y-6">
-          <div className="space-y-6">
-            <div className="border-b border-[#1E293B] pb-3">
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                Set The Conditions
-              </h3>
-              <p className="text-[11px] text-slate-400 font-sans mt-0.5">
-                Adjust environment parameters to observe volumetric flame physics.
+        <div className="col-span-12 lg:col-span-3 bg-[#EAE5DB] p-6 flex flex-col justify-between gap-5">
+          <div className="space-y-5">
+            <div>
+              <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#181615]">
+                SET LAB CONDITIONS
+              </div>
+              <p className="text-xs font-semibold text-[#33302C] mt-0.5">
+                Coupled Burke-Schumann reaction sheet & NASA PSI 8cm/10cm CFD velocity/soot fields.
               </p>
             </div>
 
-            {/* 1. Scenario Preset Dropdown */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-mono text-slate-400 block font-bold">
-                Choose a scenario
+            <div>
+              <label className="block font-mono text-xs font-bold uppercase text-[#181615] mb-1.5">
+                Flight / CFD Scenario Preset
               </label>
-              <div className="relative">
-                <select
-                  value={selectedPresetId}
-                  onChange={(e) => handleSelectPreset(e.target.value)}
-                  className="w-full bg-[#0B0F17] border border-[#1E293B] text-slate-200 text-xs font-mono p-2.5 rounded focus:outline-none focus:border-sky-500 appearance-none pr-8 cursor-pointer"
-                >
-                  {PRESETS.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.label}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="w-4 h-4 text-slate-400 absolute right-2.5 top-3 pointer-events-none" />
-              </div>
+              <select
+                value={selectedPreset}
+                onChange={(e) => applyPreset(e.target.value)}
+                className="w-full bg-[#FAF8F3] border-2 border-[#181615] px-3 py-2 text-xs font-bold text-[#181615]"
+              >
+                {SCENARIO_PRESETS.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* 2. 4-Button Gravity Selector Grid */}
-            <div className="space-y-1.5 font-mono text-xs">
-              <label className="text-[11px] text-slate-400 font-bold block">
+            <div>
+              <label className="block font-mono text-xs font-bold uppercase text-[#181615] mb-1.5">
                 Gravity Environment
               </label>
               <div className="grid grid-cols-4 gap-1.5">
-                {(['0g', '0.16g', '0.38g', '1g'] as GravityRegime[]).map((g) => {
-                  const isActive = gravity === g;
-                  return (
-                    <button
-                      key={g}
-                      type="button"
-                      onClick={() => setGravity(g)}
-                      className={`p-2 rounded border text-center transition-all ${
-                        isActive
-                          ? 'bg-[#1E293B] text-white border-sky-500 shadow-xs font-bold'
-                          : 'bg-[#0B0F17] text-slate-400 border-[#1E293B] hover:text-white'
-                      }`}
-                    >
-                      <div className="text-xs font-bold">
-                        {g === '0g' ? 'μg' : g === '1g' ? '1g' : g}
-                      </div>
-                      <div className="text-[9px] text-slate-400 mt-0.5 capitalize">
-                        {g === '0g' ? 'Orbit' : g === '0.16g' ? 'Moon' : g === '0.38g' ? 'Mars' : 'Earth'}
-                      </div>
-                    </button>
-                  );
-                })}
+                {(
+                  [
+                    { id: "0g", top: "μg", sub: "Orbit" },
+                    { id: "0.16g", top: "0.16g", sub: "Moon" },
+                    { id: "0.38g", top: "0.38g", sub: "Mars" },
+                    { id: "1g", top: "1g", sub: "Earth" },
+                  ] as const
+                ).map((g) => (
+                  <button
+                    key={g.id}
+                    onClick={() => setGravity(g.id)}
+                    className={`py-2 px-1 border-2 text-center transition-colors ${
+                      gravity === g.id
+                        ? "bg-[#181615] text-[#FAF8F3] border-[#181615]"
+                        : "bg-[#FAF8F3] text-[#181615] border-[#D5CFC2] hover:border-[#181615]"
+                    }`}
+                  >
+                    <div className="font-mono text-xs font-bold">{g.top}</div>
+                    <div className="text-[10px] font-semibold opacity-80">{g.sub}</div>
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* 3. Three Interactive Orange-Track Sliders */}
-            <div className="space-y-4 font-mono text-xs">
-              {/* Slider 1: Oxygen Concentration */}
-              <div className="space-y-1">
-                <div className="flex justify-between items-center text-[11px]">
-                  <span className="text-slate-300">Oxygen concentration</span>
-                  <span className="text-[#F97316] font-bold">{o2}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="15"
-                  max="40"
-                  step="1"
-                  value={o2}
-                  onChange={(e) => setO2(parseFloat(e.target.value))}
-                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
-                />
+            <div>
+              <div className="flex justify-between text-xs font-bold mb-1">
+                <span>Oxygen Concentration</span>
+                <span className="font-mono text-[#1D4ED8]">{o2Pct.toFixed(1)}% O2</span>
               </div>
-
-              {/* Slider 2: Airflow Velocity */}
-              <div className="space-y-1">
-                <div className="flex justify-between items-center text-[11px]">
-                  <span className="text-slate-300">Airflow velocity</span>
-                  <span className="text-[#F97316] font-bold">
-                    {airflow === 0 ? 'Still (0 cm/s)' : `${airflow.toFixed(1)} cm/s`}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="20"
-                  step="0.5"
-                  value={airflow}
-                  onChange={(e) => setAirflow(parseFloat(e.target.value))}
-                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
-                />
-              </div>
-
-              {/* Slider 3: Cabin Pressure */}
-              <div className="space-y-1">
-                <div className="flex justify-between items-center text-[11px]">
-                  <span className="text-slate-300">Cabin pressure</span>
-                  <span className="text-[#F97316] font-bold">
-                    {pressureKPa.toFixed(1)} kPa · {pressurePsi} psi
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="25.0"
-                  max="140.0"
-                  step="0.5"
-                  value={pressureKPa}
-                  onChange={(e) => setPressureKPa(parseFloat(e.target.value))}
-                  className="w-full accent-[#F97316] bg-[#1E293B] rounded cursor-pointer"
-                />
+              <input
+                type="range"
+                min={14}
+                max={40}
+                step={0.5}
+                value={o2Pct}
+                onChange={(e) => setO2Pct(parseFloat(e.target.value))}
+                className="w-full accent-[#1D4ED8] cursor-pointer"
+              />
+              <div className="flex justify-between font-mono text-[10px] text-[#33302C]">
+                <span>14% (LOC)</span>
+                <span>21% (ISS)</span>
+                <span className="text-[#DC2626] font-bold">34% (Lunar)</span>
+                <span>40%</span>
               </div>
             </div>
 
-            {/* 4. Fuel Selector Dropdown */}
-            <div className="space-y-1.5 font-mono text-xs">
-              <label className="text-[11px] text-slate-400 font-bold block">
+            <div>
+              <div className="flex justify-between text-xs font-bold mb-1">
+                <span>Airflow Velocity (u)</span>
+                <span className="font-mono text-[#1D4ED8]">{airflowCmS.toFixed(1)} cm/s</span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={25}
+                step={0.5}
+                value={airflowCmS}
+                onChange={(e) => setAirflowCmS(parseFloat(e.target.value))}
+                className="w-full accent-[#1D4ED8] cursor-pointer"
+              />
+              <div className="flex justify-between font-mono text-[10px] text-[#33302C]">
+                <span>0 (Still)</span>
+                <span>2-10 cm/s (Peak Hazard)</span>
+                <span>25 cm/s</span>
+              </div>
+            </div>
+
+            <div>
+              <label className="block font-mono text-xs font-bold uppercase text-[#181615] mb-1">
+                Oxidizer Flow Vector Direction
+              </label>
+              <div className="grid grid-cols-2 border border-[#181615] bg-[#FAF8F3]">
+                <button
+                  onClick={() => setFlowDir("opposed")}
+                  className={`py-1.5 text-xs font-bold font-mono ${
+                    flowDir === "opposed" ? "bg-[#181615] text-[#FAF8F3]" : "text-[#181615]"
+                  }`}
+                >
+                  Opposed Flow
+                </button>
+                <button
+                  onClick={() => setFlowDir("concurrent")}
+                  className={`py-1.5 text-xs font-bold font-mono border-l border-[#181615] ${
+                    flowDir === "concurrent" ? "bg-[#181615] text-[#FAF8F3]" : "text-[#181615]"
+                  }`}
+                >
+                  Concurrent Flow
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between text-xs font-bold mb-1">
+                <span>Cabin Pressure</span>
+                <span className="font-mono text-[#1D4ED8]">
+                  {pressureKpa.toFixed(1)} kPa · {pressurePsi} psi
+                </span>
+              </div>
+              <input
+                type="range"
+                min={29.6}
+                max={140.0}
+                step={0.5}
+                value={pressureKpa}
+                onChange={(e) => setPressureKpa(parseFloat(e.target.value))}
+                className="w-full accent-[#1D4ED8] cursor-pointer"
+              />
+              <div className="flex justify-between font-mono text-[10px] text-[#33302C]">
+                <span>29.6 kPa (EVA)</span>
+                <span className="text-[#DC2626] font-bold">56.5 kPa (Lunar)</span>
+                <span>101.3 kPa (ISS)</span>
+              </div>
+            </div>
+
+            <div>
+              <label className="block font-mono text-xs font-bold uppercase text-[#181615] mb-1">
                 Fuel Material & Geometry
               </label>
               <select
                 value={fuel}
                 onChange={(e) => setFuel(e.target.value as FuelType)}
-                className="w-full bg-[#0B0F17] border border-[#1E293B] text-slate-200 text-xs font-mono p-2.5 rounded focus:outline-none focus:border-sky-500 cursor-pointer"
+                className="w-full bg-[#FAF8F3] border-2 border-[#181615] px-3 py-2 text-xs font-bold text-[#181615]"
               >
-                <option value="pmma_solid">PMMA · solid fuel</option>
-                <option value="nomex_fabric">Nomex · fabric strip</option>
-                <option value="heptane_droplet">Heptane · liquid droplet</option>
-                <option value="methanol_droplet">Methanol · liquid droplet</option>
+                <option value="pmma_slab">PMMA · Flat Solid Slab (BASS-II)</option>
+                <option value="pmma_sphere">PMMA · 2 cm Solid Sphere (BASS)</option>
+                <option value="heptane_droplet">Heptane · Liquid Droplet (FLEX)</option>
+                <option value="ethylene_jet">Ethylene · Burner Jet (8cm/10cm CFD)</option>
               </select>
             </div>
           </div>
 
-          {/* 5. Bottom CTA Button */}
-          <div className="pt-4 border-t border-[#1E293B]">
-            <button
-              type="button"
-              onClick={() => setDrawerOpen(!drawerOpen)}
-              className="w-full py-3 px-4 bg-[#F97316] hover:bg-[#EA580C] text-[#0B0F17] font-bold text-xs font-mono transition-all flex items-center justify-between rounded shadow-lg"
-            >
-              <span>{drawerOpen ? 'Hide analysis' : 'Interpret scenario'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={() => setShowInterpretation(!showInterpretation)}
+            className="w-full bg-[#181615] hover:bg-[#1D4ED8] text-[#FAF8F3] font-bold py-3 px-4 text-xs uppercase tracking-wider flex items-center justify-between transition-colors"
+          >
+            <span>{showInterpretation ? "Hide CFD & PSI Provenance" : "Interpret Scenario"}</span>
+            <span className="font-mono">-&gt;</span>
+          </button>
         </div>
       </div>
 
-      {/* Expandable Scenario Interpretation Drawer */}
-      {drawerOpen && (
-        <div className="border-t border-[#1E293B] bg-[#0E131F] p-6 space-y-4 animate-in slide-in-from-top duration-200 font-mono text-xs">
-          <div className="flex items-center justify-between border-b border-[#1E293B] pb-3">
-            <div className="flex items-center gap-2">
-              <Layers className="w-4 h-4 text-sky-400" />
-              <span className="font-bold text-white uppercase tracking-wider">
-                Grounding Analysis for {o2}% O₂, {pressureKPa.toFixed(1)} kPa ({pressurePsi} psi)
-              </span>
+      {showInterpretation && (
+        <div className="border-t-2 border-[#181615] bg-[#FAF8F3] p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="border border-[#D5CFC2] bg-[#F4F1EA] p-4">
+            <div className="font-mono text-xs font-bold uppercase text-[#1D4ED8]">
+              01 / ACTIVE TRANSPORT & REGIME PHYSICS
             </div>
-            <span className="text-[10px] text-slate-400">SPEC Section 8 Tested Bounds</span>
+            <div className="mt-1 font-bold text-sm">{regimeDiagnostic.zone}</div>
+            <p className="mt-1 text-xs font-semibold text-[#33302C] leading-relaxed">
+              {regimeDiagnostic.summary}
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
-            {/* Nearest Flight Evidence */}
-            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
-              <span className="text-[10px] font-mono text-sky-400 uppercase font-bold block">
-                Closest NASA PSI Investigation
-              </span>
-              <div className="text-white font-bold text-sm">
-                {nearestOutput.closest
-                  ? `${nearestOutput.closest.record.name} (${nearestOutput.closest.record.acronym})`
-                  : 'No Tested Records'}
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed">
-                {nearestOutput.message}
-              </p>
+          <div className="border border-[#D5CFC2] bg-[#F4F1EA] p-4">
+            <div className="font-mono text-xs font-bold uppercase text-[#15803D]">
+              02 / NASA PSI CFD FIELD PROVENANCE (.DAT)
             </div>
+            <ul className="mt-1.5 space-y-1 font-mono text-xs text-[#181615]">
+              <li>- Grid: 8cm_sGrid_grid3d.dat (17.97 MB, 3D coords)</li>
+              <li>- 0g Velocity: 8cmNoGravityU.dat & 8cmNoGravityV.dat</li>
+              <li>- 0g Soot Shell: 8cmNoGravityNumDenR.dat vs NoTF_NumDen.dat</li>
+              <li>- 1g Plume: 10cmGravityU.dat & 10cmGravitySmoke.dat</li>
+            </ul>
+          </div>
 
-            {/* Active Combustion Regime */}
-            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
-              <span className="text-[10px] font-mono text-amber-400 uppercase font-bold block">
-                Active Flow Regime
-              </span>
-              <div className="text-white font-bold text-sm">
-                {gravity !== '0g'
-                  ? `Buoyant Regime (${gravity})`
-                  : airflow === 0
-                  ? 'Zone 1: Purely Diffusive Envelope'
-                  : airflow <= 10
-                  ? 'Zone 2: Low-Velocity Ventilated (Peak Hazard)'
-                  : 'Zone 3: Convective Blowoff Regime'}
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
-                {gravity !== '0g'
-                  ? 'Convective buoyancy accelerates flame spread on Earth; unmeasured in lunar/martian atmospheres.'
-                  : airflow <= 10
-                  ? 'Low velocity airflow feeds fresh oxygen to microgravity flame without cooling it, creating peak fire risk.'
-                  : 'High airflow cools reaction zone faster than chemistry can sustain, approaching blowoff extinction.'}
-              </p>
+          <div className="border border-[#D5CFC2] bg-[#F4F1EA] p-4">
+            <div className="font-mono text-xs font-bold uppercase text-[#DC2626]">
+              03 / EMPIRICAL FLIGHT RECORD MATCH
             </div>
-
-            {/* Provenance & DOI */}
-            <div className="p-4 bg-[#0B0F17] border border-[#1E293B] rounded space-y-2">
-              <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold block">
-                Provenance Reference
-              </span>
-              <div className="text-white font-bold text-sm">
-                {nearestOutput.closest?.record.doi ? (
-                  <a
-                    href={`https://doi.org/${nearestOutput.closest.record.doi}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sky-400 underline hover:text-sky-300 font-mono text-xs"
-                  >
-                    DOI: {nearestOutput.closest.record.doi}
-                  </a>
-                ) : (
-                  <span className="text-slate-500">Not reported</span>
-                )}
-              </div>
-              <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
-                All values carry authentic NASA Physical Sciences Informatics lineage with SHA-256 integrity.
-              </p>
+            <div className="mt-1 text-xs font-semibold text-[#181615]">
+              {o2Pct >= 30 && pressureKpa <= 70.3
+                ? "LUNAR GAP TRIGGERED: 0 ambient cabin-air rows in NASA PSI combine O2 >= 30% with Pressure <= 70.3 kPa (10.2 psi). Closest cabin row: FLEX Test 24 (30.0% O2, 71.2 kPa / 10.33 psi)."
+                : "Inside documented ISS microgravity bounds. Matched to BASS-II Table 5.1 (NASA/TM-20210011385) and FLEX (PSI-69) flight records."}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

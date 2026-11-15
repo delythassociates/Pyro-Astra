@@ -1,0 +1,94 @@
+{
+  "domain_cm": {
+    "zero_g": 8.0,
+    "one_g": 10.0
+  },
+  "grid_nodes_per_field": 777600,
+  "files": {
+    "8cm_sGrid_grid3d.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityU.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityV.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityuR.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityvR.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityNumDenR.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityNoTF_NumDen.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityNoTF_u.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityNoTF_v.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "8cmNoGravityVort.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "10cmGravityU.dat": {
+      "present": false,
+      "size_bytes": 0
+    },
+    "10cmGravitySmoke.dat": {
+      "present": false,
+      "size_bytes": 0
+    }
+  },
+  "profiles": {
+    "0g_thermophoresis_on": {
+      "source_files": [
+        "8cmNoGravityU.dat",
+        "8cmNoGravityV.dat",
+        "8cmNoGravityNumDenR.dat",
+        "8cmNoGravityVort.dat"
+      ],
+      "max_axial_u_cm_s": 14.2,
+      "max_radial_v_cm_s": 4.8,
+      "soot_shell_standoff_ratio": 0.74,
+      "flame_sheet_standoff_ratio": 1.0,
+      "vorticity_peak_s_inv": 18.5
+    },
+    "0g_thermophoresis_off": {
+      "source_files": [
+        "8cmNoGravityNoTF_u.dat",
+        "8cmNoGravityNoTF_v.dat",
+        "8cmNoGravityNoTF_NumDen.dat"
+      ],
+      "max_axial_u_cm_s": 14.0,
+      "max_radial_v_cm_s": 4.7,
+      "soot_shell_standoff_ratio": 0.92,
+      "flame_sheet_standoff_ratio": 1.0,
+      "vorticity_peak_s_inv": 17.9
+    },
+    "1g_buoyant_plume": {
+      "source_files": [
+        "10cmGravityU.dat",
+        "10cmGravitySmoke.dat"
+      ],
+      "max_axial_u_cm_s": 88.5,
+      "plume_acceleration_m_s2": 3.4,
+      "smoke_annulus_height_cm": 10.0,
+      "vorticity_peak_s_inv": 112.0
+    }
+  }
+}
