@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, Menu, X, ShieldCheck } from 'lucide-react';
+import { ChevronDown, Menu, X, ShieldCheck, BookOpen } from 'lucide-react';
+import { useDashboard } from '@/context/DashboardContext';
 
 interface NavGroup {
   name: string;
@@ -49,6 +50,7 @@ const NAV_GROUPS: NavGroup[] = [
 
 export function Navigation() {
   const pathname = usePathname();
+  const { openGuide } = useDashboard();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const navRef = useRef<HTMLDivElement>(null);
@@ -137,12 +139,22 @@ export function Navigation() {
             })}
           </nav>
 
-          {/* Provenance Status Indicator */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {/* Provenance Status Indicator & User Guide Button */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
             <div className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-mono text-emerald-800 flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               <span>PSI Provenance: Active</span>
             </div>
+
+            <button
+              type="button"
+              onClick={() => openGuide('quickstart')}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 text-xs font-mono font-bold transition-all shadow-xs"
+              aria-label="Open User Guide"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-sky-700" />
+              <span>📖 User Guide</span>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -162,6 +174,19 @@ export function Navigation() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-6 space-y-4 shadow-lg max-h-[85vh] overflow-y-auto">
+          <div className="p-2 border-b border-slate-100 flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openGuide('quickstart');
+              }}
+              className="w-full py-2 px-3 rounded-lg bg-sky-50 text-sky-800 border border-sky-300 text-xs font-mono font-bold flex items-center justify-center gap-2"
+            >
+              <BookOpen className="w-4 h-4 text-sky-700" />
+              <span>📖 Open User Guide</span>
+            </button>
+          </div>
           {NAV_GROUPS.map((group) => (
             <div key={group.name} className="space-y-1">
               <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 px-2 pt-2">
